@@ -3,6 +3,7 @@ using NUnit.Framework;
 using GameSystem;
 using UnityEngine.AI;
 using System.Linq;
+using System.Collections.Generic;
 
 public class MapTest {
 
@@ -168,5 +169,81 @@ public class MapTest {
 
 		Assert.That(area.IsLessOrEquals(new Vector2Int(3, 4), out bool rotation2), Is.True);
 		Assert.That(rotation2, Is.False);
+	}
+
+	[Test]
+	public void GetAreasFromMapSquare_test() {
+		Map map = new Map(25);
+		map.DrawRectangle(new Vector2Int(0, 0), new Vector2Int(3, 3), Color.blue);
+
+		List<Area> areas = Map.GetAreasFromMap(map);
+		Assert.That(areas.Count, Is.EqualTo(1));
+		Assert.That(areas[0].Size, Is.EqualTo(new Vector2Int(3, 3)));
+		Assert.That(areas[0].Origin, Is.EqualTo(new Vector2Int(0, 0)));
+	}
+
+	[Test]
+	public void GetAreasFromMapRightRectangle_test() {
+		Map map = new Map(25);
+		map.DrawRectangle(new Vector2Int(0, 0), new Vector2Int(5, 3), Color.blue);
+
+		List<Area> areas = Map.GetAreasFromMap(map);
+		Assert.That(areas.Count, Is.EqualTo(1));
+		Assert.That(areas[0].Size, Is.EqualTo(new Vector2Int(5, 3)));
+		Assert.That(areas[0].Origin, Is.EqualTo(new Vector2Int(0, 0)));
+	}
+
+	[Test]
+	public void GetAreasFromMapUpRectangle_test() {
+		Map map = new Map(25);
+		map.DrawRectangle(new Vector2Int(0, 0), new Vector2Int(3, 4), Color.blue);
+
+		List<Area> areas = Map.GetAreasFromMap(map);
+		foreach (var item in areas) {
+			Debug.Log("Origin: " + item.Origin + " and " + item.Size);
+		}
+
+
+		Assert.That(areas.Count, Is.EqualTo(1));
+		Assert.That(areas[0].Size, Is.EqualTo(new Vector2Int(3, 4)));
+		Assert.That(areas[0].Origin, Is.EqualTo(new Vector2Int(0, 0)));
+	}
+
+
+	[Test]
+	public void GetAreasFromMap_test() {
+		Map map = new Map(25);
+		map.DrawRectangle(new Vector2Int(0, 0), new Vector2Int(2, 2), Color.blue);
+		map.DrawRectangle(new Vector2Int(3, 0), new Vector2Int(1, 2), Color.blue);
+		map.DrawRectangle(new Vector2Int(1, 3), new Vector2Int(2, 2), Color.blue);
+
+		map.DrawRectangle(new Vector2Int(0, 4), new Vector2Int(1, 1), Color.blue);
+		map.DrawRectangle(new Vector2Int(3, 2), new Vector2Int(2, 1), Color.blue);
+		map.DrawRectangle(new Vector2Int(4, 4), new Vector2Int(1, 1), Color.blue);
+
+		List<Area> areas = Map.GetAreasFromMap(map);
+		foreach (Area area in areas) {
+			Debug.Log("Origin: " + area.Origin + " and size: " + area.Size);
+		}
+		Assert.That(areas.Count, Is.EqualTo(6));
+	}
+
+	[Test]
+	public void ColorsToArray_test() {
+		Map map = new Map(5);
+
+		map.DrawRectangle(new Vector2Int(0, 0), new Vector2Int(2, 2), Color.blue);
+		map.DrawRectangle(new Vector2Int(2, 2), new Vector2Int(2, 2), Color.blue);
+
+		Color[,] colors = Map.ColorsToArray(map.Texture.GetPixels(0, 0, map.Size.x, map.Size.y), map.Size.x);
+		Assert.That(colors[0, 0], Is.EqualTo(Color.blue));
+		Assert.That(colors[0, 1], Is.EqualTo(Color.blue));
+		Assert.That(colors[1, 0], Is.EqualTo(Color.blue));
+		Assert.That(colors[1, 1], Is.EqualTo(Color.blue));
+
+		Assert.That(colors[2, 2], Is.EqualTo(Color.blue));
+		Assert.That(colors[2, 3], Is.EqualTo(Color.blue));
+		Assert.That(colors[3, 2], Is.EqualTo(Color.blue));
+		Assert.That(colors[3, 3], Is.EqualTo(Color.blue));
 	}
 }

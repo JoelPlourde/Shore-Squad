@@ -32,8 +32,8 @@ namespace GameSystem {
 		/// <returns>Return true if the rectangle fits in the area, else false. Validate rotate to see if it has to be rotate first.</returns>
 		public bool IsLessOrEquals(Vector2Int size, out bool rotate) {
 			rotate = false;
-			if (Size.x >= size.x && Size.y >= size.y) {
-				return true;
+			if (Size.x * Size.y != size.x * size.y) {
+				return false;
 			}
 
 			if (Size.x >= size.y && Size.y >= size.x) {
@@ -41,7 +41,7 @@ namespace GameSystem {
 				return true;
 			}
 
-			return false;
+			return true;
 		}
 	}
 }

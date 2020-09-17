@@ -15,16 +15,19 @@ namespace EncampmentSystem {
 			private Requirements _requirements;
 			private Encampment _encampment;
 
+			private List<Area> areas;
+
 			private void Awake() {
 				_encampment = GetComponent<Encampment>();
 				_requirements = new Requirements();
 
 				_templateMap = new Map(TemplateTexture.width, TemplateTexture);
-				Color[] colors = _templateMap.GetColorsAt(new Vector2Int(12, 12), new Vector2Int(4, 4));
-				foreach (var item in colors) {
-					Debug.Log(item);
-				}
 				Tester2.Instance.DrawMap(_templateMap);
+
+				areas = Map.GetAreasFromMap(_templateMap);
+				foreach (var item in areas) {
+					Debug.Log(item.Origin + " and " + item.Size);
+				}
 			}
 
 			private void Routine() {
