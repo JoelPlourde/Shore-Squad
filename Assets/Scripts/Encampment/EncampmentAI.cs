@@ -24,6 +24,8 @@ namespace EncampmentSystem {
 				_templateMap = new Map(TemplateTexture.width, TemplateTexture);
 				Tester.Instance.DrawMap(_templateMap);
 
+				Debug.Log(_templateMap.Size);
+
 				areas = Map.GetAreasFromMap(_templateMap);
 				foreach (var item in areas) {
 					Debug.Log(item.Origin + " and " + item.Size);

@@ -214,14 +214,16 @@ namespace GameSystem {
 		/// <param name="area">The area to be modified.</param>
 		private static void ScanDiagonals(int[,] indexes, Color[,] colors, Vector2Int origin, int size, ref Area area) {
 			origin = new Vector2Int(origin.x + 1, origin.y + 1);
-			if (origin.x != origin.y) {
-				return;
-			}
 
 			if (origin.x < size && origin.y < size) {
+				if (colors[origin.x, origin.y] != Template) {
+					return;
+				}
+
 				int leftCount = GetCount(origin, indexes, colors, o => { return (o.x > 0); }, o => { o.x--; return o; });
 				int downCount = GetCount(origin, indexes, colors, o => { return (o.y > 0); }, o => { o.y--; return o; });
 				if (leftCount > 0 && leftCount == downCount) {
+					Debug.Log("Increase the size of the diagonals !");
 					area.Size.x++;
 					area.Size.y++;
 					ScanDiagonals(indexes, colors, origin, size, ref area);
@@ -241,7 +243,8 @@ namespace GameSystem {
 		/// <param name="area">The area to be modified.</param>
 		private static void ScanRightDirection(int[,] indexes, Color[,] colors, Vector2Int origin, int size, ref Area area) {
 			origin = new Vector2Int(area.Origin.x + area.Size.x, area.Origin.y - 1);
-			if (area.Size.y == GetCount(origin, indexes, colors, o => { return (o.y < size); }, o => { o.y++; return o; })) {
+			int count = GetCount(origin, indexes, colors, o => { return (o.y < size); }, o => { o.y++; return o; });
+			if (count > 0 && area.Size.y == count) {
 				area.Size.x++;
 				origin = new Vector2Int(area.Origin.x + area.Size.x - 1, area.Origin.y);
 				ScanRightDirection(indexes, colors, origin, size, ref area);
@@ -260,7 +263,8 @@ namespace GameSystem {
 		/// <param name="area">The area to be modified.</param>
 		private static void ScanUpDirection(int[,] indexes, Color[,] colors, Vector2Int origin, int size, ref Area area) {
 			origin = new Vector2Int(area.Origin.x - 1, area.Origin.y + area.Size.y);
-			if (area.Size.x == GetCount(origin, indexes, colors, o => { return (o.x < size); }, o => { o.x++; return o; })) {
+			int count = GetCount(origin, indexes, colors, o => { return (o.x < size); }, o => { o.x++; return o; });
+			if (count > 0 && area.Size.x == count) {
 				area.Size.y++;
 				origin = new Vector2Int(area.Origin.x, area.Origin.y + area.Size.y - 1);
 				ScanUpDirection(indexes, colors, origin, size, ref area);
@@ -282,6 +286,11 @@ namespace GameSystem {
 			int count = 0;
 			while (condition(origin)) {
 				origin = operation(origin);
+				int length = Mathf.RoundToInt(Mathf.Sqrt(indexes.Length));
+				// Limit check !
+				if (origin.x >= length || origin.y >= length) {
+					return count;
+				}
 				if (indexes[origin.x, origin.y] != -1 && colors[origin.x, origin.y] == Template) {
 					count++;
 				} else {

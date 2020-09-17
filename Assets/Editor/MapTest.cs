@@ -229,6 +229,36 @@ public class MapTest {
 	}
 
 	[Test]
+	public void GetAreasFromMapPerimeter_test() {
+		Map map = new Map(5);
+		map.DrawRectangle(new Vector2Int(0, 0), new Vector2Int(1, 5), Color.blue);
+		map.DrawRectangle(new Vector2Int(0, 0), new Vector2Int(5, 1), Color.blue);
+		map.DrawRectangle(new Vector2Int(0, 4), new Vector2Int(5, 1), Color.blue);
+		map.DrawRectangle(new Vector2Int(4, 0), new Vector2Int(1, 5), Color.blue);
+
+		List<Area> areas = Map.GetAreasFromMap(map);
+		foreach (Area area in areas) {
+			Debug.Log("Origin: " + area.Origin + " and size: " + area.Size);
+		}
+		Assert.That(areas.Count, Is.EqualTo(4));
+	}
+
+	[Test]
+	public void GetAreasFromMapCorners_test() {
+		Map map = new Map(25);
+		map.DrawRectangle(new Vector2Int(0, 0), new Vector2Int(2, 2), Color.blue);
+		map.DrawRectangle(new Vector2Int(0, 23), new Vector2Int(2, 2), Color.blue);
+		map.DrawRectangle(new Vector2Int(23, 0), new Vector2Int(2, 2), Color.blue);
+		map.DrawRectangle(new Vector2Int(23, 23), new Vector2Int(2, 2), Color.blue);
+
+		List<Area> areas = Map.GetAreasFromMap(map);
+		foreach (Area area in areas) {
+			Debug.Log("Origin: " + area.Origin + " and size: " + area.Size);
+		}
+		Assert.That(areas.Count, Is.EqualTo(4));
+	}
+
+	[Test]
 	public void ColorsToArray_test() {
 		Map map = new Map(5);
 
