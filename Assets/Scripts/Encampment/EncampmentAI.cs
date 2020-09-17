@@ -22,7 +22,7 @@ namespace EncampmentSystem {
 				_requirements = new Requirements();
 
 				_templateMap = new Map(TemplateTexture.width, TemplateTexture);
-				Tester2.Instance.DrawMap(_templateMap);
+				Tester.Instance.DrawMap(_templateMap);
 
 				areas = Map.GetAreasFromMap(_templateMap);
 				foreach (var item in areas) {

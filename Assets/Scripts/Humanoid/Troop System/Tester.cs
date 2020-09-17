@@ -3,11 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using TroopSystem;
 using EncampmentSystem;
+using UnityEngine.UI;
+using GameSystem;
 
 public class Tester : MonoBehaviour
 {
+	public static Tester Instance;
+
+	private Image image;
+
+	private Map _map;
+
 	public List<Encampment> Encampments1;
 	public List<Encampment> Encampments2;
+
+	void Awake() {
+		Instance = this;
+		image = GetComponent<Image>();
+		_map = new Map(100);
+		image.sprite = Sprite.Create(_map.Texture, new Rect(0, 0, _map.Size.x, _map.Size.y), Vector2.zero);
+	}
 
 	void Start()
     {
@@ -16,5 +31,10 @@ public class Tester : MonoBehaviour
 
 		TaxCollector sentinels = TroopManager.InstantiateTroop("tax_collector", new Vector3(20, 0, 0), FactionSystem.FactionType.SENTINELS) as TaxCollector;
 		sentinels.StartCollection(100, Encampments2);
+	}
+
+	public void DrawMap(Map map) {
+		Debug.Log("Displaying the map on screen !");
+		image.sprite = Sprite.Create(map.Texture, new Rect(0, 0, map.Size.x, map.Size.y), Vector2.zero);
 	}
 }

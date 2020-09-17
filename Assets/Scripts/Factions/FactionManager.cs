@@ -27,16 +27,6 @@ namespace FactionSystem {
 			return Factions[factionType].Encampments;
 		}
 
-		public static List<Encampment> GetEncampmentsInRange(FactionType factionType, Vector3 position) {
-			return Factions[factionType].Encampments.Where(x => {
-				return Vector3.Distance(x.transform.position, position) < Constant.PLACEMENT_MAXIMUM_RADIUS;
-			}).ToList();
-		}
-
-		public static Encampment GetClosestEncampmentFrom(FactionType factionType, Vector3 position) {
-			return Factions[factionType].Encampments.OrderBy(x => Vector3.Distance(x.transform.position, position)).First();
-		}
-
 		public static FactionData GetFactionData(FactionType factionType) {
 			return FactionDatas[factionType];
 		}

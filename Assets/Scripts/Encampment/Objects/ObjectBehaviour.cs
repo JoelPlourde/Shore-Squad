@@ -26,7 +26,7 @@ public abstract class ObjectBehaviour : MonoBehaviour, IConstructable
 
 		// TODO REMOVE THIS AT ONE POINT.
 		if (ZoneBehaviour) {
-			Tester2.Instance.DrawMap(ZoneBehaviour.Map);
+			Tester.Instance.DrawMap(ZoneBehaviour.Map);
 		}
 	}
 
@@ -37,7 +37,7 @@ public abstract class ObjectBehaviour : MonoBehaviour, IConstructable
 
 		// TODO REMOVE THIS AT ONE POINT.
 		if (ZoneBehaviour) {
-			Tester2.Instance.DrawMap(ZoneBehaviour.Map);
+			Tester.Instance.DrawMap(ZoneBehaviour.Map);
 		}
 	}
 
