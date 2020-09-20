@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3fae11ff74dd697428434159637d09eb, type: 3}
-  m_Name: Basket
+  m_Name: Campfire
   m_EditorClassIdentifier: 
-  ConstructionTime: 0
+  ConstructionTime: 5
   Sprite: {fileID: 0}
-  Prefab: {fileID: 899589637963243685, guid: 277cbaf8b3d17be4c985af4b146aecd9, type: 3}
-  Tooltip: To store your not-so-precious things.
+  Prefab: {fileID: 4119812352319035728, guid: 8700a1e9db95c224493803353b79b7d0, type: 3}
+  Tooltip: This is a firepit to warm you during the cold night.

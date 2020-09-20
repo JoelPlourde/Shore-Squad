@@ -4,6 +4,7 @@ using GameSystem;
 using UnityEngine.AI;
 using System.Linq;
 using System.Collections.Generic;
+using NavigationSystem;
 
 public class MapTest {
 
@@ -60,13 +61,13 @@ public class MapTest {
 
 		GameObject flag = new GameObject();
 		GameObject @object = new GameObject();
-		NavMeshObstacle navMeshObstacle = @object.AddComponent<NavMeshObstacle>();
-		navMeshObstacle.size = new Vector3(99, 0, 99);
-		Vector2Int objectSize = Map.GetSizeFromObstacle(navMeshObstacle);
+		Obstacle obstacle = @object.AddComponent<Obstacle>();
+		obstacle.RegisterBox(new Box(Vector3.zero, new Vector3(100, 0, 100)));
+		Vector2Int objectSize = Map.GetSizeFromObstacle(obstacle);
 
 		flag.transform.position = new Vector3(50, 0, 50);
 		@object.transform.position = new Vector3(50, 0, 50);
-		Assert.That(Map.GetMapPositionFrom(map, flag.transform.position, @object.transform, objectSize, out Vector2Int res), Is.True);
+		Assert.That(Map.GetMapPositionFrom(map, flag.transform.position, obstacle.transform.position, objectSize, out Vector2Int res), Is.True);
 		Assert.That(res, Is.EqualTo(new Vector2Int(0, 0)));
 	}
 
@@ -102,9 +103,18 @@ public class MapTest {
 	[Test]
 	public void GetRectangleSizeFromObstacle_test() {
 		GameObject @object = new GameObject();
-		NavMeshObstacle navMeshObstacle = @object.AddComponent<NavMeshObstacle>();
-		navMeshObstacle.size = new Vector3(3, 0, 4);
-		Assert.That(Map.GetSizeFromObstacle(navMeshObstacle), Is.EqualTo(new Vector2Int(4, 5)));
+		Obstacle obstacle = @object.AddComponent<Obstacle>();
+		obstacle.RegisterBox(new Box(Vector3.zero, new Vector3(3, 0, 4)));
+		Assert.That(Map.GetSizeFromObstacle(obstacle), Is.EqualTo(new Vector2Int(3, 4)));
+	}
+
+	[Test]
+	public void GetRectangleSizeFromObstacleRotated_test() {
+		GameObject @object = new GameObject();
+		Obstacle obstacle = @object.AddComponent<Obstacle>();
+		obstacle.RegisterBox(new Box(Vector3.zero, new Vector3(3, 0, 4)));
+		obstacle.transform.Rotate(Vector3.up, 90f);
+		Assert.That(Map.GetSizeFromObstacle(obstacle), Is.EqualTo(new Vector2Int(4, 3)));
 	}
 
 	[Test]
@@ -113,62 +123,32 @@ public class MapTest {
 
 		GameObject flag = new GameObject();
 		GameObject @object = new GameObject();
-		NavMeshObstacle navMeshObstacle = @object.AddComponent<NavMeshObstacle>();
-		navMeshObstacle.size = new Vector3(3, 0, 4);
-		Vector2Int objectSize = Map.GetSizeFromObstacle(navMeshObstacle);
+		Obstacle obstacle = @object.AddComponent<Obstacle>();
+		obstacle.RegisterBox(new Box(Vector3.zero, new Vector3(3, 0, 4)));
+		Vector2Int objectSize = Map.GetSizeFromObstacle(obstacle);
 
 		flag.transform.position = new Vector3(50, 0, 50);
 		@object.transform.position = new Vector3(25, 0, 25);
-		Assert.That(Map.GetMapPositionFrom(map, flag.transform.position, @object.transform, objectSize, out Vector2Int res1), Is.True);
-		Assert.That(res1, Is.EqualTo(new Vector2Int(23, 23)));
+		Assert.That(Map.GetMapPositionFrom(map, flag.transform.position, @object.transform.position, objectSize, out Vector2Int res1), Is.True);
+		Assert.That(res1, Is.EqualTo(new Vector2Int(24, 23)));
 
 		flag.transform.position = new Vector3(125, 0, 150);
 		@object.transform.position = new Vector3(112, 0, 130);
-		Assert.That(Map.GetMapPositionFrom(map, flag.transform.position, @object.transform, objectSize, out Vector2Int res2), Is.True);
-		Assert.That(res2, Is.EqualTo(new Vector2Int(35, 28)));
+		Assert.That(Map.GetMapPositionFrom(map, flag.transform.position, @object.transform.position, objectSize, out Vector2Int res2), Is.True);
+		Assert.That(res2, Is.EqualTo(new Vector2Int(36, 28)));
 
 		flag.transform.position = new Vector3(-147, 0, 163);
 		@object.transform.position = new Vector3(-165, 0, 130);
-		Assert.That(Map.GetMapPositionFrom(map, flag.transform.position, @object.transform, objectSize, out Vector2Int res3), Is.True);
-		Assert.That(res3, Is.EqualTo(new Vector2Int(30, 15)));
+		Assert.That(Map.GetMapPositionFrom(map, flag.transform.position, @object.transform.position, objectSize, out Vector2Int res3), Is.True);
+		Assert.That(res3, Is.EqualTo(new Vector2Int(31, 15)));
 
 		flag.transform.position = new Vector3(50, 0, 50);
-		@object.transform.position = new Vector3(99, 0, 100);
-		Assert.That(Map.GetMapPositionFrom(map, flag.transform.position, @object.transform, objectSize, out Vector2Int res4), Is.False);
+		@object.transform.position = new Vector3(100, 0, 100);
+		Assert.That(Map.GetMapPositionFrom(map, flag.transform.position, @object.transform.position, objectSize, out Vector2Int res4), Is.False);
 
 		flag.transform.position = new Vector3(50, 0, 50);
-		@object.transform.position = new Vector3(97, 0, 96);
-		Assert.That(Map.GetMapPositionFrom(map, flag.transform.position, @object.transform, objectSize, out Vector2Int res5), Is.True);
-	}
-
-	[Test]
-	public void InitializeArea_test() {
-		Area area = new Area(new Vector2Int(0,0), new Vector2Int(3,4));
-		Assert.That(area.Size.x, Is.EqualTo(3));
-		Assert.That(area.Size.y, Is.EqualTo(4));
-	}
-
-	[Test]
-	public void AreaIsLessOrEquals_test() {
-		Area area = new Area(new Vector2Int(0, 0), new Vector2Int(3, 4));
-		Assert.That(area.IsLessOrEquals(new Vector2Int(2, 2)), Is.True);
-		Assert.That(area.IsLessOrEquals(new Vector2Int(1, 2)), Is.True);
-		Assert.That(area.IsLessOrEquals(new Vector2Int(1, 1)), Is.True);
-		Assert.That(area.IsLessOrEquals(new Vector2Int(3, 3)), Is.True);
-		Assert.That(area.IsLessOrEquals(new Vector2Int(3, 4)), Is.True);
-		Assert.That(area.IsLessOrEquals(new Vector2Int(4, 4)), Is.False);
-		Assert.That(area.IsLessOrEquals(new Vector2Int(4, 3)), Is.False);
-	}
-
-	[Test]
-	public void AreaIsLessOrEqualsWithRotation_test() {
-		Area area = new Area(new Vector2Int(0, 0), new Vector2Int(3, 4));
-
-		Assert.That(area.IsLessOrEquals(new Vector2Int(4, 3), out bool rotation1), Is.True);
-		Assert.That(rotation1, Is.True);
-
-		Assert.That(area.IsLessOrEquals(new Vector2Int(3, 4), out bool rotation2), Is.True);
-		Assert.That(rotation2, Is.False);
+		@object.transform.position = new Vector3(98, 0, 96);
+		Assert.That(Map.GetMapPositionFrom(map, flag.transform.position, @object.transform.position, objectSize, out Vector2Int res5), Is.True);
 	}
 
 	[Test]

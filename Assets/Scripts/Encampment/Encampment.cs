@@ -14,32 +14,17 @@ namespace EncampmentSystem {
 		[SerializeField]
 		private EncampmentType _encampmentType = EncampmentType.CAMP;       // Type of encampment
 
-		[SerializeField]
-		private int _housingCapacity = 0;           // Number of housing capacity of the encampment.
-
-		[SerializeField]
-		private int _storageCapacity = 0;			// Number of storage capacity of the encampment.
-
-		[SerializeField]
-		[Range(0, 50)]
-		private int _currentHousing = 0;            // Number of bed that is assigned.
-
 		private float _upkeepCost = 0;              // The upkeep cost of the encampment.
+
+		[SerializeField]
+		private Specification _specification = new Specification();
 
 		public void AddToCoffer(int value) {
 			coffer += value;
 		}
 
-		public void IncreaseHousingCapacityBy(int value) {
-			_housingCapacity += value;
-		}
-
-		public void AdjustStorageCapacityBy(int value) {
-			_storageCapacity += value;
-		}
-
 		public void CalculateInfluenceRadius() {
-			InfluenceRadius = Constant.INFLUENCE_RADIUS_INCREMENT * _currentHousing + Constant.BASE_INFLUENCE_RADIUS;
+			InfluenceRadius = Constant.INFLUENCE_RADIUS_INCREMENT * Specification.Population + Constant.BASE_INFLUENCE_RADIUS;
 		}
 
 		public void CalculateUpkeepCost() {
@@ -62,8 +47,7 @@ namespace EncampmentSystem {
 			}
 		}
 
-		public int CurrentHousing { get { return _currentHousing; } }
-		public int HousingCapacity { get { return _housingCapacity; } }
+		public Specification Specification { get { return _specification; } }
 		public EncampmentType EncampmentType { get { return _encampmentType; } set { _encampmentType = value; } }
 		public FactionType FactionType { get { return _factionType; } set { _factionType = value; } }
 	}

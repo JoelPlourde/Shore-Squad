@@ -3,6 +3,7 @@ using GameSystem;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace EncampmentSystem {
 	namespace AI {
@@ -12,45 +13,66 @@ namespace EncampmentSystem {
 			public Texture2D TemplateTexture;
 
 			private Map _templateMap;
-			private Requirements _requirements;
 			private Encampment _encampment;
 
 			private List<Area> areas;
 
 			private void Awake() {
 				_encampment = GetComponent<Encampment>();
-				_requirements = new Requirements();
 
 				_templateMap = new Map(TemplateTexture.width, TemplateTexture);
 				Tester.Instance.DrawMap(_templateMap);
-
-				Debug.Log(_templateMap.Size);
-
 				areas = Map.GetAreasFromMap(_templateMap);
-				foreach (var item in areas) {
-					Debug.Log(item.Origin + " and " + item.Size);
+			}
+
+			public void Update() {
+				if (Input.GetKeyUp(KeyCode.Y)) {
+					Routine();
 				}
 			}
 
 			private void Routine() {
-				/*
-				if (_requirements.FreshWater <= _encampment.CurrentHousing) {
+				int i = Random.Range(0, 3);
+				if (i == 0) {
 					BuildFreshWaterInfrastructure();
+				} else if (i == 1) {
+					BuildStorageInfrastructure();
+				} else if (i == 2) {
+					BuildHousingInfrastructure();
 				}
-				*/
-
-				// Ration
-
-				// Storage
-				if (_requirements.StorageCapacity <= 5 + _encampment.CurrentHousing) {
-
-				}
+				/*
+				if (_encampment.Specification.WaterCapacity <= _encampment.Specification.Population) {
+					BuildFreshWaterInfrastructure();
+				} else if (_encampment.Specification.StorageCapacity <= 5 + _encampment.Specification.Population) {
+					BuildStorageInfrastructure();
+				} else if (_encampment.Specification.HousingCapacity <= _encampment.Specification.Population) {
+					BuildHousingInfrastructure();
+				}*/
 			}
 
 			public void BuildFreshWaterInfrastructure() {
 				switch (_encampment.EncampmentType) {
 					case EncampmentType.CAMP:
-						ConstructionManager.GetConstructionData("water pit");
+						Foreman(ConstructionManager.GetConstructionData("pit"));
+						break;
+					case EncampmentType.CAMPMENT:
+					case EncampmentType.ENCAMPMENT:
+					case EncampmentType.VILLAGE:
+					case EncampmentType.FORT:
+						Foreman(ConstructionManager.GetConstructionData("well"));
+						break;
+				}
+			}
+
+			public void BuildHousingInfrastructure() {
+				switch (_encampment.EncampmentType) {
+					case EncampmentType.CAMP:
+					case EncampmentType.CAMPMENT:
+					case EncampmentType.ENCAMPMENT:
+					case EncampmentType.VILLAGE:
+					case EncampmentType.FORT:
+					default:
+						Foreman(ConstructionManager.GetConstructionData("bed"));
 						break;
 				}
 			}
@@ -69,7 +91,51 @@ namespace EncampmentSystem {
 			}
 
 			public void Foreman(ConstructionData constructionData) {
+				GameObject @object = Instantiate(constructionData.Prefab);
+				ObjectBehaviour objectBehaviour = @object.GetComponent<ObjectBehaviour>();
+				objectBehaviour.Initialize();
+				Vector2Int size = Map.GetSizeFromObstacle(objectBehaviour.Obstacle);
 
+				bool placed = false;
+				List<Area> splitArea = new List<Area>();
+				int count = areas.Count;
+				while (count > 0) {
+					int i = Random.Range(0, areas.Count);
+					if (areas[i].IsLessOrEquals(size, out bool rotate)) {
+
+						if (Area.RemoveRectangleFromArea(areas[i], size, ref splitArea)) {
+							Vector2Int objectPos = new Vector2Int(-(_encampment.Map.Size.x >> 1), -(_encampment.Map.Size.y >> 1));		// Account for zone size
+							objectPos += new Vector2Int(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.z));// Account for zone world position
+							objectPos += areas[i].Origin;																				// Account for the area origin
+							objectPos += new Vector2Int(size.x >> 1, size.y >> 1);														// Account for the object size
+
+							// TODO get height at position on terrain.
+							@object.transform.position = new Vector3(objectPos.x, transform.position.y, objectPos.y);
+
+							if (!_encampment.Map.IsPositionValid(objectBehaviour.Obstacle, _encampment)) {
+								count--;
+								continue;
+							}
+
+							objectBehaviour.RegisterZone(_encampment);
+							objectBehaviour.Enable();
+							placed = true;
+							areas.RemoveAt(i);
+							break;
+						} else {
+							throw new UnityException("It should work.");
+						}
+					}
+					count--;
+				}
+
+				if (!placed) {
+					Destroy(@object);
+				}
+
+				if (splitArea.Count > 0) {
+					areas.AddRange(splitArea);
+				}
 			}
 		}
 	}

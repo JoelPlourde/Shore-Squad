@@ -42,6 +42,10 @@ public class ConstructionBehaviour : MonoBehaviour
 		Destroy(this);
 	}
 
+	public void Rotate() {
+		Constructable.Rotate();
+	}
+
 	public ConstructionData ConstructionData { get; private set; }
 	public IConstructable Constructable { get; private set; }
 }

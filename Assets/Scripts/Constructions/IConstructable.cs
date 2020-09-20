@@ -10,5 +10,7 @@ namespace ConstructionSystem {
 		void Disable();
 
 		bool IsPlacementValid();
+
+		void Rotate();
 	}
 }

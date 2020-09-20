@@ -9,12 +9,12 @@ namespace EncampmentSystem {
 
 		public override void Disable() {
 			base.Disable();
-			(ZoneBehaviour as Encampment)?.IncreaseHousingCapacityBy(-HousingCapacity);
+			(ZoneBehaviour as Encampment)?.Specification.UpdateHousingCapacityBy(-HousingCapacity);
 		}
 		
 		public override void Enable() {
 			base.Enable();
-			(ZoneBehaviour as Encampment)?.IncreaseHousingCapacityBy(HousingCapacity);
+			(ZoneBehaviour as Encampment)?.Specification.UpdateHousingCapacityBy(HousingCapacity);
 		}
 	}
 }

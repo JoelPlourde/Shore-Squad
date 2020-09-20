@@ -1,4 +1,5 @@
 ﻿using EncampmentSystem;
+using NavigationSystem;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -54,9 +55,9 @@ namespace GameSystem {
 		/// <param name="obstacle">The obstacle of the map.</param>
 		/// <param name="worldPosition">The origin of where we want to place the object in world position.</param>
 		/// <returns>Returns true if the origin position is valid, false if not.</returns>
-		public bool IsPositionValid(NavMeshObstacle obstacle, ZoneBehaviour zoneBehaviour) {
+		public bool IsPositionValid(Obstacle obstacle, ZoneBehaviour zoneBehaviour) {
 			Vector2Int rectangleSize = GetSizeFromObstacle(obstacle);
-			if (GetMapPositionFrom(this, zoneBehaviour.transform.position, obstacle.transform, rectangleSize, out Vector2Int relativePosition)) {
+			if (GetMapPositionFrom(this, zoneBehaviour.transform.position, obstacle.transform.position, rectangleSize, out Vector2Int relativePosition)) {
 				return IsPositionValid(relativePosition, rectangleSize);
 			}
 			return false;
@@ -71,6 +72,7 @@ namespace GameSystem {
 		public bool IsPositionValid(Vector2Int origin, Vector2Int rectangleSize) {
 			foreach (Color color in GetColorsAt(origin, rectangleSize)) {
 				if (Invalid.Contains(color)) {
+					Debug.Log("Invalid color: " + color);
 					return false;
 				}
 			}
@@ -95,9 +97,9 @@ namespace GameSystem {
 		/// <param name="obstacle">The obstacle to draw a rectangle for.</param>
 		/// <param name="zoneBehaviour">The zone where to draw the rectangle.</param>
 		/// <param name="color">The color to represent on the map.</param>
-		public void DrawRectangle(NavMeshObstacle obstacle, ZoneBehaviour zoneBehaviour, Color color) {
+		public void DrawRectangle(Obstacle obstacle, ZoneBehaviour zoneBehaviour, Color color) {
 			Vector2Int rectangleSize = GetSizeFromObstacle(obstacle);
-			if (GetMapPositionFrom(this, zoneBehaviour.transform.position, obstacle.transform, rectangleSize, out Vector2Int relativePosition)) {
+			if (GetMapPositionFrom(this, zoneBehaviour.transform.position, obstacle.transform.position, rectangleSize, out Vector2Int relativePosition)) {
 				DrawRectangle(relativePosition, rectangleSize, color);
 			} else {
 				Debug.LogError("Couldn't draw the rectangle.");
@@ -130,10 +132,10 @@ namespace GameSystem {
 		/// <param name="object">The object to be recorded on the map.</param>
 		/// <param name="objectSize">The object's size</param>
 		/// <returns>Returns the position on the map.</returns>
-		public static bool GetMapPositionFrom(Map map, Vector3 reference, Transform @object, Vector2Int objectSize, out Vector2Int mapRelativePosition) {
+		public static bool GetMapPositionFrom(Map map, Vector3 reference, Vector3 objectPosition, Vector2Int objectSize, out Vector2Int mapRelativePosition) {
 			Vector3 origin = new Vector3(reference.x - (map.Size.x >> 1), 0, reference.z - (map.Size.y >> 1));
-			Vector3 objectPosition = new Vector3(@object.position.x - (objectSize.x >> 1), 0, @object.position.z - (objectSize.y >> 1));
-			Vector3 relativePosition = objectPosition - origin;
+			Vector3 objectPos = new Vector3(objectPosition.x - (objectSize.x >> 1), 0, objectPosition.z - (objectSize.y >> 1));
+			Vector3 relativePosition = objectPos - origin;
 			mapRelativePosition = new Vector2Int(Mathf.RoundToInt(relativePosition.x), Mathf.RoundToInt(relativePosition.z));
 
 			if ((mapRelativePosition.x + objectSize.x) > map.Size.x || (mapRelativePosition.y + objectSize.y) > map.Size.y) {
@@ -152,8 +154,14 @@ namespace GameSystem {
 		/// </summary>
 		/// <param name="obstacle">The Obstacle in the world.</param>
 		/// <returns>Returns a size in map unit.</returns>
-		public static Vector2Int GetSizeFromObstacle(NavMeshObstacle obstacle) {
-			return new Vector2Int(Mathf.RoundToInt(obstacle.size.x + 1), Mathf.RoundToInt(obstacle.size.z + 1));
+		public static Vector2Int GetSizeFromObstacle(Obstacle obstacle) {
+			Vector2Int size = new Vector2Int(Mathf.RoundToInt(obstacle.Size.x), Mathf.RoundToInt(obstacle.Size.z));
+			if (Mathf.Approximately(obstacle.transform.eulerAngles.y, 90) || Mathf.Approximately(obstacle.transform.eulerAngles.y, 270)) {
+				var tmp = size.x;
+				size.x = size.y;
+				size.y = tmp;
+			}
+			return size;
 		}
 
 		/// <summary>

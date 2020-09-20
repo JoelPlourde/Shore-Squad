@@ -7,5 +7,15 @@ namespace EncampmentSystem {
 		[Range(0, 100)]
 		public int Value;
 
+		public override void Disable() {
+			base.Disable();
+			// TODO FINISH THIS
+			(ZoneBehaviour as Encampment)?.Specification.UpdateWaterCapacityBy(-Value);
+		}
+
+		public override void Enable() {
+			base.Enable();
+			(ZoneBehaviour as Encampment)?.Specification.UpdateWaterCapacityBy(Value);
+		}
 	}
 }

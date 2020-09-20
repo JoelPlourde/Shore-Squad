@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3fae11ff74dd697428434159637d09eb, type: 3}
-  m_Name: Tent
+  m_Name: Barrel
   m_EditorClassIdentifier: 
   ConstructionTime: 0
   Sprite: {fileID: 0}
-  Prefab: {fileID: 3189822939962347382, guid: ea9af258688ee81489cea4763d69e161, type: 3}
-  Tooltip: This is a very basic tent
+  Prefab: {fileID: 7283500795223740098, guid: 0d3a64dffb9f2ee428380e727a855516, type: 3}
+  Tooltip: To store your not-so-precious things.

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4264640609996697760}
   - component: {fileID: 4264640609996697763}
   - component: {fileID: 4264640609996697762}
-  - component: {fileID: 3557763650919432400}
+  - component: {fileID: 9208639684573890525}
   m_Layer: 0
   m_Name: Sleeping Bag
   m_TagString: Untagged
@@ -108,19 +108,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   requiresEncampment: 0
   HousingCapacity: 1
---- !u!208 &3557763650919432400
-NavMeshObstacle:
+--- !u!114 &9208639684573890525
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4264640609996697765}
   m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 1, y: 0.25, z: 0.5}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
-  m_TimeToStationary: 0.5
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 022fd7b6e926eb24a86fe67d40218763, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Boxes:
+  - Center: {x: 0, y: 0, z: 0}
+    Size: {x: 1, y: 1, z: 1}

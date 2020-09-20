@@ -47,6 +47,11 @@ public class Foreman : MonoBehaviour
 			_isValid = _constructionBehaviour.Constructable.IsPlacementValid();
 		}
 
+		// Rotate
+		if (Input.GetKeyUp(KeyCode.R)) {
+			_constructionBehaviour.Rotate();
+		}
+
 		if (Input.GetMouseButtonUp(0)) {
 			if (_isValid) {
 				_constructionBehaviour.StartConstruction();

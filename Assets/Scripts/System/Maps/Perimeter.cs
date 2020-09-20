@@ -7,6 +7,11 @@ namespace GameSystem {
 		public Border X { get; private set; }
 		public Border Y { get; private set; }
 
+		public Perimeter() {
+			X = new Border();
+			Y = new Border();
+		}
+
 		public Perimeter(Vector2Int mapSize, Vector2Int rectangleSize, int limit = 0) {
 			X = new Border(mapSize.x, rectangleSize.x, limit);
 			Y = new Border(mapSize.y, rectangleSize.y, limit);

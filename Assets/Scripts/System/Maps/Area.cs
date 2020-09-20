@@ -32,7 +32,7 @@ namespace GameSystem {
 		/// <returns>Return true if the rectangle fits in the area, else false. Validate rotate to see if it has to be rotate first.</returns>
 		public bool IsLessOrEquals(Vector2Int size, out bool rotate) {
 			rotate = false;
-			if (Size.x * Size.y != size.x * size.y) {
+			if (AreaValue < size.x * size.y) {
 				return false;
 			}
 
@@ -43,5 +43,51 @@ namespace GameSystem {
 
 			return true;
 		}
+
+		// Return bool to indicates if it worked or not.
+		// Pass Areas by ref.
+		public static bool RemoveRectangleFromArea(Area area, Vector2Int rectangle, ref List<Area> areas) {
+			areas = new List<Area>();
+			if (area.IsLessOrEquals(rectangle, out bool rotate)) {
+				if (rotate) {
+					var tmp = rectangle;
+					rectangle.x = rectangle.y;
+					rectangle.y = tmp.x;
+				}
+
+				Area right = new Area(
+					new Vector2Int {
+						x = area.Origin.x + rectangle.x,
+						y = area.Origin.y
+					},
+					new Vector2Int {
+						x = area.Size.x - rectangle.x,
+						y = rectangle.y
+					});
+				if (right.AreaValue > 0) {
+					areas.Add(right);
+				}
+
+				Area up = new Area(
+					new Vector2Int {
+						x = area.Origin.x,
+						y = area.Origin.y + rectangle.y
+					},
+					new Vector2Int {
+						x = area.Size.x,
+						y = area.Size.y - rectangle.y
+					});
+
+				if (up.AreaValue > 0) {
+					areas.Add(up);
+				}
+				return true;
+			} else {
+				Debug.Log("The rectangle is too big to fit into the area !");
+				return false;
+			}
+		}
+
+		public int AreaValue { get { return Size.x * Size.y; } }
 	}
 }

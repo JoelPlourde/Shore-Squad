@@ -3,26 +3,24 @@ using EncampmentSystem;
 using ConstructionSystem;
 using UnityEngine.AI;
 using System.Collections.Generic;
+using NavigationSystem;
 
 [RequireComponent(typeof(Collider))]
-[RequireComponent(typeof(NavMeshObstacle))]
+[RequireComponent(typeof(Obstacle))]
 public abstract class ObjectBehaviour : MonoBehaviour, IConstructable
 {
-	public NavMeshObstacle NavMeshObstacle { get; private set; }
+	public Obstacle Obstacle { get; private set; }
 	public Stack<ZoneBehaviour> ZoneBehaviours { get; protected set; }
 
 	public virtual void Initialize() {
 		ZoneBehaviours = new Stack<ZoneBehaviour>();
-		NavMeshObstacle = GetComponent<NavMeshObstacle>();
-		NavMeshObstacle.carving = false;
-		NavMeshObstacle.enabled = false;
+		Obstacle = GetComponent<Obstacle>();
 	}
 
 	public virtual void Enable() {
-		NavMeshObstacle.enabled = true;
-		NavMeshObstacle.carving = true;								// Enable the carving of the NavMeshObstacle
+		Obstacle.Enable();
 		gameObject.layer = LayerMask.NameToLayer("Default");        // Reset the Layer to Default
-		ZoneBehaviour?.Map.DrawRectangle(NavMeshObstacle, ZoneBehaviour, Color.red); // Record the position of this object on the map.
+		ZoneBehaviour?.Map.DrawRectangle(Obstacle, ZoneBehaviour, Color.red); // Record the position of this object on the map.
 
 		// TODO REMOVE THIS AT ONE POINT.
 		if (ZoneBehaviour) {
@@ -31,14 +29,17 @@ public abstract class ObjectBehaviour : MonoBehaviour, IConstructable
 	}
 
 	public virtual void Disable() {
-		NavMeshObstacle.carving = false;
-		NavMeshObstacle.enabled = false;
-		ZoneBehaviour?.Map.DrawRectangle(NavMeshObstacle, ZoneBehaviour, Color.white); // Reset the position of this object on the map.
+		Obstacle.Disable();
+		ZoneBehaviour?.Map.DrawRectangle(Obstacle, ZoneBehaviour, Color.white); // Reset the position of this object on the map.
 
 		// TODO REMOVE THIS AT ONE POINT.
 		if (ZoneBehaviour) {
 			Tester.Instance.DrawMap(ZoneBehaviour.Map);
 		}
+	}
+
+	public void Rotate() {
+		transform.Rotate(Vector3.up, 90f);
 	}
 
 	#region Zone Management
@@ -56,7 +57,7 @@ public abstract class ObjectBehaviour : MonoBehaviour, IConstructable
 	#region IPlaceable
 	public virtual bool IsPlacementValid() {
 		if (ZoneBehaviour) {
-			return ZoneBehaviour.Map.IsPositionValid(NavMeshObstacle, ZoneBehaviour);
+			return ZoneBehaviour.Map.IsPositionValid(Obstacle, ZoneBehaviour);
 		} else {
 			return false;
 		}

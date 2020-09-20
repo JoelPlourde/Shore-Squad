@@ -26,7 +26,7 @@ namespace EncampmentSystem {
 
 		public override void Enable() {
 			base.Enable();
-			Encampment.Map.DrawRectangle(NavMeshObstacle, Encampment, Color.red);
+			Encampment.Map.DrawRectangle(Obstacle, Encampment, Color.red);
 			gameObject.transform.GetChild(0).GetComponent<MeshRenderer>().material = FactionManager.GetFactionData(Encampment.FactionType).Flag;
 			FactionManager.RegisterEncampment(Encampment.FactionType, Encampment);
 		}

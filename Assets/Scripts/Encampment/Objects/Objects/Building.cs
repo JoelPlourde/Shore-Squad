@@ -19,7 +19,7 @@ namespace EncampmentSystem {
 			InnerZoneBehaviour.Map = new Map(InnerZoneBehaviour.InfluenceRadius);
 
 			Initialize();
-			NavMeshObstacle.size = new Vector3(InnerZoneBehaviour.InfluenceRadius, InnerZoneBehaviour.InfluenceRadius, InnerZoneBehaviour.InfluenceRadius);
+			// Obstacle.Initialize(new Vector3(InnerZoneBehaviour.InfluenceRadius, InnerZoneBehaviour.InfluenceRadius, InnerZoneBehaviour.InfluenceRadius));
 		}
 
 		public override void Initialize() {

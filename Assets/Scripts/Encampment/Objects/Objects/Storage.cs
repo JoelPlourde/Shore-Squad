@@ -5,12 +5,12 @@
 
 		public override void Disable() {
 			base.Disable();
-			(ZoneBehaviour as Encampment)?.AdjustStorageCapacityBy(-Capacity);
+			(ZoneBehaviour as Encampment)?.Specification.UpdateStorageCapacityBy(-Capacity);
 		}
 
 		public override void Enable() {
 			base.Enable();
-			(ZoneBehaviour as Encampment)?.AdjustStorageCapacityBy(Capacity);
+			(ZoneBehaviour as Encampment)?.Specification.UpdateStorageCapacityBy(Capacity);
 		}
 	}
 }
