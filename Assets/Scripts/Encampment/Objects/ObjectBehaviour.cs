@@ -20,26 +20,15 @@ public abstract class ObjectBehaviour : MonoBehaviour, IConstructable
 	public virtual void Enable() {
 		Obstacle.Enable();
 		gameObject.layer = LayerMask.NameToLayer("Default");        // Reset the Layer to Default
-		ZoneBehaviour?.Map.DrawRectangle(Obstacle, ZoneBehaviour, Color.red); // Record the position of this object on the map.
-
-		// TODO REMOVE THIS AT ONE POINT.
-		if (ZoneBehaviour) {
-			Tester.Instance.DrawMap(ZoneBehaviour.Map);
-		}
 	}
 
 	public virtual void Disable() {
 		Obstacle.Disable();
-		ZoneBehaviour?.Map.DrawRectangle(Obstacle, ZoneBehaviour, Color.white); // Reset the position of this object on the map.
-
-		// TODO REMOVE THIS AT ONE POINT.
-		if (ZoneBehaviour) {
-			Tester.Instance.DrawMap(ZoneBehaviour.Map);
-		}
 	}
 
 	public void Rotate() {
 		transform.Rotate(Vector3.up, 90f);
+		Obstacle.CalculateBoundingBox();
 	}
 
 	#region Zone Management
@@ -69,6 +58,14 @@ public abstract class ObjectBehaviour : MonoBehaviour, IConstructable
 				return ZoneBehaviours.Peek();
 			}
 			return null;
+		}
+	}
+
+	/// <summary>
+	/// 
+	/// </summary>
+	public ZoneBehaviour ParentZone { get {
+			return ZoneBehaviours.ToArray()[ZoneBehaviours.Count - 1];
 		}
 	}
 }

@@ -12,14 +12,15 @@ public static class TerrainScanner
 	/// <param name="terrain">The Terrain</param>
 	/// <param name="zoneBehaviour">The Zone.</param>
 	/// <returns>True if the zone is within the terrain, false if not.</returns>
-	public static bool CheckIfZoneIsWithinTerrain(Terrain terrain, Vector3 position, int size) {
+	public static bool CheckIfZoneIsWithinTerrain(Terrain terrain, Vector3 position, int mapWidth, int mapHeight) {
 		Vector3 relativePosition = position - terrain.transform.position;
-		float halfSize = size >> 1;
-		if ((relativePosition.x - halfSize) < 0 || (relativePosition.x + halfSize) > terrain.terrainData.size.x) {
+		float halfSizeX = mapWidth >> 1;
+		float halfSizeY = mapHeight >> 1;
+		if ((relativePosition.x - halfSizeX) < 0 || (relativePosition.x + halfSizeX) > terrain.terrainData.size.x) {
 			return false;
 		}
 
-		if ((relativePosition.z - halfSize) < 0 || (relativePosition.z + halfSize) > terrain.terrainData.size.z) {
+		if ((relativePosition.z - halfSizeY) < 0 || (relativePosition.z + halfSizeY) > terrain.terrainData.size.z) {
 			return false;
 		}
 
@@ -34,9 +35,9 @@ public static class TerrainScanner
 	/// <param name="size">The size of the area to map.</param>
 	/// <param name="map">The map that will be generated.</param>
 	/// <returns>Return True if the map had been able to be mapped, else false.</returns>
-	public static bool GetTerrainMap(Terrain terrain, Vector3 position, int size, out Map map) {
-		map = new Map(size);
-		if (!CheckIfZoneIsWithinTerrain(terrain, position, size)) {
+	public static bool GetTerrainMap(Terrain terrain, Vector3 position, int mapWidth, int mapHeight, out Map map) {
+		map = new Map(mapWidth, mapHeight);
+		if (!CheckIfZoneIsWithinTerrain(terrain, position, mapWidth, mapHeight)) {
 			return false;
 		}
 

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fae11ff74dd697428434159637d09eb, type: 3}
   m_Name: Chest
   m_EditorClassIdentifier: 
-  ConstructionTime: 0
+  ConstructionTime: 10
   Sprite: {fileID: 0}
   Prefab: {fileID: 1951089912045833644, guid: 203bfec9d7ff842448c4cb893cad9a23, type: 3}
   Tooltip: Holds all your most precious thingy !

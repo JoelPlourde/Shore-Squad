@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fae11ff74dd697428434159637d09eb, type: 3}
   m_Name: Bed
   m_EditorClassIdentifier: 
-  ConstructionTime: 0
+  ConstructionTime: 10
   Sprite: {fileID: 0}
   Prefab: {fileID: 5158501254355179197, guid: 928211f69f7800a4485fa39fa74daacc, type: 3}
   Tooltip: This is a very good tooltip

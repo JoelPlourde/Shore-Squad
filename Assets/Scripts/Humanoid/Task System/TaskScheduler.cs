@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
+using System.Linq;
 using UnityEngine.AI;
 
 namespace TaskSystem {
@@ -9,12 +11,19 @@ namespace TaskSystem {
 	[RequireComponent(typeof(NavMeshAgent))]
 	public class TaskScheduler : MonoBehaviour {
 
+		public static Dictionary<TaskType, Type> TaskTypes = new Dictionary<TaskType, Type>() {
+			{ TaskType.ATTACK, typeof(Attack) },
+			{ TaskType.CONSTRUCT, typeof(Construct) },
+			{ TaskType.FLEE, typeof(Flee) },
+			{ TaskType.MOVE, typeof(Move) },
+			{ TaskType.SLEEP, typeof(Sleep) }
+		};
+		private static readonly Dictionary<Guid, TaskScheduler> _instances = new Dictionary<Guid, TaskScheduler>();
+
 		public event Action<TaskBehaviour> OnAddTaskEvent;
 		public event Action<TaskBehaviour> OnEndTaskEvent;
 
 		private Guid _guid;
-
-		private static readonly Dictionary<Guid, TaskScheduler> _instances = new Dictionary<Guid, TaskScheduler>();
 
 		private bool _isExecuting = false;
 		private readonly Queue<TaskBehaviour> _taskBehaviours = new Queue<TaskBehaviour>();
@@ -31,6 +40,13 @@ namespace TaskSystem {
 				return taskScheduler;
 			}
 			throw new UnityException("This instance of TaskScheduler does not exists by Guid: " + guid.ToString());
+		}
+
+		public void CreateTask(ITaskArguments taskArguments, TaskPriority taskPriority = TaskPriority.NORMAL) {
+			MethodInfo methodInfo = typeof(TaskScheduler).GetMethods().Where(x => x.Name == "CreateTask").Where(x => x.IsGenericMethod).First();
+			methodInfo = methodInfo.MakeGenericMethod(TaskTypes[taskArguments.GetTaskType()]);
+			object[] args = { taskArguments, taskPriority };
+			methodInfo.Invoke(this, args);
 		}
 
 		public void CreateTask<T>(ITaskArguments taskArguments, TaskPriority taskPriority = TaskPriority.NORMAL) where T : TaskBehaviour {
@@ -58,7 +74,7 @@ namespace TaskSystem {
 			}
 		}
 
-		public void AddTask(TaskBehaviour taskBehaviour) {
+		private void AddTask(TaskBehaviour taskBehaviour) {
 			_taskBehaviours.Enqueue(taskBehaviour);
 
 			// Invoke on Add Task event.
@@ -106,5 +122,7 @@ namespace TaskSystem {
 				ScheduleTask();
 			}
 		}
+
+		public bool Busy { get { return _currentTask != null; } }
 	}
 }

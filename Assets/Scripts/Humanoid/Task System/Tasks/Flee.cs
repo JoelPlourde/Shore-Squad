@@ -1,36 +1,37 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TaskSystem;
 using UnityEngine.AI;
 
-public class Flee : TaskBehaviour {
+namespace TaskSystem {
+	public class Flee : TaskBehaviour {
 
-	private NavMeshAgent navMeshAgent;
-	private FleeArguments fleeArguments;
+		private NavMeshAgent navMeshAgent;
+		private FleeArguments fleeArguments;
 
-	public override void Combine(ITaskArguments taskArguments) {
-		base.Initialize(taskArguments, TaskPriority);
-		Execute();
-	}
+		public override void Combine(ITaskArguments taskArguments) {
+			base.Initialize(taskArguments, TaskPriority);
+			Execute();
+		}
 
-	public override void Execute() {
-		// Validate the arguments you've received is of the correct type.
-		FleeArguments fleeArguments = TaskArguments as FleeArguments;
+		public override void Execute() {
+			// Validate the arguments you've received is of the correct type.
+			FleeArguments fleeArguments = TaskArguments as FleeArguments;
 
-		Debug.Log(name + " is fleeing !!");
+			Debug.Log(name + " is fleeing !!");
 
-		// Start the NavMeshAgent.
-		navMeshAgent = gameObject.GetComponent<NavMeshAgent>();
-		navMeshAgent.SetDestination(fleeArguments.Direction);
-		navMeshAgent.isStopped = false;
+			// Start the NavMeshAgent.
+			navMeshAgent = gameObject.GetComponent<NavMeshAgent>();
+			navMeshAgent.SetDestination(fleeArguments.Direction);
+			navMeshAgent.isStopped = false;
 
-		actor.Animator.SetBool("Move", true);
-	}
+			actor.Animator.SetBool("Move", true);
+		}
 
-	public override void OnEnd() {
-		base.OnEnd();
-		navMeshAgent.isStopped = true;
-		actor.Animator.SetBool("Move", false);
+		public override void OnEnd() {
+			base.OnEnd();
+			navMeshAgent.isStopped = true;
+			actor.Animator.SetBool("Move", false);
+		}
 	}
 }

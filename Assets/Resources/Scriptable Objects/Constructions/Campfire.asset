@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fae11ff74dd697428434159637d09eb, type: 3}
   m_Name: Campfire
   m_EditorClassIdentifier: 
-  ConstructionTime: 5
+  ConstructionTime: 10
   Sprite: {fileID: 0}
   Prefab: {fileID: 4119812352319035728, guid: 8700a1e9db95c224493803353b79b7d0, type: 3}
   Tooltip: This is a firepit to warm you during the cold night.

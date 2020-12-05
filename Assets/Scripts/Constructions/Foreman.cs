@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using ConstructionSystem;
+using EncampmentSystem;
 
 public class Foreman : MonoBehaviour
 {
@@ -25,15 +26,16 @@ public class Foreman : MonoBehaviour
 		if (!IsInvoking()) {
 
 			// Create an object based on the construction received.
-			CreateConstructionBehaviour(constructionData);
+			_constructionBehaviour = CreateConstructionBehaviour(constructionData);
 
 			InvokeRepeating(nameof(Routine), 0, Constant.DEFAULT_REFRESH_RATE);
 		}
 	}
 
-	private void CreateConstructionBehaviour(ConstructionData constructionData) {
-		_constructionBehaviour = Instantiate(constructionData.Prefab).AddComponent<ConstructionBehaviour>();
-		_constructionBehaviour.Initialize(constructionData, _constructionBehaviour.GetComponent<IConstructable>());
+	public static ConstructionBehaviour CreateConstructionBehaviour(ConstructionData constructionData) {
+		ConstructionBehaviour constructionBehaviour = Instantiate(constructionData.Prefab).AddComponent<ConstructionBehaviour>();
+		constructionBehaviour.Initialize(constructionData, constructionBehaviour.GetComponent<IConstructable>());
+		return constructionBehaviour;
 	}
 
 	public void Routine() {
@@ -43,7 +45,11 @@ public class Foreman : MonoBehaviour
 
 		_isValid = false;
 		if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out _hit, Mathf.Infinity, _layerMask)) {
-			_constructionBehaviour.transform.position = _hit.point;
+
+
+
+
+			_constructionBehaviour.transform.position = MapUtils.GetMapPositionFromWorldPosition(_hit.point);
 			_isValid = _constructionBehaviour.Constructable.IsPlacementValid();
 		}
 

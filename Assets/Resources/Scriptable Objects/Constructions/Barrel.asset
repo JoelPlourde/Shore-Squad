@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fae11ff74dd697428434159637d09eb, type: 3}
   m_Name: Barrel
   m_EditorClassIdentifier: 
-  ConstructionTime: 0
+  ConstructionTime: 10
   Sprite: {fileID: 0}
   Prefab: {fileID: 7283500795223740098, guid: 0d3a64dffb9f2ee428380e727a855516, type: 3}
   Tooltip: To store your not-so-precious things.

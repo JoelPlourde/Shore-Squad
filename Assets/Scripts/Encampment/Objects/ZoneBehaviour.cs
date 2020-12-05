@@ -22,7 +22,7 @@ namespace EncampmentSystem {
 			_boxCollider.isTrigger = true;
 
 			if (TerrainScanner.GetTerrainAtWorldPosition(transform.position, out Terrain terrain)) {
-				if (TerrainScanner.GetTerrainMap(terrain, transform.position, InfluenceRadius, out Map map)) {
+				if (TerrainScanner.GetTerrainMap(terrain, transform.position, InfluenceRadius, InfluenceRadius, out Map map)) {
 					Map = map;
 				}
 			} else {

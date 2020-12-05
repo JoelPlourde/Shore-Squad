@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fae11ff74dd697428434159637d09eb, type: 3}
   m_Name: Pit
   m_EditorClassIdentifier: 
-  ConstructionTime: 0
+  ConstructionTime: 10
   Sprite: {fileID: 0}
   Prefab: {fileID: 317694016408402029, guid: 933d2f7107a4dc244873bf6b74c29601, type: 3}
   Tooltip: A pit allows you to extract fresh water from the ground.

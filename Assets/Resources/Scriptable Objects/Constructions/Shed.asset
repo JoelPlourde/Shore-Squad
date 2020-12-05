@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fae11ff74dd697428434159637d09eb, type: 3}
   m_Name: Shed
   m_EditorClassIdentifier: 
-  ConstructionTime: 0
+  ConstructionTime: 10
   Sprite: {fileID: 0}
   Prefab: {fileID: 2061284419992553555, guid: 9244c476ed2cdb04cbecf6be438a9e7e, type: 3}
   Tooltip: This is a very basic tent

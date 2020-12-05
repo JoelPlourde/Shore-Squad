@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using NavigationSystem;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,13 +16,9 @@ namespace GameSystem {
 			Size = size;
 		}
 
-		/// <summary>
-		/// Verify if the size in parameters fits in this area.
-		/// </summary>
-		/// <param name="size">Rectangle to try to fit in the area.</param>
-		/// <returns>Return true if the rectangle fits in the area, else false.</returns>
-		public bool IsLessOrEquals(Vector2Int size) {
-			return (Size.x >= size.x && Size.y >= size.y);
+		// TODO change naming convention.
+		public bool ObstacleCanFitInTheArea(Obstacle obstacle, out bool rotate) {
+			return IsLessOrEquals(Map.GetSizeFromObstacle(obstacle), out rotate);
 		}
 
 		/// <summary>
@@ -32,22 +29,21 @@ namespace GameSystem {
 		/// <returns>Return true if the rectangle fits in the area, else false. Validate rotate to see if it has to be rotate first.</returns>
 		public bool IsLessOrEquals(Vector2Int size, out bool rotate) {
 			rotate = false;
-			if (AreaValue < size.x * size.y) {
-				return false;
+			if (Size.x >= size.x && Size.y >= size.y) {
+				return true;
 			}
 
-			if (Size.x >= size.y && Size.y >= size.x) {
+			if (Size.y >= size.x && Size.x >= size.y) {
 				rotate = true;
 				return true;
 			}
 
-			return true;
+			return false;
 		}
 
-		// Return bool to indicates if it worked or not.
-		// Pass Areas by ref.
-		public static bool RemoveRectangleFromArea(Area area, Vector2Int rectangle, ref List<Area> areas) {
+		public static bool RemoveObstacleFromArea(Area area, Obstacle obstacle, ref List<Area> areas) {
 			areas = new List<Area>();
+			Vector2Int rectangle = Map.GetSizeFromObstacle(obstacle);
 			if (area.IsLessOrEquals(rectangle, out bool rotate)) {
 				if (rotate) {
 					var tmp = rectangle;
@@ -86,6 +82,18 @@ namespace GameSystem {
 				Debug.Log("The rectangle is too big to fit into the area !");
 				return false;
 			}
+		}
+
+		public override bool Equals(object obj) {
+			return (!(obj is Area area)) ? false : Origin.Equals(area.Origin) && Size.Equals(area.Size);
+		}
+
+		public override int GetHashCode() {
+			return base.GetHashCode();
+		}
+
+		public override string ToString() {
+			return "Origin: " + Origin + " and Size: " + Size;
 		}
 
 		public int AreaValue { get { return Size.x * Size.y; } }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using EncampmentSystem;
-using UnityEngine;
 using System.Linq;
 
 namespace FactionSystem {
@@ -11,7 +10,7 @@ namespace FactionSystem {
 
 		static FactionManager() {
 			Factions = Enum.GetValues(typeof(FactionType)).OfType<FactionType>().ToDictionary(x => x, x => new Faction(x));
-			FactionDatas = Resources.LoadAll<FactionData>("Scriptable Objects/Factions")
+			FactionDatas = UnityEngine.Resources.LoadAll<FactionData>("Scriptable Objects/Factions")
 				.ToDictionary(x => (FactionType)Enum.Parse(typeof(FactionType), x.name.ToUpper()));
 		}
 

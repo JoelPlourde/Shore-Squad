@@ -1,9 +1,7 @@
 ﻿using ConstructionSystem;
 using GameSystem;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 namespace EncampmentSystem {
 	namespace AI {
@@ -15,14 +13,15 @@ namespace EncampmentSystem {
 			private Map _templateMap;
 			private Encampment _encampment;
 
-			private List<Area> areas;
+			private List<Area> _availableAreas;
+
+			private int i = 0;
 
 			private void Awake() {
 				_encampment = GetComponent<Encampment>();
 
-				_templateMap = new Map(TemplateTexture.width, TemplateTexture);
-				Tester.Instance.DrawMap(_templateMap);
-				areas = Map.GetAreasFromMap(_templateMap);
+				_templateMap = new Map(TemplateTexture.width, TemplateTexture.height, TemplateTexture);
+				_availableAreas = Map.GetAreasFromMap(_templateMap);
 			}
 
 			public void Update() {
@@ -32,14 +31,15 @@ namespace EncampmentSystem {
 			}
 
 			private void Routine() {
-				int i = Random.Range(0, 3);
-				if (i == 0) {
+				if (i < 1) {
+					BuildInfrastructure();
+				} else {
 					BuildFreshWaterInfrastructure();
-				} else if (i == 1) {
-					BuildStorageInfrastructure();
-				} else if (i == 2) {
 					BuildHousingInfrastructure();
+					BuildStorageInfrastructure();
 				}
+
+				i++;
 				/*
 				if (_encampment.Specification.WaterCapacity <= _encampment.Specification.Population) {
 					BuildFreshWaterInfrastructure();
@@ -50,16 +50,103 @@ namespace EncampmentSystem {
 				}*/
 			}
 
+			/// <summary>
+			/// Register new areas for the AI to place object in.
+			/// </summary>
+			/// <param name="areas"></param>
+			public void RegisterAreas(List<Area> areas) {
+				foreach (var area in areas) {
+					if (!_availableAreas.Contains(area)) {
+						_availableAreas.Add(area);
+					} else {
+						Debug.Log(area);
+						Debug.Log(_availableAreas.FindIndex(0, x => x.Equals(area)));
+						Debug.Log("Area is already registered in the available areas.");
+					}
+				}
+			}
+
+			/// <summary>
+			/// Place an object unto the map based on the available areas.
+			/// </summary>
+			/// <param name="constructionData"></param>
+			public void Construct(ConstructionData constructionData) {
+				ConstructionBehaviour constructionBehaviour = Foreman.CreateConstructionBehaviour(constructionData);
+				ObjectBehaviour objectBehaviour = constructionBehaviour.GetComponent<ObjectBehaviour>();
+				objectBehaviour.Initialize();
+
+				bool placed = false;
+				List<Area> splitArea = new List<Area>();
+				int count = _availableAreas.Count;
+				while (count > 0) {
+					// Generate a random index to check if the areas is ok.
+					int i = Random.Range(0, _availableAreas.Count);
+					if (_availableAreas[i].ObstacleCanFitInTheArea(objectBehaviour.Obstacle, out bool rotate)) {
+
+						Debug.Log("The obstacle " + objectBehaviour.Obstacle.Size + " can fit in: " + _availableAreas[i] + " with rotation: " + rotate);
+
+						// If the Obstacle fits if the area is rotated, rotate it.
+						if (rotate) {
+							constructionBehaviour.Rotate();
+						}
+
+						// Remove the obstacle from the area.
+						if (Area.RemoveObstacleFromArea(_availableAreas[i], objectBehaviour.Obstacle, ref splitArea)) {
+							Vector3 origin = Map.GetMapOriginInWorldPos(_encampment.Map, _encampment.transform.position);
+							Vector3 objectPos = new Vector3(_availableAreas[i].Origin.x, 0, _availableAreas[i].Origin.y);
+							Vector3 pos = objectPos + origin + (new Vector3(_availableAreas[i].Size.x, 0, _availableAreas[i].Size.y) / 2);
+
+							// TODO get height at position on terrain.
+							constructionBehaviour.transform.position = pos;
+
+							if (!_encampment.Map.IsPositionValid(objectBehaviour.Obstacle, _encampment)) {
+								break;
+							}
+
+
+							objectBehaviour.RegisterZone(_encampment);
+							constructionBehaviour.StartConstruction();
+
+							_availableAreas.Remove(_availableAreas[i]);
+							RegisterAreas(splitArea);
+							placed = true;
+							break;
+						} else {
+							throw new UnityException("It should work.");
+						}
+					} else {
+						Debug.Log("The obstacle " + objectBehaviour.Obstacle.Size + " cannot fit in: " + _availableAreas[i]);
+					}
+					count--;
+				}
+
+				if (!placed) {
+					Destroy(constructionBehaviour.gameObject);
+				}
+			}
+
+			void OnDrawGizmos() {
+				if (Application.isPlaying) {
+					foreach (var area in _availableAreas) {
+						Vector3 origin = Map.GetMapOriginInWorldPos(_encampment.Map, _encampment.transform.position);
+						Vector3 areaHalfSize = new Vector3(area.Size.x / 2, 0, area.Size.y / 2);
+						Gizmos.color = Color.yellow;
+						Gizmos.DrawWireCube(origin + areaHalfSize + new Vector3(area.Origin.x, 0, area.Origin.y), new Vector3(area.Size.x, 1, area.Size.y));
+					}
+				}
+			}
+
+
 			public void BuildFreshWaterInfrastructure() {
 				switch (_encampment.EncampmentType) {
 					case EncampmentType.CAMP:
-						Foreman(ConstructionManager.GetConstructionData("pit"));
+						Construct(ConstructionManager.GetConstructionData("pit"));
 						break;
 					case EncampmentType.CAMPMENT:
 					case EncampmentType.ENCAMPMENT:
 					case EncampmentType.VILLAGE:
 					case EncampmentType.FORT:
-						Foreman(ConstructionManager.GetConstructionData("well"));
+						Construct(ConstructionManager.GetConstructionData("well"));
 						break;
 				}
 			}
@@ -72,7 +159,7 @@ namespace EncampmentSystem {
 					case EncampmentType.VILLAGE:
 					case EncampmentType.FORT:
 					default:
-						Foreman(ConstructionManager.GetConstructionData("bed"));
+						Construct(ConstructionManager.GetConstructionData("bed"));
 						break;
 				}
 			}
@@ -85,56 +172,21 @@ namespace EncampmentSystem {
 					case EncampmentType.VILLAGE:
 					case EncampmentType.FORT:
 					default:
-						Foreman(ConstructionManager.GetConstructionData("basket"));
+						Construct(ConstructionManager.GetConstructionData("chest"));
 						break;
 				}
 			}
 
-			public void Foreman(ConstructionData constructionData) {
-				GameObject @object = Instantiate(constructionData.Prefab);
-				ObjectBehaviour objectBehaviour = @object.GetComponent<ObjectBehaviour>();
-				objectBehaviour.Initialize();
-				Vector2Int size = Map.GetSizeFromObstacle(objectBehaviour.Obstacle);
-
-				bool placed = false;
-				List<Area> splitArea = new List<Area>();
-				int count = areas.Count;
-				while (count > 0) {
-					int i = Random.Range(0, areas.Count);
-					if (areas[i].IsLessOrEquals(size, out bool rotate)) {
-
-						if (Area.RemoveRectangleFromArea(areas[i], size, ref splitArea)) {
-							Vector2Int objectPos = new Vector2Int(-(_encampment.Map.Size.x >> 1), -(_encampment.Map.Size.y >> 1));		// Account for zone size
-							objectPos += new Vector2Int(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.z));// Account for zone world position
-							objectPos += areas[i].Origin;																				// Account for the area origin
-							objectPos += new Vector2Int(size.x >> 1, size.y >> 1);														// Account for the object size
-
-							// TODO get height at position on terrain.
-							@object.transform.position = new Vector3(objectPos.x, transform.position.y, objectPos.y);
-
-							if (!_encampment.Map.IsPositionValid(objectBehaviour.Obstacle, _encampment)) {
-								count--;
-								continue;
-							}
-
-							objectBehaviour.RegisterZone(_encampment);
-							objectBehaviour.Enable();
-							placed = true;
-							areas.RemoveAt(i);
-							break;
-						} else {
-							throw new UnityException("It should work.");
-						}
-					}
-					count--;
-				}
-
-				if (!placed) {
-					Destroy(@object);
-				}
-
-				if (splitArea.Count > 0) {
-					areas.AddRange(splitArea);
+			public void BuildInfrastructure() {
+				switch (_encampment.EncampmentType) {
+					case EncampmentType.CAMP:
+					case EncampmentType.CAMPMENT:
+					case EncampmentType.ENCAMPMENT:
+					case EncampmentType.VILLAGE:
+					case EncampmentType.FORT:
+					default:
+						Construct(ConstructionManager.GetConstructionData("shed"));
+						break;
 				}
 			}
 		}

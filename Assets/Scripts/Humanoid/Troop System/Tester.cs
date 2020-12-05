@@ -6,6 +6,7 @@ using EncampmentSystem;
 using UnityEngine.UI;
 using GameSystem;
 using System;
+using TaskSystem;
 
 public class Tester : MonoBehaviour
 {
@@ -18,10 +19,13 @@ public class Tester : MonoBehaviour
 	public List<Encampment> Encampments1;
 	public List<Encampment> Encampments2;
 
+	public Actor actor;
+	public NodeSystem.NodeBehaviour NodeBehaviour;
+
 	void Awake() {
 		Instance = this;
 		image = GetComponent<Image>();
-		_map = new Map(100);
+		_map = new Map(100, 100);
 		image.sprite = Sprite.Create(_map.Texture, new Rect(0, 0, _map.Size.x, _map.Size.y), Vector2.zero);
 	}
 
@@ -29,6 +33,10 @@ public class Tester : MonoBehaviour
 		if (Input.GetKeyUp(KeyCode.G)) {
 			byte[] _bytes = _map.Texture.EncodeToPNG();
 			System.IO.File.WriteAllBytes(Application.persistentDataPath + "/" + Guid.NewGuid() + ".png", _bytes);
+		}
+
+		if (Input.GetKeyUp(KeyCode.T)) {
+			actor.TaskScheduler.CreateTask<Interact>(new InteractArguments(1f, NodeBehaviour.transform.position, NodeBehaviour));
 		}
 	}
 
@@ -43,7 +51,6 @@ public class Tester : MonoBehaviour
 
 	public void DrawMap(Map map) {
 		_map = map;
-		Debug.Log("Displaying the map on screen !");
 		image.sprite = Sprite.Create(map.Texture, new Rect(0, 0, map.Size.x, map.Size.y), Vector2.zero);
 	}
 }

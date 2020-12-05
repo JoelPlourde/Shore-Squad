@@ -11,7 +11,7 @@ namespace NavigationSystem {
 		public List<Box> Boxes = new List<Box>();
 
 		private List<NavMeshObstacle> _navMeshObstacles = new List<NavMeshObstacle>();
-		private Box _box = new Box();
+		private Box _boundingBox = new Box();
 
 		private void Awake() {
 			if (Boxes != null) {
@@ -28,14 +28,14 @@ namespace NavigationSystem {
 					_navMeshObstacles.Add(obstacle);
 				}
 
-				CalculateBox();
+				CalculateBoundingBox();
 			}
 		}
 
 		public void RegisterBox(Box box) {
 			box.Size.y = 1;
 			Boxes.Add(box);
-			CalculateBox();
+			CalculateBoundingBox();
 		}
 
 		public void Enable() {
@@ -52,7 +52,7 @@ namespace NavigationSystem {
 			});
 		}
 
-		private void CalculateBox() {
+		public void CalculateBoundingBox() {
 			float Xmin = float.MaxValue;
 			float Xmax = float.MinValue;
 			float Zmin = float.MaxValue;
@@ -64,7 +64,6 @@ namespace NavigationSystem {
 				origin += item.Center;
 			}
 			origin /= Boxes.Count;
-
 
 			foreach (var box in Boxes) {
 				float minx = (box.Center.x - origin.x) - (box.Size.x / 2);
@@ -88,32 +87,38 @@ namespace NavigationSystem {
 				}
 			}
 
-			_box.Center = origin + transform.position;
-			_box.Size = new Vector3(Mathf.Abs(Xmin) + Mathf.Abs(Xmax), 0, Mathf.Abs(Zmin) + Mathf.Abs(Zmax));
+			_boundingBox.Center = origin + transform.position;
+			_boundingBox.Size = new Vector3(Mathf.Abs(Xmin) + Mathf.Abs(Xmax), 0, Mathf.Abs(Zmin) + Mathf.Abs(Zmax));
+
+			if (Mathf.Approximately(transform.rotation.eulerAngles.y, 90) || Mathf.Approximately(transform.rotation.eulerAngles.y, 270)) {
+				var tmp = _boundingBox.Size.x;
+				_boundingBox.Size.x = _boundingBox.Size.z;
+				_boundingBox.Size.z = tmp;
+			}
 		}
 
-		void OnDrawGizmosSelected() {
+		private void OnDrawGizmosSelected() {
 			if (Boxes != null) {
-				foreach (var box in Boxes) {
-					Gizmos.color = Color.red;
-					Gizmos.DrawWireCube(transform.position + box.Center, box.Size);
-				}
-
-				CalculateBox();
+				CalculateBoundingBox();
 				Gizmos.color = Color.blue;
-				Gizmos.DrawWireCube(_box.Center, _box.Size);
+				Gizmos.DrawWireCube(_boundingBox.Center, _boundingBox.Size);
 			}
 		}
 
 		/// <summary>
+		/// Radius of the obstacle in World unit.
+		/// </summary>
+		public float Radius { get { return new float[] { _boundingBox.Size.x, _boundingBox.Size.z }.Max(); } }
+
+		/// <summary>
 		/// Size of the obstacle in World unit.
 		/// </summary>
-		public Vector3 Size { get { return _box.Size; } }
+		public Vector3 Size { get { return _boundingBox.Size; } }
 
 		/// <summary>
 		/// Center of the obstacle in World position.
 		/// </summary>
-		public Vector3 Center { get { return _box.Center; } }
+		public Vector3 Center { get { return _boundingBox.Center; } }
 	}
 
 	[System.Serializable]

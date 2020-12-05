@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fae11ff74dd697428434159637d09eb, type: 3}
   m_Name: Well
   m_EditorClassIdentifier: 
-  ConstructionTime: 0
+  ConstructionTime: 10
   Sprite: {fileID: 0}
   Prefab: {fileID: 442551377748772258, guid: 449061e4e8e14ea4bb32f031be2eb1c7, type: 3}
   Tooltip: A Well allows you to better extract the fresh water in the ground.

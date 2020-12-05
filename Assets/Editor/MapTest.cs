@@ -23,7 +23,7 @@ public class MapTest {
 		Texture2D Texture = new Texture2D(25, 25, TextureFormat.RGBA32, false) {
 			filterMode = FilterMode.Point
 		};
-		Map map = new Map(25, Texture);
+		Map map = new Map(25, 25, Texture);
 		Assert.That(map.Size, Is.EqualTo(new Vector2Int(25, 25)));
 		Assert.That(map.Count, Is.EqualTo(25 * 25));
 		Assert.That(map.Texture, Is.Not.EqualTo(null));
@@ -67,7 +67,7 @@ public class MapTest {
 
 		flag.transform.position = new Vector3(50, 0, 50);
 		@object.transform.position = new Vector3(50, 0, 50);
-		Assert.That(Map.GetMapPositionFrom(map, flag.transform.position, obstacle.transform.position, objectSize, out Vector2Int res), Is.True);
+		Assert.That(Map.GetObstacleOriginRelativeToMap(map, flag.transform.position, obstacle, out Vector2Int res), Is.True);
 		Assert.That(res, Is.EqualTo(new Vector2Int(0, 0)));
 	}
 
@@ -112,8 +112,8 @@ public class MapTest {
 	public void GetRectangleSizeFromObstacleRotated_test() {
 		GameObject @object = new GameObject();
 		Obstacle obstacle = @object.AddComponent<Obstacle>();
-		obstacle.RegisterBox(new Box(Vector3.zero, new Vector3(3, 0, 4)));
 		obstacle.transform.Rotate(Vector3.up, 90f);
+		obstacle.RegisterBox(new Box(Vector3.zero, new Vector3(3, 0, 4)));
 		Assert.That(Map.GetSizeFromObstacle(obstacle), Is.EqualTo(new Vector2Int(4, 3)));
 	}
 
@@ -129,26 +129,26 @@ public class MapTest {
 
 		flag.transform.position = new Vector3(50, 0, 50);
 		@object.transform.position = new Vector3(25, 0, 25);
-		Assert.That(Map.GetMapPositionFrom(map, flag.transform.position, @object.transform.position, objectSize, out Vector2Int res1), Is.True);
-		Assert.That(res1, Is.EqualTo(new Vector2Int(24, 23)));
+		Assert.That(Map.GetObstacleOriginRelativeToMap(map, flag.transform.position, obstacle, out Vector2Int res1), Is.True);
+		Assert.That(res1, Is.EqualTo(new Vector2Int(23, 23)));
 
 		flag.transform.position = new Vector3(125, 0, 150);
 		@object.transform.position = new Vector3(112, 0, 130);
-		Assert.That(Map.GetMapPositionFrom(map, flag.transform.position, @object.transform.position, objectSize, out Vector2Int res2), Is.True);
-		Assert.That(res2, Is.EqualTo(new Vector2Int(36, 28)));
+		Assert.That(Map.GetObstacleOriginRelativeToMap(map, flag.transform.position, obstacle, out Vector2Int res2), Is.True);
+		Assert.That(res2, Is.EqualTo(new Vector2Int(35, 28)));
 
 		flag.transform.position = new Vector3(-147, 0, 163);
 		@object.transform.position = new Vector3(-165, 0, 130);
-		Assert.That(Map.GetMapPositionFrom(map, flag.transform.position, @object.transform.position, objectSize, out Vector2Int res3), Is.True);
-		Assert.That(res3, Is.EqualTo(new Vector2Int(31, 15)));
+		Assert.That(Map.GetObstacleOriginRelativeToMap(map, flag.transform.position, obstacle, out Vector2Int res3), Is.True);
+		Assert.That(res3, Is.EqualTo(new Vector2Int(30, 15)));
 
 		flag.transform.position = new Vector3(50, 0, 50);
 		@object.transform.position = new Vector3(100, 0, 100);
-		Assert.That(Map.GetMapPositionFrom(map, flag.transform.position, @object.transform.position, objectSize, out Vector2Int res4), Is.False);
+		Assert.That(Map.GetObstacleOriginRelativeToMap(map, flag.transform.position, obstacle, out Vector2Int res4), Is.False);
 
 		flag.transform.position = new Vector3(50, 0, 50);
 		@object.transform.position = new Vector3(98, 0, 96);
-		Assert.That(Map.GetMapPositionFrom(map, flag.transform.position, @object.transform.position, objectSize, out Vector2Int res5), Is.True);
+		Assert.That(Map.GetObstacleOriginRelativeToMap(map, flag.transform.position, obstacle, out Vector2Int res5), Is.True);
 	}
 
 	[Test]
@@ -245,7 +245,7 @@ public class MapTest {
 		map.DrawRectangle(new Vector2Int(0, 0), new Vector2Int(2, 2), Color.blue);
 		map.DrawRectangle(new Vector2Int(2, 2), new Vector2Int(2, 2), Color.blue);
 
-		Color[,] colors = Map.ColorsToArray(map.Texture.GetPixels(0, 0, map.Size.x, map.Size.y), map.Size.x);
+		Color[,] colors = Map.ColorsToArray(map.Texture.GetPixels(0, 0, map.Size.x, map.Size.y), map.Size.x, map.Size.y);
 		Assert.That(colors[0, 0], Is.EqualTo(Color.blue));
 		Assert.That(colors[0, 1], Is.EqualTo(Color.blue));
 		Assert.That(colors[1, 0], Is.EqualTo(Color.blue));
@@ -255,5 +255,13 @@ public class MapTest {
 		Assert.That(colors[2, 3], Is.EqualTo(Color.blue));
 		Assert.That(colors[3, 2], Is.EqualTo(Color.blue));
 		Assert.That(colors[3, 3], Is.EqualTo(Color.blue));
+	}
+
+	[Test]
+	public void GetMapOrigin_test() {
+		Map map = new Map(20, 20);
+		Vector3 reference = new Vector3(256, 0, 256);
+		Vector3 mapOriginInWorldPos = Map.GetMapOriginInWorldPos(map, reference);
+		Assert.That(mapOriginInWorldPos, Is.EqualTo(new Vector3(246, 0, 246)));
 	}
 }

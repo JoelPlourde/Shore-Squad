@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fae11ff74dd697428434159637d09eb, type: 3}
   m_Name: Sleeping Bag
   m_EditorClassIdentifier: 
-  ConstructionTime: 0
+  ConstructionTime: 10
   Sprite: {fileID: 0}
   Prefab: {fileID: 4264640609996697765, guid: 02e6853644008da4a93cffd91e95d62e, type: 3}
   Tooltip: This is a sleeping bag to sleep anywhere.
