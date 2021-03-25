@@ -63,8 +63,8 @@ GameObject:
   - component: {fileID: 6970891383537337948}
   - component: {fileID: 6970891383537337949}
   - component: {fileID: 6970891383537337950}
-  - component: {fileID: 6970891383537337951}
   - component: {fileID: 6970891383537337944}
+  - component: {fileID: 7773761112439296436}
   m_Layer: 0
   m_Name: Guard
   m_TagString: Untagged
@@ -203,18 +203,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &6970891383537337951
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6970891383537337946}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49a59eec9203d7c4289aa85dc9c501b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &6970891383537337944
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -234,9 +222,22 @@ MonoBehaviour:
     Damage: 2
   _status:
     Dead: 0
-    Maimed: 0
+    Stunned: 0
     Wounded: 0
     Fleeing: 0
+    Sheltered: 0
+--- !u!114 &7773761112439296436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6970891383537337946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74f315850b998604796bef4851f02192, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6970891383946360313
 GameObject:
   m_ObjectHideFlags: 0
@@ -252,8 +253,8 @@ GameObject:
   - component: {fileID: 6970891383946360316}
   - component: {fileID: 6970891383946360317}
   - component: {fileID: 6970891383946360318}
-  - component: {fileID: 6970891383946360319}
   - component: {fileID: 6970891383946360312}
+  - component: {fileID: 9115730970936008572}
   m_Layer: 0
   m_Name: Leader
   m_TagString: Untagged
@@ -392,18 +393,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &6970891383946360319
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6970891383946360313}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49a59eec9203d7c4289aa85dc9c501b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &6970891383946360312
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -423,9 +412,22 @@ MonoBehaviour:
     Damage: 2
   _status:
     Dead: 0
-    Maimed: 0
+    Stunned: 0
     Wounded: 0
     Fleeing: 0
+    Sheltered: 0
+--- !u!114 &9115730970936008572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6970891383946360313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74f315850b998604796bef4851f02192, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6970891384895642474
 GameObject:
   m_ObjectHideFlags: 0
@@ -441,8 +443,8 @@ GameObject:
   - component: {fileID: 6970891384895642476}
   - component: {fileID: 6970891384895642477}
   - component: {fileID: 6970891384895642478}
-  - component: {fileID: 6970891384895642479}
   - component: {fileID: 6970891384895642472}
+  - component: {fileID: 5965896330482709780}
   m_Layer: 0
   m_Name: Guard
   m_TagString: Untagged
@@ -581,18 +583,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &6970891384895642479
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6970891384895642474}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49a59eec9203d7c4289aa85dc9c501b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &6970891384895642472
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -612,9 +602,22 @@ MonoBehaviour:
     Damage: 2
   _status:
     Dead: 0
-    Maimed: 0
+    Stunned: 0
     Wounded: 0
     Fleeing: 0
+    Sheltered: 0
+--- !u!114 &5965896330482709780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6970891384895642474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74f315850b998604796bef4851f02192, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8808639367223284646
 GameObject:
   m_ObjectHideFlags: 0
@@ -630,8 +633,8 @@ GameObject:
   - component: {fileID: 4532819365760845618}
   - component: {fileID: 6395542712244629501}
   - component: {fileID: 3869480713822957542}
-  - component: {fileID: 6949284556519803016}
   - component: {fileID: 1596241786197142287}
+  - component: {fileID: 7028254346115623911}
   m_Layer: 0
   m_Name: Cart
   m_TagString: Untagged
@@ -770,18 +773,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &6949284556519803016
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8808639367223284646}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49a59eec9203d7c4289aa85dc9c501b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1596241786197142287
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -801,6 +792,19 @@ MonoBehaviour:
     Damage: 2
   _status:
     Dead: 0
-    Maimed: 0
+    Stunned: 0
     Wounded: 0
     Fleeing: 0
+    Sheltered: 0
+--- !u!114 &7028254346115623911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8808639367223284646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74f315850b998604796bef4851f02192, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

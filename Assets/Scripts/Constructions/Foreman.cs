@@ -24,10 +24,7 @@ public class Foreman : MonoBehaviour
 
 	public void StartPlacement(ConstructionData constructionData) {
 		if (!IsInvoking()) {
-
-			// Create an object based on the construction received.
 			_constructionBehaviour = CreateConstructionBehaviour(constructionData);
-
 			InvokeRepeating(nameof(Routine), 0, Constant.DEFAULT_REFRESH_RATE);
 		}
 	}
@@ -45,10 +42,6 @@ public class Foreman : MonoBehaviour
 
 		_isValid = false;
 		if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out _hit, Mathf.Infinity, _layerMask)) {
-
-
-
-
 			_constructionBehaviour.transform.position = MapUtils.GetMapPositionFromWorldPosition(_hit.point);
 			_isValid = _constructionBehaviour.Constructable.IsPlacementValid();
 		}
