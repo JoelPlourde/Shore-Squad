@@ -18,17 +18,20 @@ namespace EncampmentSystem {
 			private int i = 0;
 
 			private void Awake() {
+				/*
 				_encampment = GetComponent<Encampment>();
 
 				_templateMap = new Map(TemplateTexture.width, TemplateTexture.height, TemplateTexture);
 				_availableAreas = Map.GetAreasFromMap(_templateMap);
+				*/
 			}
-
+			/*
 			public void Update() {
 				if (Input.GetKeyUp(KeyCode.Y)) {
 					Routine();
 				}
 			}
+			*/
 
 			private void Routine() {
 				if (i < 1) {
@@ -122,17 +125,6 @@ namespace EncampmentSystem {
 
 				if (!placed) {
 					Destroy(constructionBehaviour.gameObject);
-				}
-			}
-
-			void OnDrawGizmos() {
-				if (Application.isPlaying) {
-					foreach (var area in _availableAreas) {
-						Vector3 origin = Map.GetMapOriginInWorldPos(_encampment.Map, _encampment.transform.position);
-						Vector3 areaHalfSize = new Vector3(area.Size.x / 2, 0, area.Size.y / 2);
-						Gizmos.color = Color.yellow;
-						Gizmos.DrawWireCube(origin + areaHalfSize + new Vector3(area.Origin.x, 0, area.Origin.y), new Vector3(area.Size.x, 1, area.Size.y));
-					}
 				}
 			}
 
