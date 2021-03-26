@@ -19,3 +19,4 @@ MonoBehaviour:
   Temporary: 1
   canStack: 0
   Tooltip: Burn baby burn!
+  statusEffectTypes: 00000000010000000200000003000000

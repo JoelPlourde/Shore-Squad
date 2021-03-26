@@ -3,10 +3,12 @@ using UnityEngine.AI;
 using TaskSystem;
 using System;
 using FactionSystem;
+using StatusEffectSystem;
 
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(TaskScheduler))]
+[RequireComponent(typeof(StatusEffectScheduler))]
 public class Actor : MonoBehaviour {
 	private Guid guid = Guid.NewGuid();
 
@@ -21,6 +23,7 @@ public class Actor : MonoBehaviour {
 	public virtual void Awake() {
 		Animator = GetComponent<Animator>();
 		TaskScheduler = GetComponent<TaskScheduler>();
+		StatusEffectScheduler = GetComponent<StatusEffectScheduler>();
 		NavMeshAgent = GetComponent<NavMeshAgent>();
 
 		gameObject.name = guid.ToString();
@@ -37,6 +40,7 @@ public class Actor : MonoBehaviour {
 		collider.isTrigger = true;
 
 		TaskScheduler.Initialize(guid);
+		StatusEffectScheduler.Initialize(guid);
 	}
 
 	/// <summary>
@@ -68,8 +72,10 @@ public class Actor : MonoBehaviour {
 	public bool Dead { get => _status.Dead; private set => _status.Dead = value; }
 	public bool Fleeing { get => _status.Fleeing; set => _status.Fleeing = value; }
 	public bool Sheltered { get => _status.Sheltered; set => _status.Sheltered = value; }
+	public Guid Guid { get => guid; }
 
 	public Animator Animator { get; private set; }
 	public TaskScheduler TaskScheduler { get; private set; }
+	public StatusEffectScheduler StatusEffectScheduler { get; private set; }
 	public NavMeshAgent NavMeshAgent { get; private set; }
 }

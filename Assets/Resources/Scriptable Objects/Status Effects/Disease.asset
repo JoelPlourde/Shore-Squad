@@ -19,3 +19,4 @@ MonoBehaviour:
   Temporary: 0
   canStack: 1
   Tooltip: You will die.
+  statusEffectTypes: 0300000004000000

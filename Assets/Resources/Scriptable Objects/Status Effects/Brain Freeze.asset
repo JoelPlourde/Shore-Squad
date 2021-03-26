@@ -19,3 +19,4 @@ MonoBehaviour:
   Temporary: 1
   canStack: 1
   Tooltip: Hahah loser
+  statusEffectTypes: 0000000003000000
