@@ -2,25 +2,14 @@
 using ConstructionSystem;
 using EncampmentSystem;
 
-public class Foreman : MonoBehaviour
+public class Foreman : SingletonBehaviour<Foreman>
 {
-	public static Foreman Instance;
-
 	private ConstructionBehaviour _constructionBehaviour;
-
 	private RaycastHit _hit;
-
 	private bool _isValid = false;
 
 	[Tooltip("Layer on which objects can be placed in.")]
 	public LayerMask _layerMask;
-
-    private void Awake() {
-		if (Instance != null) {
-			throw new UnityException("Foreman is a singleton, multiple instances is not allowed.");
-		}
-		Instance = this;
-    }
 
 	public void StartPlacement(ConstructionData constructionData) {
 		if (!IsInvoking()) {

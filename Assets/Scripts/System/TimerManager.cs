@@ -2,15 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TimerManager : MonoBehaviour {
-
-	public static TimerManager Instance;
+public class TimerManager : SingletonBehaviour<TimerManager> {
 
 	private static readonly Queue<DelayedAction> _actions = new Queue<DelayedAction>();
-
-	private void Awake() {
-		Instance = this;
-	}
 
 	public void Enqueue(DelayedAction delayedAction) {
 		_actions.Enqueue(delayedAction);

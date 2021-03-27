@@ -5,9 +5,7 @@ using System.Timers;
 using UnityEngine;
 
 namespace TimeSystem {
-	public class Time : MonoBehaviour {
-
-		public static Time Instance;
+	public class Time : SingletonBehaviour<Time> {
 
 		private Timer _timer;
 		private long _seconds;
@@ -15,12 +13,9 @@ namespace TimeSystem {
 		private TimeComparator _timeComparator = new TimeComparator();
 		private List<TimedEvent> timedEvents = new List<TimedEvent>();
 
-		private void Awake() {
-			Instance = this;
-
-			// TODO Load this from the save file.
+		protected override void Awake() {
+			base.Awake();
 			_seconds = 0;
-
 			Initialize();
 		}
 

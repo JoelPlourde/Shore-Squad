@@ -24,11 +24,6 @@ namespace ConstructionSystem {
 			// Draw the object on the map to prevent further object to placed here.
 			_objectBehaviour.ZoneBehaviour.Map.DrawRectangle(_objectBehaviour.Obstacle, _objectBehaviour.ZoneBehaviour, Color.red);
 
-			// TODO REMOVE THIS AT ONE POINT.
-			if (_objectBehaviour.ZoneBehaviour) {
-				Tester.Instance.DrawMap(_objectBehaviour.ZoneBehaviour.Map);
-			}
-
 			if (ConstructionData.ConstructionTime == 0) {
 				Construct();
 				return;

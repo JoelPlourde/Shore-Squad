@@ -55,6 +55,18 @@ public class Actor : MonoBehaviour {
 		}
 	}
 
+	public void ReduceSpeed(float value) {
+		Speed = Constant.ACTOR_BASE_SPEED - (Constant.ACTOR_BASE_SPEED * value);
+	}
+
+	public void ResetSpeed(float value) {
+		Speed = Speed + (Constant.ACTOR_BASE_SPEED * value);
+	}
+
+	public void IncreaseSpeed(float value) {
+		Speed = Constant.ACTOR_BASE_SPEED + (Constant.ACTOR_BASE_SPEED * value);
+	}
+
 	public virtual void OnDeath() {
 		Debug.Log("On Death !!");
 		Animator.SetTrigger("Dead");

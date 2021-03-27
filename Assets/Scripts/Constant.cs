@@ -8,4 +8,7 @@
 	public static readonly int PLACEMENT_MAXIMUM_RADIUS = 100;
 	public static readonly float DEFAULT_REFRESH_RATE = 1 / 60f;
 	public static readonly int AGENT_MAX_SLOPE = 45;
+
+
+	public static readonly int ACTOR_BASE_SPEED = 1;
 }
