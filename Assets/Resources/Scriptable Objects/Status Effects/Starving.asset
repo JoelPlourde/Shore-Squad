@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8476638fcace1bf49994823e6e886ed4, type: 3}
-  m_Name: Brain Freeze
+  m_Name: Starving
   m_EditorClassIdentifier: 
-  Name: Brain Freeze
+  Name: Starving
   Sprite: {fileID: 0}
-  Duration: 5
+  Duration: 1
   Reset: 0
-  Temporary: 1
-  CanStack: 1
+  Temporary: 0
+  CanStack: 0
   Hidden: 0
   StatusEffectCategory: 1
-  Tooltip: You are afflicted with a terrible brain freeze.
-  statusEffectTypes: 00000000
+  Tooltip: You are starving!
+  statusEffectTypes: 05000000

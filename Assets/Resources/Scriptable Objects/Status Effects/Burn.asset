@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: Burn
   m_EditorClassIdentifier: 
   Name: Burn
-  Sprite: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+  Sprite: {fileID: 0}
   Duration: 10
   Reset: 1
-  Temporary: 0
-  canStack: 0
-  Tooltip: Burn baby burn!
-  statusEffectTypes: 01000000
+  Temporary: 1
+  CanStack: 0
+  Hidden: 0
+  StatusEffectCategory: 1
+  Tooltip: You are burning.
+  statusEffectTypes: 05000000

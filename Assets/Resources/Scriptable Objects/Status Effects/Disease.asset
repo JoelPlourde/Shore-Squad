@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: Disease
   m_EditorClassIdentifier: 
   Name: Disease
-  Sprite: {fileID: 21300000, guid: 645eca269c4543c45bc91f396cc897db, type: 3}
+  Sprite: {fileID: 0}
   Duration: 60
   Reset: 0
   Temporary: 0
-  canStack: 1
-  Tooltip: You will die.
-  statusEffectTypes: 0300000004000000
+  CanStack: 1
+  Hidden: 0
+  StatusEffectCategory: 1
+  Tooltip: You are afflicted with a deadly disease. Find a cure.
+  statusEffectTypes: 05000000

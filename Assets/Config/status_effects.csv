@@ -1,4 +1,15 @@
-NAME,TOOLTIP,DURATION,RESET,TEMPORARY,CAN STACK,TYPES
-Burn,Burn baby burn!,10,True,True,False,SLOWED/DAMAGED_OVER_TIME/REDUCED_HEALTH_REGEN/INCREASED_HUNGER_RATE
-Brain Freeze,Hahah loser,5,False,True,True,SLOWED/INCREASED_HUNGER_RATE
-Disease,You will die.,60,False,False,True,INCREASED_HUNGER_RATE/STUNNED
+NAME,TOOLTIP,,RESET,TEMPORARY,CAN STACK,HIDDEN,CATEGORY,TYPES
+Brain Freeze,You are afflicted with a terrible brain freeze.,5,False,True,True,False,HARMFUL,SLOW
+Burn,You are burning.,10,True,True,False,False,HARMFUL,DAMAGE_OVER_TIME
+Disease,You are afflicted with a deadly disease. Find a cure.,60,False,False,True,False,HARMFUL,DAMAGE_OVER_TIME
+Fear,You are paralized by fear.,5,True,True,False,False,HARMFUL,FEAR
+Regrowth,You seem to be feeling better already.,5,True,True,False,False,BENEFICIAL,HEAL_OVER_TIME
+Hungry,You feel peckish..,1,False,False,False,True,NEUTRAL,HUNGER_OVER_TIME
+Starving,You are starving!,1,False,False,False,False,HARMFUL,DAMAGE_OVER_TIME
+Safe,You are feeling safe.,1,False,False,False,False,BENEFICIAL,HEALTH_REGENERATION
+Sheltered,You are sheltered from the elements.,1,False,False,False,False,BENEFICIAL,HEALTH_REGENERATION/SHELTER
+Decay,You suffer from a slow decay..,5,False,True,False,False,HARMFUL,SLOW_OVER_TIME
+Stunned,You are stunned!,5,True,True,False,False,HARMFUL,STUN
+Tired,You are feeling tired.,10,False,True,False,False,HARMFUL,INCREASE_HUNGER_RATE
+Well Fed,You are well fed.,60,True,True,False,False,BENEFICIAL,REDUCE_HUNGER_RATE
+Dead,Oh dear ! You are dead.,1,False,False,False,False,HARMFUL,DEATH

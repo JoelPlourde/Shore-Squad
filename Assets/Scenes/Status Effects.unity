@@ -187,7 +187,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: EventSystem
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4151272574473607703, guid: d9dd9a659da46644ea505e00b0edc6e4, type: 3}
+    - {fileID: 7614158502024686314, guid: d9dd9a659da46644ea505e00b0edc6e4, type: 3}
+    - {fileID: 1564720492618524012, guid: d9dd9a659da46644ea505e00b0edc6e4, type: 3}
+    - {fileID: 4569675774425006999, guid: d9dd9a659da46644ea505e00b0edc6e4, type: 3}
+    - {fileID: 385874077268102300, guid: d9dd9a659da46644ea505e00b0edc6e4, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: d9dd9a659da46644ea505e00b0edc6e4, type: 3}
 --- !u!1 &661101303
 GameObject:
@@ -287,10 +292,29 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1302649573, guid: 97a976c78f2838f49b8f0a852039e059, type: 3}
+      propertyPath: statusHandler
+      value: 
+      objectReference: {fileID: 1867630327}
     - target: {fileID: 6266242082693858128, guid: 97a976c78f2838f49b8f0a852039e059,
         type: 3}
       propertyPath: m_Name
       value: Actor
+      objectReference: {fileID: 0}
+    - target: {fileID: 6266242082693858129, guid: 97a976c78f2838f49b8f0a852039e059,
+        type: 3}
+      propertyPath: _attributes.HungerRate
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6266242082693858129, guid: 97a976c78f2838f49b8f0a852039e059,
+        type: 3}
+      propertyPath: _attributes.MaxHealth
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6266242082693858129, guid: 97a976c78f2838f49b8f0a852039e059,
+        type: 3}
+      propertyPath: _attributes.Health
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 6266242082693858137, guid: 97a976c78f2838f49b8f0a852039e059,
         type: 3}
@@ -380,7 +404,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Magnitude: 1
-  StatusEffectData: {fileID: 11400000, guid: 10b1cdd10a99759478242b87679be698, type: 2}
+  StatusEffectData: {fileID: 0}
 --- !u!135 &1095073503
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -610,42 +634,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff540c79694d43c468e03e5f2d8136c7, type: 3}
---- !u!1 &1302649562 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6266242082693858128, guid: 97a976c78f2838f49b8f0a852039e059,
-    type: 3}
-  m_PrefabInstance: {fileID: 1015110262}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1302649565 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6266242082693858129, guid: 97a976c78f2838f49b8f0a852039e059,
-    type: 3}
-  m_PrefabInstance: {fileID: 1015110262}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1302649562}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e706086f94e51e45ac676a1deaa4684, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1302649573
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1302649562}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6cbde989358152e4bb50ea05bd07e67a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  statusEffectDatas:
-  - {fileID: 11400000, guid: 10b1cdd10a99759478242b87679be698, type: 2}
-  - {fileID: 11400000, guid: 2c2662a6399fd334dab34d83eedcaca7, type: 2}
-  - {fileID: 11400000, guid: 13c9272d7f985ac418415023013a9399, type: 2}
-  statusHandler: {fileID: 1867630327}
-  Actor: {fileID: 1302649565}
 --- !u!1 &1428597476
 GameObject:
   m_ObjectHideFlags: 0
@@ -794,7 +782,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Magnitude: 0.05
-  StatusEffectData: {fileID: 11400000, guid: 13c9272d7f985ac418415023013a9399, type: 2}
+  StatusEffectData: {fileID: 0}
 --- !u!135 &2041495348
 SphereCollider:
   m_ObjectHideFlags: 0

@@ -1,17 +1,15 @@
-﻿using UnityEngine;
-using UnityEngine.AI;
-using TaskSystem;
-using System;
-using FactionSystem;
+﻿using FactionSystem;
 using StatusEffectSystem;
+using System;
+using TaskSystem;
+using UnityEngine;
+using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(TaskScheduler))]
 [RequireComponent(typeof(StatusEffectScheduler))]
 public class Actor : MonoBehaviour {
-	private Guid guid = Guid.NewGuid();
-
 	public FactionType FactionType;
 
 	[SerializeField]
@@ -26,7 +24,7 @@ public class Actor : MonoBehaviour {
 		StatusEffectScheduler = GetComponent<StatusEffectScheduler>();
 		NavMeshAgent = GetComponent<NavMeshAgent>();
 
-		gameObject.name = guid.ToString();
+		gameObject.name = Guid.ToString();
 		gameObject.tag = FactionType.ToString();
 		Rigidbody rigidbody = gameObject.GetComponent<Rigidbody>();
 		rigidbody.isKinematic = true;
@@ -39,8 +37,12 @@ public class Actor : MonoBehaviour {
 		collider.radius = 1f;
 		collider.isTrigger = true;
 
-		TaskScheduler.Initialize(guid);
-		StatusEffectScheduler.Initialize(guid);
+		TaskScheduler.Initialize(Guid);
+		StatusEffectScheduler.Initialize(Guid);
+	}
+
+	public void Start() {
+		StatusEffectScheduler.Instance(Guid).AddStatusEffect(new StatusEffectSystem.Status(this, 1f, StatusEffectManager.GetStatusEffectData(Constant.HUNGRY)));
 	}
 
 	/// <summary>
@@ -50,25 +52,91 @@ public class Actor : MonoBehaviour {
 	public void SufferDamage(float damage) {
 		Health -= damage;
 		if (Health <= 0) {
-			Dead = true;
-			OnDeath();
+			StatusEffectScheduler.Instance(Guid).AddStatusEffect(new StatusEffectSystem.Status(this, 1f, StatusEffectManager.GetStatusEffectData(Constant.DEATH)));
 		}
 	}
 
+	/// <summary>
+	/// Increase the health value by X. The health value is capped at maximum health of the actor.
+	/// </summary>
+	/// <param name="value">Amount of health to increase.</param>
+	public void IncreaseHealth(float value) {
+		if (!Dead) {
+			Health += value;
+			if (Health > MaxHealth) {
+				Health = MaxHealth;
+			}
+		}
+	}
+
+	/// <summary>
+	/// Increase the hunger rate by X.
+	/// </summary>
+	/// <param name="value">Amount of hunger rate to increase</param>
+	public void IncreaseHungerRate(float value) {
+		HungerRate += value;
+	}
+
+	/// <summary>
+	/// Reduce the hunger rate by X.
+	/// </summary>
+	/// <param name="value">Amount of hunger to deduct.</param>
+	public void ReduceHungerRate(float value) {
+		HungerRate -= value;
+	}
+
+	/// <summary>
+	/// Increase the food bar by X. Remove any Hungry status effects.
+	/// </summary>
+	/// <param name="value">Amount of food to restore.</param>
+	public void IncreaseFood(float value) {
+		Food += value;
+
+		StatusEffectScheduler.Instance(Guid).RemoveStatusEffect(Constant.STARVING);
+
+		if (Food > Constant.ACTOR_BASE_FOOD) {
+			Food = Constant.ACTOR_BASE_FOOD;
+		}
+	}
+
+	/// <summary>
+	/// Reduce the food by X. Apply a Hungry status effect if the food equals to 0.
+	/// </summary>
+	/// <param name="value">Amount of food to deduct.</param>
+	public void ReduceFood(float value) {
+		Food -= value;
+
+		if (Food <= 0) {
+			Food = 0;
+			StatusEffectScheduler.Instance(Guid).AddStatusEffect(new StatusEffectSystem.Status(this, 0.5f, StatusEffectManager.GetStatusEffectData(Constant.STARVING)));
+		}
+	}
+
+	/// <summary>
+	/// Reduce speed by a percentage of the base speed.
+	/// </summary>
+	/// <param name="value">A value in %</param>
 	public void ReduceSpeed(float value) {
 		Speed = Constant.ACTOR_BASE_SPEED - (Constant.ACTOR_BASE_SPEED * value);
 	}
 
+	/// <summary>
+	/// Reset the speed to its original speed before the speed bonus applied.
+	/// </summary>
+	/// <param name="value">A value in % of the speed bonus applied before.</param>
 	public void ResetSpeed(float value) {
 		Speed = Speed + (Constant.ACTOR_BASE_SPEED * value);
 	}
 
+	/// <summary>
+	/// Increase speed by a percentage of the base speed.
+	/// </summary>
+	/// <param name="value">A value in %</param>
 	public void IncreaseSpeed(float value) {
 		Speed = Constant.ACTOR_BASE_SPEED + (Constant.ACTOR_BASE_SPEED * value);
 	}
 
 	public virtual void OnDeath() {
-		Debug.Log("On Death !!");
 		Animator.SetTrigger("Dead");
 		gameObject.GetComponent<MeshRenderer>().material.color = Color.red;
 		gameObject.GetComponent<Rigidbody>().isKinematic = true;
@@ -78,16 +146,32 @@ public class Actor : MonoBehaviour {
 		TaskScheduler.CancelTask();
 	}
 
+	public virtual void OnResurrection() {
+		// Animator.SetTrigger("Dead");
+		gameObject.GetComponent<MeshRenderer>().material.color = Color.blue;
+		gameObject.GetComponent<Rigidbody>().isKinematic = false;
+		gameObject.GetComponent<Collider>().enabled = true;
+		gameObject.layer = LayerMask.NameToLayer("Default");
+		NavMeshAgent.enabled = true;
+	}
+
+	public float MaxHealth { get => _attributes.MaxHealth; private set => _attributes.MaxHealth = value; }
 	public float Health { get => _attributes.Health; private set => _attributes.Health = value; }
 	public float Speed { get => _attributes.Speed; private set => _attributes.Speed = value; }
 	public float Damage { get => _attributes.Damage; private set => _attributes.Damage = value; }
-	public bool Dead { get => _status.Dead; private set => _status.Dead = value; }
+	public float HealthRegeneration { get => _attributes.HealthRegeneration; private set => _attributes.HealthRegeneration = value; }
+	public float HungerRate { get => _attributes.HungerRate; private set => _attributes.HungerRate = value; }
+	public float Food { get => _attributes.Food; private set => _attributes.Food = value; }
+
+	public bool Dead { get => _status.Dead; set => _status.Dead = value; }
 	public bool Fleeing { get => _status.Fleeing; set => _status.Fleeing = value; }
 	public bool Sheltered { get => _status.Sheltered; set => _status.Sheltered = value; }
-	public Guid Guid { get => guid; }
+	public bool Stunned { get => _status.Stunned; set => _status.Stunned = value; }
 
 	public Animator Animator { get; private set; }
 	public TaskScheduler TaskScheduler { get; private set; }
 	public StatusEffectScheduler StatusEffectScheduler { get; private set; }
 	public NavMeshAgent NavMeshAgent { get; private set; }
+
+	public Guid Guid { get; } = Guid.NewGuid();
 }

@@ -1,8 +1,11 @@
 ﻿using UnityEngine;
 using StatusEffectSystem;
 
+[RequireComponent(typeof(HungerStatusEffect))]
+[RequireComponent(typeof(HealOverTimeEffect))]
+[RequireComponent(typeof(HealthRegenerationStatusEffect))]
+[RequireComponent(typeof(SlowOverTimeEffect))]
 [RequireComponent(typeof(DamageOverTimeEffect))]
-[RequireComponent(typeof(SlowEffect))]
 [RequireComponent(typeof(TimerManager))]
 [RequireComponent(typeof(Foreman))]
 [RequireComponent(typeof(Time))]

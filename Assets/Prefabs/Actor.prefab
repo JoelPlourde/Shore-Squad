@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 6266242082693858129}
   - component: {fileID: 6051516456617860773}
   - component: {fileID: 5669545019280480446}
+  - component: {fileID: 1302649573}
   m_Layer: 0
   m_Name: Actor
   m_TagString: Untagged
@@ -169,14 +170,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FactionType: 0
+  hungry: {fileID: 11400000, guid: f611e1662e87b42428985edcf73fef7d, type: 2}
+  hungerOverTime: {fileID: 11400000, guid: 848fc7f34b882d943b1a685895cf62a6, type: 2}
   _attributes:
+    MaxHealth: 100
     Health: 100
+    HealthRegeneration: 1
     Speed: 1
     Damage: 2
+    HungerRate: 0.05
+    Food: 20
   _status:
     Dead: 0
     Stunned: 0
-    Wounded: 0
     Fleeing: 0
     Sheltered: 0
 --- !u!114 &6051516456617860773
@@ -203,3 +209,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fb0e078f80607147a96dc864c3066cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1302649573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6266242082693858128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cbde989358152e4bb50ea05bd07e67a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statusEffectDatas:
+  - {fileID: 11400000, guid: 10b1cdd10a99759478242b87679be698, type: 2}
+  - {fileID: 11400000, guid: 8d14bd3d51c9cd64888cbe5e80e69361, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  statusHandler: {fileID: 0}
+  Actor: {fileID: 6266242082693858129}

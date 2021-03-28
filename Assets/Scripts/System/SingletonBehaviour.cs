@@ -14,13 +14,5 @@ public class SingletonBehaviour<T> : MonoBehaviour where T : MonoBehaviour {
 		} else {
 			throw new System.Exception("An instance of this singleton already exists.");
 		}
-		/*
-		if (Instance != null && Instance != this) {
-			Destroy(this);
-			throw new System.Exception("An instance of this singleton already exists.");
-		} else {
-			Instance = (T) this;
-		}
-		*/
 	}
 }

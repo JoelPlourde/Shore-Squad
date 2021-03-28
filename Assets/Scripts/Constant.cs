@@ -11,4 +11,9 @@
 
 
 	public static readonly int ACTOR_BASE_SPEED = 1;
+	public static readonly float ACTOR_BASE_FOOD = 20f;
+
+	public static readonly string STARVING = "Starving";
+	public static readonly string HUNGRY = "Hungry";
+	public static readonly string DEATH = "Dead";
 }
