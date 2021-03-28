@@ -9,4 +9,5 @@ public class Attributes {
 	public float Damage = 2f;
 	public float HungerRate = 0.05f;            // Value per 5 seconds
 	public float Food = 20f;
+	public float Temperature = 20f;
 }

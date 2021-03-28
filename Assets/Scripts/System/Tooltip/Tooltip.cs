@@ -7,7 +7,7 @@ namespace UI {
 	public class Tooltip : MonoBehaviour {
 		private RectTransform _rectTransform;
 		private RectTransform _childrenRectTransform;
-		public ContentSizeFitter _contentSizeFitter;
+		private ContentSizeFitter _contentSizeFitter;
 		private Canvas _canvas;
 		private Text _text;
 

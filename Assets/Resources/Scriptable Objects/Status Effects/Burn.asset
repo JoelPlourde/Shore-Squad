@@ -20,5 +20,5 @@ MonoBehaviour:
   CanStack: 0
   Hidden: 0
   StatusEffectCategory: 1
-  Tooltip: You are burning.
+  Tooltip: You are burning
   statusEffectTypes: 05000000

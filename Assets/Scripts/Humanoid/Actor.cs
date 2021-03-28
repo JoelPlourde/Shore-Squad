@@ -136,6 +136,22 @@ public class Actor : MonoBehaviour {
 		Speed = Constant.ACTOR_BASE_SPEED + (Constant.ACTOR_BASE_SPEED * value);
 	}
 
+	/// <summary>
+	/// Increase temperature by a value.
+	/// </summary>
+	/// <param name="value">A value to increment by.</param>
+	public void IncreaseTemperature(float value) {
+		Temperature += value;
+	}
+
+	/// <summary>
+	/// Decrease temperature by a value.
+	/// </summary>
+	/// <param name="value">A value to decrease by.</param>
+	public void DecreaseTemperature(float value) {
+		Temperature -= value;
+	}
+
 	public virtual void OnDeath() {
 		Animator.SetTrigger("Dead");
 		gameObject.GetComponent<MeshRenderer>().material.color = Color.red;
@@ -162,6 +178,7 @@ public class Actor : MonoBehaviour {
 	public float HealthRegeneration { get => _attributes.HealthRegeneration; private set => _attributes.HealthRegeneration = value; }
 	public float HungerRate { get => _attributes.HungerRate; private set => _attributes.HungerRate = value; }
 	public float Food { get => _attributes.Food; private set => _attributes.Food = value; }
+	public float Temperature { get => _attributes.Temperature; private set => _attributes.Temperature = value; }
 
 	public bool Dead { get => _status.Dead; set => _status.Dead = value; }
 	public bool Fleeing { get => _status.Fleeing; set => _status.Fleeing = value; }

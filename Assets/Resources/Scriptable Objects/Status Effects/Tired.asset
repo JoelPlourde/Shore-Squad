@@ -20,5 +20,5 @@ MonoBehaviour:
   CanStack: 0
   Hidden: 0
   StatusEffectCategory: 1
-  Tooltip: You are feeling tired.
+  Tooltip: You are feeling tired
   statusEffectTypes: 07000000

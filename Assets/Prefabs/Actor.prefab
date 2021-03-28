@@ -170,8 +170,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FactionType: 0
-  hungry: {fileID: 11400000, guid: f611e1662e87b42428985edcf73fef7d, type: 2}
-  hungerOverTime: {fileID: 11400000, guid: 848fc7f34b882d943b1a685895cf62a6, type: 2}
   _attributes:
     MaxHealth: 100
     Health: 100
@@ -180,6 +178,7 @@ MonoBehaviour:
     Damage: 2
     HungerRate: 0.05
     Food: 20
+    Temperature: 20
   _status:
     Dead: 0
     Stunned: 0
@@ -222,8 +221,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   statusEffectDatas:
-  - {fileID: 11400000, guid: 10b1cdd10a99759478242b87679be698, type: 2}
-  - {fileID: 11400000, guid: 8d14bd3d51c9cd64888cbe5e80e69361, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}

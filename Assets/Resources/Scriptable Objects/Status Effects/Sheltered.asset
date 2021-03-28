@@ -20,5 +20,5 @@ MonoBehaviour:
   CanStack: 0
   Hidden: 0
   StatusEffectCategory: 2
-  Tooltip: You are sheltered from the elements.
+  Tooltip: You are sheltered from the elements
   statusEffectTypes: 0a00000003000000

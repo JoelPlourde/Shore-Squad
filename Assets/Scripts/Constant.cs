@@ -16,4 +16,8 @@
 	public static readonly string STARVING = "Starving";
 	public static readonly string HUNGRY = "Hungry";
 	public static readonly string DEATH = "Dead";
+
+	public static readonly float DEFAULT_TEMPERATURE = 20f;
+
+	public static readonly float TIME_BETWEEN_TEMPERATURE_CHANGES = 60f;
 }

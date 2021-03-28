@@ -20,5 +20,5 @@ MonoBehaviour:
   CanStack: 0
   Hidden: 0
   StatusEffectCategory: 2
-  Tooltip: You are feeling safe.
+  Tooltip: You are feeling safe
   statusEffectTypes: 0a000000

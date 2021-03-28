@@ -20,5 +20,5 @@ MonoBehaviour:
   CanStack: 0
   Hidden: 0
   StatusEffectCategory: 1
-  Tooltip: You are paralized by fear.
+  Tooltip: You are paralized by fear
   statusEffectTypes: 02000000

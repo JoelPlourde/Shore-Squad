@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8476638fcace1bf49994823e6e886ed4, type: 3}
-  m_Name: Regrowth
+  m_Name: Heat Acclimatization
   m_EditorClassIdentifier: 
-  Name: Regrowth
+  Name: Heat Acclimatization
   Sprite: {fileID: 0}
-  Duration: 5
+  Duration: 60
   Reset: 1
   Temporary: 1
   CanStack: 0
   Hidden: 0
-  StatusEffectCategory: 2
-  Tooltip: You seem to be feeling better already
-  statusEffectTypes: 04000000
+  StatusEffectCategory: 0
+  Tooltip: Your body is adjusting to hotter temperature
+  statusEffectTypes: 0d000000

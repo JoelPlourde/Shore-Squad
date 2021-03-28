@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using StatusEffectSystem;
 
+[RequireComponent(typeof(AdjustTemperatureStatusEffect))]
 [RequireComponent(typeof(HungerStatusEffect))]
 [RequireComponent(typeof(HealOverTimeEffect))]
 [RequireComponent(typeof(HealthRegenerationStatusEffect))]

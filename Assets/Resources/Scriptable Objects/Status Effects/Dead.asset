@@ -20,5 +20,5 @@ MonoBehaviour:
   CanStack: 0
   Hidden: 0
   StatusEffectCategory: 1
-  Tooltip: Oh dear ! You are dead.
+  Tooltip: You are dead
   statusEffectTypes: 0c000000

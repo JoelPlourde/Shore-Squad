@@ -20,5 +20,5 @@ MonoBehaviour:
   CanStack: 1
   Hidden: 0
   StatusEffectCategory: 1
-  Tooltip: You are afflicted with a terrible brain freeze.
+  Tooltip: You are afflicted with a terrible brain freeze
   statusEffectTypes: 00000000
