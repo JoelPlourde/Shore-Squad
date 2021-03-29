@@ -2,6 +2,7 @@
 using StatusEffectSystem;
 using System;
 using TaskSystem;
+using UI.Portrait;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -12,11 +13,16 @@ using UnityEngine.AI;
 public class Actor : MonoBehaviour {
 	public FactionType FactionType;
 
+	public bool Playable = false;
+
 	[SerializeField]
 	private Attributes _attributes;
 
 	[SerializeField]
 	private Status _status;
+
+	public event Action<float> OnUpdateHealthEvent;
+	public event Action<float> OnUpdateFoodEvent;
 
 	public virtual void Awake() {
 		Animator = GetComponent<Animator>();
@@ -43,6 +49,10 @@ public class Actor : MonoBehaviour {
 
 	public void Start() {
 		StatusEffectScheduler.Instance(Guid).AddStatusEffect(new StatusEffectSystem.Status(this, 1f, StatusEffectManager.GetStatusEffectData(Constant.HUNGRY)));
+
+		if (Playable) {
+			PortraitManager.InstantiateActorPortrait(this);
+		}
 	}
 
 	/// <summary>
@@ -51,6 +61,9 @@ public class Actor : MonoBehaviour {
 	/// <param name="damage">Amount of damage to suffer.</param>
 	public void SufferDamage(float damage) {
 		Health -= damage;
+
+		OnUpdateHealthEvent?.Invoke(Health / MaxHealth);
+
 		if (Health <= 0) {
 			StatusEffectScheduler.Instance(Guid).AddStatusEffect(new StatusEffectSystem.Status(this, 1f, StatusEffectManager.GetStatusEffectData(Constant.DEATH)));
 		}
@@ -63,9 +76,12 @@ public class Actor : MonoBehaviour {
 	public void IncreaseHealth(float value) {
 		if (!Dead) {
 			Health += value;
+
 			if (Health > MaxHealth) {
 				Health = MaxHealth;
 			}
+
+			OnUpdateHealthEvent?.Invoke(Health / MaxHealth);
 		}
 	}
 
@@ -97,6 +113,8 @@ public class Actor : MonoBehaviour {
 		if (Food > Constant.ACTOR_BASE_FOOD) {
 			Food = Constant.ACTOR_BASE_FOOD;
 		}
+
+		OnUpdateFoodEvent?.Invoke(Food);
 	}
 
 	/// <summary>
@@ -110,6 +128,8 @@ public class Actor : MonoBehaviour {
 			Food = 0;
 			StatusEffectScheduler.Instance(Guid).AddStatusEffect(new StatusEffectSystem.Status(this, 0.5f, StatusEffectManager.GetStatusEffectData(Constant.STARVING)));
 		}
+
+		OnUpdateFoodEvent?.Invoke(Food);
 	}
 
 	/// <summary>
