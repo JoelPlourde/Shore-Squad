@@ -5,6 +5,7 @@ using TaskSystem;
 using UI.Portrait;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(Animator))]
@@ -14,6 +15,7 @@ public class Actor : MonoBehaviour {
 	public FactionType FactionType;
 
 	public bool Playable = false;
+	public bool Selected = false;
 
 	[SerializeField]
 	private Attributes _attributes;
@@ -51,7 +53,7 @@ public class Actor : MonoBehaviour {
 		StatusEffectScheduler.Instance(Guid).AddStatusEffect(new StatusEffectSystem.Status(this, 1f, StatusEffectManager.GetStatusEffectData(Constant.HUNGRY)));
 
 		if (Playable) {
-			PortraitManager.InstantiateActorPortrait(this);
+			Squad.AddToSquad(this);
 		}
 	}
 
@@ -172,9 +174,10 @@ public class Actor : MonoBehaviour {
 		Temperature -= value;
 	}
 
+	/// <summary>
+	/// On Death event triggered by the Status Effect: Dead
+	/// </summary>
 	public virtual void OnDeath() {
-		Animator.SetTrigger("Dead");
-		gameObject.GetComponent<MeshRenderer>().material.color = Color.red;
 		gameObject.GetComponent<Rigidbody>().isKinematic = true;
 		gameObject.GetComponent<Collider>().enabled = false;
 		gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
@@ -182,9 +185,10 @@ public class Actor : MonoBehaviour {
 		TaskScheduler.CancelTask();
 	}
 
+	/// <summary>
+	/// On Resurrection event triggered by the Status Effect: Resurrect
+	/// </summary>
 	public virtual void OnResurrection() {
-		// Animator.SetTrigger("Dead");
-		gameObject.GetComponent<MeshRenderer>().material.color = Color.blue;
 		gameObject.GetComponent<Rigidbody>().isKinematic = false;
 		gameObject.GetComponent<Collider>().enabled = true;
 		gameObject.layer = LayerMask.NameToLayer("Default");

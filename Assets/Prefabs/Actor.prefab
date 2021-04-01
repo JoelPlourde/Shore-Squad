@@ -18,7 +18,6 @@ GameObject:
   - component: {fileID: 6266242082693858129}
   - component: {fileID: 6051516456617860773}
   - component: {fileID: 5669545019280480446}
-  - component: {fileID: 1302649573}
   m_Layer: 0
   m_Name: Actor
   m_TagString: Untagged
@@ -170,6 +169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FactionType: 0
+  Playable: 0
   _attributes:
     MaxHealth: 100
     Health: 100
@@ -208,29 +208,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fb0e078f80607147a96dc864c3066cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1302649573
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6266242082693858128}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6cbde989358152e4bb50ea05bd07e67a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  statusEffectDatas:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  statusHandler: {fileID: 0}
-  Actor: {fileID: 6266242082693858129}
