@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using TaskSystem;
+using System;
 
 public static class Squad {
 
 	private static readonly List<Unit> _units = new List<Unit>();
 
-	private static GameObject _selectorTemplate;
+	private static readonly GameObject _selectorTemplate;
 
 	static Squad() {
 		UserInputs.Instance.Subscribe("Terrain", MoveSquad);
@@ -17,6 +18,10 @@ public static class Squad {
 		}
 	}
 
+	/// <summary>
+	/// Add an actor from the squad.
+	/// </summary>
+	/// <param name="actor">An actor.</param>
 	public static void AddToSquad(Actor actor) {
 		int index = _units.FindIndex(x => x.Actor.Guid == actor.Guid);
 		if (index == -1) {
@@ -29,6 +34,10 @@ public static class Squad {
 		UserInputs.Instance.Subscribe(actor.Guid.ToString(), SelectActor);
 	}
 
+	/// <summary>
+	/// Remove an actor from the squad.
+	/// </summary>
+	/// <param name="actor">An actor.</param>
 	public static void RemoveFromSquad(Actor actor) {
 		_units.RemoveAll(x => x.Actor.Guid == actor.Guid);
 		DeleteSelector(actor);
@@ -61,17 +70,16 @@ public static class Squad {
 		if (mouseButton == MouseButton.LEFT_MOUSE_BUTTON) {
 			if (!Input.GetKey(KeyCode.LeftControl) && !Input.GetKey(KeyCode.RightControl)) {
 				_units.ForEach(x => {
-					x.Actor.Selected = false;
 					x.EnableSelector(false);
 				});
 
 			}
 			Unit selectedUnit = _units.Find(x => x.Actor.Guid.ToString() == raycastHit.collider.name);
-			selectedUnit.Actor.Selected = true;
 			selectedUnit.EnableSelector(true);
 		}
 	}
 
+	#region Selector
 	private static GameObject CreateSelector(Actor actor) {
 		GameObject selectorObj = GameObject.Instantiate(_selectorTemplate);
 		selectorObj.SetActive(false);
@@ -82,8 +90,9 @@ public static class Squad {
 	}
 
 	private static void DeleteSelector(Actor actor) {
-		GameObject.Destroy(actor.transform.Find("Selector").gameObject);
+		UnityEngine.Object.Destroy(actor.transform.Find("Selector").gameObject);
 	}
+	#endregion
 
 	public class Unit {
 
@@ -97,6 +106,7 @@ public static class Squad {
 
 		public void EnableSelector(bool value) {
 			Selector.SetActive(value);
+			Actor.SetSelected(value);
 		}
 	}
 }

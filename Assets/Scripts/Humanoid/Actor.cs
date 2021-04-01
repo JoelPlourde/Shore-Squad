@@ -15,7 +15,6 @@ public class Actor : MonoBehaviour {
 	public FactionType FactionType;
 
 	public bool Playable = false;
-	public bool Selected = false;
 
 	[SerializeField]
 	private Attributes _attributes;
@@ -25,6 +24,7 @@ public class Actor : MonoBehaviour {
 
 	public event Action<float> OnUpdateHealthEvent;
 	public event Action<float> OnUpdateFoodEvent;
+	public event Action<bool> OnSelectionEvent;
 
 	public virtual void Awake() {
 		Animator = GetComponent<Animator>();
@@ -195,6 +195,15 @@ public class Actor : MonoBehaviour {
 		NavMeshAgent.enabled = true;
 	}
 
+	/// <summary>
+	/// Set Selected on this Actor.
+	/// </summary>
+	/// <param name="value"></param>
+	public void SetSelected(bool value) {
+		Selected = value;
+		OnSelectionEvent?.Invoke(value);
+	}
+
 	public float MaxHealth { get => _attributes.MaxHealth; private set => _attributes.MaxHealth = value; }
 	public float Health { get => _attributes.Health; private set => _attributes.Health = value; }
 	public float Speed { get => _attributes.Speed; private set => _attributes.Speed = value; }
@@ -208,6 +217,8 @@ public class Actor : MonoBehaviour {
 	public bool Fleeing { get => _status.Fleeing; set => _status.Fleeing = value; }
 	public bool Sheltered { get => _status.Sheltered; set => _status.Sheltered = value; }
 	public bool Stunned { get => _status.Stunned; set => _status.Stunned = value; }
+
+	public bool Selected { get; private set; }
 
 	public Animator Animator { get; private set; }
 	public TaskScheduler TaskScheduler { get; private set; }
