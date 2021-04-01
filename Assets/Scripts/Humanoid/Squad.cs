@@ -4,16 +4,23 @@ using TaskSystem;
 
 public static class Squad {
 
-	private static readonly List<Actor> _actors = new List<Actor>();
+	private static readonly List<Unit> _units = new List<Unit>();
+
+	private static GameObject _selectorTemplate;
 
 	static Squad() {
 		UserInputs.Instance.Subscribe("Terrain", MoveSquad);
+
+		_selectorTemplate = Resources.Load<GameObject>("Prefabs/Selector");
+		if (_selectorTemplate == null) {
+			throw new UnityException("Please define a projector gameobject at: Assets/Resources/Prefabs/Selector");
+		}
 	}
 
 	public static void AddToSquad(Actor actor) {
-		int index = _actors.FindIndex(x => x.Guid == actor.Guid);
+		int index = _units.FindIndex(x => x.Actor.Guid == actor.Guid);
 		if (index == -1) {
-			_actors.Add(actor);
+			_units.Add(new Unit(actor, CreateSelector(actor)));
 		} else {
 			throw new UnityException("This actor has already been added to the Squad, something is wrong.");
 		}
@@ -23,7 +30,8 @@ public static class Squad {
 	}
 
 	public static void RemoveFromSquad(Actor actor) {
-		_actors.RemoveAll(x => x.Guid == actor.Guid);
+		_units.RemoveAll(x => x.Actor.Guid == actor.Guid);
+		DeleteSelector(actor);
 		PortraitManager.DeleteActorPortrait(actor);
 		UserInputs.Instance.Unsubscribe(actor.Guid.ToString(), SelectActor);
 	}
@@ -36,9 +44,9 @@ public static class Squad {
 	private static void MoveSquad(MouseButton mouseButton, RaycastHit raycastHit) {
 		if (mouseButton == MouseButton.LEFT_MOUSE_BUTTON) {
 			MoveArguments moveArguments = new MoveArguments(raycastHit.point);
-			_actors.ForEach(x => {
-				if (x.Selected) {
-					x.TaskScheduler.CreateTask<Move>(moveArguments);
+			_units.ForEach(x => {
+				if (x.Actor.Selected) {
+					x.Actor.TaskScheduler.CreateTask<Move>(moveArguments);
 				}
 			});
 		}
@@ -52,9 +60,43 @@ public static class Squad {
 	private static void SelectActor(MouseButton mouseButton, RaycastHit raycastHit) {
 		if (mouseButton == MouseButton.LEFT_MOUSE_BUTTON) {
 			if (!Input.GetKey(KeyCode.LeftControl) && !Input.GetKey(KeyCode.RightControl)) {
-				_actors.ForEach(x => x.Selected = false);
+				_units.ForEach(x => {
+					x.Actor.Selected = false;
+					x.EnableSelector(false);
+				});
+
 			}
-			_actors.Find(x => x.Guid.ToString() == raycastHit.collider.name).Selected = true;
+			Unit selectedUnit = _units.Find(x => x.Actor.Guid.ToString() == raycastHit.collider.name);
+			selectedUnit.Actor.Selected = true;
+			selectedUnit.EnableSelector(true);
+		}
+	}
+
+	private static GameObject CreateSelector(Actor actor) {
+		GameObject selectorObj = GameObject.Instantiate(_selectorTemplate);
+		selectorObj.SetActive(false);
+		selectorObj.name = "Selector";
+		selectorObj.transform.SetParent(actor.transform);
+		selectorObj.transform.localPosition = new Vector3(0, 5, 0);
+		return selectorObj;
+	}
+
+	private static void DeleteSelector(Actor actor) {
+		GameObject.Destroy(actor.transform.Find("Selector").gameObject);
+	}
+
+	public class Unit {
+
+		public Actor Actor { get; private set; }
+		public GameObject Selector { get; private set; }
+
+		public Unit(Actor actor, GameObject selector) {
+			Actor = actor;
+			Selector = selector;
+		}
+
+		public void EnableSelector(bool value) {
+			Selector.SetActive(value);
 		}
 	}
 }

@@ -30,6 +30,11 @@ public class Trigger : MonoBehaviour
 	}
 
 	public void Destroy() {
+		if (OnTriggerEnterEvent != null) {
+			foreach (var d in OnTriggerEnterEvent.GetInvocationList()) {
+				OnTriggerEnterEvent -= (d as Action);
+			}
+		}
 		Destroy(gameObject);
 	}
 
