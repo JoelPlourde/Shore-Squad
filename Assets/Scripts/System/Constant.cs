@@ -1,5 +1,8 @@
 ﻿public static class Constant
 {
+	public static readonly int DEFAULT_CAMERA_DISTANCE = 10;
+	public static readonly int DEFAULT_CAMERA_HEIGHT = 5;
+
 	public static readonly float DEFAULT_ACTOR_SPEED = 3.5f;
 	public static readonly int TICK_RATE = 500;                 // Tick rate in milliseconds.
 	public static readonly float SCALED_TICK_RATE = TICK_RATE / 1000f;	// Tick rate in seconds.
