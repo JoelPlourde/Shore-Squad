@@ -30,14 +30,6 @@ namespace EncampmentSystem {
 			}
 		}
 
-		public void Update() {
-			if (Input.GetKeyUp(KeyCode.A)) {
-				string filename = Application.persistentDataPath + "/" + Guid.NewGuid() + ".png";
-				Debug.Log(filename);
-				File.WriteAllBytes(filename, Map.Texture.EncodeToPNG());
-			}
-		}
-
 		public void OnTriggerEnter(Collider other) {
 			ObjectBehaviour objectBehaviour = other.gameObject.GetComponent<ObjectBehaviour>();
 			if (objectBehaviour != null) {

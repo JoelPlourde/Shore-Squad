@@ -18,15 +18,14 @@ public class UserInputs : MonoBehaviour
 	private Action<MouseButton, RaycastHit> _value;
 
 	private void Awake() {
-		if (Instance == null) {
+		if (ReferenceEquals(Instance, null)) {
 			Instance = this;
 		} else {
 			throw new UnityException("A single entity of UserInputs can exists at any time.");
 		}
 	}
 
-	private void Update()
-    {
+	private void Update() {
 		if (Input.GetMouseButtonUp(0)) {
 			OnMouseEvent(MouseButton.LEFT_MOUSE_BUTTON);
 		} else if (Input.GetMouseButtonUp(1)) {

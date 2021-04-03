@@ -15,17 +15,17 @@ namespace UI {
 		private Vector2 _padding = new Vector2(20, 10);
 
 		private void Awake() {
-			if (Instance == null) {
+			if (ReferenceEquals(Instance, null)) {
 				Instance = this;
 			}
 
 			_canvas = GetComponent<Canvas>();
-			if (_canvas == null) {
+			if (ReferenceEquals(_canvas, null)) {
 				throw new UnityException("Canvas component is null.");
 			}
 
 			_text = GetComponentInChildren<Text>();
-			if (_text == null) {
+			if (ReferenceEquals(_text, null)) {
 				throw new UnityException("Text component is null.");
 			}
 

@@ -25,7 +25,7 @@ public class Foreman : SingletonBehaviour<Foreman>
 	}
 
 	public void Routine() {
-		if (_constructionBehaviour == null) {
+		if (ReferenceEquals(_constructionBehaviour, null)) {
 			CancelInvoke();
 		}
 

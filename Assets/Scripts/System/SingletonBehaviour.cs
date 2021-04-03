@@ -8,7 +8,7 @@ public class SingletonBehaviour<T> : MonoBehaviour where T : MonoBehaviour {
 
 	protected virtual void Awake() {
 
-		if (Instance == null) {
+		if (ReferenceEquals(Instance, null)) {
 			Instance = (T)FindObjectOfType(typeof(T));
 			DontDestroyOnLoad(this);
 		} else {

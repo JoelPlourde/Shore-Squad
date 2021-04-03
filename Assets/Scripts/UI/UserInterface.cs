@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 namespace UI {
@@ -11,14 +9,14 @@ namespace UI {
 		private CanvasScaler _canvasScaler;
 
 		private void Awake() {
-			if (Instance == null) {
+			if (ReferenceEquals(Instance, null)) {
 				Instance = this;
 			}
 
 			DontDestroyOnLoad(this);
 
 			Portraits = transform.Find("Portraits");
-			if (Portraits == null) {
+			if (ReferenceEquals(Portraits, null)) {
 				throw new UnityException("Verify the structure of the UIController to include a child named: Portraits");
 			}
 

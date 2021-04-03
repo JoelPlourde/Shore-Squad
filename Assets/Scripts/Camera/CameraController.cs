@@ -28,7 +28,7 @@ namespace CameraSystem {
 			Distance = (MinZoom + MaxZoom) / 2;
 
 			Target = FindObjectOfType<CameraTarget>();
-			if (Target is null) {
+			if (ReferenceEquals(Target, null)) {
 				GameObject targetObj = new GameObject("CameraTarget");
 				Target = targetObj.AddComponent<CameraTarget>();
 			}

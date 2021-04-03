@@ -14,7 +14,7 @@ namespace NavigationSystem {
 		private Box _boundingBox = new Box();
 
 		private void Awake() {
-			if (Boxes != null) {
+			if (!ReferenceEquals(Boxes, null)) {
 				foreach (var box in Boxes) {
 					var child = new GameObject("obstacle");
 					child.transform.SetParent(transform);
@@ -98,7 +98,7 @@ namespace NavigationSystem {
 		}
 
 		private void OnDrawGizmosSelected() {
-			if (Boxes != null) {
+			if (ReferenceEquals(Boxes, null)) {
 				CalculateBoundingBox();
 				Gizmos.color = Color.blue;
 				Gizmos.DrawWireCube(_boundingBox.Center, _boundingBox.Size);
