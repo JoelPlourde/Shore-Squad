@@ -15,4 +15,14 @@ public class SingletonBehaviour<T> : MonoBehaviour where T : MonoBehaviour {
 			throw new System.Exception("An instance of this singleton already exists.");
 		}
 	}
+
+	void OnDestroy() {
+		Alive = false;
+	}
+
+	void OnApplicationQuit() {
+		Alive = false;
+	}
+
+	public bool Alive { get; private set; } = true;
 }

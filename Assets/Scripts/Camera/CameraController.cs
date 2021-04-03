@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 
 namespace CameraSystem {
-	public class CameraController : MonoBehaviour {
+	public class CameraController : MonoBehaviour, IUpdatable {
 
 		public static CameraController Instance;
+
+		public CameraTarget Target;
 
 		[Header("LayerMask")]
 		public LayerMask ignoreLayer;
@@ -21,21 +23,24 @@ namespace CameraSystem {
 
 		private RaycastHit _hit;
 		protected private Vector3 _localRotation;
+		protected private Vector3 _smoothedPosition;
 
 		private void Awake() {
 			Instance = this;
 			Camera = GetComponent<Camera>();
 			Distance = (MinZoom + MaxZoom) / 2;
 
-			Target = FindObjectOfType<CameraTarget>();
 			if (ReferenceEquals(Target, null)) {
-				GameObject targetObj = new GameObject("CameraTarget");
-				Target = targetObj.AddComponent<CameraTarget>();
+				throw new UnityException("Please assign a CameraTarget to the CameraController object.");
 			}
 			Target.Initialize(blockedByLayer);
 		}
 
-		void LateUpdate() {
+		private void Start() {
+			GameController.Instance.RegisterLateUpdatable(this);
+		}
+
+		public void OnUpdate() {
 			Distance -= Input.GetAxis("Mouse ScrollWheel") * Time.smoothDeltaTime * ScrollSensitivity;
 			Distance = Mathf.Clamp(Distance, MinZoom, MaxZoom);
 
@@ -48,10 +53,11 @@ namespace CameraSystem {
 			Target.transform.Translate(Input.GetAxis("Horizontal") * transform.right * (MovingSpeed * ((int)Distance >> 1)) * Time.deltaTime, Space.World);
 			Target.transform.Translate(Input.GetAxis("Vertical") * transform.forward * (MovingSpeed * ((int)Distance >> 1)) * Time.deltaTime, Space.World);
 
-			Vector3 smoothedPosition = Vector3.Lerp(transform.position, Target.transform.position + Quaternion.Euler(_localRotation.y, _localRotation.x, 0f) * (Distance * -Vector3.back), SmoothSensitivity);
-			transform.position = smoothedPosition;
+			_smoothedPosition = Vector3.Lerp(transform.position, Target.transform.position + Quaternion.Euler(_localRotation.y, _localRotation.x, 0f) * (Distance * -Vector3.back), SmoothSensitivity);
 			if (Physics.Raycast(transform.position, (Target.transform.position - transform.position), out _hit, Mathf.Infinity, ignoreLayer, QueryTriggerInteraction.UseGlobal)) {
 				transform.position = _hit.point;
+			} else {
+				transform.position = _smoothedPosition;
 			}
 			transform.LookAt(Target.transform.position, Vector3.up);
 		}
@@ -64,7 +70,12 @@ namespace CameraSystem {
 			Target.transform.position = target.transform.position;
 		}
 
-		public CameraTarget Target { get; private set; }
+		public void OnDestroy() {
+			if (GameController.Instance.Alive) {
+				GameController.Instance.DeregisterLateUpdatable(this);
+			}
+		}
+
 		public Camera Camera { get; private set; }
 		public float Distance { get; private set; } = 20;
 	}

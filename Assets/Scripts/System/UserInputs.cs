@@ -7,7 +7,7 @@ public enum MouseButton {
 	LEFT_MOUSE_BUTTON, RIGHT_MOUSE_BUTTON, MIDDLE_MOUSE_BUTTON
 }
 
-public class UserInputs : MonoBehaviour
+public class UserInputs : MonoBehaviour, IUpdatable
 {
 	public static UserInputs Instance;
 
@@ -25,7 +25,11 @@ public class UserInputs : MonoBehaviour
 		}
 	}
 
-	private void Update() {
+	private void Start() {
+		GameController.Instance.RegisterUpdatable(this);
+	}
+
+	public void OnUpdate() {
 		if (Input.GetMouseButtonUp(0)) {
 			OnMouseEvent(MouseButton.LEFT_MOUSE_BUTTON);
 		} else if (Input.GetMouseButtonUp(1)) {
@@ -65,6 +69,12 @@ public class UserInputs : MonoBehaviour
 			if (_actions[topic].GetInvocationList().Length == 0) {
 				_actions.Remove(topic);
 			}
+		}
+	}
+
+	private void OnDestroy() {
+		if (GameController.Instance.Alive) {
+			GameController.Instance.DeregisterUpdatable(this);
 		}
 	}
 }

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 namespace CameraSystem {
-	public class CameraTarget : MonoBehaviour {
+	public class CameraTarget : MonoBehaviour, IUpdatable {
 
 		private Transform _target;
 
@@ -10,6 +10,10 @@ namespace CameraSystem {
 		private Vector3 _buffer;
 		private LayerMask _layerMask;
 		private Vector3 _offset = new Vector3(0, 15, 0);
+
+		private void Start() {
+			GameController.Instance.RegisterLateUpdatable(this);
+		}
 
 		public void Initialize(LayerMask layerMask) {
 			_layerMask = layerMask;
@@ -20,7 +24,7 @@ namespace CameraSystem {
 			_target = target;
 		}
 
-		private void LateUpdate() {
+		public void OnUpdate() {
 			if (!ReferenceEquals(_target, null)) {
 				transform.position = _target.position;
 			} else {
@@ -35,6 +39,12 @@ namespace CameraSystem {
 
 		public void CancelRoutine() {
 			_target = null;
+		}
+
+		private void OnDestroy() {
+			if (GameController.Instance.Alive) {
+				GameController.Instance.DeregisterLateUpdatable(this);
+			}
 		}
 	}
 }
