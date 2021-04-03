@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 5349810858471793426}
   - component: {fileID: 7178777427083921381}
   - component: {fileID: 276147859510135159}
+  - component: {fileID: 7361260126521871112}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -215,3 +216,15 @@ MonoBehaviour:
   LayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &7361260126521871112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6618174110233258670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 254e9f877fe9b454a9265ef8564e9957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

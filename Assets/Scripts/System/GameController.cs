@@ -2,7 +2,9 @@
 using StatusEffectSystem;
 using System.Collections.Generic;
 using System;
+using QuestSystem;
 
+[RequireComponent(typeof(QuestManager))]
 [RequireComponent(typeof(AdjustTemperatureStatusEffect))]
 [RequireComponent(typeof(HungerStatusEffect))]
 [RequireComponent(typeof(HealOverTimeEffect))]
