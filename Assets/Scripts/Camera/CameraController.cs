@@ -24,6 +24,7 @@ namespace CameraSystem {
 		private RaycastHit _hit;
 		protected private Vector3 _localRotation;
 		protected private Vector3 _smoothedPosition;
+		protected private float _desiredDistance;
 
 		private void Awake() {
 			Instance = this;
@@ -41,7 +42,14 @@ namespace CameraSystem {
 		}
 
 		public void OnUpdate() {
-			Distance -= Input.GetAxis("Mouse ScrollWheel") * Time.smoothDeltaTime * ScrollSensitivity;
+			_desiredDistance -= Input.GetAxis("Mouse ScrollWheel") * Time.smoothDeltaTime * ScrollSensitivity;
+
+			Vector3 direction = (Target.transform.position - transform.position);
+			if (Physics.Raycast(transform.position, direction, out _hit, _desiredDistance, ignoreLayer, QueryTriggerInteraction.UseGlobal)) {
+				Distance = (_hit.point - Target.transform.position).magnitude + 0.2f;
+			} else {
+				Distance = _desiredDistance;
+			}
 			Distance = Mathf.Clamp(Distance, MinZoom, MaxZoom);
 
 			if (Input.GetMouseButton(2)) {
@@ -53,17 +61,16 @@ namespace CameraSystem {
 			Target.transform.Translate(Input.GetAxis("Horizontal") * transform.right * (MovingSpeed * ((int)Distance >> 1)) * Time.deltaTime, Space.World);
 			Target.transform.Translate(Input.GetAxis("Vertical") * transform.forward * (MovingSpeed * ((int)Distance >> 1)) * Time.deltaTime, Space.World);
 
-			_smoothedPosition = Vector3.Lerp(transform.position, Target.transform.position + Quaternion.Euler(_localRotation.y, _localRotation.x, 0f) * (Distance * -Vector3.back), SmoothSensitivity);
-			if (Physics.Raycast(transform.position, (Target.transform.position - transform.position), out _hit, Mathf.Infinity, ignoreLayer, QueryTriggerInteraction.UseGlobal)) {
-				transform.position = _hit.point;
-			} else {
-				transform.position = _smoothedPosition;
-			}
+			transform.position = Vector3.Lerp(transform.position, Target.transform.position + Quaternion.Euler(_localRotation.y, _localRotation.x, 0f) * (Distance * -Vector3.back), SmoothSensitivity);
 			transform.LookAt(Target.transform.position, Vector3.up);
 		}
 
 		public void FollowTarget(Transform target) {
-			Target.StartRoutine(target);
+			Target.FollowTarget(target);
+		}
+
+		public void StopFollow() {
+			Target.CancelFollow();
 		}
 
 		public void FocusOnTarget(Transform target) {

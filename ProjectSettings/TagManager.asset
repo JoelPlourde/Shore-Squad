@@ -8,6 +8,7 @@ TagManager:
   - SENTINELS
   - INQUISITOR
   - WILDLING
+  - Terrain
   layers:
   - Default
   - TransparentFX
@@ -18,7 +19,7 @@ TagManager:
   - 
   - 
   - Terrain
-  - 
+  - Actor
   - 
   - 
   - 
