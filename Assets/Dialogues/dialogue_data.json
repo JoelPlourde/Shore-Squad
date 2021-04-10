@@ -1,0 +1,43 @@
+{
+    "Identifier": "dialogue_data",
+    "Entry": {
+        "NodeType": 0,
+        "Content": "Introduction",
+        "Nodes": [
+            {
+                "NodeType": 0,
+                "Content": "Filler A",
+                "Nodes": [
+                    {
+                        "NodeType": 1,
+                        "Content": "Choice",
+                        "Nodes": [
+                            {
+                                "NodeType": 2,
+                                "Content": "Options A",
+                                "Nodes": [
+                                    {
+                                        "NodeType": 3,
+                                        "Content": "Awesome!",
+                                        "Nodes": []
+                                    }
+                                ]
+                            },
+                            {
+                                "NodeType": 0,
+                                "Content": "Options B",
+                                "Nodes": [
+                                    {
+                                        "NodeType": 3,
+                                        "Content": "Its ok ...",
+                                        "Nodes": []
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}
