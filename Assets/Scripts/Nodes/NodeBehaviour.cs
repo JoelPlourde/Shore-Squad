@@ -31,7 +31,7 @@ namespace NodeSystem {
 				if (rand < _nodeData.Probability) {
 					CancelInvoke();
 					Debug.Log("Deplete !");
-					OnInteractExit();
+					// OnInteractExit();
 				}
 			} else {
 				Drop drop = _nodeData.DropTable.GetRandomDrop();

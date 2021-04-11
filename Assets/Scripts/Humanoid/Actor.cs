@@ -49,7 +49,7 @@ public class Actor : MonoBehaviour {
 		StatusEffectScheduler.Initialize(Guid);
 	}
 
-	public void Start() {
+	public virtual void Start() {
 		StatusEffectScheduler.Instance(Guid).AddStatusEffect(new StatusEffectSystem.Status(this, 1f, StatusEffectManager.GetStatusEffectData(Constant.HUNGRY)));
 
 		if (Playable) {

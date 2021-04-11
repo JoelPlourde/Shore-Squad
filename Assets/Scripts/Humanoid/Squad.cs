@@ -46,6 +46,21 @@ public static class Squad {
 	}
 
 	/// <summary>
+	/// Return any Actor in the squad.
+	/// </summary>
+	/// <param name="actor"></param>
+	/// <returns></returns>
+	public static bool First(out Actor actor) {
+		actor = null;
+		if (_units.Count > 0) {
+			actor = _units[0].Actor;
+			_units[0].EnableSelector(true);
+			return true;
+		}
+		return false;
+	}
+
+	/// <summary>
 	/// Move the selected actors to the position.
 	/// </summary>
 	/// <param name="mouseButton">Which mouse button it is used.</param>

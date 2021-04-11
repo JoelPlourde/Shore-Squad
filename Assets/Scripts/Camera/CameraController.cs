@@ -24,7 +24,9 @@ namespace CameraSystem {
 		private RaycastHit _hit;
 		protected private Vector3 _localRotation;
 		protected private Vector3 _smoothedPosition;
-		protected private float _desiredDistance;
+		protected private float _desiredDistance = 20f;
+
+		protected private Vector3 _direction;
 
 		private void Awake() {
 			Instance = this;
@@ -44,9 +46,9 @@ namespace CameraSystem {
 		public void OnUpdate() {
 			_desiredDistance -= Input.GetAxis("Mouse ScrollWheel") * Time.smoothDeltaTime * ScrollSensitivity;
 
-			Vector3 direction = (Target.transform.position - transform.position);
-			if (Physics.Raycast(transform.position, direction, out _hit, _desiredDistance, ignoreLayer, QueryTriggerInteraction.UseGlobal)) {
-				Distance = (_hit.point - Target.transform.position).magnitude + 0.2f;
+			_direction = (transform.position - Target.transform.position).normalized;
+			if (Physics.Raycast(Target.transform.position, _direction * _desiredDistance, out _hit, _desiredDistance, ignoreLayer, QueryTriggerInteraction.UseGlobal)) {
+				Distance = (_hit.point - Target.transform.position).magnitude;
 			} else {
 				Distance = _desiredDistance;
 			}
@@ -55,7 +57,7 @@ namespace CameraSystem {
 			if (Input.GetMouseButton(2)) {
 				_localRotation.x += Input.GetAxis("Mouse X") * Time.smoothDeltaTime * CameraSensitivity;
 				_localRotation.y += Input.GetAxis("Mouse Y") * Time.smoothDeltaTime * CameraSensitivity;
-				_localRotation.y = Mathf.Clamp(_localRotation.y, -60, 60);
+				_localRotation.y = Mathf.Clamp(_localRotation.y, -60, -5);
 			}
 
 			Target.transform.Translate(Input.GetAxis("Horizontal") * transform.right * (MovingSpeed * ((int)Distance >> 1)) * Time.deltaTime, Space.World);

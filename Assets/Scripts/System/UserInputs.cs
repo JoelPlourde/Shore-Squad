@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public enum MouseButton {
 	LEFT_MOUSE_BUTTON, RIGHT_MOUSE_BUTTON, MIDDLE_MOUSE_BUTTON
@@ -30,14 +31,17 @@ public class UserInputs : MonoBehaviour, IUpdatable
 	}
 
 	public void OnUpdate() {
-		if (Input.GetMouseButtonUp(0)) {
-			OnMouseEvent(MouseButton.LEFT_MOUSE_BUTTON);
-		} else if (Input.GetMouseButtonUp(1)) {
-			OnMouseEvent(MouseButton.RIGHT_MOUSE_BUTTON);
+		if (!EventSystem.current.IsPointerOverGameObject()) {
+			if (Input.GetMouseButtonUp(0)) {
+				OnMouseEvent(MouseButton.LEFT_MOUSE_BUTTON);
+			} else if (Input.GetMouseButtonUp(1)) {
+				OnMouseEvent(MouseButton.RIGHT_MOUSE_BUTTON);
+			}
 		}
 	}
 
 	private void OnMouseEvent(MouseButton mouseButton) {
+
 		if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out _hit, Mathf.Infinity, LayerMask)) {
 			if (_actions.TryGetValue(_hit.collider.name, out _value) || _actions.TryGetValue(_hit.collider.tag, out _value)) {
 				_value?.Invoke(mouseButton, _hit);
