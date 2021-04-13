@@ -99,10 +99,10 @@ MonoBehaviour:
   Target: {fileID: 0}
   ignoreLayer:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 513
   blockedByLayer:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 311
   CameraSensitivity: 300
   ScrollSensitivity: 2000
   SmoothSensitivity: 0.5

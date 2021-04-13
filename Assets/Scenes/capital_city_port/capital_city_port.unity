@@ -974,22 +974,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32b1fc2cfd489a7458de95bdf6568a3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FactionType: 0
-  Playable: 0
-  _attributes:
-    MaxHealth: 100
-    Health: 100
-    HealthRegeneration: 1
-    Speed: 1
-    Damage: 2
-    HungerRate: 0.05
-    Food: 20
-    Temperature: 20
-  _status:
-    Dead: 0
-    Stunned: 0
-    Fleeing: 0
-    Sheltered: 0
+  Identifier: george_foreman
   DialogueData: {fileID: 11400000, guid: e759076a8c6c68947a3d2204fe6b80f1, type: 2}
 --- !u!114 &1553571269
 MonoBehaviour:
@@ -1158,16 +1143,6 @@ PrefabInstance:
       propertyPath: Target
       value: 
       objectReference: {fileID: 274563067}
-    - target: {fileID: 43865178677137712, guid: 18fd5ac1957a4cb4cac32f08873a1243,
-        type: 3}
-      propertyPath: ignoreLayer.m_Bits
-      value: 513
-      objectReference: {fileID: 0}
-    - target: {fileID: 43865178677137712, guid: 18fd5ac1957a4cb4cac32f08873a1243,
-        type: 3}
-      propertyPath: blockedByLayer.m_Bits
-      value: 311
-      objectReference: {fileID: 0}
     - target: {fileID: 43865178677137713, guid: 18fd5ac1957a4cb4cac32f08873a1243,
         type: 3}
       propertyPath: m_LocalPosition.x
