@@ -3,7 +3,10 @@ using StatusEffectSystem;
 using System.Collections.Generic;
 using System;
 using QuestSystem;
+using SaveSystem;
 
+[RequireComponent(typeof(SaveManager))]
+[RequireComponent(typeof(ActorManager))]
 [RequireComponent(typeof(QuestManager))]
 [RequireComponent(typeof(AdjustTemperatureStatusEffect))]
 [RequireComponent(typeof(HungerStatusEffect))]

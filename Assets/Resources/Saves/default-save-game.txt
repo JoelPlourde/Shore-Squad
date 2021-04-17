@@ -1,0 +1,36 @@
+{
+    "ActorDtos": [
+        {
+            "Position": {
+                "x": 258.6300048828125,
+                "y": 16.0,
+                "z": 280.469970703125
+            },
+            "Guid": "c5bedba8-3981-4876-8c98-8c13166b115f",
+            "Playable": true,
+            "FactionType": 0,
+            "AttributesDto": {
+                "MaxHealth": 100.0,
+                "Health": 100.0,
+                "HealthRegeneration": 1.0,
+                "Speed": 1.0,
+                "Damage": 2.0,
+                "HungerRate": 0.05,
+                "Food": 20.0,
+                "Temperature": 20.0
+            },
+            "StatusDto": {
+                "Dead": false,
+                "Stunned": false,
+                "Fleeing": false,
+                "Sheltered": false
+            }
+        }
+    ],
+"QuestDtos": [
+{
+	"ID": "a_new_adventure_awaits",
+	"QuestState": 1
+}
+]
+}

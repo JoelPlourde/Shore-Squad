@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 486ff88b45dd6bf4abaae472c2b33a61, type: 3}
+  m_Name: a_new_adventure_awaits
+  m_EditorClassIdentifier: 
+  Title: A New Adventure Awaits!
+  Prologue: The charter ship is ready to embark unto new adventures. Talk to the Captain
+    Foreman to sail away from this wretched place.
+  objectiveDatas:
+  - Title: Talk to Captain Foreman
+    TaskDatas:
+    - Title: Talk to Captain Foreman
+      objectiveType: 6
+      Amount: 1
+      Identifier: talk_to_captain_foreman
+  Requirements: []
+  Unlocks: []

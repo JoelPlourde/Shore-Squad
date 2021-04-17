@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c36249179937b35439407ac11bf735c5, type: 3}
+  m_Name: talk_to_captain_foreman
+  m_EditorClassIdentifier: 
+  Identifier: talk_to_captain_foreman
+  Entry:
+    NodeType: 0
+    Content: Ahoy! Pay attention 'cause I won't tell ye twice! We be headin' towards
+      uncharted territory where ye won't be able t' come back from at least a month.
+    Nodes:
+    - NodeType: 0
+      Content: Me last crew barely came back alive as ye can see, but ay the High
+        King pay mighty fer that last shipment..
+      Nodes:
+      - NodeType: 1
+        Content: Are ye ready t' set sail towards the new land?
+        Nodes:
+        - NodeType: 2
+          Content: Aye!
+          Nodes:
+          - NodeType: 3
+            Content: Arrr!
+            Nodes: []
+        - NodeType: 0
+          Content: Not yet
+          Nodes:
+          - NodeType: 3
+            Content: Curse you for breathin'. Don't ye test me patience ye
+            Nodes: []

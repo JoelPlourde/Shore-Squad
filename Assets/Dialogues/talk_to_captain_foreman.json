@@ -1,35 +1,35 @@
 {
-    "Identifier": "dialogue_data",
+    "Identifier": "talk_to_captain_foreman",
     "Entry": {
         "NodeType": 0,
-        "Content": "Introduction",
+        "Content": "Ahoy! Pay attention 'cause I won't tell ye twice! We be headin' towards uncharted territory where ye won't be able t' come back from at least a month.",
         "Nodes": [
             {
                 "NodeType": 0,
-                "Content": "Filler A",
+                "Content": "Me last crew barely came back alive as ye can see, but ay the High King pay mighty fer that last shipment..",
                 "Nodes": [
                     {
                         "NodeType": 1,
-                        "Content": "Choice",
+                        "Content": "Are ye ready t' set sail towards the new land?",
                         "Nodes": [
                             {
                                 "NodeType": 2,
-                                "Content": "Options A",
+                                "Content": "Aye!",
                                 "Nodes": [
                                     {
                                         "NodeType": 3,
-                                        "Content": "Awesome!",
+                                        "Content": "Arrr!",
                                         "Nodes": []
                                     }
                                 ]
                             },
                             {
                                 "NodeType": 0,
-                                "Content": "Options B",
+                                "Content": "Not yet",
                                 "Nodes": [
                                     {
                                         "NodeType": 3,
-                                        "Content": "Its ok ...",
+                                        "Content": "Curse you for breathin'. Don't ye test me patience ye",
                                         "Nodes": []
                                     }
                                 ]

@@ -1,0 +1,19 @@
+{
+    "Title": "A New Adventure Awaits!",
+    "Prologue": "The charter ship is ready to embark unto new adventures. Talk to the Captain Foreman to sail away from this wretched place.",
+    "objectiveDatas": [
+        {
+            "Title": "Talk to Captain Foreman",
+            "TaskDatas": [
+                {
+                    "Title": "Talk to Captain Foreman",
+                    "objectiveType": 6,
+                    "Amount": 1,
+                    "Identifier": "talk_to_captain_foreman"
+                }
+            ]
+        }
+    ],
+    "Requirements": [],
+    "Unlocks": []
+}
