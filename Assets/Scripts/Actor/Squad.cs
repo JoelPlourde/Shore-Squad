@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using TaskSystem;
-using System;
+using UnityEngine.SceneManagement;
 
 public static class Squad {
 
@@ -25,6 +25,7 @@ public static class Squad {
 	public static void AddToSquad(Actor actor) {
 		int index = _units.FindIndex(x => x.Actor.Guid == actor.Guid);
 		if (index == -1) {
+			Object.DontDestroyOnLoad(actor);
 			_units.Add(new Unit(actor, CreateSelector(actor)));
 		} else {
 			throw new UnityException("This actor has already been added to the Squad, something is wrong.");
@@ -39,6 +40,7 @@ public static class Squad {
 	/// </summary>
 	/// <param name="actor">An actor.</param>
 	public static void RemoveFromSquad(Actor actor) {
+		SceneManager.MoveGameObjectToScene(actor.gameObject, SceneManager.GetActiveScene());
 		_units.RemoveAll(x => x.Actor.Guid == actor.Guid);
 		DeleteSelector(actor);
 		PortraitManager.DeleteActorPortrait(actor);
@@ -58,6 +60,16 @@ public static class Squad {
 			return true;
 		}
 		return false;
+	}
+
+	/// <summary>
+	/// Teleport the Squad to a new position.
+	/// </summary>
+	/// <param name="position">The new position</param>
+	public static void TeleportSquad(Vector3 position) {
+		foreach (Unit unit in _units) {
+			unit.Actor.NavMeshAgent.Warp(position);
+		}
 	}
 
 	/// <summary>

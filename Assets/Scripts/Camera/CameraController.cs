@@ -30,6 +30,9 @@ namespace CameraSystem {
 
 		private void Awake() {
 			Instance = this;
+
+			DontDestroyOnLoad(this.gameObject);
+
 			Camera = GetComponent<Camera>();
 			Distance = (MinZoom + MaxZoom) / 2;
 

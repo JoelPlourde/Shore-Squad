@@ -23,6 +23,8 @@ namespace CameraSystem {
 
 		private void Awake() {
 			Instance = this;
+
+			DontDestroyOnLoad(this.gameObject);
 		}
 
 		private void Start() {
@@ -64,6 +66,8 @@ namespace CameraSystem {
 			if (!ReferenceEquals(_collider, null) && !_collider.bounds.Contains(transform.position)) {
 				transform.position = _collider.ClosestPoint(transform.position);
 				return;
+			} else {
+				_collider = null;
 			}
 
 

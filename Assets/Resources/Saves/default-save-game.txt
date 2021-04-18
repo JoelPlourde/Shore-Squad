@@ -2,9 +2,9 @@
     "ActorDtos": [
         {
             "Position": {
-                "x": 258.6300048828125,
+                "x": 275.45,
                 "y": 16.0,
-                "z": 280.469970703125
+                "z": 318.38
             },
             "Guid": "c5bedba8-3981-4876-8c98-8c13166b115f",
             "Playable": true,
@@ -30,7 +30,7 @@
 "QuestDtos": [
 {
 	"ID": "a_new_adventure_awaits",
-	"QuestState": 1
+	"QuestState": 2
 }
 ]
 }

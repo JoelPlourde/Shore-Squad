@@ -25,10 +25,10 @@ MonoBehaviour:
       - NodeType: 1
         Content: Are ye ready t' set sail towards the new land?
         Nodes:
-        - NodeType: 2
+        - NodeType: 0
           Content: Aye!
           Nodes:
-          - NodeType: 3
+          - NodeType: 2
             Content: Arrr!
             Nodes: []
         - NodeType: 0

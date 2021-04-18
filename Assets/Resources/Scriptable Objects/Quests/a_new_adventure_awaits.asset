@@ -19,8 +19,11 @@ MonoBehaviour:
   - Title: Talk to Captain Foreman
     TaskDatas:
     - Title: Talk to Captain Foreman
-      objectiveType: 6
+      objectiveType: 8
       Amount: 1
       Identifier: talk_to_captain_foreman
+      Dependencies: {fileID: 11400000, guid: 85b40ea367ce1d142a51c3cd070db061, type: 2}
+      Triggers:
+      - {fileID: 11400000, guid: a38579ffae2d71c4891a3bca9613886e, type: 2}
   Requirements: []
   Unlocks: []

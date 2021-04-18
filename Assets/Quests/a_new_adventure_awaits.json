@@ -7,9 +7,12 @@
             "TaskDatas": [
                 {
                     "Title": "Talk to Captain Foreman",
-                    "objectiveType": 6,
+                    "objectiveType": 8,
                     "Amount": 1,
-                    "Identifier": "talk_to_captain_foreman"
+                    "Identifier": "talk_to_captain_foreman",
+                    "Dependencies": {
+                        "instanceID": 12014
+                    }
                 }
             ]
         }
