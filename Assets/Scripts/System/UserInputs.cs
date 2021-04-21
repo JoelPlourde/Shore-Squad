@@ -8,15 +8,14 @@ public enum MouseButton {
 	LEFT_MOUSE_BUTTON, RIGHT_MOUSE_BUTTON, MIDDLE_MOUSE_BUTTON
 }
 
-public class UserInputs : MonoBehaviour, IUpdatable
-{
+public class UserInputs : MonoBehaviour, IUpdatable {
 	public static UserInputs Instance;
 
 	public LayerMask LayerMask;
 
-	private Dictionary<string, Action<MouseButton, RaycastHit>> _actions = new Dictionary<string, Action<MouseButton, RaycastHit>>();
+	private Dictionary<string, InputAction> _actions = new Dictionary<string, InputAction>();
 	private RaycastHit _hit;
-	private Action<MouseButton, RaycastHit> _value;
+	private InputAction _value;
 
 	private void Awake() {
 		if (ReferenceEquals(Instance, null)) {
@@ -41,10 +40,9 @@ public class UserInputs : MonoBehaviour, IUpdatable
 	}
 
 	private void OnMouseEvent(MouseButton mouseButton) {
-
 		if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out _hit, Mathf.Infinity, LayerMask)) {
 			if (_actions.TryGetValue(_hit.collider.name, out _value) || _actions.TryGetValue(_hit.collider.tag, out _value)) {
-				_value?.Invoke(mouseButton, _hit);
+				_value.Action?.Invoke(mouseButton, _hit);
 			}
 		}
 	}
@@ -54,11 +52,11 @@ public class UserInputs : MonoBehaviour, IUpdatable
 	/// </summary>
 	/// <param name="topic">The topic to subscribe to.</param>
 	/// <param name="action">The action to be triggered.</param>
-	public void Subscribe(string topic, Action<MouseButton, RaycastHit> action) {
-		if (_actions.TryGetValue(topic, out Action<MouseButton, RaycastHit> value)) {
-			_actions[topic] += action;
+	public void Subscribe(string topic, Action<MouseButton, RaycastHit> action, bool persistent = false) {
+		if (_actions.TryGetValue(topic, out InputAction value)) {
+			_actions[topic].Action += action;
 		} else {
-			_actions.Add(topic, action);
+			_actions.Add(topic, new InputAction(action, persistent));
 		}
 	}
 
@@ -68,17 +66,59 @@ public class UserInputs : MonoBehaviour, IUpdatable
 	/// <param name="topic">The topic to subscribe to.</param>
 	/// <param name="action">The action to be triggered.</param>
 	public void Unsubscribe(string topic, Action<MouseButton, RaycastHit> action) {
-		if (_actions.TryGetValue(topic, out Action<MouseButton, RaycastHit> value)) {
-			_actions[topic] -= action;
-			if (_actions[topic].GetInvocationList().Length == 0) {
+		if (_actions.TryGetValue(topic, out InputAction value)) {
+			_actions[topic].Action -= action;
+			if (_actions[topic].Action.GetInvocationList().Length == 0) {
 				_actions.Remove(topic);
 			}
 		}
 	}
 
-	private void OnDestroy() {
+	/// <summary>
+	/// Unsubscribe all events to that are currently listening.
+	/// </summary>
+	public void UnsubscribeAll() {
+		List<string> keys = new List<string>(_actions.Keys);
+		foreach (string key in keys) {
+			if (_actions[key].Persistent == false) {
+				foreach (var d in _actions[key].Action.GetInvocationList()) {
+					_actions[key].Action -= (d as Action<MouseButton, RaycastHit>);
+				}
+				_actions.Remove(key);
+			}
+		}
+	}
+
+	/// <summary>
+	/// Disable the inputs by unregistering the update function.
+	/// </summary>
+	public void DisableInput() {
 		if (GameController.Instance.Alive) {
 			GameController.Instance.DeregisterUpdatable(this);
 		}
+	}
+
+	/// <summary>
+	/// Enable the inputs by registering the update function.
+	/// </summary>
+	public void EnableInput() {
+		if (GameController.Instance.Alive) {
+			GameController.Instance.RegisterUpdatable(this);
+		}
+	}
+
+	private void OnDestroy() {
+		DisableInput();
+	}
+
+	private class InputAction {
+
+		public InputAction(Action<MouseButton, RaycastHit> action, bool persistent = false) {
+			Action = action;
+			Persistent = persistent;
+		}
+
+		public Action<MouseButton, RaycastHit> Action { get; set; }
+		public bool Persistent { get; private set; }
 	}
 }

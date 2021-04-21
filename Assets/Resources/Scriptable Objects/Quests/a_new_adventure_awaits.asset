@@ -25,5 +25,25 @@ MonoBehaviour:
       Dependencies: {fileID: 11400000, guid: 85b40ea367ce1d142a51c3cd070db061, type: 2}
       Triggers:
       - {fileID: 11400000, guid: a38579ffae2d71c4891a3bca9613886e, type: 2}
+  - Title: Speak to Captain Foreman
+    TaskDatas:
+    - Title: Happy sailing
+      objectiveType: 8
+      Amount: 1
+      Identifier: speak_to_captain_foreman
+      Dependencies: {fileID: 11400000, guid: 2d1d47af90100d54380b286b26bd7774, type: 2}
+      Triggers: []
+    - Title: To Arms!
+      objectiveType: 1
+      Amount: 1
+      Identifier: mop
+      Dependencies: {fileID: 0}
+      Triggers: []
+    - Title: A pesky rat!
+      objectiveType: 0
+      Amount: 1
+      Identifier: rat
+      Dependencies: {fileID: 0}
+      Triggers: []
   Requirements: []
   Unlocks: []

@@ -10,7 +10,7 @@ public static class Squad {
 	private static readonly GameObject _selectorTemplate;
 
 	static Squad() {
-		UserInputs.Instance.Subscribe("Terrain", MoveSquad);
+		UserInputs.Instance.Subscribe("Terrain", MoveSquad, true);
 
 		_selectorTemplate = Resources.Load<GameObject>("Prefabs/Selector");
 		if (_selectorTemplate == null) {
@@ -32,7 +32,7 @@ public static class Squad {
 		}
 
 		PortraitManager.InstantiateActorPortrait(actor);
-		UserInputs.Instance.Subscribe(actor.Guid.ToString(), SelectActor);
+		UserInputs.Instance.Subscribe(actor.Guid.ToString(), SelectActor, true);
 	}
 
 	/// <summary>

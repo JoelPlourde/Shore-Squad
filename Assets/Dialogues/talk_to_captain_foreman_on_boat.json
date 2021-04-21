@@ -1,0 +1,14 @@
+{
+    "Identifier": "Talk to captain foreman on boat",
+    "Entry": {
+        "NodeType": 0,
+        "Content": "Well, I see you are still alive, that's good.",
+        "Nodes": [
+            {
+                "NodeType": 3,
+                "Content": "Grab a mop over there and go kill a few of those rats why dont you ?!",
+                "Nodes": []
+            }
+        ]
+    }
+}

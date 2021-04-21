@@ -12,7 +12,47 @@
                     "Identifier": "talk_to_captain_foreman",
                     "Dependencies": {
                         "instanceID": 12014
-                    }
+                    },
+                    "Triggers": [
+                        {
+                            "instanceID": -17396
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "Title": "Speak to Captain Foreman",
+            "TaskDatas": [
+                {
+                    "Title": "Happy sailing",
+                    "objectiveType": 8,
+                    "Amount": 1,
+                    "Identifier": "speak_to_captain_foreman",
+                    "Dependencies": {
+                        "instanceID": -31008
+                    },
+                    "Triggers": []
+                },
+                {
+                    "Title": "To Arms!",
+                    "objectiveType": 1,
+                    "Amount": 1,
+                    "Identifier": "mop",
+                    "Dependencies": {
+                        "instanceID": 0
+                    },
+                    "Triggers": []
+                },
+                {
+                    "Title": "A pesky rat!",
+                    "objectiveType": 0,
+                    "Amount": 1,
+                    "Identifier": "rat",
+                    "Dependencies": {
+                        "instanceID": 0
+                    },
+                    "Triggers": []
                 }
             ]
         }
