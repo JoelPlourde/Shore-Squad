@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PointerSystem;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -32,9 +33,12 @@ public class UserInputs : MonoBehaviour, IUpdatable {
 	public void OnUpdate() {
 		if (!EventSystem.current.IsPointerOverGameObject()) {
 			if (Input.GetMouseButtonUp(0)) {
+				PointerManager.Instance.SetPointer(PointerMode.DEFAULT);
 				OnMouseEvent(MouseButton.LEFT_MOUSE_BUTTON);
 			} else if (Input.GetMouseButtonUp(1)) {
 				OnMouseEvent(MouseButton.RIGHT_MOUSE_BUTTON);
+			} else if (Input.GetMouseButton(0)) {
+				PointerManager.Instance.SetPointer(PointerMode.DEFAULT_PRESSED);
 			}
 		}
 	}
