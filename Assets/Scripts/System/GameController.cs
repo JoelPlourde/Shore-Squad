@@ -4,7 +4,13 @@ using System.Collections.Generic;
 using System;
 using QuestSystem;
 using SaveSystem;
+using PointerSystem;
+using GameSystem;
+using ItemSystem;
 
+[RequireComponent(typeof(ItemManager))]
+[RequireComponent(typeof(SceneController))]
+[RequireComponent(typeof(PointerManager))]
 [RequireComponent(typeof(SaveManager))]
 [RequireComponent(typeof(ActorManager))]
 [RequireComponent(typeof(QuestManager))]

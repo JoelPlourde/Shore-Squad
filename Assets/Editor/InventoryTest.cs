@@ -44,7 +44,9 @@ public class InventoryTest {
 	public void GetNextIndexToAddWithFullInventoryWithCombine_test() {
 		Inventory inventory = new Inventory(1);
 		ItemData itemData = GetItemDataFixture();
-		inventory.AddItemToInventory(itemData, 15);
+		List<int> indexes = new List<int>();
+		inventory.AddItemToInventory(itemData, 15, ref indexes);
+		Assert.That(indexes[0], Is.EqualTo(0));
 		Assert.That(inventory.GetNextIndexToAdd(itemData, 5), Is.EqualTo(new KeyValuePair<int, int>(0, 0)));
 		Assert.That(inventory.GetNextIndexToAdd(itemData, 6), Is.EqualTo(new KeyValuePair<int, int>(-1, -1)));
 	}
@@ -53,18 +55,19 @@ public class InventoryTest {
 	public void GetNextIndexToAddWithFullInventory_test() {
 		Inventory inventory = new Inventory(1);
 		ItemData itemData = GetItemDataFixture();
-		inventory.AddItemToInventory(itemData, Inventory.MAX_STACK);
+		List<int> indexes = new List<int>();
+		inventory.AddItemToInventory(itemData, Inventory.MAX_STACK, ref indexes);
+		Assert.That(indexes[0], Is.EqualTo(0));
 		Assert.That(inventory.GetNextIndexToAdd(itemData, 1), Is.EqualTo(new KeyValuePair<int, int>(-1, -1)));
 	}
 
 	[Test]
 	public void AddItemToInventoryWithMultipleItem_test() {
 		Inventory inventory = new Inventory(3);
+		List<int> indexes = new List<int>();
 		for (int i = 0; i < 3; i++) {
-			inventory.AddItemToInventory(GetItemDataFixture(i), 5 + i);
+			inventory.AddItemToInventory(GetItemDataFixture(i), 5 + i, ref indexes);
 		}
-
-		Debug.Log(inventory.ToString());
 
 		for (int i = 0; i < 3; i++) {
 			Assert.That(inventory.CheckIfItemExistsInInventory(GetItemDataFixture(i), out int amount));
@@ -76,8 +79,12 @@ public class InventoryTest {
 	public void AddItemToInventoryCombine_test() {
 		Inventory inventory = new Inventory(1);
 		ItemData itemData = GetItemDataFixture();
-		Assert.That(inventory.AddItemToInventory(itemData, 10), Is.True);
-		Assert.That(inventory.AddItemToInventory(itemData, 10), Is.True);
+		List<int> indexes1 = new List<int>();
+		List<int> indexes2 = new List<int>();
+		Assert.That(inventory.AddItemToInventory(itemData, 10, ref indexes1), Is.True);
+		Assert.That(indexes1[0], Is.EqualTo(0));
+		Assert.That(inventory.AddItemToInventory(itemData, 10, ref indexes2), Is.True);
+		Assert.That(indexes2[0], Is.EqualTo(0));
 		Assert.That(inventory.CheckIfItemExistsInInventory(itemData, out int amount), Is.True);
 		Assert.That(amount, Is.EqualTo(Inventory.MAX_STACK));
 	}
@@ -86,8 +93,12 @@ public class InventoryTest {
 	public void AddItemToInventoryWithFullInventory_test() {
 		Inventory inventory = new Inventory(1);
 		ItemData itemData = GetItemDataFixture();
-		Assert.That(inventory.AddItemToInventory(itemData, Inventory.MAX_STACK), Is.True);
-		Assert.That(inventory.AddItemToInventory(itemData, 1), Is.False);
+		List<int> indexes1 = new List<int>();
+		List<int> indexes2 = new List<int>();
+		Assert.That(inventory.AddItemToInventory(itemData, Inventory.MAX_STACK, ref indexes1), Is.True);
+		Assert.That(indexes1[0], Is.EqualTo(0));
+		Assert.That(inventory.AddItemToInventory(itemData, 1, ref indexes2), Is.False);
+		Assert.That(indexes2.Count, Is.EqualTo(0));
 		Assert.That(inventory.GetItemAtIndex(0), Is.EqualTo(new Item(itemData, Inventory.MAX_STACK)));
 	}
 
@@ -95,22 +106,28 @@ public class InventoryTest {
 	public void AddItemToInventoryWithNegativeAmount_test() {
 		Assert.Throws<UnityException>(delegate () {
 			Inventory inventory = new Inventory(1);
-			inventory.AddItemToInventory(GetItemDataFixture(), -1);
+			List<int> indexes = new List<int>();
+			inventory.AddItemToInventory(GetItemDataFixture(), -1, ref indexes);
 		});
 	}
 
 	[Test]
 	public void RemoveItemFromInventoryWithEmptyInventory_test() {
 		Inventory inventory = new Inventory(1);
-		Assert.That(inventory.RemoveItemFromInventory(GetItemDataFixture(), 1), Is.False);
+		List<int> indexes = new List<int>();
+		Assert.That(inventory.RemoveItemFromInventory(GetItemDataFixture(), 1, ref indexes), Is.False);
 	}
 
 	[Test]
 	public void RemoveItemFromInventoryWithFullInventory_test() {
 		Inventory inventory = new Inventory(1);
 		ItemData itemData = GetItemDataFixture();
-		inventory.AddItemToInventory(itemData, Inventory.MAX_STACK);
-		Assert.That(inventory.RemoveItemFromInventory(itemData, 10), Is.True);
+		List<int> indexes1 = new List<int>();
+		List<int> indexes2 = new List<int>();
+		inventory.AddItemToInventory(itemData, Inventory.MAX_STACK, ref indexes1);
+		Assert.That(indexes1[0], Is.EqualTo(0));
+		Assert.That(inventory.RemoveItemFromInventory(itemData, 10, ref indexes2), Is.True);
+		Assert.That(indexes2[0], Is.EqualTo(0));
 		Assert.That(inventory.CheckIfItemExistsInInventory(itemData, out int amount), Is.True);
 		Assert.That(amount, Is.EqualTo(10));
 	}
@@ -119,12 +136,18 @@ public class InventoryTest {
 	public void RemoveItemFromInventory_test() {
 		Inventory inventory = new Inventory(2);
 		ItemData itemData = GetItemDataFixture();
-		inventory.AddItemToInventory(itemData, 15);
-		inventory.AddItemToInventory(itemData, 8);
+		List<int> indexes1 = new List<int>();
+		List<int> indexes2 = new List<int>();
+		inventory.AddItemToInventory(itemData, 15, ref indexes1);
+		Assert.That(indexes1[0], Is.EqualTo(0));
+		inventory.AddItemToInventory(itemData, 8, ref indexes2);
+		Assert.That(indexes2[0], Is.EqualTo(0));
 		Assert.That(inventory.CheckIfItemExistsInInventory(itemData, out int before), Is.True);
 		Assert.That(before, Is.EqualTo(23));
 
-		Assert.That(inventory.RemoveItemFromInventory(itemData, Inventory.MAX_STACK), Is.True);
+		List<int> indexes3 = new List<int>();
+		Assert.That(inventory.RemoveItemFromInventory(itemData, Inventory.MAX_STACK, ref indexes3), Is.True);
+		Assert.That(indexes3[0], Is.EqualTo(0));
 		Assert.That(inventory.CheckIfItemExistsInInventory(itemData, out int after), Is.True);
 		Assert.That(after, Is.EqualTo(3));
 	}
@@ -133,18 +156,28 @@ public class InventoryTest {
 	public void RemoveItemFromInventoryWhereNotEnoughItems_test() {
 		Inventory inventory = new Inventory(2);
 		ItemData itemData = GetItemDataFixture();
-		inventory.AddItemToInventory(itemData, Inventory.MAX_STACK);
-		inventory.AddItemToInventory(itemData, 4);
-		Assert.That(inventory.RemoveItemFromInventory(itemData, 30), Is.False);
+		List<int> indexes1 = new List<int>();
+		inventory.AddItemToInventory(itemData, Inventory.MAX_STACK, ref indexes1);
+		Assert.That(indexes1[0], Is.EqualTo(0));
+		List<int> indexes2 = new List<int>();
+		inventory.AddItemToInventory(itemData, 4, ref indexes2);
+		Assert.That(indexes2[0], Is.EqualTo(1));
+		List<int> indexes3 = new List<int>();
+		Assert.That(inventory.RemoveItemFromInventory(itemData, 30, ref indexes3), Is.False);
+		Assert.That(indexes3.Count, Is.EqualTo(0));
 	}
 
 	[Test]
 	public void GetNumberOfAvailableSlot_test() {
 		Inventory inventory = new Inventory(1);
 		ItemData itemData = GetItemDataFixture();
-		Assert.That(inventory.AddItemToInventory(itemData, 15), Is.True);
+		List<int> indexes1 = new List<int>();
+		Assert.That(inventory.AddItemToInventory(itemData, 15, ref indexes1), Is.True);
+		Assert.That(indexes1[0], Is.EqualTo(0));
 		Assert.That(inventory.GetNumberOfAvailableSlotForItem(itemData), Is.EqualTo(5));
-		Assert.That(inventory.AddItemToInventory(itemData, 5), Is.True);
+		List<int> indexes2 = new List<int>();
+		Assert.That(inventory.AddItemToInventory(itemData, 5, ref indexes2), Is.True);
+		Assert.That(indexes2[0], Is.EqualTo(0));
 		Assert.That(inventory.GetNumberOfAvailableSlotForItem(itemData), Is.EqualTo(0));
 	}
 
@@ -158,7 +191,9 @@ public class InventoryTest {
 	public void GetNumberOfAvailableSlotWithFullInventory_test() {
 		Inventory inventory = new Inventory(1);
 		ItemData itemData = GetItemDataFixture();
-		Assert.That(inventory.AddItemToInventory(itemData, Inventory.MAX_STACK), Is.True);
+		List<int> indexes = new List<int>();
+		Assert.That(inventory.AddItemToInventory(itemData, Inventory.MAX_STACK, ref indexes), Is.True);
+		Assert.That(indexes[0], Is.EqualTo(0));
 		Assert.That(inventory.GetNumberOfAvailableSlotForItem(GetItemDataFixture()), Is.EqualTo(0));
 	}
 
@@ -167,8 +202,10 @@ public class InventoryTest {
 		Inventory source = new Inventory(1);
 		Inventory destination = new Inventory(1);
 
+		List<int> indexes = new List<int>();
 		ItemData itemData = GetItemDataFixture();
-		Assert.That(source.AddItemToInventory(itemData, Inventory.MAX_STACK), Is.True);
+		Assert.That(source.AddItemToInventory(itemData, Inventory.MAX_STACK, ref indexes), Is.True);
+		Assert.That(indexes[0], Is.EqualTo(0));
 
 		Assert.That(InventoryUtils.TransferItem(source, destination, itemData, 15));
 
@@ -198,7 +235,9 @@ public class InventoryTest {
 
 		ItemData itemData = GetItemDataFixture();
 
-		Assert.That(destination.AddItemToInventory(itemData, Inventory.MAX_STACK), Is.True);
+		List<int> indexes = new List<int>();
+		Assert.That(destination.AddItemToInventory(itemData, Inventory.MAX_STACK, ref indexes), Is.True);
+		Assert.That(indexes[0], Is.EqualTo(0));
 
 		Assert.That(InventoryUtils.TransferItem(source, destination, itemData, 15), Is.False);
 
@@ -220,8 +259,9 @@ public class InventoryTest {
 	[Test]
 	public void GetGroupedItems_test() {
 		Inventory inventory = new Inventory(5);
+		List<int> indexes = new List<int>();
 		for (int i = 0; i < 3; i++) {
-			inventory.AddItemToInventory(GetItemDataFixture(i), Random.Range(1, Inventory.MAX_STACK));
+			inventory.AddItemToInventory(GetItemDataFixture(i), Random.Range(1, Inventory.MAX_STACK), ref indexes);
 		}
 		Dictionary<string, int> groupedItems = inventory.GetGroupedItems();
 		for (int i = 0; i < 3; i++) {
@@ -234,7 +274,9 @@ public class InventoryTest {
 		Inventory inventory = new Inventory(2);
 
 		Assert.That(inventory.GetItemAtIndex(0), Is.EqualTo(null));
-		Assert.That(inventory.AddItemToInventory(GetItemDataFixture(), 5));
+		List<int> indexes = new List<int>();
+		Assert.That(inventory.AddItemToInventory(GetItemDataFixture(), 5, ref indexes));
+		Assert.That(indexes[0], Is.EqualTo(0));
 		Assert.That(inventory.GetItemAtIndex(0), Is.EqualTo(new Item(GetItemDataFixture(), 5)));
 	}
 
@@ -332,8 +374,12 @@ public class InventoryTest {
 			new Item(GetItemDataFixture(1), 12)
 		};
 
-		inventory.AddItemToInventory(GetItemDataFixture(0), 3);
-		inventory.AddItemToInventory(GetItemDataFixture(1), 4);
+		List<int> indexes1 = new List<int>();
+		inventory.AddItemToInventory(GetItemDataFixture(0), 3, ref indexes1);
+		Assert.That(indexes1[0], Is.EqualTo(0));
+		List<int> indexes2 = new List<int>();
+		inventory.AddItemToInventory(GetItemDataFixture(1), 4, ref indexes2);
+		Assert.That(indexes2[0], Is.EqualTo(1));
 
 		inventory.RemoveItemsFromInventory(itemsToRemove, out List<Item> remainingItems);
 		Assert.That(remainingItems[0], Is.EqualTo(new Item(GetItemDataFixture(0), 2)));
@@ -442,19 +488,19 @@ public class InventoryTest {
 	}
 
 	private ItemData GetItemDataFixture() {
-		return ItemManager.GetItemData("branch");
+		return ItemManager.Instance.GetItemData("branch");
 	}
 
 	private ItemData GetItemDataFixture(int index) {
 		switch (index) {
 			case 0:
-				return ItemManager.GetItemData("branch");
+				return ItemManager.Instance.GetItemData("branch");
 			case 1:
-				return ItemManager.GetItemData("log");
+				return ItemManager.Instance.GetItemData("log");
 			case 2:
-				return ItemManager.GetItemData("stone");
+				return ItemManager.Instance.GetItemData("stone");
 			default:
-				return ItemManager.GetItemData("branch");
+				return ItemManager.Instance.GetItemData("branch");
 		}
 	}
 }

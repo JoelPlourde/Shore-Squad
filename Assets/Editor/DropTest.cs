@@ -25,13 +25,13 @@ public class DropTest
 	private ItemData GetItemDataFixture(int index) {
 		switch (index) {
 			case 0:
-				return ItemManager.GetItemData("branch");
+				return ItemManager.Instance.GetItemData("branch");
 			case 1:
-				return ItemManager.GetItemData("log");
+				return ItemManager.Instance.GetItemData("log");
 			case 2:
-				return ItemManager.GetItemData("stone");
+				return ItemManager.Instance.GetItemData("stone");
 			default:
-				return ItemManager.GetItemData("branch");
+				return ItemManager.Instance.GetItemData("branch");
 		}
 	}
 }

@@ -73,6 +73,21 @@ public static class Squad {
 	}
 
 	/// <summary>
+	/// Select the following actor only.
+	/// </summary>
+	/// <param name="actor">The actor to select.<param>
+	public static void SelectActor(Actor actor) {
+		_units.ForEach(x => {
+			x.EnableSelector(false);
+		});
+
+		Unit selectedUnit = _units.Find(x => x.Actor.Guid == actor.Guid);
+		selectedUnit.EnableSelector(true);
+
+		CameraSystem.CameraController.Instance.FollowTarget(actor.transform);
+	}
+
+	/// <summary>
 	/// Move the selected actors to the position.
 	/// </summary>
 	/// <param name="mouseButton">Which mouse button it is used.</param>
