@@ -4,15 +4,32 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.TestTools;
 
-public class InventoryTest {
+public class InventoryTest : IPrebuildSetup {
+
+	public void Setup() {
+		var gameObject = new GameObject();
+		ItemManager itemManager = gameObject.AddComponent<ItemManager>();
+	}
+
 	[Test]
+	[PrebuildSetup(typeof(InventoryTest))]
+	public void Setup_test() {
+		Assert.That(ItemManager.Instance, !Is.EqualTo(null));
+		ItemData itemData = GetItemDataFixture();
+		Assert.That(itemData, !Is.EqualTo(null));
+	}
+
+	[Test]
+	[PrebuildSetup(typeof(InventoryTest))]
 	public void GetNextIndexToRemoveWithEmptyInventory_test() {
 		Inventory inventory = new Inventory(1);
 		Assert.That(inventory.GetNextIndexToRemove(GetItemDataFixture(), 5), Is.EqualTo(new KeyValuePair<int, int>(-1, -1)));
 	}
 
 	[Test]
+	[PrebuildSetup(typeof(InventoryTest))]
 	public void GetNextIndexToRemoveWithNegativeAmount_test() {
 		Assert.Throws<UnityException>(delegate () {
 			Inventory inventory = new Inventory(1);
@@ -21,12 +38,21 @@ public class InventoryTest {
 	}
 
 	[Test]
+	[PrebuildSetup(typeof(InventoryTest))]
 	public void GetNextIndexToAddWithEmptyInventory_test() {
 		Inventory inventory = new Inventory(1);
 		Assert.That(inventory.GetNextIndexToAdd(GetItemDataFixture(), 5), Is.EqualTo(new KeyValuePair<int, int>(0, 0)));
 	}
 
 	[Test]
+	[PrebuildSetup(typeof(InventoryTest))]
+	public void GetNextIndexToAddWithEmptyInventory_non_stackable_test() {
+		Inventory inventory = new Inventory(1);
+		Assert.That(inventory.GetNextIndexToAdd(GetNonStackableItemData(), 1), Is.EqualTo(new KeyValuePair<int, int>(0, 0)));
+	}
+
+	[Test]
+	[PrebuildSetup(typeof(InventoryTest))]
 	public void GetNextIndexToAddWithNegativeAmount_test() {
 		Assert.Throws<UnityException>(delegate () {
 			Inventory inventory = new Inventory(1);
@@ -35,12 +61,33 @@ public class InventoryTest {
 	}
 
 	[Test]
+	[PrebuildSetup(typeof(InventoryTest))]
 	public void GetNextIndexToAddMaxStack_test() {
 		Inventory inventory = new Inventory(1);
 		Assert.That(inventory.GetNextIndexToAdd(GetItemDataFixture(), 25), Is.EqualTo(new KeyValuePair<int, int>(0, 5)));
 	}
 
 	[Test]
+	[PrebuildSetup(typeof(InventoryTest))]
+	public void GetNextIndexToAdd_non_stackable_test() {
+		Inventory inventory = new Inventory(1);
+		Assert.That(inventory.GetNextIndexToAdd(GetNonStackableItemData(), 2), Is.EqualTo(new KeyValuePair<int, int>(0, 1)));
+	}
+
+	[Test]
+	[PrebuildSetup(typeof(InventoryTest))]
+	public void GetNextIndexToAddSameItem_non_stackable_test() {
+		Inventory inventory = new Inventory(1);
+		ItemData nonStackableItem = GetNonStackableItemData();
+
+		Assert.That(inventory.GetNextIndexToAdd(nonStackableItem, 1), Is.EqualTo(new KeyValuePair<int, int>(0, 0)));
+		List<int> indexes = new List<int>();
+		inventory.AddItemToInventory(nonStackableItem, 1, ref indexes);
+		Assert.That(inventory.GetNextIndexToAdd(nonStackableItem, 1), Is.EqualTo(new KeyValuePair<int, int>(-1, -1)));
+	}
+
+	[Test]
+	[PrebuildSetup(typeof(InventoryTest))]
 	public void GetNextIndexToAddWithFullInventoryWithCombine_test() {
 		Inventory inventory = new Inventory(1);
 		ItemData itemData = GetItemDataFixture();
@@ -52,6 +99,7 @@ public class InventoryTest {
 	}
 
 	[Test]
+	[PrebuildSetup(typeof(InventoryTest))]
 	public void GetNextIndexToAddWithFullInventory_test() {
 		Inventory inventory = new Inventory(1);
 		ItemData itemData = GetItemDataFixture();
@@ -62,6 +110,7 @@ public class InventoryTest {
 	}
 
 	[Test]
+	[PrebuildSetup(typeof(InventoryTest))]
 	public void AddItemToInventoryWithMultipleItem_test() {
 		Inventory inventory = new Inventory(3);
 		List<int> indexes = new List<int>();
@@ -76,6 +125,7 @@ public class InventoryTest {
 	}
 
 	[Test]
+	[PrebuildSetup(typeof(InventoryTest))]
 	public void AddItemToInventoryCombine_test() {
 		Inventory inventory = new Inventory(1);
 		ItemData itemData = GetItemDataFixture();
@@ -90,6 +140,7 @@ public class InventoryTest {
 	}
 
 	[Test]
+	[PrebuildSetup(typeof(InventoryTest))]
 	public void AddItemToInventoryWithFullInventory_test() {
 		Inventory inventory = new Inventory(1);
 		ItemData itemData = GetItemDataFixture();
@@ -103,6 +154,7 @@ public class InventoryTest {
 	}
 
 	[Test]
+	[PrebuildSetup(typeof(InventoryTest))]
 	public void AddItemToInventoryWithNegativeAmount_test() {
 		Assert.Throws<UnityException>(delegate () {
 			Inventory inventory = new Inventory(1);
@@ -112,6 +164,7 @@ public class InventoryTest {
 	}
 
 	[Test]
+	[PrebuildSetup(typeof(InventoryTest))]
 	public void RemoveItemFromInventoryWithEmptyInventory_test() {
 		Inventory inventory = new Inventory(1);
 		List<int> indexes = new List<int>();
@@ -119,6 +172,7 @@ public class InventoryTest {
 	}
 
 	[Test]
+	[PrebuildSetup(typeof(InventoryTest))]
 	public void RemoveItemFromInventoryWithFullInventory_test() {
 		Inventory inventory = new Inventory(1);
 		ItemData itemData = GetItemDataFixture();
@@ -133,6 +187,7 @@ public class InventoryTest {
 	}
 
 	[Test]
+	[PrebuildSetup(typeof(InventoryTest))]
 	public void RemoveItemFromInventory_test() {
 		Inventory inventory = new Inventory(2);
 		ItemData itemData = GetItemDataFixture();
@@ -153,6 +208,7 @@ public class InventoryTest {
 	}
 
 	[Test]
+	[PrebuildSetup(typeof(InventoryTest))]
 	public void RemoveItemFromInventoryWhereNotEnoughItems_test() {
 		Inventory inventory = new Inventory(2);
 		ItemData itemData = GetItemDataFixture();
@@ -168,6 +224,7 @@ public class InventoryTest {
 	}
 
 	[Test]
+	[PrebuildSetup(typeof(InventoryTest))]
 	public void GetNumberOfAvailableSlot_test() {
 		Inventory inventory = new Inventory(1);
 		ItemData itemData = GetItemDataFixture();
@@ -182,12 +239,22 @@ public class InventoryTest {
 	}
 
 	[Test]
+	[PrebuildSetup(typeof(InventoryTest))]
+	public void GetNumberOfAvailableSlotWithNotStackable_test() {
+		Inventory inventory = new Inventory(2);
+		ItemData itemData = GetNonStackableItemData();
+		Assert.That(inventory.GetNumberOfAvailableSlotForItem(itemData), Is.EqualTo(2));
+	}
+
+	[Test]
+	[PrebuildSetup(typeof(InventoryTest))]
 	public void GetNumberOfAvailableSlotWithEmptyInventory_test() {
 		Inventory inventory = new Inventory(5);
 		Assert.That(inventory.GetNumberOfAvailableSlotForItem(GetItemDataFixture()), Is.EqualTo(Inventory.MAX_STACK * 5));
 	}
 
 	[Test]
+	[PrebuildSetup(typeof(InventoryTest))]
 	public void GetNumberOfAvailableSlotWithFullInventory_test() {
 		Inventory inventory = new Inventory(1);
 		ItemData itemData = GetItemDataFixture();
@@ -198,6 +265,7 @@ public class InventoryTest {
 	}
 
 	[Test]
+	[PrebuildSetup(typeof(InventoryTest))]
 	public void TransferItem_test() {
 		Inventory source = new Inventory(1);
 		Inventory destination = new Inventory(1);
@@ -217,6 +285,7 @@ public class InventoryTest {
 	}
 
 	[Test]
+	[PrebuildSetup(typeof(InventoryTest))]
 	public void TransferItemWithEmptySource_test() {
 		Inventory source = new Inventory(1);
 		Inventory destination = new Inventory(1);
@@ -229,6 +298,7 @@ public class InventoryTest {
 	}
 
 	[Test]
+	[PrebuildSetup(typeof(InventoryTest))]
 	public void TransferItemWithFullDestination_test() {
 		Inventory source = new Inventory(1);
 		Inventory destination = new Inventory(1);
@@ -247,6 +317,7 @@ public class InventoryTest {
 	}
 
 	[Test]
+	[PrebuildSetup(typeof(InventoryTest))]
 	public void TransferItemWithNegativeAmount_test() {
 		Inventory source = new Inventory(1);
 		Inventory destination = new Inventory(1);
@@ -257,6 +328,7 @@ public class InventoryTest {
 	}
 
 	[Test]
+	[PrebuildSetup(typeof(InventoryTest))]
 	public void GetGroupedItems_test() {
 		Inventory inventory = new Inventory(5);
 		List<int> indexes = new List<int>();
@@ -270,17 +342,23 @@ public class InventoryTest {
 	}
 
 	[Test]
+	[PrebuildSetup(typeof(InventoryTest))]
 	public void GetItemAtIndex_test() {
 		Inventory inventory = new Inventory(2);
+		Debug.Log(inventory);
+		Debug.Log(inventory.Items);
 
 		Assert.That(inventory.GetItemAtIndex(0), Is.EqualTo(null));
+		Debug.Log("Here !");
 		List<int> indexes = new List<int>();
 		Assert.That(inventory.AddItemToInventory(GetItemDataFixture(), 5, ref indexes));
+		Debug.Log(indexes);
 		Assert.That(indexes[0], Is.EqualTo(0));
 		Assert.That(inventory.GetItemAtIndex(0), Is.EqualTo(new Item(GetItemDataFixture(), 5)));
 	}
 
 	[Test]
+	[PrebuildSetup(typeof(InventoryTest))]
 	public void AddItemsToInventory_test() {
 		Inventory inventory = new Inventory(10);
 
@@ -307,6 +385,7 @@ public class InventoryTest {
 	}
 
 	[Test]
+	[PrebuildSetup(typeof(InventoryTest))]
 	public void AddItemsToInventoryWithFullInventory_test() {
 		Inventory inventory = new Inventory(3);
 		List<Item> items = new List<Item> {
@@ -323,6 +402,7 @@ public class InventoryTest {
 	}
 
 	[Test]
+	[PrebuildSetup(typeof(InventoryTest))]
 	public void AddAllItemsToInventory_test() {
 		Inventory inventory = new Inventory(5);
 		List<Item> items = new List<Item> {
@@ -342,6 +422,7 @@ public class InventoryTest {
 	}
 
 	[Test]
+	[PrebuildSetup(typeof(InventoryTest))]
 	public void RemoveItemsFromInventory_test() {
 		Inventory inventory = new Inventory(3);
 		List<Item> initialItems = new List<Item> {
@@ -362,11 +443,10 @@ public class InventoryTest {
 		Assert.That(inventory.CheckIfItemExistsInInventory(GetItemDataFixture(2), out int itemAmount2));
 		Assert.That(itemAmount1, Is.EqualTo(3));
 		Assert.That(itemAmount2, Is.EqualTo(7));
-
-		Debug.Log(inventory.ToString());
 	}
 
 	[Test]
+	[PrebuildSetup(typeof(InventoryTest))]
 	public void RemoveItemsFromInventoryWithNotEnoughItemsInInventory_test() {
 		Inventory inventory = new Inventory(3);
 		List<Item> itemsToRemove = new List<Item> {
@@ -391,6 +471,7 @@ public class InventoryTest {
 	}
 
 	[Test]
+	[PrebuildSetup(typeof(InventoryTest))]
 	public void RemoveItemsFromInventoryWithEmptyInventory_test() {
 		Inventory inventory = new Inventory(3);
 		List<Item> itemsToRemove = new List<Item> {
@@ -405,6 +486,7 @@ public class InventoryTest {
 	}
 
 	[Test]
+	[PrebuildSetup(typeof(InventoryTest))]
 	public void RemoveAllItemsFromInventory_test() {
 		Inventory inventory = new Inventory(3);
 		List<Item> items = new List<Item> {
@@ -419,6 +501,7 @@ public class InventoryTest {
 	}
 
 	[Test]
+	[PrebuildSetup(typeof(InventoryTest))]
 	public void ItemEquals_test() {
 		Item item1 = new Item(GetItemDataFixture(), 5);
 		Item item2 = new Item(GetItemDataFixture(), 5);
@@ -429,6 +512,7 @@ public class InventoryTest {
 	}
 
 	[Test]
+	[PrebuildSetup(typeof(InventoryTest))]
 	public void TransferItems_test() {
 		Inventory source = new Inventory(5);
 		Inventory destination = new Inventory(10);
@@ -453,6 +537,7 @@ public class InventoryTest {
 	}
 
 	[Test]
+	[PrebuildSetup(typeof(InventoryTest))]
 	public void TransferItemsWithFullDestinationInventory_test() {
 		Inventory source = new Inventory(5);
 		Inventory destination = new Inventory(4);
@@ -479,6 +564,7 @@ public class InventoryTest {
 	}
 
 	[Test]
+	[PrebuildSetup(typeof(InventoryTest))]
 	public void TransferItemsWithEmptySourceInventory_test() {
 		Inventory source = new Inventory(5);
 		Inventory destination = new Inventory(5);
@@ -487,8 +573,207 @@ public class InventoryTest {
 		Assert.That(remainingItemsToTransfer.Count, Is.EqualTo(0));
 	}
 
+	[Test]
+	[PrebuildSetup(typeof(InventoryTest))]
+	public void AddAllNonStackableItemsToEmptyInventory_test() {
+		Inventory inventory = new Inventory(3);
+
+		List<Item> items = new List<Item> {
+			new Item(GetItemDataFixture(3), 1),
+			new Item(GetItemDataFixture(3), 1),
+			new Item(GetItemDataFixture(3), 1)
+		};
+
+		inventory.AddItemsToInventory(items, out List<Item> remainingItems);
+		Assert.That(remainingItems.Count, Is.EqualTo(0));
+	}
+
+	[Test]
+	[PrebuildSetup(typeof(InventoryTest))]
+	public void AddAllNonStackableItemsToPartialInventory_test() {
+		Inventory inventory = new Inventory(3);
+
+		List<Item> initial = new List<Item> {
+			new Item(GetItemDataFixture(3), 1),
+			new Item(GetItemDataFixture(3), 1)
+		};
+
+		inventory.AddItemsToInventory(initial, out _);
+
+		List<Item> items = new List<Item> {
+			new Item(GetItemDataFixture(3), 1)
+		};
+
+		inventory.AddItemsToInventory(items, out List<Item> remainingItems);
+		Assert.That(remainingItems.Count, Is.EqualTo(0));
+		Assert.That(inventory.Items.Count, Is.EqualTo(3));
+		foreach (Item item in inventory.Items) {
+			Assert.That(item.Amount, Is.EqualTo(1));
+		}
+	}
+
+	[Test]
+	[PrebuildSetup(typeof(InventoryTest))]
+	public void AddAllNonStackableItemsToFullInventory_test() {
+		Inventory inventory = new Inventory(3);
+
+		List<Item> initial = new List<Item> {
+			new Item(GetItemDataFixture(3), 1),
+			new Item(GetItemDataFixture(3), 1),
+			new Item(GetItemDataFixture(3), 1)
+		};
+
+		inventory.AddItemsToInventory(initial, out _);
+
+		List<Item> items = new List<Item> {
+			new Item(GetItemDataFixture(3), 1),
+			new Item(GetItemDataFixture(2), 15)
+		};
+
+		inventory.AddItemsToInventory(items, out List<Item> remainingItems);
+		Assert.That(remainingItems.Count, Is.EqualTo(2));
+		Assert.That(remainingItems[0].Amount, Is.EqualTo(1));
+		Assert.That(remainingItems[1].Amount, Is.EqualTo(15));
+	}
+
+	[Test]
+	[PrebuildSetup(typeof(InventoryTest))]
+	public void AddMixedStackableItemsToEmptyInventory() {
+		Inventory inventory = new Inventory(3);
+
+		List<Item> items = new List<Item> {
+			new Item(GetItemDataFixture(3), 1),
+			new Item(GetItemDataFixture(1), 15),
+			new Item(GetItemDataFixture(2), 18),
+			new Item(GetItemDataFixture(2), 7)
+		};
+
+		inventory.AddItemsToInventory(items, out List<Item> remainingItems);
+		Assert.That(remainingItems.Count, Is.EqualTo(1));
+		Assert.That(remainingItems[0].Amount, Is.EqualTo(5));
+	}
+
+
+	[Test]
+	[PrebuildSetup(typeof(InventoryTest))]
+	public void AddMixedStackableItemsToPartialInventory() {
+		Inventory inventory = new Inventory(3);
+
+		List<Item> initial = new List<Item> {
+			new Item(GetItemDataFixture(1), 15),
+			new Item(GetItemDataFixture(2), 18),
+			new Item(GetItemDataFixture(3), 1)
+		};
+
+		inventory.AddItemsToInventory(initial, out _);
+
+		List<Item> items = new List<Item> {
+			new Item(GetItemDataFixture(1), 5),
+			new Item(GetItemDataFixture(2), 2),
+			new Item(GetItemDataFixture(3), 1)
+		};
+
+		inventory.AddItemsToInventory(items, out List<Item> remainingItems);
+		Assert.That(remainingItems.Count, Is.EqualTo(1));
+		Assert.That(remainingItems[0].Amount, Is.EqualTo(1));
+	}
+
+	[Test]
+	[PrebuildSetup(typeof(InventoryTest))]
+	public void AddMixedStackableItemsToFullInventory() {
+		Inventory inventory = new Inventory(3);
+
+		List<Item> initial = new List<Item> {
+			new Item(GetItemDataFixture(3), 1),
+			new Item(GetItemDataFixture(2), 20),
+			new Item(GetItemDataFixture(3), 1)
+		};
+
+		inventory.AddItemsToInventory(initial, out _);
+
+		List<Item> items = new List<Item> {
+			new Item(GetItemDataFixture(0), 4),
+			new Item(GetItemDataFixture(1), 3),
+			new Item(GetItemDataFixture(2), 2),
+			new Item(GetItemDataFixture(3), 1)
+		};
+
+		inventory.AddItemsToInventory(items, out List<Item> remainingItems);
+		Assert.That(remainingItems.Count, Is.EqualTo(4));
+		for (int i = 0; i < remainingItems.Count; i++) {
+			Assert.That(remainingItems[i].Amount, Is.EqualTo(remainingItems.Count - i));
+		}
+	}
+
+	[Test]
+	[PrebuildSetup(typeof(InventoryTest))]
+	public void RemoveStackableItemsFromEmptyInventory() {
+		Inventory inventory = new Inventory(3);
+
+		List<Item> items = new List<Item> {
+			new Item(GetItemDataFixture(3), 1),
+			new Item(GetItemDataFixture(3), 1)
+		};
+
+		inventory.RemoveItemsFromInventory(items, out List<Item> remainingItems);
+		Assert.That(remainingItems.Count, Is.EqualTo(2));
+	}
+
+	[Test]
+	[PrebuildSetup(typeof(InventoryTest))]
+	public void RemoveStackableItemsFromPartialInventory() {
+		Inventory inventory = new Inventory(3);
+
+		List<Item> initial = new List<Item> {
+			new Item(GetItemDataFixture(1), 15),
+			new Item(GetItemDataFixture(2), 5),
+			new Item(GetItemDataFixture(3), 1)
+		};
+
+		inventory.AddItemsToInventory(initial, out _);
+
+		List<Item> items = new List<Item> {
+			new Item(GetItemDataFixture(2), 4),
+			new Item(GetItemDataFixture(3), 1)
+		};
+
+		inventory.RemoveItemsFromInventory(items, out List<Item> remainingItems);
+		Assert.That(remainingItems.Count, Is.EqualTo(0));
+		Assert.That(inventory.Items[0].Amount, Is.EqualTo(15));
+		Assert.That(inventory.Items[1].Amount, Is.EqualTo(1));
+		Assert.That(inventory.Items[2], Is.EqualTo(null));
+	}
+
+	[Test]
+	[PrebuildSetup(typeof(InventoryTest))]
+	public void RemoveStackableItemsFromFullInventory_test() {
+		Inventory inventory = new Inventory(3);
+
+		List<Item> initial = new List<Item> {
+			new Item(GetItemDataFixture(1), 20),
+			new Item(GetItemDataFixture(3), 1),
+			new Item(GetItemDataFixture(3), 1)
+		};
+
+		inventory.AddItemsToInventory(initial, out _);
+
+		inventory.RemoveItemsFromInventory(initial, out List<Item> remainingItems);
+		Assert.That(remainingItems.Count, Is.EqualTo(0));
+		foreach (var item in inventory.Items) {
+			Assert.That(item, Is.EqualTo(null));
+		}
+	}
+
 	private ItemData GetItemDataFixture() {
+		ItemData itemData = ItemManager.Instance.GetItemData("branch");
+		Debug.Log(itemData);
 		return ItemManager.Instance.GetItemData("branch");
+	}
+
+	private ItemData GetNonStackableItemData() {
+		ItemData itemData = GetItemDataFixture(3);
+		itemData.Stackable = false;
+		return itemData;
 	}
 
 	private ItemData GetItemDataFixture(int index) {
@@ -499,6 +784,8 @@ public class InventoryTest {
 				return ItemManager.Instance.GetItemData("log");
 			case 2:
 				return ItemManager.Instance.GetItemData("stone");
+			case 3:
+				return ItemManager.Instance.GetItemData("leather_boots");
 			default:
 				return ItemManager.Instance.GetItemData("branch");
 		}
