@@ -31,6 +31,8 @@ namespace CameraSystem {
 
 		protected private Vector3 _direction;
 
+		protected private bool _isFollowing = false;
+
 		private void Awake() {
 			Instance = this;
 
@@ -66,18 +68,22 @@ namespace CameraSystem {
 				_localRotation.y = Mathf.Clamp(_localRotation.y, -60, -5);
 			}
 
-			Target.transform.Translate(Input.GetAxis("Horizontal") * transform.right * (MovingSpeed * ((int)Distance >> 1)) * Time.deltaTime, Space.World);
-			Target.transform.Translate(Input.GetAxis("Vertical") * transform.forward * (MovingSpeed * ((int)Distance >> 1)) * Time.deltaTime, Space.World);
+			if (!_isFollowing) {
+				Target.transform.Translate(Input.GetAxis("Horizontal") * transform.right * (MovingSpeed * ((int)Distance >> 1)) * Time.deltaTime, Space.World);
+				Target.transform.Translate(Input.GetAxis("Vertical") * transform.forward * (MovingSpeed * ((int)Distance >> 1)) * Time.deltaTime, Space.World);
+			}
 
 			transform.position = Vector3.Lerp(transform.position, Target.transform.position + Quaternion.Euler(_localRotation.y, _localRotation.x, 0f) * (Distance * -Vector3.back), SmoothSensitivity);
 			transform.LookAt(Target.transform.position, Vector3.up);
 		}
 
 		public void FollowTarget(Transform target) {
+			_isFollowing = true;
 			Target.FollowTarget(target);
 		}
 
 		public void StopFollow() {
+			_isFollowing = false;
 			Target.CancelFollow();
 		}
 
