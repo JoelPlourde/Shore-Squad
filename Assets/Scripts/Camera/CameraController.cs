@@ -8,8 +8,11 @@ namespace CameraSystem {
 		public CameraTarget Target;
 
 		[Header("LayerMask")]
-		public LayerMask ignoreLayer;
-		public LayerMask blockedByLayer;
+		[Tooltip("Layer(s) on which the Camera be blocked by. Thus, the camera will move forward whenever behind an object assigned to any of the layer(s).")]
+		public LayerMask BlockingLayer;
+
+		[Tooltip("Layer(s) on which the Camera Target will navigate on.")]
+		public LayerMask CameraTargetLayer;
 
 		[Header("Sensitivity Parameters")]
 		public int CameraSensitivity = 300;
@@ -39,7 +42,7 @@ namespace CameraSystem {
 			if (ReferenceEquals(Target, null)) {
 				throw new UnityException("Please assign a CameraTarget to the CameraController object.");
 			}
-			Target.Initialize(blockedByLayer);
+			Target.Initialize(CameraTargetLayer);
 		}
 
 		private void Start() {
@@ -50,7 +53,7 @@ namespace CameraSystem {
 			_desiredDistance -= Input.GetAxis("Mouse ScrollWheel") * Time.smoothDeltaTime * ScrollSensitivity;
 
 			_direction = (transform.position - Target.transform.position).normalized;
-			if (Physics.Raycast(Target.transform.position, _direction * _desiredDistance, out _hit, _desiredDistance, ignoreLayer, QueryTriggerInteraction.UseGlobal)) {
+			if (Physics.Raycast(Target.transform.position, _direction * _desiredDistance, out _hit, _desiredDistance, BlockingLayer, QueryTriggerInteraction.UseGlobal)) {
 				Distance = (_hit.point - Target.transform.position).magnitude;
 			} else {
 				Distance = _desiredDistance;

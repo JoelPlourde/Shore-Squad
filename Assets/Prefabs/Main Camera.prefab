@@ -97,12 +97,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Target: {fileID: 0}
-  ignoreLayer:
+  BlockingLayer:
     serializedVersion: 2
-    m_Bits: 513
-  blockedByLayer:
+    m_Bits: 1
+  CameraTargetLayer:
     serializedVersion: 2
-    m_Bits: 311
+    m_Bits: 257
   CameraSensitivity: 300
   ScrollSensitivity: 2000
   SmoothSensitivity: 0.5
