@@ -88,6 +88,17 @@ public static class Squad {
 	}
 
 	/// <summary>
+	/// Unselect all the actors
+	/// </summary>
+	public static void UnselectAll() {
+		_units.ForEach(x => {
+			x.EnableSelector(false);
+		});
+	
+		CameraSystem.CameraController.Instance.StopFollow();
+	}
+
+	/// <summary>
 	/// Move the selected actors to the position.
 	/// </summary>
 	/// <param name="mouseButton">Which mouse button it is used.</param>

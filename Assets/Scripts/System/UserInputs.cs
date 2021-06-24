@@ -41,6 +41,10 @@ public class UserInputs : MonoBehaviour, IUpdatable {
 				PointerManager.Instance.SetPointer(PointerMode.DEFAULT_PRESSED);
 			}
 		}
+
+		if (Input.GetKeyUp(KeyCode.Escape)) {
+			Squad.UnselectAll();
+		}
 	}
 
 	private void OnMouseEvent(MouseButton mouseButton) {
