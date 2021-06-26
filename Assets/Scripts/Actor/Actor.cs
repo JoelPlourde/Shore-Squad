@@ -1,5 +1,6 @@
 ﻿using BodySystem;
 using FactionSystem;
+using ItemSystem.EquipmentSystem;
 using SaveSystem;
 using StatusEffectSystem;
 using System;
@@ -24,6 +25,8 @@ public class Actor : MonoBehaviour {
 		TaskScheduler = GetComponent<TaskScheduler>();
 		StatusEffectScheduler = GetComponent<StatusEffectScheduler>();
 		NavMeshAgent = GetComponent<NavMeshAgent>();
+		Armory = GetComponentInChildren<Armory>();
+		Armory.Initialize(this);
 
 		Rigidbody rigidbody = gameObject.GetComponent<Rigidbody>();
 		rigidbody.isKinematic = true;
@@ -31,6 +34,8 @@ public class Actor : MonoBehaviour {
 
 		NavMeshAgent.autoBraking = true;
 		NavMeshAgent.stoppingDistance = 0.1f;
+		NavMeshAgent.angularSpeed = 360f;
+		NavMeshAgent.speed = 1.5f;
 
 		SphereCollider collider = gameObject.AddComponent<SphereCollider>();
 		collider.radius = 1f;
@@ -100,9 +105,12 @@ public class Actor : MonoBehaviour {
 	public TaskScheduler TaskScheduler { get; private set; }
 	public StatusEffectScheduler StatusEffectScheduler { get; private set; }
 	public NavMeshAgent NavMeshAgent { get; private set; }
-	public Guid Guid { get; private set; }
+	public Armory Armory { get; private set; }
+
 	public Attributes Attributes { get; private set; } = new Attributes();
 	public Status Status { get; private set; } = new Status();
 	public Face Face { get; private set; } = new Face();
 	public Body Body { get; private set; } = new Body();
+
+	public Guid Guid { get; private set; }
 }
