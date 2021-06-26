@@ -6,6 +6,7 @@
 		_Color("Tint", Color) = (1, 1, 1, 1)
 		_MainTex("Texture", 2D) = "white" {}
 		_Specular("Specular Color", Color) = (1,1,1,1)
+		_Alpha("Alpha", Range(0, 1)) = 1
 		[HDR] _Emission("Emission", color) = (0,0,0 , 1)
 
 		[Header(Lighting Parameters)]

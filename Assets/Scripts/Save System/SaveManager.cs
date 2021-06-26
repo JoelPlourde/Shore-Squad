@@ -52,6 +52,7 @@ namespace SaveSystem {
 			}
 
 			string path = Application.persistentDataPath + "/";
+			Debug.Log(path);
 			Directory.CreateDirectory(path);
 			File.WriteAllText(Path.Combine(path, "savefile-" + new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds() + ".json"), JsonUtility.ToJson(Save, true));
 		}

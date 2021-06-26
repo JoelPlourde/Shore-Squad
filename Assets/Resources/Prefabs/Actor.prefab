@@ -120,7 +120,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 837013056597211095}
-  m_LocalRotation: {x: 0.061779574, y: 0.28686497, z: 0.023061061, w: 0.95569867}
+  m_LocalRotation: {x: 0.061779577, y: 0.28686497, z: 0.023061063, w: 0.95569867}
   m_LocalPosition: {x: 0.0000000023841857, y: 0.31983176, z: -0.000000009536743}
   m_LocalScale: {x: 1, y: 1.0000002, z: 1.0000001}
   m_Children:
@@ -562,9 +562,9 @@ SkinnedMeshRenderer:
   - {fileID: 2100000, guid: caacb943c0b736742b64f22059cc5dfe, type: 2}
   - {fileID: 2100000, guid: caacb943c0b736742b64f22059cc5dfe, type: 2}
   - {fileID: 2100000, guid: caacb943c0b736742b64f22059cc5dfe, type: 2}
-  - {fileID: 2100000, guid: caacb943c0b736742b64f22059cc5dfe, type: 2}
-  - {fileID: 2100000, guid: caacb943c0b736742b64f22059cc5dfe, type: 2}
-  - {fileID: 2100000, guid: caacb943c0b736742b64f22059cc5dfe, type: 2}
+  - {fileID: 2100000, guid: 53a58b4cfb9371042b0779130650870f, type: 2}
+  - {fileID: 2100000, guid: 4d5f627bb5078474e8e6f23e40417068, type: 2}
+  - {fileID: 2100000, guid: a346f4a89299d0e4a8cc236a6ac9d13a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -826,7 +826,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3401922647874468606}
-  m_LocalRotation: {x: 0.23255622, y: 0.005854925, z: 0.0061444812, w: 0.9725459}
+  m_LocalRotation: {x: 0.23255624, y: 0.005854925, z: 0.0061444817, w: 0.9725459}
   m_LocalPosition: {x: 0.042857442, y: 0.12467812, z: -0.00065100193}
   m_LocalScale: {x: 0.9999999, y: 1.0000002, z: 1.0000001}
   m_Children:
@@ -1381,7 +1381,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6169645124514272628}
-  m_LocalRotation: {x: -0.13825983, y: 0.076976076, z: 0.9826559, w: 0.09667617}
+  m_LocalRotation: {x: -0.13825983, y: 0.07697608, z: 0.9826559, w: 0.09667618}
   m_LocalPosition: {x: -0.10770706, y: -0.06319565, z: 0.005711049}
   m_LocalScale: {x: 0.99996144, y: 0.9999991, z: 0.99999994}
   m_Children:
@@ -1713,7 +1713,7 @@ Animator:
   m_GameObject: {fileID: 8696446425973915764}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: fb865e64ceac85444a91a2cec5042c6a, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 367b9dd1aa678f64399ff4b1d7f80347, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

@@ -24,6 +24,9 @@ namespace SaveSystem {
 		[SerializeField]
 		public StatusDto StatusDto;
 
+		[SerializeField]
+		public FeaturesDto FeaturesDto;
+
 		public ActorDto(Actor actor) {
 			Position = actor.transform.position;
 			Guid = actor.Guid.ToString();
@@ -31,6 +34,8 @@ namespace SaveSystem {
 			FactionType = actor.FactionType;
 			AttributesDto = new AttributesDto(actor.Attributes);
 			StatusDto = new StatusDto(actor.Status);
+			FeaturesDto = new FeaturesDto(actor.Body, actor.Face);
+			Debug.Log("Here !");
 		}
 	}
 }

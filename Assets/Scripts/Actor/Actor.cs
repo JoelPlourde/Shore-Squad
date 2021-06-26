@@ -1,4 +1,5 @@
-﻿using FactionSystem;
+﻿using BodySystem;
+using FactionSystem;
 using SaveSystem;
 using StatusEffectSystem;
 using System;
@@ -49,6 +50,10 @@ public class Actor : MonoBehaviour {
 		Attributes.Initialize(this, actorDto.AttributesDto);
 		Status.Initialize(actorDto.StatusDto);
 
+		SkinnedMeshRenderer skinnedMeshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
+		Face.Initialize(skinnedMeshRenderer, actorDto.FeaturesDto);
+		Body.Initialize(skinnedMeshRenderer, actorDto.FeaturesDto);
+
 		if (Playable) {
 			Squad.AddToSquad(this);
 		}
@@ -95,8 +100,9 @@ public class Actor : MonoBehaviour {
 	public TaskScheduler TaskScheduler { get; private set; }
 	public StatusEffectScheduler StatusEffectScheduler { get; private set; }
 	public NavMeshAgent NavMeshAgent { get; private set; }
-
 	public Guid Guid { get; private set; }
 	public Attributes Attributes { get; private set; } = new Attributes();
 	public Status Status { get; private set; } = new Status();
+	public Face Face { get; private set; } = new Face();
+	public Body Body { get; private set; } = new Body();
 }
