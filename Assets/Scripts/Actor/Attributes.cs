@@ -1,6 +1,8 @@
 ﻿using SaveSystem;
 using StatusEffectSystem;
 using System;
+using ItemSystem.EquipmentSystem;
+using UnityEngine;
 
 [Serializable]
 public class Attributes {
@@ -15,6 +17,7 @@ public class Attributes {
 
 	public event Action<float> OnUpdateHealthEvent;
 	public event Action<float> OnUpdateFoodEvent;
+	public event Action<float> OnUpdateTemperatureEvent;
 
 	private Actor _actor;
 
@@ -148,6 +151,7 @@ public class Attributes {
 	/// <param name="value">A value to increment by.</param>
 	public void IncreaseTemperature(float value) {
 		Temperature += value;
+		ApplyTemperatureEffect();
 	}
 
 	/// <summary>
@@ -156,6 +160,28 @@ public class Attributes {
 	/// <param name="value">A value to decrease by.</param>
 	public void DecreaseTemperature(float value) {
 		Temperature -= value;
+		ApplyTemperatureEffect();
+	}
+
+	// TODO: Add cold/hot animation, Add feedback: Cold breath, sweat.
+	private void ApplyTemperatureEffect() {
+		float adjustedTemperature = (Temperature > 0) ? Temperature - _actor.Statistics.CurrentStatistics[StatisticType.HEAT_RESISTANCE] : Temperature - _actor.Statistics.CurrentStatistics[StatisticType.COLD_RESISTANCE];
+
+		Debug.Log("Adjusted Temperature: " + adjustedTemperature);
+
+		// TODO replace this by CONSTANT
+		if (adjustedTemperature > 25) {
+			StatusEffectScheduler.Instance(_actor.Guid).AddStatusEffect(new StatusEffectSystem.Status(_actor, 0.5f, StatusEffectManager.GetStatusEffectData("Hot")));
+		} else {
+			// TODO check if there is a hot status effect, if so remove it.
+		}
+
+
+		if (adjustedTemperature < 0) {
+			StatusEffectScheduler.Instance(_actor.Guid).AddStatusEffect(new StatusEffectSystem.Status(_actor, 0.5f, StatusEffectManager.GetStatusEffectData("Cold")));
+		} else {
+			// TODO check if there is a cold status effect, if so add it.
+		}
 	}
 	#endregion
 }

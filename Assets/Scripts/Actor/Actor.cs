@@ -1,5 +1,6 @@
 ﻿using BodySystem;
 using FactionSystem;
+using ItemSystem;
 using ItemSystem.EquipmentSystem;
 using SaveSystem;
 using StatusEffectSystem;
@@ -55,6 +56,8 @@ public class Actor : MonoBehaviour {
 		Attributes.Initialize(this, actorDto.AttributesDto);
 		Status.Initialize(actorDto.StatusDto);
 
+		// Load Armory & Inventory from file.
+
 		SkinnedMeshRenderer skinnedMeshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
 		Face.Initialize(skinnedMeshRenderer, actorDto.FeaturesDto);
 		Body.Initialize(skinnedMeshRenderer, actorDto.FeaturesDto);
@@ -106,8 +109,10 @@ public class Actor : MonoBehaviour {
 	public StatusEffectScheduler StatusEffectScheduler { get; private set; }
 	public NavMeshAgent NavMeshAgent { get; private set; }
 	public Armory Armory { get; private set; }
+	public Inventory Inventory { get; private set; } = new Inventory(Inventory.MAX_STACK);
 
 	public Attributes Attributes { get; private set; } = new Attributes();
+	public Statistics Statistics { get; private set; } = new Statistics();
 	public Status Status { get; private set; } = new Status();
 	public Face Face { get; private set; } = new Face();
 	public Body Body { get; private set; } = new Body();

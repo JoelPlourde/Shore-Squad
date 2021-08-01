@@ -35,7 +35,6 @@ namespace SaveSystem {
 			AttributesDto = new AttributesDto(actor.Attributes);
 			StatusDto = new StatusDto(actor.Status);
 			FeaturesDto = new FeaturesDto(actor.Body, actor.Face);
-			Debug.Log("Here !");
 		}
 	}
 }

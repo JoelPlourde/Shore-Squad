@@ -23,3 +23,9 @@ MonoBehaviour:
   HideBodyPart: 1
   HideArms: 0
   HideHair: 0
+  EquipmentStats:
+    Statistics:
+    - StatisticType: 0
+      Value: 5
+    - StatisticType: 6
+      Value: 4

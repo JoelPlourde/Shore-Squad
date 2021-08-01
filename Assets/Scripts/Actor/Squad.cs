@@ -50,13 +50,32 @@ public static class Squad {
 	/// <summary>
 	/// Return any Actor in the squad.
 	/// </summary>
-	/// <param name="actor"></param>
-	/// <returns></returns>
-	public static bool First(out Actor actor) {
+	/// <param name="actor">The Actor will be initialized only if any actor exists in the squad.</param>
+	/// <returns>Whether or not the operation was successful</returns>
+	public static bool Any(out Actor actor) {
 		actor = null;
 		if (_units.Count > 0) {
 			actor = _units[0].Actor;
 			_units[0].EnableSelector(true);
+			return true;
+		}
+		return false;
+	}
+
+	/// <summary>
+	/// Return the first selected actor in the squad.
+	/// </summary>
+	/// <param name="actor">The Actor will be initialized as out, if any actor is in the squad.</param>
+	/// <returns>Whether or not the operation was successful</returns>
+	public static bool FirstSelected(out Actor actor) {
+		actor = null;
+		if (_units.Count > 0) {
+			Unit unit = _units.Find(x => x.Actor.Selected == true);
+			if (ReferenceEquals(unit, null)) {
+				unit = _units[0];
+				unit.EnableSelector(true);
+			}
+			actor = unit.Actor;
 			return true;
 		}
 		return false;
