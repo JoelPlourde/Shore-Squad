@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,20 +7,19 @@ namespace ItemSystem {
 	namespace EquipmentSystem {
 		public class Armory : MonoBehaviour {
 
-			private readonly Dictionary<SlotType, Attachment> _equipments = new Dictionary<SlotType, Attachment>() {
-				{ SlotType.HEAD,    new Attachment() },
-				{ SlotType.BODY,    new Attachment() },
-				{ SlotType.PANTS,   new Attachment() },
-				{ SlotType.GLOVES,  new Attachment() },
-				{ SlotType.BOOTS,   new Attachment() },
-				{ SlotType.WEAPON,  new Attachment() },
-				{ SlotType.SHIELD,  new Attachment() },
-				{ SlotType.RING,    new Attachment() },
-				{ SlotType.NECK,    new Attachment() }
-			};
+			public event Action<Equipment> OnEquipmentAddedEvent;
+			public event Action<Equipment> OnEquipmentRemovedEvent;
+
+			private void Awake() {
+				foreach (SlotType slotType in (SlotType[])Enum.GetValues(typeof(SlotType))) {
+					Equipments.Add(slotType, new Attachment());
+				}
+			}
 
 			public void Initialize(Actor actor) {
 				Actor = actor;
+
+				// TODO fill-in the 
 			}
 
 			/// <summary>
@@ -30,7 +30,7 @@ namespace ItemSystem {
 			/// <param name="previousEquipment">The previous equipment that was equipped.</param>
 			/// <returns>Return true if the equipment could be equipped properly. Exception if any error occured.</returns>
 			public bool Equip(Equipment equipment, out Equipment previousEquipment) {
-				if (_equipments.TryGetValue(equipment.EquipmentData.SlotType, out Attachment attachment)) {
+				if (Equipments.TryGetValue(equipment.EquipmentData.SlotType, out Attachment attachment)) {
 					previousEquipment = null;
 
 					if (attachment.IsAttached && !Unequip(attachment, out previousEquipment)) {
@@ -45,6 +45,8 @@ namespace ItemSystem {
 
 					Actor.Statistics.UpdateStatistics(equipment.EquipmentData.EquipmentStats.Statistics, true);
 
+					OnEquipmentAddedEvent?.Invoke(equipment);
+
 					return true;
 				} else {
 					throw new UnityException("The slot is not defined in this Equipment, please verify.");
@@ -58,7 +60,7 @@ namespace ItemSystem {
 			/// <param name="equipment">The equipment that will be unequipped.</param>
 			/// <returns>Return true if there is an equipment attached. Else false.</returns>
 			public bool Unequip(SlotType slotType, out Equipment equipment) {
-				if (_equipments.TryGetValue(slotType, out Attachment attachment)) {
+				if (Equipments.TryGetValue(slotType, out Attachment attachment)) {
 					return Unequip(attachment, out equipment);
 				} else {
 					throw new UnityException("The slot is not defined in this Equipment, please verify.");
@@ -85,10 +87,13 @@ namespace ItemSystem {
 
 				Actor.Statistics.UpdateStatistics(equipment.EquipmentData.EquipmentStats.Statistics, false);
 
+				OnEquipmentRemovedEvent?.Invoke(equipment);
+
 				return true;
 			}
 
 			public Actor Actor { get; private set; }
+			public Dictionary<SlotType, Attachment> Equipments { get; private set; } = new Dictionary<SlotType, Attachment>();
 		}
 	}
 }

@@ -10,6 +10,8 @@ namespace UI {
 		private MenuButton[] _menuButtons;
 		private Dictionary<int, Menu> _interfaceStatus;
 
+		private int _currentMenu = -1;
+
 		private void Awake() {
 			Instance = this;
 
@@ -20,14 +22,31 @@ namespace UI {
 
 			// TODO fill-in.
 			_interfaceStatus = new Dictionary<int, Menu>() {
-				{ 0, InventoryHandler.Instance}
+				{ 0, InventoryHandler.Instance},
+				{ 1, EquipmentHandler.Instance },
+				{ 3, SettingsHandler.Instance }
 			};
 		}
 
 		public void OnClick(int index) {
+			Debug.Log("On Click: old: " + _currentMenu + " and new: " + index);
+
+
+			if (_currentMenu != -1 && _currentMenu != index) {
+				Debug.Log("Toggling: " + _currentMenu);
+				ToggleInterface(_currentMenu);
+				_currentMenu = index;
+			}
+
 			ToggleInterface(index);
+
+			_currentMenu = index;
 		}
 
+		/// <summary>
+		/// Toggle the interface indicates by the index
+		/// </summary>
+		/// <param name="index">The index of the interface to toggle.</param>
 		private void ToggleInterface(int index) {
 			if (Squad.Any(out Actor actor)) {
 				if (_interfaceStatus.TryGetValue(index, out Menu menu)) {

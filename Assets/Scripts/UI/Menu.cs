@@ -14,8 +14,6 @@ namespace UI {
 
 		public abstract void Close(Actor actor);
 
-		public abstract void OnClick(int index);
-
 		public Canvas Canvas { get; private set; }
 	}
 }

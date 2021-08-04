@@ -56,10 +56,6 @@ namespace ItemSystem {
 				Canvas.enabled = false;
 			}
 
-			public override void OnClick(int index) {
-				Debug.Log("The inventory button has been clicked !");
-			}
-
 			private void OnDirtyItemsEvent(List<int> indexes, Item[] items) {
 				foreach (int index in indexes) {
 					_slots[index].Refresh(items[index]);

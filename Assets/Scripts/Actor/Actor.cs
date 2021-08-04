@@ -108,7 +108,7 @@ public class Actor : MonoBehaviour {
 	public TaskScheduler TaskScheduler { get; private set; }
 	public StatusEffectScheduler StatusEffectScheduler { get; private set; }
 	public NavMeshAgent NavMeshAgent { get; private set; }
-	public Armory Armory { get; private set; }
+	public Armory Armory { get; private set; } = new Armory();
 	public Inventory Inventory { get; private set; } = new Inventory(Inventory.MAX_STACK);
 
 	public Attributes Attributes { get; private set; } = new Attributes();
