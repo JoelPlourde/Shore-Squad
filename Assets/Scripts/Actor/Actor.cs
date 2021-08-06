@@ -3,6 +3,7 @@ using FactionSystem;
 using ItemSystem;
 using ItemSystem.EquipmentSystem;
 using SaveSystem;
+using SkillSystem;
 using StatusEffectSystem;
 using System;
 using TaskSystem;
@@ -57,6 +58,7 @@ public class Actor : MonoBehaviour {
 
 		Inventory.Initialize(actorDto.InventoryDto);
 		Armory.Initialize(this, actorDto.ArmoryDto);
+		Skills.Initialize(actorDto.SkillsDto);
 
 		SkinnedMeshRenderer skinnedMeshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
 		Face.Initialize(skinnedMeshRenderer, actorDto.FeaturesDto);
@@ -110,6 +112,7 @@ public class Actor : MonoBehaviour {
 	public NavMeshAgent NavMeshAgent { get; private set; }
 	public Armory Armory { get; private set; } = new Armory();
 	public Inventory Inventory { get; private set; } = new Inventory(Inventory.MAX_STACK);
+	public Skills Skills { get; private set; } = new Skills();
 
 	public Attributes Attributes { get; private set; } = new Attributes();
 	public Statistics Statistics { get; private set; } = new Statistics();

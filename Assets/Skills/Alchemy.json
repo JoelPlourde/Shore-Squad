@@ -1,0 +1,9 @@
+{
+    "SkillType": 2,
+    "Title": "Alchemy",
+    "Description": "Brew, Swirl, Mix. I definitely know what I am doing ..",
+    "Icon": {
+        "instanceID": 0
+    },
+    "Competencies": []
+}

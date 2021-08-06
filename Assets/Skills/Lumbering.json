@@ -1,0 +1,9 @@
+{
+    "SkillType": 1,
+    "Title": "Lumbering",
+    "Description": "Some says chopping a tree is as simple as it looks, but its an art.",
+    "Icon": {
+        "instanceID": 12314
+    },
+    "Competencies": []
+}

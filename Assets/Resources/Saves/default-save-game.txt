@@ -167,6 +167,34 @@
                         "Amount": -1
                     }
                 ]
+            },
+            "SkillsDto": {
+                "levelDtos": [
+                    {
+                        "Value": 1,
+                        "Experience": 1.0
+                    },
+                    {
+                        "Value": 1,
+                        "Experience": 1.0
+                    },
+                    {
+                        "Value": 1,
+                        "Experience": 1.0
+                    },
+                    {
+                        "Value": 1,
+                        "Experience": 1.0
+                    },
+                    {
+                        "Value": 1,
+                        "Experience": 1.0
+                    },
+                    {
+                        "Value": 1,
+                        "Experience": 1.0
+                    }
+                ]
             }
         }
     ]

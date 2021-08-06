@@ -1,0 +1,9 @@
+{
+    "SkillType": 3,
+    "Title": "Cooking",
+    "Description": "oh what's cooking ?!",
+    "Icon": {
+        "instanceID": 0
+    },
+    "Competencies": []
+}

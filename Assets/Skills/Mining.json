@@ -1,0 +1,9 @@
+{
+    "SkillType": 0,
+    "Title": "Mining",
+    "Description": "Dictates the ability of the character to exploit the earth for its minerals.",
+    "Icon": {
+        "instanceID": 13298
+    },
+    "Competencies": []
+}

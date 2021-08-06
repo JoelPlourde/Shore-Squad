@@ -24,4 +24,7 @@
 	public static readonly float DEFAULT_TEMPERATURE = 20f;
 
 	public static readonly float TIME_BETWEEN_TEMPERATURE_CHANGES = 60f;
+
+	public static readonly int MINIMUM_LEVEL = 1;
+	public static readonly int MAXIMUM_LEVEL = 100;
 }
