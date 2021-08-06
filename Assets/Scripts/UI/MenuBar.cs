@@ -29,11 +29,8 @@ namespace UI {
 		}
 
 		public void OnClick(int index) {
-			Debug.Log("On Click: old: " + _currentMenu + " and new: " + index);
-
-
+			// TODO FIX THIS.
 			if (_currentMenu != -1 && _currentMenu != index) {
-				Debug.Log("Toggling: " + _currentMenu);
 				ToggleInterface(_currentMenu);
 				_currentMenu = index;
 			}

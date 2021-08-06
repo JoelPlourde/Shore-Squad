@@ -1,10 +1,19 @@
 {
+    "QuestDtos": [
+        {
+            "ID": "a_new_adventure_awaits",
+            "CurrentObjective": 0,
+            "CurrentTask": 0,
+            "CurrentProgress": 0,
+            "QuestState": 2
+        }
+    ],
     "ActorDtos": [
         {
             "Position": {
-                "x": 275.45,
-                "y": 16.0,
-                "z": 318.38
+                "x": 275.45001220703127,
+                "y": 15.960051536560059,
+                "z": 318.3800048828125
             },
             "Guid": "c5bedba8-3981-4876-8c98-8c13166b115f",
             "Playable": true,
@@ -15,7 +24,7 @@
                 "HealthRegeneration": 1.0,
                 "Speed": 1.0,
                 "Damage": 2.0,
-                "HungerRate": 0.05,
+                "HungerRate": 0.05000000074505806,
                 "Food": 20.0,
                 "Temperature": 20.0
             },
@@ -34,13 +43,131 @@
                 "HairColor": "#FFEB04",
                 "SkinColor": "#B98D50",
                 "UnderwearColor": "#FFFFFF"
+            },
+            "InventoryDto": {
+                "ItemDtos": [
+                    {
+                        "ID": "-1",
+                        "Amount": -1
+                    },
+                    {
+                        "ID": "-1",
+                        "Amount": -1
+                    },
+                    {
+                        "ID": "-1",
+                        "Amount": -1
+                    },
+                    {
+                        "ID": "-1",
+                        "Amount": -1
+                    },
+                    {
+                        "ID": "-1",
+                        "Amount": -1
+                    },
+                    {
+                        "ID": "-1",
+                        "Amount": -1
+                    },
+                    {
+                        "ID": "-1",
+                        "Amount": -1
+                    },
+                    {
+                        "ID": "-1",
+                        "Amount": -1
+                    },
+                    {
+                        "ID": "-1",
+                        "Amount": -1
+                    },
+                    {
+                        "ID": "-1",
+                        "Amount": -1
+                    },
+                    {
+                        "ID": "-1",
+                        "Amount": -1
+                    },
+                    {
+                        "ID": "-1",
+                        "Amount": -1
+                    },
+                    {
+                        "ID": "-1",
+                        "Amount": -1
+                    },
+                    {
+                        "ID": "-1",
+                        "Amount": -1
+                    },
+                    {
+                        "ID": "-1",
+                        "Amount": -1
+                    },
+                    {
+                        "ID": "-1",
+                        "Amount": -1
+                    },
+                    {
+                        "ID": "-1",
+                        "Amount": -1
+                    },
+                    {
+                        "ID": "-1",
+                        "Amount": -1
+                    },
+                    {
+                        "ID": "-1",
+                        "Amount": -1
+                    },
+                    {
+                        "ID": "-1",
+                        "Amount": -1
+                    }
+                ]
+            },
+            "ArmoryDto": {
+                "EquipmentDtos": [
+                    {
+                        "ID": "-1",
+                        "Amount": -1
+                    },
+                    {
+                        "ID": "-1",
+                        "Amount": -1
+                    },
+                    {
+                        "ID": "-1",
+                        "Amount": -1
+                    },
+                    {
+                        "ID": "-1",
+                        "Amount": -1
+                    },
+                    {
+                        "ID": "-1",
+                        "Amount": -1
+                    },
+                    {
+                        "ID": "-1",
+                        "Amount": -1
+                    },
+                    {
+                        "ID": "-1",
+                        "Amount": -1
+                    },
+                    {
+                        "ID": "-1",
+                        "Amount": -1
+                    },
+                    {
+                        "ID": "-1",
+                        "Amount": -1
+                    }
+                ]
             }
         }
-    ],
-"QuestDtos": [
-{
-	"ID": "a_new_adventure_awaits",
-	"QuestState": 2
-}
-]
+    ]
 }

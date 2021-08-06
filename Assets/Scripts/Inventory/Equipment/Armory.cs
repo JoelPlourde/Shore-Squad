@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SaveSystem;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,16 +11,24 @@ namespace ItemSystem {
 			public event Action<Equipment> OnEquipmentAddedEvent;
 			public event Action<Equipment> OnEquipmentRemovedEvent;
 
+			private Actor _actor;
+
 			private void Awake() {
 				foreach (SlotType slotType in (SlotType[])Enum.GetValues(typeof(SlotType))) {
 					Equipments.Add(slotType, new Attachment());
 				}
 			}
 
-			public void Initialize(Actor actor) {
-				Actor = actor;
+			public void Initialize(Actor actor, ArmoryDto armoryDto) {
+				_actor = actor;
 
-				// TODO fill-in the 
+				foreach (ItemDto itemDto in armoryDto.EquipmentDtos) {
+					if (itemDto.ID != "-1") {
+						if (!Equip(new Equipment(ItemManager.Instance.GetEquipmentData(itemDto.ID), itemDto.Amount), out Equipment previousEquipment)) {
+							throw new UnityException("Please investigate there shouldn't an equipment in this slot.");
+						}
+					}
+				}
 			}
 
 			/// <summary>
@@ -40,10 +49,10 @@ namespace ItemSystem {
 					attachment.Attach(transform, equipment);
 
 					if (equipment.EquipmentData.HideBodyPart) {
-						Actor.Body.DisplayBodyParts(equipment.EquipmentData.SlotType, false);
+						_actor.Body.DisplayBodyParts(equipment.EquipmentData.SlotType, false);
 					}
 
-					Actor.Statistics.UpdateStatistics(equipment.EquipmentData.EquipmentStats.Statistics, true);
+					_actor.Statistics.UpdateStatistics(equipment.EquipmentData.EquipmentStats.Statistics, true);
 
 					OnEquipmentAddedEvent?.Invoke(equipment);
 
@@ -82,17 +91,16 @@ namespace ItemSystem {
 				equipment = attachment.Detach();
 
 				if (!ReferenceEquals(equipment, null) && equipment.EquipmentData.HideBodyPart) {
-					Actor.Body.DisplayBodyParts(equipment.EquipmentData.SlotType, true);
+					_actor.Body.DisplayBodyParts(equipment.EquipmentData.SlotType, true);
 				}
 
-				Actor.Statistics.UpdateStatistics(equipment.EquipmentData.EquipmentStats.Statistics, false);
+				_actor.Statistics.UpdateStatistics(equipment.EquipmentData.EquipmentStats.Statistics, false);
 
 				OnEquipmentRemovedEvent?.Invoke(equipment);
 
 				return true;
 			}
 
-			public Actor Actor { get; private set; }
 			public Dictionary<SlotType, Attachment> Equipments { get; private set; } = new Dictionary<SlotType, Attachment>();
 		}
 	}

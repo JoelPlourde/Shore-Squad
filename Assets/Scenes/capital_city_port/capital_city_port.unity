@@ -167,6 +167,22 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1435308870, guid: 817dfdaeefbe16645a5343d0a5ebae30, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0.7137255
+      objectReference: {fileID: 0}
+    - target: {fileID: 1435308870, guid: 817dfdaeefbe16645a5343d0a5ebae30, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1435308870, guid: 817dfdaeefbe16645a5343d0a5ebae30, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4278236927
+      objectReference: {fileID: 0}
+    - target: {fileID: 1435308870, guid: 817dfdaeefbe16645a5343d0a5ebae30, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 41119711214521543, guid: 817dfdaeefbe16645a5343d0a5ebae30,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -432,6 +448,36 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4469977430021252431, guid: 817dfdaeefbe16645a5343d0a5ebae30,
+        type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4469977430021252431, guid: 817dfdaeefbe16645a5343d0a5ebae30,
+        type: 3}
+      propertyPath: m_fontColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4469977430021252431, guid: 817dfdaeefbe16645a5343d0a5ebae30,
+        type: 3}
+      propertyPath: m_fontColor.g
+      value: 0.71237
+      objectReference: {fileID: 0}
+    - target: {fileID: 4469977430021252431, guid: 817dfdaeefbe16645a5343d0a5ebae30,
+        type: 3}
+      propertyPath: m_fontColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4469977430021252431, guid: 817dfdaeefbe16645a5343d0a5ebae30,
+        type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4278236671
+      objectReference: {fileID: 0}
+    - target: {fileID: 5469041095235778700, guid: 817dfdaeefbe16645a5343d0a5ebae30,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6653952995728404518, guid: 817dfdaeefbe16645a5343d0a5ebae30,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -462,11 +508,11 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7005689548433387443, guid: 817dfdaeefbe16645a5343d0a5ebae30,
+    - target: {fileID: 7479950357384470711, guid: 817dfdaeefbe16645a5343d0a5ebae30,
         type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2061402154}
     - target: {fileID: 7551059197051395585, guid: 817dfdaeefbe16645a5343d0a5ebae30,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -1159,29 +1205,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 8814541163159417327}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1743818545 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1054005972969359329, guid: 817dfdaeefbe16645a5343d0a5ebae30,
-    type: 3}
-  m_PrefabInstance: {fileID: 247788465}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1743818552
+--- !u!114 &2061402154 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 9158820798551282262, guid: d9dd9a659da46644ea505e00b0edc6e4,
+    type: 3}
+  m_PrefabInstance: {fileID: 6618174109613560266}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1743818545}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Script: {fileID: 11500000, guid: c9ccb80b9aacdce419621aca80dfe696, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
 --- !u!1001 &43865179337161797
 PrefabInstance:
   m_ObjectHideFlags: 0

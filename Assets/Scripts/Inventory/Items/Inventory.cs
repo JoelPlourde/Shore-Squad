@@ -4,6 +4,7 @@ using TaskSystem;
 using UnityEngine;
 using System.Linq;
 using System;
+using SaveSystem;
 
 namespace ItemSystem {
 	public class Inventory {
@@ -15,6 +16,20 @@ namespace ItemSystem {
 
 		public Inventory(int capacity) {
 			Items = new Item[capacity];
+		}
+
+		/// <summary>
+		/// Initialize the Inventory with a saved inventory.
+		/// </summary>
+		/// <param name="inventoryDto">The saved inventory to load.</param>
+		public void Initialize(InventoryDto inventoryDto) {
+			for (int i = 0; i < Items.Length; i++) {
+				if (inventoryDto.ItemDtos[i].ID != "-1") {
+					Items[i] = new Item(ItemManager.Instance.GetItemData(inventoryDto.ItemDtos[i].ID), inventoryDto.ItemDtos[i].Amount);
+				} else {
+					Items[i] = null;
+				}
+			}
 		}
 
 		/// <summary>

@@ -27,6 +27,12 @@ namespace SaveSystem {
 		[SerializeField]
 		public FeaturesDto FeaturesDto;
 
+		[SerializeField]
+		public InventoryDto InventoryDto;
+
+		[SerializeField]
+		public ArmoryDto ArmoryDto;
+
 		public ActorDto(Actor actor) {
 			Position = actor.transform.position;
 			Guid = actor.Guid.ToString();
@@ -35,6 +41,8 @@ namespace SaveSystem {
 			AttributesDto = new AttributesDto(actor.Attributes);
 			StatusDto = new StatusDto(actor.Status);
 			FeaturesDto = new FeaturesDto(actor.Body, actor.Face);
+			InventoryDto = new InventoryDto(actor.Inventory);
+			ArmoryDto = new ArmoryDto(actor.Armory);
 		}
 	}
 }

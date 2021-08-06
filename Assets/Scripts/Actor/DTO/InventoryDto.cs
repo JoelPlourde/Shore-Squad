@@ -15,6 +15,8 @@ namespace SaveSystem {
 			for (int i = 0; i < inventory.Items.Length; i++) {
 				if (!ReferenceEquals(inventory.Items[i], null)) {
 					ItemDtos[i] = new ItemDto(inventory.Items[i]);
+				} else {
+					ItemDtos[i] = null;
 				}
 			}
 		}

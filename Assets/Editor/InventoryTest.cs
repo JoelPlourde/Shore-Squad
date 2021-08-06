@@ -1,5 +1,6 @@
 ﻿using ItemSystem;
 using NUnit.Framework;
+using SaveSystem;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -762,6 +763,49 @@ public class InventoryTest : IPrebuildSetup {
 		foreach (var item in inventory.Items) {
 			Assert.That(item, Is.EqualTo(null));
 		}
+	}
+
+	[Test]
+	[PrebuildSetup(typeof(InventoryTest))]
+	public void SaveInventory_test() {
+		Inventory inventory = new Inventory(3);
+
+		List<Item> initial = new List<Item> {
+			new Item(GetItemDataFixture(1), 20),
+			new Item(GetItemDataFixture(3), 1),
+			new Item(GetItemDataFixture(3), 1)
+		};
+
+		inventory.AddItemsToInventory(initial, out _);
+
+		InventoryDto inventoryDto = new InventoryDto(inventory);
+
+		Assert.That(inventoryDto.ItemDtos[0].Amount, Is.EqualTo(20));
+		Assert.That(inventoryDto.ItemDtos[1].Amount, Is.EqualTo(1));
+		Assert.That(inventoryDto.ItemDtos[2].Amount, Is.EqualTo(1));
+	}
+
+	[Test]
+	[PrebuildSetup(typeof(InventoryTest))]
+	public void LoadInventory_test() {
+		Inventory before = new Inventory(3);
+
+		List<Item> initial = new List<Item> {
+			new Item(GetItemDataFixture(1), 20),
+			new Item(GetItemDataFixture(3), 1),
+			new Item(GetItemDataFixture(3), 1)
+		};
+
+		before.AddItemsToInventory(initial, out _);
+
+		InventoryDto inventoryDto = new InventoryDto(before);
+
+		Inventory after = new Inventory(3);
+		after.Initialize(inventoryDto);
+
+		Assert.That(after.Items[0].Amount, Is.EqualTo(20));
+		Assert.That(after.Items[1].Amount, Is.EqualTo(1));
+		Assert.That(after.Items[2].Amount, Is.EqualTo(1));
 	}
 
 	private ItemData GetItemDataFixture() {

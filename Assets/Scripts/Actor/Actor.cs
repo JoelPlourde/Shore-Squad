@@ -27,7 +27,6 @@ public class Actor : MonoBehaviour {
 		StatusEffectScheduler = GetComponent<StatusEffectScheduler>();
 		NavMeshAgent = GetComponent<NavMeshAgent>();
 		Armory = GetComponentInChildren<Armory>();
-		Armory.Initialize(this);
 
 		Rigidbody rigidbody = gameObject.GetComponent<Rigidbody>();
 		rigidbody.isKinematic = true;
@@ -56,7 +55,8 @@ public class Actor : MonoBehaviour {
 		Attributes.Initialize(this, actorDto.AttributesDto);
 		Status.Initialize(actorDto.StatusDto);
 
-		// Load Armory & Inventory from file.
+		Inventory.Initialize(actorDto.InventoryDto);
+		Armory.Initialize(this, actorDto.ArmoryDto);
 
 		SkinnedMeshRenderer skinnedMeshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
 		Face.Initialize(skinnedMeshRenderer, actorDto.FeaturesDto);

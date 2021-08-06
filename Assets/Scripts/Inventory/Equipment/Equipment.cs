@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-namespace ItemSystem {
+﻿namespace ItemSystem {
 	namespace EquipmentSystem {
 		public class Equipment {
 
