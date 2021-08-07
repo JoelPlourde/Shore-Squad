@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Farming
   m_EditorClassIdentifier: 
   SkillType: 4
+  Color: {r: 0.035568405, g: 0.5754717, b: 0, a: 0}
   Title: Farming
   Description: Nature is beautiful, it finds a way in the weirdest place.
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: 6e90f844421105f458d5d68f2c7d2c19, type: 3}
   Competencies: []

@@ -1,5 +1,11 @@
 {
     "SkillType": 2,
+    "Color": {
+        "r": 0.6226415038108826,
+        "g": 0.0,
+        "b": 0.36546555161476138,
+        "a": 0.0
+    },
     "Title": "Alchemy",
     "Description": "Brew, Swirl, Mix. I definitely know what I am doing ..",
     "Icon": {

@@ -1,5 +1,11 @@
 {
     "SkillType": 4,
+    "Color": {
+        "r": 0.03556840494275093,
+        "g": 0.5754716992378235,
+        "b": 0.0,
+        "a": 0.0
+    },
     "Title": "Farming",
     "Description": "Nature is beautiful, it finds a way in the weirdest place.",
     "Icon": {

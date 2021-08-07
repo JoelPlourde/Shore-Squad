@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Fishing
   m_EditorClassIdentifier: 
   SkillType: 5
+  Color: {r: 0, g: 0.78515863, b: 1, a: 0}
   Title: Fishing
   Description: Wow! Look at that big one!
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: 4cb7514fc4b3adb4398ca38508e134b3, type: 3}
   Competencies: []

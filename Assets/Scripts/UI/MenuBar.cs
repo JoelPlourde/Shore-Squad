@@ -1,4 +1,5 @@
 ﻿using ItemSystem.UI;
+using SkillSystem.UI;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,16 +21,15 @@ namespace UI {
 				menuButton.Initialize(OnClick);
 			}
 
-			// TODO fill-in.
 			_interfaceStatus = new Dictionary<int, Menu>() {
 				{ 0, InventoryHandler.Instance},
 				{ 1, EquipmentHandler.Instance },
+				{ 2, ExperienceHandler.Instance },
 				{ 3, SettingsHandler.Instance }
 			};
 		}
 
 		public void OnClick(int index) {
-			// TODO FIX THIS.
 			if (_currentMenu != -1 && _currentMenu != index) {
 				ToggleInterface(_currentMenu);
 				_currentMenu = index;

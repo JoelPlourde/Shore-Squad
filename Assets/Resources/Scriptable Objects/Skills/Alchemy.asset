@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Alchemy
   m_EditorClassIdentifier: 
   SkillType: 2
+  Color: {r: 0.6226415, g: 0, b: 0.36546555, a: 0}
   Title: Alchemy
   Description: Brew, Swirl, Mix. I definitely know what I am doing ..
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: b2e11d1934d215f42b50c93e4068152b, type: 3}
   Competencies: []

@@ -11,6 +11,10 @@ namespace SkillSystem {
 		public SkillType SkillType;
 
 		[SerializeField]
+		[Tooltip("The color that represents this skill.")]
+		public Color Color;
+
+		[SerializeField]
 		[Tooltip("Title of the Skill")]
 		public string Title;
 

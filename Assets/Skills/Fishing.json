@@ -1,5 +1,11 @@
 {
     "SkillType": 5,
+    "Color": {
+        "r": 0.0,
+        "g": 0.785158634185791,
+        "b": 1.0,
+        "a": 0.0
+    },
     "Title": "Fishing",
     "Description": "Wow! Look at that big one!",
     "Icon": {

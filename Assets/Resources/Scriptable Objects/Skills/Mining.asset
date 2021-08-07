@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Mining
   m_EditorClassIdentifier: 
   SkillType: 0
+  Color: {r: 0.4245283, g: 0.4245283, b: 0.4245283, a: 0}
   Title: Mining
   Description: Dictates the ability of the character to exploit the earth for its
     minerals.
-  Icon: {fileID: 21300000, guid: a2022d0dd218b5a4eb28b57076614fc2, type: 3}
+  Icon: {fileID: 21300000, guid: 3e49c9d6b9403d34fbd92c8a9d1eb84f, type: 3}
   Competencies: []

@@ -40,6 +40,12 @@ public class UserInputs : MonoBehaviour, IUpdatable {
 			} else if (Input.GetMouseButton(0)) {
 				PointerManager.Instance.SetPointer(PointerMode.DEFAULT_PRESSED);
 			}
+		} else {
+			if (Input.GetMouseButtonUp(0)) {
+				PointerManager.Instance.SetPointer(PointerMode.DEFAULT);
+			} else if (Input.GetMouseButton(0)) {
+				PointerManager.Instance.SetPointer(PointerMode.DEFAULT_PRESSED);
+			}
 		}
 
 		if (Input.GetKeyUp(KeyCode.Escape)) {

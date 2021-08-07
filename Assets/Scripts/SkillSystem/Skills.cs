@@ -7,6 +7,7 @@ namespace SkillSystem {
 	public class Skills {
 
 		public Action<SkillType, Level> OnLevelUp;
+		public Action<SkillType, Level> OnExperienceGain;
 
 		private Dictionary<SkillType, Level> _skills = new Dictionary<SkillType, Level>();
 
@@ -46,6 +47,7 @@ namespace SkillSystem {
 				_skills[skillType].IncreaseLevel();
 				OnLevelUp?.Invoke(skillType, _skills[skillType]);
 			}
+			OnExperienceGain?.Invoke(skillType, _skills[skillType]);
 		}
 
 		public IReadOnlyDictionary<SkillType, Level> GetSkillLevels => _skills;

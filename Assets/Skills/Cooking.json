@@ -1,5 +1,11 @@
 {
     "SkillType": 3,
+    "Color": {
+        "r": 1.0,
+        "g": 0.029075106605887414,
+        "b": 0.0,
+        "a": 0.0
+    },
     "Title": "Cooking",
     "Description": "oh what's cooking ?!",
     "Icon": {
