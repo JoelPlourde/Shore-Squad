@@ -1,13 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UI;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace ItemSystem {
 	namespace UI {
 		[RequireComponent(typeof(Image))]
-		public class SlotHandler : MonoBehaviour {
+		public class SlotHandler : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
 
+			private Item _item;
 			private Image _image;
 			private Text _text;
 
@@ -24,6 +27,7 @@ namespace ItemSystem {
 					return;
 				}
 
+				_item = item;
 				_image.sprite = item.ItemData.Sprite;
 				_text.text = (item.Amount > 1) ? item.Amount.ToString() : "";
 				Enable(true);
@@ -32,6 +36,22 @@ namespace ItemSystem {
 			public void Enable(bool enable) {
 				_image.enabled = enable;
 				_text.enabled = enable;
+
+				if (!enable) {
+					_item = null;
+				}
+			}
+
+			public void OnPointerEnter(PointerEventData eventData) {
+				if (!ReferenceEquals(_item, null)) {
+					Tooltip.Instance.ShowTooltip(_item.ItemData.Tooltip);
+				}
+			}
+
+			public void OnPointerExit(PointerEventData eventData) {
+				if (!ReferenceEquals(_item, null)) {
+					Tooltip.Instance.HideTooltip();
+				}
 			}
 		}
 	}

@@ -5,14 +5,15 @@ using UnityEngine.UI;
 namespace UI {
 	[RequireComponent(typeof(Canvas))]
 	public class Tooltip : MonoBehaviour {
+
 		private RectTransform _rectTransform;
 		private RectTransform _childrenRectTransform;
 		private ContentSizeFitter _contentSizeFitter;
 		private Canvas _canvas;
 		private Text _text;
 
-		private Vector3 _offset = new Vector2(-20, 20);
 		private Vector2 _padding = new Vector2(20, 10);
+		private Vector2 _position = Vector2.zero;
 
 		private void Awake() {
 			if (ReferenceEquals(Instance, null)) {
@@ -36,7 +37,7 @@ namespace UI {
 		}
 
 		public void ShowTooltip(string text) {
-			transform.position = Input.mousePosition - _offset;
+			transform.SetAsLastSibling();
 			_text.text = text;
 			StartCoroutine(UpdateContentSize());
 		}
@@ -48,13 +49,26 @@ namespace UI {
 		}
 
 		private void FollowMouse() {
-			transform.position = Input.mousePosition - _offset;
+			_position = Input.mousePosition;
+			if (_position.x + _rectTransform.sizeDelta.x >= Screen.width) {
+				_position.x = Screen.width - _rectTransform.sizeDelta.x;
+			} else if (_rectTransform.position.x <= 0) {
+				_position.x = 0;
+			}
+
+			if (_position.y >= Screen.height) {
+				_position.y = Screen.height;
+			} else if (_position.y <= _rectTransform.sizeDelta.y) {
+				_position.y = _rectTransform.sizeDelta.y;
+			}
+
+			_rectTransform.position = _position;
 		}
 
 		private IEnumerator UpdateContentSize() {
 			yield return new WaitForEndOfFrame();
 			_rectTransform.sizeDelta = _childrenRectTransform.sizeDelta + _padding;
-			InvokeRepeating(nameof(FollowMouse), 0f, 0.016f);
+			InvokeRepeating(nameof(FollowMouse), 0f, Constant.DEFAULT_REFRESH_RATE);
 			_canvas.enabled = true;
 		}
 

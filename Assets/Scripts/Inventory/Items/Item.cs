@@ -2,9 +2,9 @@
 
 namespace ItemSystem {
 	public class Item {
+
 		public ItemData ItemData;
 		public int Amount;
-		public int Index { get; private set; }
 
 		public Item(ItemData itemData, int amount) {
 			ItemData = itemData;
@@ -32,5 +32,7 @@ namespace ItemSystem {
 		public override string ToString() {
 			return ItemData.ToString() + "x" + Amount + " at: " + Index;
 		}
+
+		public int Index { get; private set; }
 	}
 }
