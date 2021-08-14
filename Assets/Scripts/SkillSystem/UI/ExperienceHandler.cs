@@ -19,7 +19,7 @@ namespace SkillSystem {
 
 			public override void Open(Actor actor) {
 				foreach (SkillType skillType in Enum.GetValues(typeof(SkillType))) {
-					_skillComponents[(int) skillType].Initialize(SkillManager.Instance.GetSkillData(skillType), actor.Skills.GetSkillLevels[skillType]);
+					_skillComponents[(int) skillType].Initialize(SkillManager.Instance.GetSkillData(skillType), actor.Skills.GetSkillLevels[skillType], delegate { OnClick(skillType, actor); });
 				}
 
 				actor.Skills.OnLevelUp += OnLevelUp;
@@ -33,6 +33,10 @@ namespace SkillSystem {
 
 				actor.Skills.OnLevelUp -= OnLevelUp;
 				actor.Skills.OnExperienceGain -= OnExperienceGain;
+			}
+
+			private void OnClick(SkillType skillType, Actor actor) {
+				SkillHandler.Instance.Open(skillType, actor);
 			}
 
 			/// <summary>

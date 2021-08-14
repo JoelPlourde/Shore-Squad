@@ -9,7 +9,7 @@
     "Title": "Mining",
     "Description": "Dictates the ability of the character to exploit the earth for its minerals.",
     "Icon": {
-        "instanceID": 13338
+        "instanceID": 12772
     },
     "Competencies": []
 }

@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
-using UnityEngine.EventSystems;
+using UnityEngine.Events;
+using UnityEngine.UI;
 
 namespace SkillSystem {
 	namespace UI {
+		[RequireComponent(typeof(Button))]
 		public class SkillComponent : MonoBehaviour {
 
 			private bool _initialized = false;
@@ -19,13 +21,18 @@ namespace SkillSystem {
 				}
 			}
 
-			public void Initialize(SkillData skillData, Level level) {
+			public void Initialize(SkillData skillData, Level level, UnityAction callback) {
 				if (!_initialized) {
-					IconComponent.Initialize(skillData);
+					GetComponent<Button>().onClick.AddListener(callback);
+					IconComponent.Initialize(skillData, callback);
 					TextComponent.Initialize(level);
 					_initialized = true;
 				}
 				TextComponent.Refresh(level);
+			}
+
+			private void Destroy() {
+				GetComponent<Button>().onClick.RemoveAllListeners();
 			}
 
 			public SkillIconComponent IconComponent { get; private set; }
