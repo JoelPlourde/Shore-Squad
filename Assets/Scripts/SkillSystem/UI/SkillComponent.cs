@@ -24,7 +24,7 @@ namespace SkillSystem {
 			public void Initialize(SkillData skillData, Level level, UnityAction callback) {
 				if (!_initialized) {
 					GetComponent<Button>().onClick.AddListener(callback);
-					IconComponent.Initialize(skillData, callback);
+					IconComponent.Initialize(skillData);
 					TextComponent.Initialize(level);
 					_initialized = true;
 				}
