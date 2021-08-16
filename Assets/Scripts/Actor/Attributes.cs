@@ -165,9 +165,7 @@ public class Attributes {
 
 	// TODO: Add cold/hot animation, Add feedback: Cold breath, sweat.
 	private void ApplyTemperatureEffect() {
-		float adjustedTemperature = (Temperature > 0) ? Temperature - _actor.Statistics.CurrentStatistics[StatisticType.HEAT_RESISTANCE] : Temperature - _actor.Statistics.CurrentStatistics[StatisticType.COLD_RESISTANCE];
-
-		Debug.Log("Adjusted Temperature: " + adjustedTemperature);
+		float adjustedTemperature = (Temperature > 0) ? Temperature - _actor.Statistics.GetStatistic(StatisticType.HEAT_RESISTANCE) : Temperature - _actor.Statistics.GetStatistic(StatisticType.COLD_RESISTANCE);
 
 		// TODO replace this by CONSTANT
 		if (adjustedTemperature > 25) {
@@ -175,7 +173,6 @@ public class Attributes {
 		} else {
 			// TODO check if there is a hot status effect, if so remove it.
 		}
-
 
 		if (adjustedTemperature < 0) {
 			StatusEffectScheduler.Instance(_actor.Guid).AddStatusEffect(new StatusEffectSystem.Status(_actor, 0.5f, StatusEffectManager.GetStatusEffectData("Cold")));
