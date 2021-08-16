@@ -23,6 +23,14 @@ namespace ItemSystem {
 					equipmentData.HideHair = EditorGUILayout.Toggle("Hide Hair", equipmentData.HideHair);
 				}
 
+				if (equipmentData.SlotType == SlotType.WEAPON) {
+					EditorGUILayout.Space();
+					EditorGUILayout.LabelField("Weapon-Specific Properties", EditorStyles.boldLabel);
+					equipmentData.WeaponType = (WeaponType)EditorGUILayout.EnumPopup("Weapon Type", equipmentData.WeaponType);
+				} else {
+					equipmentData.WeaponType = WeaponType.NONE;
+				}
+
 				if (equipmentData.SlotType != SlotType.BODY) {
 					equipmentData.HideArms = false;
 				}

@@ -16,6 +16,10 @@ namespace ItemSystem {
 			public SlotType SlotType;
 
 			[SerializeField]
+			[HideInInspector]
+			public WeaponType WeaponType;
+
+			[SerializeField]
 			[Tooltip("If true, the body part will be hidden to avoid clipping when this object is equipped.")]
 			public bool HideBodyPart = true;
 

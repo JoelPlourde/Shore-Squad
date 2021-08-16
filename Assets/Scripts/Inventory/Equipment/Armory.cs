@@ -13,6 +13,8 @@ namespace ItemSystem {
 
 			private Actor _actor;
 
+			private WeaponType _currentWeaponType;
+
 			private void Awake() {
 				foreach (SlotType slotType in (SlotType[])Enum.GetValues(typeof(SlotType))) {
 					Equipments.Add(slotType, new Attachment());
@@ -46,6 +48,14 @@ namespace ItemSystem {
 						throw new UnityException("The Unequip method returned false, there is a problem, please verify.");
 					}
 
+					if (equipment.EquipmentData.SlotType == SlotType.WEAPON) {
+						// TODO Record the Animation for the new weapon type.
+
+						// TODO If two-hand, remove the shield, if any. TEST THIS
+
+						_currentWeaponType = equipment.EquipmentData.WeaponType;
+					}
+
 					attachment.Attach(transform, equipment);
 
 					if (equipment.EquipmentData.HideBodyPart) {
@@ -77,6 +87,15 @@ namespace ItemSystem {
 			}
 
 			/// <summary>
+			/// Check if the Weapon Type is equipped.
+			/// </summary>
+			/// <param name="weaponType">The Weapon type to check.</param>
+			/// <returns>True if the weapon type corresponds, else false.</returns>
+			public bool HasWeaponEquipped(WeaponType weaponType) {
+				return _currentWeaponType == weaponType;
+			}
+
+			/// <summary>
 			/// Unequip method that detach the equipment from the body.
 			/// </summary>
 			/// <param name="attachment">The attachment</param>
@@ -89,6 +108,12 @@ namespace ItemSystem {
 				}
 
 				equipment = attachment.Detach();
+
+				if (equipment.EquipmentData.SlotType == SlotType.WEAPON) {
+					// TODO Reset the Animation for the previous weapon type.
+
+					_currentWeaponType = WeaponType.NONE;
+				}
 
 				if (!ReferenceEquals(equipment, null) && equipment.EquipmentData.HideBodyPart) {
 					_actor.Body.DisplayBodyParts(equipment.EquipmentData.SlotType, true);
