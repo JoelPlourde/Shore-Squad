@@ -18,6 +18,7 @@ MonoBehaviour:
   DropTable: {fileID: 0}
   SkillType: 0
   WeaponType: 3
-  StatisticType: 9
   Requirement: 1
   Experience: 5
+  DamageStatistic: 9
+  SpeedStatistic: 8
