@@ -21,19 +21,22 @@ namespace QuestSystem {
 		public void Interact(MouseButton mouseButton, RaycastHit raycastHit) {
 			if (Squad.FirstSelected(out Actor actor)) {
 				_actor = actor;
-				InteractArguments interactArguments = new InteractArguments(1f, transform.position, this);
-				_actor.TaskScheduler.CreateTask<Interact>(interactArguments);
+				_actor.TaskScheduler.CreateTask<Interact>(new InteractArguments(transform.position, this));
 			}
 		}
 
-		public void OnInteractEnter() {
+		public void OnInteractEnter(Actor actor) {
 			CameraSystem.CameraTarget.Instance.ZoomIn((_actor.transform.position + transform.position) / 2);
 			DialogueHandler.Instance.OnDialogueEnd += OnDialogueEnded;
 			DialogueHandler.Instance.Initialize(_dialogueData);
 		}
 
-		public void OnInteractExit() {
+		public void OnInteractExit(Actor actor) {
 			CameraSystem.CameraTarget.Instance.ZoomOut();
+		}
+
+		public float GetInteractionRadius() {
+			return 1f;
 		}
 		#endregion
 

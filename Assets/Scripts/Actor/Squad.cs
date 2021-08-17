@@ -11,6 +11,7 @@ public static class Squad {
 
 	static Squad() {
 		UserInputs.Instance.Subscribe("Terrain", MoveSquad, true);
+		UserInputs.Instance.Subscribe("Interactable", Interact, true);
 
 		_selectorTemplate = Resources.Load<GameObject>("Prefabs/Selector");
 		if (_selectorTemplate == null) {
@@ -128,6 +129,22 @@ public static class Squad {
 			_units.ForEach(x => {
 				if (x.Actor.Selected) {
 					x.Actor.TaskScheduler.CreateTask<Move>(moveArguments);
+				}
+			});
+		}
+	}
+
+	/// <summary>
+	/// Create the Interact task for the selected actors.
+	/// </summary>
+	/// <param name="mouseButton">Which button it is used.</param>
+	/// <param name="raycastHit">The RaycastHit information</param>
+	private static void Interact(MouseButton mouseButton, RaycastHit raycastHit) {
+		if (mouseButton == MouseButton.LEFT_MOUSE_BUTTON) {
+			InteractArguments interactArguments = new InteractArguments(raycastHit.collider.transform.position, raycastHit.collider.gameObject.GetComponent<IInteractable>());
+			_units.ForEach(x => {
+				if (x.Actor.Selected) {
+					x.Actor.TaskScheduler.CreateTask<Interact>(interactArguments);
 				}
 			});
 		}

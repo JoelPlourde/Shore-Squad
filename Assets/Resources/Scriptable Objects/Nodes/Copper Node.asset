@@ -10,8 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e6fb8310d4201904b8ca8fcb39d8d651, type: 3}
-  m_Name: Normal Tree
+  m_Name: Copper Node
   m_EditorClassIdentifier: 
-  HarvestCapacity: 5
-  Probability: 100
-  DropTable: {fileID: 11400000, guid: 7733f26157d67f149908f302775d97b0, type: 2}
+  Health: 100
+  Durability: 5
+  Capacity: 5
+  DropTable: {fileID: 0}
+  SkillType: 0
+  WeaponType: 3
+  StatisticType: 9
+  Requirement: 1
+  Experience: 5

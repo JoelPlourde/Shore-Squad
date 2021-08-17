@@ -15,7 +15,7 @@ namespace TaskSystem {
 			// Validate the arguments you've received is of the correct type.
 			_interactArguments = TaskArguments as InteractArguments;
 
-			TriggerManager.CreateTrigger(_interactArguments.Position, _interactArguments.Radius, OnTriggerEnterCondition, AtDestination);
+			TriggerManager.CreateTrigger(_interactArguments.Position, _interactArguments.Interactable.GetInteractionRadius(), OnTriggerEnterCondition, AtDestination);
 
 			// Start the NavMeshAgent.
 			navMeshAgent = gameObject.GetComponent<NavMeshAgent>();
@@ -34,13 +34,13 @@ namespace TaskSystem {
 		}
 
 		private void AtDestination() {
-			_interactArguments.Interactable.OnInteractEnter();
+			_interactArguments.Interactable.OnInteractEnter(actor);
 			navMeshAgent.isStopped = true;
 			actor.Animator.SetBool("Move", false);
 		}
 
 		public override void OnEnd() {
-			_interactArguments.Interactable.OnInteractExit();
+			_interactArguments.Interactable.OnInteractExit(actor);
 			base.OnEnd();
 			if (trigger) {
 				trigger.Destroy();

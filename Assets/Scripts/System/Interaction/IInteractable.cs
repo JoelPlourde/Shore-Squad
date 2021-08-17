@@ -1,10 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public interface IInteractable
+﻿public interface IInteractable
 {
-	void OnInteractEnter();
+	void OnInteractEnter(Actor actor);
 
-	void OnInteractExit();
+	void OnInteractExit(Actor actor);
+
+	// To determine how close the Actor has to be to interact with this.
+	float GetInteractionRadius();
 }
