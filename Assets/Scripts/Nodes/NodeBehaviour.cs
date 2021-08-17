@@ -46,8 +46,7 @@ namespace NodeSystem {
 				return;
 			}
 
-			// TODO, get the repeatRate value from the Utils.
-			_routines.Add(actor.name, StartCoroutine(Routine(actor, 1f)));
+			_routines.Add(actor.name, StartCoroutine(Routine(actor, GameplayUtils.CalculateRepeatRateBasedOnSpeed(actor.Statistics.GetStatistic(_nodeData.SpeedStatistic)))));
 		}
 
 		/// <summary>
@@ -59,7 +58,7 @@ namespace NodeSystem {
 		IEnumerator Routine(Actor actor, float repeatRate) {
 			while (true) {
 				yield return new WaitForSeconds(repeatRate);
-				if (_node.ReduceHealth(actor, actor.Statistics.GetStatistic(_nodeData.StatisticType)) <= 0) {
+				if (_node.ReduceHealth(actor, actor.Statistics.GetStatistic(_nodeData.DamageStatistic)) <= 0) {
 					actor.TaskScheduler.CancelTask();
 				}
 			}

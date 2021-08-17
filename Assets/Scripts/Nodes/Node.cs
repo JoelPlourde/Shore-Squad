@@ -40,11 +40,11 @@ namespace NodeSystem {
 		/// <param name="damage">The raw damage inflicted by the character.</param>
 		/// <returns>The remaining health of this node.</returns>
 		public int ReduceHealth(Actor actor, int damage) {
-			int calculatedDamage = Mathf.Clamp(damage - Durability, 0, int.MaxValue);
+			int calculatedDamage = GameplayUtils.CalculateDamageBasedOnStrength(Durability, damage, actor.Statistics.GetStatistic(ItemSystem.EquipmentSystem.StatisticType.LUCK));
 
 			Health -= calculatedDamage;
-
 			_threshold += calculatedDamage;
+
 			while (_threshold >= _maxThreshold && Capacity > 0) {
 				_threshold = _threshold - _maxThreshold;
 				Capacity--;

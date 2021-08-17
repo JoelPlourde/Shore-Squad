@@ -30,13 +30,17 @@ namespace NodeSystem {
 		[Tooltip("The Tool required to harvest this node.")]
 		public WeaponType WeaponType;
 
-		[Tooltip("The Statistic to look at to determine how is the damage calculated")]
-		public StatisticType StatisticType;
-
 		[Tooltip("The level required in the respective skill in order to harvest this node.")]
 		public int Requirement = 1;
 
 		[Tooltip("The experience granted by each harvest strike.")]
 		public int Experience = 1;
+
+		[Header("Improvement Parameters")]
+		[Tooltip("The Statistic to look at to determine how is the damage calculated")]
+		public StatisticType DamageStatistic;
+
+		[Tooltip("The Statistic to look at to determine how is the speed calculated")]
+		public StatisticType SpeedStatistic;
 	}
 }

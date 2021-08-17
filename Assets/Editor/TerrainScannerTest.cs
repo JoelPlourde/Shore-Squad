@@ -30,29 +30,11 @@ public class TerrainScannerTest
 		terrain.transform.position = Vector3.zero;
 
 		heights[255, 255] = 100;
-		terrain.terrainData.SetHeights(0,0, heights);
+		terrain.terrainData.SetHeights(0, 0, heights);
 
 		Assert.That(TerrainScanner.GetTerrainMap(terrain, new Vector3(256, 0, 256), 100, 100, out Map map), Is.True);
 		Assert.That(map.IsPositionValid(new Vector2Int(50, 50), new Vector2Int(1, 1)), Is.False);
 		Assert.That(map.IsPositionValid(new Vector2Int(51, 51), new Vector2Int(1, 1)), Is.True);
 		Assert.That(map.IsPositionValid(new Vector2Int(48, 48), new Vector2Int(1, 1)), Is.True);
-	}
-
-	[Test]
-	public void GetTerrainAtWorldPosition_test() {
-		TerrainData terrainData = new TerrainData {
-			size = new Vector3(512, 512, 512)
-		};
-		Terrain terrain = Terrain.CreateTerrainGameObject(terrainData).GetComponent<Terrain>();
-		terrain.transform.position = Vector3.zero;
-
-		Assert.That(TerrainScanner.GetTerrainAtWorldPosition(new Vector3(256, 0, 256), out Terrain terrain1), Is.True);
-		Assert.That(TerrainScanner.GetTerrainAtWorldPosition(new Vector3(0, 0, 0), out Terrain terrain2), Is.True);
-		Assert.That(TerrainScanner.GetTerrainAtWorldPosition(new Vector3(-1, 0, 0), out Terrain terrain3), Is.False);
-		Assert.That(TerrainScanner.GetTerrainAtWorldPosition(new Vector3(0, 0, -1), out Terrain terrain4), Is.False);
-		Assert.That(TerrainScanner.GetTerrainAtWorldPosition(new Vector3(513, 0, 0), out Terrain terrain5), Is.False);
-		Assert.That(TerrainScanner.GetTerrainAtWorldPosition(new Vector3(0, 0, 513), out Terrain terrain6), Is.False);
-		Assert.That(TerrainScanner.GetTerrainAtWorldPosition(new Vector3(513, 0, 513), out Terrain terrain7), Is.False);
-		Assert.That(terrain1.Equals(terrain2), Is.True);
 	}
 }

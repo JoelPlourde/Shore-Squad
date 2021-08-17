@@ -27,4 +27,6 @@
 
 	public static readonly int MINIMUM_LEVEL = 1;
 	public static readonly int MAXIMUM_LEVEL = 100;
+
+	public static readonly int MAXIMUM_LUCK = 100;
 }
