@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 656fd23eb31f3ac4aa3b80ee64427820, type: 3}
   m_Name: Pickaxe
   m_EditorClassIdentifier: 
-  Sprite: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 3e49c9d6b9403d34fbd92c8a9d1eb84f, type: 3}
   Prefab: {fileID: 0}
   Tooltip: 
   ItemType: 1
