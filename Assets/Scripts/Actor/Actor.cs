@@ -46,7 +46,7 @@ public class Actor : MonoBehaviour {
 	public void Initialize(ActorDto actorDto) {
 		Guid = Guid.Parse(actorDto.Guid);
 		gameObject.name = Guid.ToString();
-		gameObject.tag = FactionType.ToString();
+		// gameObject.tag = FactionType.ToString();
 
 		FactionType = actorDto.FactionType;
 		Playable = actorDto.Playable;
@@ -58,7 +58,7 @@ public class Actor : MonoBehaviour {
 
 		Inventory.Initialize(actorDto.InventoryDto);
 		Armory.Initialize(this, actorDto.ArmoryDto);
-		Skills.Initialize(actorDto.SkillsDto);
+		Skills.Initialize(this, actorDto.SkillsDto);
 
 		SkinnedMeshRenderer skinnedMeshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
 		Face.Initialize(skinnedMeshRenderer, actorDto.FeaturesDto);

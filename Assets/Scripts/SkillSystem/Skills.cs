@@ -1,4 +1,5 @@
-﻿using SaveSystem;
+﻿using GamePlay;
+using SaveSystem;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,13 +10,15 @@ namespace SkillSystem {
 		public Action<SkillType, Level> OnLevelUp;
 		public Action<SkillType, Level> OnExperienceGain;
 
+		private Actor _actor;
 		private Dictionary<SkillType, Level> _skills = new Dictionary<SkillType, Level>();
 
 		/// <summary>
 		/// Initialize the Skills from the saved information.
 		/// </summary>
 		/// <param name="skillsDto">The skills to be loaded.</param>
-		public void Initialize(SkillsDto skillsDto) {
+		public void Initialize(Actor actor, SkillsDto skillsDto) {
+			_actor = actor;
 			_skills = new Dictionary<SkillType, Level>();
 
 			foreach (SkillType skillType in Enum.GetValues(typeof(SkillType))) {
@@ -43,6 +46,8 @@ namespace SkillSystem {
 		/// <param name="skillType">The skill</param>
 		/// <param name="experience">The amount of experience</param>
 		public void GainExperience(SkillType skillType, float experience) {
+			FeedbackManager.Instance.DisplayExperienceGain(_actor, (int) experience);
+
 			if (_skills[skillType].IncreaseExperience(experience) >= ExperienceTable.GetExperienceRequiredAt(GetLevel(skillType).Value + 1)) {
 				_skills[skillType].IncreaseLevel();
 				OnLevelUp?.Invoke(skillType, _skills[skillType]);

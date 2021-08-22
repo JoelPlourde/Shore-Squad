@@ -8,7 +8,7 @@ namespace UnitTest {
 		[Test]
 		public void Initialize_test() {
 			Skills skills = new Skills();
-			skills.Initialize(GetSkillsDtoFixture(out int[] values));
+			skills.Initialize(new Actor(), GetSkillsDtoFixture(out int[] values));
 
 			for (int i = 0; i < Enum.GetValues(typeof(SkillType)).Length; i++) {
 				Assert.That(skills.GetLevel((SkillType)i).Value, Is.EqualTo(values[i]));
@@ -22,7 +22,7 @@ namespace UnitTest {
 			skillsDto.levelDtos[0].Value = 1;
 			skillsDto.levelDtos[0].Experience = 0;
 
-			skills.Initialize(skillsDto);
+			skills.Initialize(new Actor(), skillsDto);
 			skills.GainExperience((SkillType)0, 100);
 			Assert.That(skills.GetLevel((SkillType)0).Value, Is.EqualTo(2));
 

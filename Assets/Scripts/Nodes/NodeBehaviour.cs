@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using GamePlay;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -26,22 +27,19 @@ namespace NodeSystem {
 			}
 
 			if (_node.IsDepleted()) {
-				// TODO output error message to the player.
-				Debug.Log("This node has been completed depleted.");
+				FeedbackManager.Instance.DisplayError(actor, "This node has been completed depleted.");
 				actor.TaskScheduler.CancelTask();
 				return;
 			}
 
 			if (actor.Skills.GetLevel(_nodeData.SkillType).Value < _nodeData.Requirement) {
-				// TODO output error message to the player.
-				Debug.Log("The Character is not skilled enough to harvest this node.");
+				FeedbackManager.Instance.DisplayError(actor, "You are not skilled enough to harvest this!");
 				actor.TaskScheduler.CancelTask();
 				return;
 			}
 
 			if (!actor.Armory.HasWeaponEquipped(_nodeData.WeaponType)) {
-				// TODO output error message to the player.
-				Debug.Log("The Character has not the correct tool equipped!");
+				FeedbackManager.Instance.DisplayError(actor, "You need to equip the proper tool!");
 				actor.TaskScheduler.CancelTask();
 				return;
 			}
