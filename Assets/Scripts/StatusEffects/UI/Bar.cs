@@ -31,8 +31,10 @@ namespace UI {
 
 			public void UpdateQuarter(float value) {
 				float diff = value - _currentValue;
-				if (diff >= 0.25) {
-					AddQuarter(Mathf.FloorToInt(diff));
+				if (diff >= 0.245) {
+					int quarter = Mathf.FloorToInt(diff / 0.245f);
+					diff %= 0.245f;
+					AddQuarter(quarter);
 					_currentValue = value;
 				} else if (diff <= -0.245) {
 					RemoveQuarter(Mathf.CeilToInt(-diff));

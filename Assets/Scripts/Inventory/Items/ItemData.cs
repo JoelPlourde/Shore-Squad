@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ItemSystem.EffectSystem;
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ItemSystem {
@@ -22,6 +24,10 @@ namespace ItemSystem {
 		[SerializeField]
 		[Tooltip("The type of item")]
 		public ItemType ItemType = ItemType.DEFAULT;
+
+		[SerializeField]
+		[Tooltip("The effects that this item has when activated.")]
+		public List<ItemEffect> ItemEffects = new List<ItemEffect>();
 
 		[SerializeField]
 		[Tooltip("Determine whether or not the object can be stacked in the inventory or not.")]

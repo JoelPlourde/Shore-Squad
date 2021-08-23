@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using ItemSystem.EffectSystem;
+using System.Collections;
 using System.Collections.Generic;
 using UI;
 using UnityEngine;
@@ -11,14 +12,13 @@ namespace ItemSystem {
 		public class SlotHandler : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler {
 
 			private Item _item;
-			private Image _image;
 			private Text _text;
 
 			private void Awake() {
-				_image = transform.Find("Item").GetComponent<Image>();
+				Image = transform.Find("Item").GetComponent<Image>();
 				_text = GetComponentInChildren<Text>();
 
-				_image.rectTransform.sizeDelta = new Vector2(45, 45);
+				Image.rectTransform.sizeDelta = new Vector2(45, 45);
 			}
 
 			public void Refresh(Item item) {
@@ -28,13 +28,13 @@ namespace ItemSystem {
 				}
 
 				_item = item;
-				_image.sprite = item.ItemData.Sprite;
+				Image.sprite = item.ItemData.Sprite;
 				_text.text = (item.Amount > 1) ? item.Amount.ToString() : "";
 				Enable(true);
 			}
 
 			public void Enable(bool enable) {
-				_image.enabled = enable;
+				Image.enabled = enable;
 				_text.enabled = enable;
 
 				if (!enable) {
@@ -46,6 +46,8 @@ namespace ItemSystem {
 			public void OnPointerEnter(PointerEventData eventData) {
 				if (!ReferenceEquals(_item, null)) {
 					Tooltip.Instance.ShowTooltip(_item.ItemData.Tooltip);
+				} else {
+					Tooltip.Instance.HideTooltip();
 				}
 			}
 
@@ -56,11 +58,21 @@ namespace ItemSystem {
 			}
 
 			public void OnPointerClick(PointerEventData eventData) {
-				ItemSelector.SelectItem(this);
+				if (HasItem) {
+					if (eventData.clickCount == 2) {
+						if (Squad.FirstSelected(out Actor actor)) {
+							ItemEffectFactory.Activate(actor, _item);
+
+							ItemSelector.UnselectItem();
+						}
+					} else {
+						ItemSelector.SelectItem(this);
+					}
+				}
 			}
 			#endregion
 
-			public Image Image { get { return _image; } }
+			public Image Image { get; private set; }
 
 			public bool HasItem { get { return !ReferenceEquals(_item, null); } }
 		}

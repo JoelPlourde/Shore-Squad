@@ -49,6 +49,13 @@ namespace ItemSystem {
 						Value = 1
 					});
 				}
+
+				if (equipmentData.ItemEffects.Count == 0) {
+					equipmentData.ItemEffects.Add(new EffectSystem.ItemEffect {
+						ItemEffectType = EffectSystem.ItemEffectType.EQUIP,
+						Magnitude = 0
+					});
+				}
 			}
 		}
 	}

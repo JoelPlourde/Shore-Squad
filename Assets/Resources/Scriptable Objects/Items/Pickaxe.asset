@@ -16,6 +16,9 @@ MonoBehaviour:
   Prefab: {fileID: 0}
   Tooltip: 
   ItemType: 1
+  ItemEffects:
+  - ItemEffectType: 0
+    Magnitude: 0
   Stackable: 0
   EquipmentPrefab: {fileID: 0}
   SlotType: 5
