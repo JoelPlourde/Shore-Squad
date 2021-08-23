@@ -8,7 +8,7 @@ using UnityEngine.UI;
 namespace ItemSystem {
 	namespace UI {
 		[RequireComponent(typeof(Image))]
-		public class SlotHandler : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
+		public class SlotHandler : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler {
 
 			private Item _item;
 			private Image _image;
@@ -42,6 +42,7 @@ namespace ItemSystem {
 				}
 			}
 
+			#region Pointer
 			public void OnPointerEnter(PointerEventData eventData) {
 				if (!ReferenceEquals(_item, null)) {
 					Tooltip.Instance.ShowTooltip(_item.ItemData.Tooltip);
@@ -53,6 +54,15 @@ namespace ItemSystem {
 					Tooltip.Instance.HideTooltip();
 				}
 			}
+
+			public void OnPointerClick(PointerEventData eventData) {
+				ItemSelector.SelectItem(this);
+			}
+			#endregion
+
+			public Image Image { get { return _image; } }
+
+			public bool HasItem { get { return !ReferenceEquals(_item, null); } }
 		}
 	}
 }
