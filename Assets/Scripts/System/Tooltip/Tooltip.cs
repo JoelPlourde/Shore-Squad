@@ -15,6 +15,8 @@ namespace UI {
 		private Vector2 _padding = new Vector2(20, 10);
 		private Vector2 _position = Vector2.zero;
 
+		private Coroutine _delay;
+
 		private void Awake() {
 			if (ReferenceEquals(Instance, null)) {
 				Instance = this;
@@ -36,16 +38,17 @@ namespace UI {
 			_canvas.enabled = false;
 		}
 
-		public void ShowTooltip(string text) {
+		public void ShowTooltip(string text, float delay) {
 			transform.SetAsLastSibling();
 			_text.text = text;
-			StartCoroutine(UpdateContentSize());
+
+			_delay = StartCoroutine(WaitForDelay(delay));
 		}
 
 		public void HideTooltip() {
+			StopCoroutine(_delay);
 			CancelInvoke();
 			_canvas.enabled = false;
-			CancelInvoke();
 		}
 
 		private void FollowMouse() {
@@ -63,6 +66,11 @@ namespace UI {
 			}
 
 			_rectTransform.position = _position;
+		}
+
+		private IEnumerator WaitForDelay(float delay) {
+			yield return new WaitForSecondsRealtime(delay);
+			StartCoroutine(UpdateContentSize());
 		}
 
 		private IEnumerator UpdateContentSize() {

@@ -22,7 +22,7 @@ namespace SkillSystem {
 			}
 
 			public void OnPointerEnter(PointerEventData eventData) {
-				Tooltip.Instance.ShowTooltip(_tooltip);
+				Tooltip.Instance.ShowTooltip(_tooltip, Constant.TOOLTIP_DELAY);
 			}
 
 			public void OnPointerExit(PointerEventData eventData) {

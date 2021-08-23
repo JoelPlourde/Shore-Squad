@@ -88,7 +88,7 @@ namespace StatusEffectSystem {
 			}
 
 			public void OnPointerEnter(PointerEventData eventData) {
-				Tooltip.Instance.ShowTooltip(_status.StatusEffectData.Tooltip);
+				Tooltip.Instance.ShowTooltip(_status.StatusEffectData.Tooltip, Constant.TOOLTIP_DELAY);
 			}
 
 			public void OnPointerExit(PointerEventData eventData) {

@@ -45,7 +45,7 @@ namespace ItemSystem {
 			#region Pointer
 			public void OnPointerEnter(PointerEventData eventData) {
 				if (!ReferenceEquals(_item, null)) {
-					Tooltip.Instance.ShowTooltip(_item.ItemData.Tooltip);
+					Tooltip.Instance.ShowTooltip(_item.ItemData.Tooltip, Constant.TOOLTIP_DELAY);
 				} else {
 					Tooltip.Instance.HideTooltip();
 				}
