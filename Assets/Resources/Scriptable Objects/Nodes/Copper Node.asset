@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Copper Node
   m_EditorClassIdentifier: 
   Health: 100
-  Durability: 5
+  Durability: 0
   Capacity: 5
   DropTable: {fileID: 0}
   SkillType: 0

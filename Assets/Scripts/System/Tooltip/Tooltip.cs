@@ -14,6 +14,7 @@ namespace UI {
 
 		private Vector2 _padding = new Vector2(20, 10);
 		private Vector2 _position = Vector2.zero;
+		private Vector3 _offset = new Vector3(0, -30, 0);
 
 		private Coroutine _delay;
 
@@ -55,7 +56,7 @@ namespace UI {
 		}
 
 		private void FollowMouse() {
-			_position = Input.mousePosition;
+			_position = Input.mousePosition + _offset;
 			if (_position.x + _rectTransform.sizeDelta.x >= Screen.width) {
 				_position.x = Screen.width - _rectTransform.sizeDelta.x;
 			} else if (_rectTransform.position.x <= 0) {
@@ -78,6 +79,7 @@ namespace UI {
 
 		private IEnumerator UpdateContentSize() {
 			yield return new WaitForEndOfFrame();
+			_rectTransform.position = Input.mousePosition;
 			_rectTransform.sizeDelta = _childrenRectTransform.sizeDelta + _padding;
 			InvokeRepeating(nameof(FollowMouse), 0f, Constant.DEFAULT_REFRESH_RATE);
 			_canvas.enabled = true;
