@@ -46,7 +46,10 @@ namespace UI {
 		}
 
 		public void HideTooltip() {
-			StopCoroutine(_delay);
+			if (!ReferenceEquals(_delay, null)) {
+				StopCoroutine(_delay);
+				_delay = null;
+			}
 			CancelInvoke();
 			_canvas.enabled = false;
 		}

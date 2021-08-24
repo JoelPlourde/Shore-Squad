@@ -14,6 +14,7 @@ namespace ItemSystem {
 			private Actor _actor;
 
 			private WeaponType _currentWeaponType;
+			private WeaponType _currentShieldType;
 
 			private void Awake() {
 				foreach (SlotType slotType in (SlotType[])Enum.GetValues(typeof(SlotType))) {
@@ -49,11 +50,19 @@ namespace ItemSystem {
 					}
 
 					if (equipment.EquipmentData.SlotType == SlotType.WEAPON) {
-						// TODO Record the Animation for the new weapon type.
-
 						// TODO If two-hand, remove the shield, if any. TEST THIS
 
 						_currentWeaponType = equipment.EquipmentData.WeaponType;
+
+						_actor.Animator.SetBool("Weapon", true);
+						_actor.Animator.SetInteger("Weapon Type", (int) _currentWeaponType);
+					}
+
+					if (equipment.EquipmentData.SlotType == SlotType.SHIELD) {
+						_currentShieldType = equipment.EquipmentData.WeaponType;
+
+						_actor.Animator.SetBool("Shield", true);
+						_actor.Animator.SetInteger("Shield Type", (int)_currentShieldType);
 					}
 
 					attachment.Attach(transform, equipment);
@@ -110,9 +119,17 @@ namespace ItemSystem {
 				equipment = attachment.Detach();
 
 				if (equipment.EquipmentData.SlotType == SlotType.WEAPON) {
-					// TODO Reset the Animation for the previous weapon type.
-
 					_currentWeaponType = WeaponType.NONE;
+
+					_actor.Animator.SetBool("Weapon", false);
+					_actor.Animator.SetInteger("Weapon Type", (int)_currentWeaponType);
+				}
+
+				if (equipment.EquipmentData.SlotType == SlotType.SHIELD) {
+					_currentShieldType = WeaponType.NONE;
+
+					_actor.Animator.SetBool("Shield", false);
+					_actor.Animator.SetInteger("Shield Type", (int) _currentShieldType);
 				}
 
 				if (!ReferenceEquals(equipment, null) && equipment.EquipmentData.HideBodyPart) {

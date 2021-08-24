@@ -23,7 +23,7 @@ namespace ItemSystem {
 					equipmentData.HideHair = EditorGUILayout.Toggle("Hide Hair", equipmentData.HideHair);
 				}
 
-				if (equipmentData.SlotType == SlotType.WEAPON) {
+				if (equipmentData.SlotType == SlotType.WEAPON || equipmentData.SlotType == SlotType.SHIELD) {
 					EditorGUILayout.Space();
 					EditorGUILayout.LabelField("Weapon-Specific Properties", EditorStyles.boldLabel);
 					equipmentData.WeaponType = (WeaponType)EditorGUILayout.EnumPopup("Weapon Type", equipmentData.WeaponType);

@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 656fd23eb31f3ac4aa3b80ee64427820, type: 3}
-  m_Name: Pickaxe
+  m_Name: Lantern
   m_EditorClassIdentifier: 
-  Sprite: {fileID: 21300000, guid: 3e49c9d6b9403d34fbd92c8a9d1eb84f, type: 3}
+  Sprite: {fileID: 21300000, guid: 502848424f9be5845b8a65a596269c49, type: 3}
   Prefab: {fileID: 0}
   Tooltip: 
   ItemType: 1
@@ -20,14 +20,14 @@ MonoBehaviour:
   - ItemEffectType: 0
     Magnitude: 0
   Stackable: 0
-  EquipmentPrefab: {fileID: 4837317121008528336, guid: 34609e7abf40d9243b352149b4a0ee0e,
+  EquipmentPrefab: {fileID: 4948250561221570548, guid: 14dc863178c73da428369b4bf6c98ac3,
     type: 3}
-  SlotType: 5
-  WeaponType: 3
-  HideBodyPart: 0
+  SlotType: 6
+  WeaponType: 5
+  HideBodyPart: 1
   HideArms: 0
   HideHair: 0
   EquipmentStats:
     Statistics:
-    - StatisticType: 9
-      Value: 60
+    - StatisticType: 8
+      Value: 5
