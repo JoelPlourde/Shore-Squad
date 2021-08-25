@@ -35,6 +35,12 @@ namespace ItemSystem {
 					}
 				}
 			}
+
+			if (GUILayout.Button("Save")) {
+				EditorUtility.SetDirty(itemData);
+				AssetDatabase.SaveAssets();
+				AssetDatabase.Refresh();
+			}
 		}
 
 		private string FormatItemType(ItemType itemType) {

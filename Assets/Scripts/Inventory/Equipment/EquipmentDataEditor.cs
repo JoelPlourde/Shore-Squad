@@ -74,6 +74,12 @@ namespace ItemSystem {
 						}
 					}
 				}
+
+				if (GUILayout.Button("Save")) {
+					EditorUtility.SetDirty(equipmentData);
+					AssetDatabase.SaveAssets();
+					AssetDatabase.Refresh();
+				}
 			}
 
 			private string FormatEnum(string input) {

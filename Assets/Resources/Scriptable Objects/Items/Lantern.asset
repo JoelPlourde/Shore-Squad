@@ -16,9 +16,9 @@ MonoBehaviour:
   Prefab: {fileID: 0}
   Tooltip: '<size=24>Lantern</size>
 
-    <size=14>Lantern</size>
+    <size=18>Off-hand</size>
 
-    <size=14><color=green>+5 Mining Speed</color></size>'
+    <size=18><color=#1DFF00>+5 Mining Speed</color></size>'
   ItemType: 1
   ItemEffects:
   - ItemEffectType: 0

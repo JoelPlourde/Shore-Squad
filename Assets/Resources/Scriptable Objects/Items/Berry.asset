@@ -14,7 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Sprite: {fileID: 21300000, guid: b2e11d1934d215f42b50c93e4068152b, type: 3}
   Prefab: {fileID: 0}
-  Tooltip: Delicious berry! Safe to consume.
+  Tooltip: '<size=24>Berry</size>
+
+    <size=18>Consumable</size>
+
+    <size=18><color=#1DFF00>+1 Nutrition</color></size>'
   ItemType: 2
   ItemEffects:
   - ItemEffectType: 1
