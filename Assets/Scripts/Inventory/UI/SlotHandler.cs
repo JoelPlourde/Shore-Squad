@@ -59,14 +59,12 @@ namespace ItemSystem {
 
 			public void OnPointerClick(PointerEventData eventData) {
 				if (HasItem) {
-					if (eventData.clickCount == 2) {
-						if (Squad.FirstSelected(out Actor actor)) {
-							ItemEffectFactory.Activate(actor, _item);
+					if (Squad.FirstSelected(out Actor actor)) {
+						ItemEffectFactory.Activate(actor, _item);
 
-							ItemSelector.UnselectItem();
+						if (!HasItem) {
+							Tooltip.Instance.HideTooltip();
 						}
-					} else {
-						ItemSelector.SelectItem(this);
 					}
 				}
 			}

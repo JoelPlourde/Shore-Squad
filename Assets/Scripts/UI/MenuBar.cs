@@ -9,9 +9,7 @@ namespace UI {
 		public static MenuBar Instance;
 
 		private MenuButton[] _menuButtons;
-		private Dictionary<int, Menu> _interfaceStatus;
-
-		private int _currentMenu = -1;
+		private Dictionary<MenuType, Menu> _interfaceStatus;
 
 		private void Awake() {
 			Instance = this;
@@ -21,11 +19,11 @@ namespace UI {
 				menuButton.Initialize(OnClick);
 			}
 
-			_interfaceStatus = new Dictionary<int, Menu>() {
-				{ 0, InventoryHandler.Instance},
-				{ 1, EquipmentHandler.Instance },
-				{ 2, ExperienceHandler.Instance },
-				{ 3, SettingsHandler.Instance }
+			_interfaceStatus = new Dictionary<MenuType, Menu>() {
+				{ MenuType.INVENTORY, InventoryHandler.Instance},
+				{ MenuType.EQUIPMENT, EquipmentHandler.Instance },
+				{ MenuType.EXPERIENCE, ExperienceHandler.Instance },
+				{ MenuType.SETTINGS, SettingsHandler.Instance }
 			};
 		}
 
@@ -34,24 +32,26 @@ namespace UI {
 		/// </summary>
 		/// <param name="index">The index clicked.</param>
 		public void OnClick(int index) {
-			if (_currentMenu == index) {
-				_currentMenu = -1;
+			MenuType menuType = (MenuType)index;
+
+			if (CurrentMenu == menuType) {
+				CurrentMenu = MenuType.NONE;
 			} else {
-				if (_currentMenu != -1) {
-					ToggleInterface(_currentMenu);
+				if (CurrentMenu != MenuType.NONE) {
+					ToggleInterface(CurrentMenu);
 				}
 
-				_currentMenu = index;
+				CurrentMenu = menuType;
 			}
 
-			ToggleInterface(index);
+			ToggleInterface(menuType);
 		}
 
 		/// <summary>
 		/// Toggle the interface indicates by the index
 		/// </summary>
 		/// <param name="index">The index of the interface to toggle.</param>
-		private void ToggleInterface(int index) {
+		private void ToggleInterface(MenuType index) {
 			if (Squad.Any(out Actor actor)) {
 				if (_interfaceStatus.TryGetValue(index, out Menu menu)) {
 					if (!menu.Canvas.enabled) {
@@ -64,5 +64,7 @@ namespace UI {
 				}
 			}
 		}
+
+		public MenuType CurrentMenu { get; private set; } = MenuType.NONE;
 	}
 }
