@@ -792,10 +792,10 @@ namespace UnitTest {
 			Inventory before = new Inventory(3);
 
 			List<Item> initial = new List<Item> {
-			new Item(GetItemDataFixture(1), 20),
-			new Item(GetItemDataFixture(3), 1),
-			new Item(GetItemDataFixture(3), 1)
-		};
+				new Item(GetItemDataFixture(1), 20),
+				new Item(GetItemDataFixture(3), 1),
+				new Item(GetItemDataFixture(3), 1)
+			};
 
 			before.AddItemsToInventory(initial, out _);
 
@@ -809,9 +809,91 @@ namespace UnitTest {
 			Assert.That(after.Items[2].Amount, Is.EqualTo(1));
 		}
 
+		[Test]
+		[PrebuildSetup(typeof(InventoryTest))]
+		public void SwapItems_test() {
+			Inventory inventory = new Inventory(3);
+
+			List<Item> initial = new List<Item> {
+				new Item(GetItemDataFixture(0), 1),
+				new Item(GetItemDataFixture(1), 2),
+				new Item(GetItemDataFixture(2), 3)
+			};
+
+			inventory.AddItemsToInventory(initial, out _);
+
+			Assert.That(inventory.SwapItems(0, 2));
+
+			Assert.That(inventory.Items[0].Amount, Is.EqualTo(3));
+			Assert.That(inventory.Items[0].ItemData.ID, Is.EqualTo(GetItemDataFixture(2).ID));
+			Assert.That(inventory.Items[1].Amount, Is.EqualTo(2));
+			Assert.That(inventory.Items[1].ItemData.ID, Is.EqualTo(GetItemDataFixture(1).ID));
+			Assert.That(inventory.Items[2].Amount, Is.EqualTo(1));
+			Assert.That(inventory.Items[2].ItemData.ID, Is.EqualTo(GetItemDataFixture(0).ID));
+		}
+
+		[Test]
+		public void SwapItems_BadInput_Test() {
+			Inventory inventory = new Inventory(3);
+
+			Assert.That(!inventory.SwapItems(-1, 2));
+			Assert.That(!inventory.SwapItems(1, -1));
+			Assert.That(!inventory.SwapItems(Inventory.MAX_STACK, 2));
+			Assert.That(!inventory.SwapItems(2, Inventory.MAX_STACK));
+		}
+
+		[Test]
+		[PrebuildSetup(typeof(InventoryTest))]
+		public void CombineItems_test() {
+			Inventory inventory = new Inventory(3);
+			inventory.Items[0] = new Item(GetItemDataFixture(0), 1);
+			inventory.Items[1] = new Item(GetItemDataFixture(0), 2);
+			inventory.Items[2] = new Item(GetItemDataFixture(1), 3);
+
+			Assert.That(inventory.SwapItems(0, 1));
+			Assert.That(inventory.Items[0], Is.Null);
+			Assert.That(inventory.Items[1].Amount, Is.EqualTo(3));
+			Assert.That(inventory.Items[2].Amount, Is.EqualTo(3));
+		}
+
+		[Test]
+		[PrebuildSetup(typeof(InventoryTest))]
+		public void CombineItems_with_remaining_in_source_test() {
+			Inventory inventory = new Inventory(3);
+			inventory.Items[0] = new Item(GetItemDataFixture(0), Inventory.MAX_STACK - 2);
+			inventory.Items[1] = new Item(GetItemDataFixture(0), 5);
+			inventory.Items[2] = new Item(GetItemDataFixture(1), 3);
+
+			Assert.That(inventory.SwapItems(0, 1));
+			Assert.That(inventory.Items[0].Amount, Is.EqualTo(3));
+			Assert.That(inventory.Items[1].Amount, Is.EqualTo(Inventory.MAX_STACK));
+			Assert.That(inventory.Items[2].Amount, Is.EqualTo(3));
+		}
+
+		[Test]
+		[PrebuildSetup(typeof(InventoryTest))]
+		public void CombineItems_with_null_test() {
+			Inventory inventory = new Inventory(2);
+			inventory.Items[0] = new Item(GetItemDataFixture(0), 1);
+			inventory.Items[1] = null;
+
+			Assert.That(inventory.SwapItems(0, 1));
+		}
+
+		[Test]
+		[PrebuildSetup(typeof(InventoryTest))]
+		public void CombineItems_with_unstackable_test() {
+			Inventory inventory = new Inventory(2);
+			inventory.Items[0] = new Item(GetItemDataFixture(3), 1);
+			inventory.Items[1] = new Item(GetItemDataFixture(3), 1);
+
+			Assert.That(inventory.SwapItems(0, 1));
+			Assert.That(inventory.Items[0].Amount, Is.EqualTo(1));
+			Assert.That(inventory.Items[1].Amount, Is.EqualTo(1));
+		}
+
 		private ItemData GetItemDataFixture() {
 			ItemData itemData = ItemManager.Instance.GetItemData("branch");
-			Debug.Log(itemData);
 			return ItemManager.Instance.GetItemData("branch");
 		}
 

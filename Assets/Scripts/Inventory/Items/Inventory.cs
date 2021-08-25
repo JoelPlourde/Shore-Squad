@@ -138,6 +138,62 @@ namespace ItemSystem {
 		}
 
 		/// <summary>
+		/// Swap two items inside the same inventory
+		/// </summary>
+		/// <param name="sourceIndex">The source index</param>
+		/// <param name="destinationIndex">The destination index</param>
+		/// <returns>Returns true if the operation was successful, else false.</returns>
+		public bool SwapItems(int sourceIndex, int destinationIndex) {
+			if (Items.Length <= sourceIndex || Items.Length <= destinationIndex || sourceIndex < 0 || destinationIndex < 0) {
+				return false;
+			}
+
+			if (!CombineItems(sourceIndex, destinationIndex)) {
+				var buffer = Items[sourceIndex];
+				Items[sourceIndex] = Items[destinationIndex];
+				Items[destinationIndex] = buffer;
+			}
+
+			OnDirtyItemsEvent?.Invoke(new List<int>() { sourceIndex, destinationIndex }, Items);
+			return true;
+		}
+
+		/// <summary>
+		/// Combine Item at Source to Destination.
+		///	WARNING; This method does not trigger a redraw at the indexes.
+		/// </summary>
+		/// <param name="sourceIndex">The index of the source item</param>
+		/// <param name="destinationIndex">The index of the destination item</param>
+		/// <returns>True if the combination worked, else false.</returns>
+		public bool CombineItems(int sourceIndex, int destinationIndex) {
+			if (ReferenceEquals(Items[sourceIndex], null) || ReferenceEquals(Items[destinationIndex], null)) {
+				return false;
+			}
+
+			if (!Items[sourceIndex].ItemData.Stackable || !Items[destinationIndex].ItemData.Stackable) {
+				return false;
+			}
+
+			if (Items[destinationIndex].ItemData.ID == Items[sourceIndex].ItemData.ID) {
+				int diff = MAX_STACK - Items[destinationIndex].Amount;
+				if (diff > 0) {
+					if (Items[sourceIndex].Amount <= diff) {
+						Items[destinationIndex].Amount += Items[sourceIndex].Amount;
+						Items[sourceIndex] = null;
+					} else if (Items[sourceIndex].Amount > diff) {
+						Items[destinationIndex].Amount += diff;
+						Items[sourceIndex].Amount -= diff;
+					}
+					return true;
+				} else {
+					return false;
+				}
+			}
+
+			return false;
+		}
+
+		/// <summary>
 		/// Get the next index where to add the item.
 		/// </summary>
 		/// <param name="itemData">The ItemData to add.</param>

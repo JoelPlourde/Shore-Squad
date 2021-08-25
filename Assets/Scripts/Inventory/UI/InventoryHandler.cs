@@ -31,6 +31,7 @@ namespace ItemSystem {
 
 				for (int i = 0; i < Inventory.MAX_STACK; i++) {
 					GameObject slotHandlerObj = Instantiate(SlotTemplate, transform);
+					slotHandlerObj.name = "Slot" + i;
 					_slots[i] = slotHandlerObj.GetComponent<SlotHandler>();
 					_slots[i].Enable(false);
 				}
