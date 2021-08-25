@@ -29,15 +29,22 @@ namespace UI {
 			};
 		}
 
+		/// <summary>
+		/// On Click on the button of the menu, open/close the interface to have only a single interface opened.
+		/// </summary>
+		/// <param name="index">The index clicked.</param>
 		public void OnClick(int index) {
-			if (_currentMenu != -1 && _currentMenu != index) {
-				ToggleInterface(_currentMenu);
+			if (_currentMenu == index) {
+				_currentMenu = -1;
+			} else {
+				if (_currentMenu != -1) {
+					ToggleInterface(_currentMenu);
+				}
+
 				_currentMenu = index;
 			}
 
 			ToggleInterface(index);
-
-			_currentMenu = index;
 		}
 
 		/// <summary>
