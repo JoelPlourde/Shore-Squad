@@ -1,7 +1,9 @@
-﻿using PointerSystem;
+﻿using ItemSystem.UI;
+using PointerSystem;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UI;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -43,6 +45,11 @@ public class UserInputs : MonoBehaviour, IUpdatable {
 		} else {
 			if (Input.GetMouseButtonUp(0)) {
 				PointerManager.Instance.SetPointer(PointerMode.DEFAULT);
+
+				ItemSelector.UnselectItem();
+
+				OptionsHandler.Instance.Close();
+
 			} else if (Input.GetMouseButton(0)) {
 				PointerManager.Instance.SetPointer(PointerMode.DEFAULT_PRESSED);
 			}

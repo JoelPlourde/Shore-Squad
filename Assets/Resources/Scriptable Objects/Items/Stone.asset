@@ -14,11 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Sprite: {fileID: 0}
   Prefab: {fileID: 0}
-  Tooltip: '<size=24>Stone</size>
+  Tooltip: '<size=22>Stone</size>
 
-    <size=18>Resource</size>
-
-'
+    <size=16>Resource</size>'
   ItemType: 0
   ItemEffects: []
   Stackable: 1

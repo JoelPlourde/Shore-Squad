@@ -826,10 +826,13 @@ namespace UnitTest {
 
 			Assert.That(inventory.Items[0].Amount, Is.EqualTo(3));
 			Assert.That(inventory.Items[0].ItemData.ID, Is.EqualTo(GetItemDataFixture(2).ID));
+			Assert.That(inventory.Items[0].Index, Is.EqualTo(0));
 			Assert.That(inventory.Items[1].Amount, Is.EqualTo(2));
 			Assert.That(inventory.Items[1].ItemData.ID, Is.EqualTo(GetItemDataFixture(1).ID));
+			Assert.That(inventory.Items[1].Index, Is.EqualTo(1));
 			Assert.That(inventory.Items[2].Amount, Is.EqualTo(1));
 			Assert.That(inventory.Items[2].ItemData.ID, Is.EqualTo(GetItemDataFixture(0).ID));
+			Assert.That(inventory.Items[2].Index, Is.EqualTo(2));
 		}
 
 		[Test]
@@ -891,6 +894,44 @@ namespace UnitTest {
 			Assert.That(inventory.Items[0].Amount, Is.EqualTo(1));
 			Assert.That(inventory.Items[1].Amount, Is.EqualTo(1));
 		}
+
+		[Test]
+		[PrebuildSetup(typeof(InventoryTest))]
+		public void RemoveItemFromInventoryAtPosition_test() {
+			Inventory inventory = new Inventory(5);
+			inventory.Items[0] = new Item(GetItemDataFixture(0), 10);
+			inventory.Items[1] = new Item(GetItemDataFixture(1), 9);
+			inventory.Items[2] = new Item(GetItemDataFixture(2), 8);
+			inventory.Items[3] = new Item(GetItemDataFixture(3), 1);
+			inventory.Items[4] = new Item(GetItemDataFixture(0), 7);
+
+			inventory.RemoveItemFromInventoryAtPosition(0, 5);
+			inventory.RemoveItemFromInventoryAtPosition(1, 9);
+			inventory.RemoveItemFromInventoryAtPosition(2, 7);
+			inventory.RemoveItemFromInventoryAtPosition(3, 1);
+			inventory.RemoveItemFromInventoryAtPosition(4, 7);
+
+			Assert.That(inventory.Items[0].Amount, Is.EqualTo(5));
+			Assert.That(inventory.Items[1], Is.Null);
+			Assert.That(inventory.Items[2].Amount, Is.EqualTo(1));
+			Assert.That(inventory.Items[3], Is.Null);
+			Assert.That(inventory.Items[4], Is.Null);
+		}
+
+		[Test]
+		[PrebuildSetup(typeof(InventoryTest))]
+		public void RemoveItemFromInventoryAtPosition_withBadInput_test() {
+			Inventory inventory = new Inventory(3);
+			inventory.Items[0] = new Item(GetItemDataFixture(0), 10);
+			inventory.Items[1] = new Item(GetItemDataFixture(1), 9);
+
+			Assert.That(!inventory.RemoveItemFromInventoryAtPosition(-1, 1));
+			Assert.That(!inventory.RemoveItemFromInventoryAtPosition(inventory.Items.Length, 1));
+			Assert.That(!inventory.RemoveItemFromInventoryAtPosition(0, -1));
+			Assert.That(!inventory.RemoveItemFromInventoryAtPosition(0, Inventory.MAX_STACK + 1));
+			Assert.That(!inventory.RemoveItemFromInventoryAtPosition(2, 1));
+		}
+
 
 		private ItemData GetItemDataFixture() {
 			ItemData itemData = ItemManager.Instance.GetItemData("branch");

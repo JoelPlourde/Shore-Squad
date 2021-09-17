@@ -33,6 +33,10 @@ namespace ItemSystem {
 			return ItemData.ToString() + "x" + Amount + " at: " + Index;
 		}
 
+		public void UpdateIndex(int index) {
+			Index = index;
+		}
+
 		public int Index { get; private set; }
 	}
 }

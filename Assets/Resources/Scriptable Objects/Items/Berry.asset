@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Sprite: {fileID: 21300000, guid: b2e11d1934d215f42b50c93e4068152b, type: 3}
   Prefab: {fileID: 0}
-  Tooltip: '<size=24>Berry</size>
+  Tooltip: '<color=#BFBFBF><size=20>Eat</size></color> <size=22>Berry</size>
 
-    <size=18>Consumable</size>
+    <size=16>Consumable</size>
 
-    <size=18><color=#1DFF00>+1 Nutrition</color></size>'
+    <size=16><color=#1DFF00>+1 Nutrition</color></size>'
   ItemType: 2
   ItemEffects:
   - ItemEffectType: 1

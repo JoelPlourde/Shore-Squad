@@ -152,6 +152,9 @@ namespace ItemSystem {
 				var buffer = Items[sourceIndex];
 				Items[sourceIndex] = Items[destinationIndex];
 				Items[destinationIndex] = buffer;
+
+				Items[sourceIndex]?.UpdateIndex(sourceIndex);
+				Items[destinationIndex]?.UpdateIndex(destinationIndex);
 			}
 
 			OnDirtyItemsEvent?.Invoke(new List<int>() { sourceIndex, destinationIndex }, Items);
@@ -191,6 +194,34 @@ namespace ItemSystem {
 			}
 
 			return false;
+		}
+
+		/// <summary>
+		/// Remove an item from the inventory at the specific position.
+		/// </summary>
+		/// <param name="index">The index has to be between 0 and MAX_STACK</param>
+		/// <param name="amount">The amount to remove.</param>
+		/// <returns>True if the operation was successful else, false.</returns>
+		public bool RemoveItemFromInventoryAtPosition(int index, int amount) {
+			if (Items.Length <= index || index < 0 || amount < 0 || amount > MAX_STACK) {
+				return false;
+			}
+
+			if (ReferenceEquals(Items[index], null)) {
+				return false;
+			}
+
+			if (Items[index].Amount < amount) {
+				return false;
+			}
+
+			Items[index].Amount -= amount;
+			if (Items[index].Amount == 0) {
+				Items[index] = null;
+			}
+
+			OnDirtyItemsEvent?.Invoke(new List<int>() { index }, Items);
+			return true;
 		}
 
 		/// <summary>

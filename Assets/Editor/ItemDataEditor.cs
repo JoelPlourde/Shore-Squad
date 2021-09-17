@@ -24,11 +24,20 @@ namespace ItemSystem {
 			EditorGUILayout.Space();
 			EditorGUILayout.LabelField("General", EditorStyles.boldLabel);
 			if (GUILayout.Button("Generate Tooltip")) {
-				itemData.Tooltip = string.Format("<size=24>{0}</size>\n<size=18>{1}</size>\n", itemData.name, FormatItemType(itemData.ItemType));
+				itemData.Tooltip = "";
+				if (itemData.ItemEffects.Count > 0) {
+					itemData.Tooltip = string.Format("<color=#BFBFBF><size=20>{0}</size></color> ", EnumExtensions.FormatItemEffectType(itemData.ItemEffects[0].ItemEffectType));
+				}
+
+				itemData.Tooltip += string.Format("<size=22>{0}</size>\n<size=16>{1}</size>", itemData.name, FormatItemType(itemData.ItemType));
 
 				int count = itemData.ItemEffects.Count;
+				if (count > 0) {
+					itemData.Tooltip += "\n";
+				}
+
 				foreach (var itemEffect in itemData.ItemEffects) {
-					itemData.Tooltip += string.Format("<size=18><color=#1DFF00>{0}</color></size>", FormatItemEffect(itemEffect));
+					itemData.Tooltip += string.Format("<size=16><color=#1DFF00>{0}</color></size>", FormatItemEffect(itemEffect));
 					count--;
 					if (count > 0) {
 						itemData.Tooltip += "\n";

@@ -31,9 +31,10 @@ namespace ItemSystem {
 
 				// TODO ADD SOUND HERE.
 				if (actor.Armory.Equip(equipment, out Equipment previousEquipment)) {
-					actor.Inventory.RemoveItemsFromInventory(new List<Item>() { item }, out List<Item> _);
-					if (!ReferenceEquals(previousEquipment, null)) {
-						actor.Inventory.AddItemsToInventory(new List<Item>() { new Item(previousEquipment.EquipmentData, previousEquipment.Amount) }, out List<Item> _);
+					if (actor.Inventory.RemoveItemFromInventoryAtPosition(item.Index, item.Amount)) {
+						if (!ReferenceEquals(previousEquipment, null)) {
+							actor.Inventory.AddItemsToInventory(new List<Item>() { new Item(previousEquipment.EquipmentData, previousEquipment.Amount) }, out List<Item> _);
+						}
 					}
 				}
 			}

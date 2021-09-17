@@ -63,11 +63,17 @@ namespace ItemSystem {
 				EditorGUILayout.Space();
 				EditorGUILayout.LabelField("General", EditorStyles.boldLabel);
 				if (GUILayout.Button("Generate Tooltip")) {
-					equipmentData.Tooltip = string.Format("<size=24>{0}</size>\n<size=18>{1}</size>\n", equipmentData.name, FormatEquipmentType(equipmentData));
+					equipmentData.Tooltip = "";
+
+					if (equipmentData.ItemEffects.Count > 0) {
+						equipmentData.Tooltip = string.Format("<color=#BFBFBF><size=20>{0}</size></color> ", EnumExtensions.FormatItemEffectType(equipmentData.ItemEffects[0].ItemEffectType));
+					}
+
+					equipmentData.Tooltip += string.Format("<size=22>{0}</size>\n<size=16>{1}</size>\n", equipmentData.name, FormatEquipmentType(equipmentData));
 
 					int count = equipmentData.EquipmentStats.Statistics.Count;
 					foreach (Statistic statistic in equipmentData.EquipmentStats.Statistics) {
-						equipmentData.Tooltip += string.Format("<size=18><color=#1DFF00>+{0} {1}</color></size>", statistic.Value, FormatEnum(statistic.StatisticType.ToString()));
+						equipmentData.Tooltip += string.Format("<size=16><color=#1DFF00>+{0} {1}</color></size>", statistic.Value, FormatEnum(statistic.StatisticType.ToString()));
 						count--;
 						if (count > 0) {
 							equipmentData.Tooltip += "\n";

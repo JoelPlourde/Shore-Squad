@@ -14,12 +14,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Sprite: {fileID: 0}
   Prefab: {fileID: 9013216995371323266, guid: 2e62e9be1424086449a121e9c2998ab6, type: 3}
-  Tooltip: 
+  Tooltip: '<color=#BFBFBF><size=20>Equip</size></color> <size=22>Leather Boots</size>
+
+    <size=16>Boots</size>
+
+    <size=16><color=#1DFF00>+5 Armor</color></size>
+
+    <size=16><color=#1DFF00>+4 Cold Resistance</color></size>'
   ItemType: 1
+  ItemEffects:
+  - ItemEffectType: 0
+    Magnitude: 0
   Stackable: 0
   EquipmentPrefab: {fileID: 9013216995371323266, guid: 2e62e9be1424086449a121e9c2998ab6,
     type: 3}
   SlotType: 4
+  WeaponType: 0
   HideBodyPart: 1
   HideArms: 0
   HideHair: 0

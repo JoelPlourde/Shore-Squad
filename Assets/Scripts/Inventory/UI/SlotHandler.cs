@@ -12,8 +12,6 @@ namespace ItemSystem {
 		[RequireComponent(typeof(Image))]
 		public class SlotHandler : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerUpHandler, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler {
 
-			private Item _item;
-
 			private void Awake() {
 				Image = transform.Find("Item").GetComponent<Image>();
 				Amount = GetComponentInChildren<Text>();
@@ -27,7 +25,7 @@ namespace ItemSystem {
 					return;
 				}
 
-				_item = item;
+				Item = item;
 				Image.sprite = item.ItemData.Sprite;
 				Amount.text = (item.Amount > 1) ? item.Amount.ToString() : "";
 				Enable(true);
@@ -38,21 +36,21 @@ namespace ItemSystem {
 				Amount.enabled = enable;
 
 				if (!enable) {
-					_item = null;
+					Item = null;
 				}
 			}
 
 			#region Pointer
 			public void OnPointerEnter(PointerEventData eventData) {
-				if (!ReferenceEquals(_item, null)) {
-					Tooltip.Instance.ShowTooltip(_item.ItemData.Tooltip, Constant.TOOLTIP_DELAY);
+				if (!ReferenceEquals(Item, null)) {
+					Tooltip.Instance.ShowTooltip(Item.ItemData.Tooltip, Constant.TOOLTIP_DELAY);
 				} else {
 					Tooltip.Instance.HideTooltip();
 				}
 			}
 
 			public void OnPointerExit(PointerEventData eventData) {
-				if (!ReferenceEquals(_item, null)) {
+				if (!ReferenceEquals(Item, null)) {
 					Tooltip.Instance.HideTooltip();
 				}
 			}
@@ -64,15 +62,22 @@ namespace ItemSystem {
 					return;
 				}
 
+				if (Input.GetMouseButtonUp(1)) {
+					OptionsHandler.Instance.Open(this);
+					return;
+				}
+
 				if (HasItem) {
 					if (Squad.FirstSelected(out Actor actor)) {
-						ItemEffectFactory.Activate(actor, _item);
+						ItemEffectFactory.Activate(actor, Item);
 
 						if (!HasItem) {
 							Tooltip.Instance.HideTooltip();
 						}
 					}
 				}
+
+				ItemSelector.UnselectItem();
 			}
 
 			public void OnPointerDown(PointerEventData eventData) {
@@ -143,7 +148,8 @@ namespace ItemSystem {
 			public Image Image { get; private set; }
 			public Text Amount { get; private set; }
 
-			public bool HasItem { get { return !ReferenceEquals(_item, null); } }
+			public Item Item { get; private set; }
+			public bool HasItem { get { return !ReferenceEquals(Item, null); } }
 		}
 	}
 }
