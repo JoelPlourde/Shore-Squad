@@ -7,7 +7,12 @@ using SaveSystem;
 using PointerSystem;
 using GameSystem;
 using ItemSystem;
+using SkillSystem;
+using EmoteSystem;
 
+[RequireComponent(typeof(SkillManager))]
+[RequireComponent(typeof(IconManager))]
+[RequireComponent(typeof(EmoteManager))]
 [RequireComponent(typeof(ItemManager))]
 [RequireComponent(typeof(SceneController))]
 [RequireComponent(typeof(PointerManager))]

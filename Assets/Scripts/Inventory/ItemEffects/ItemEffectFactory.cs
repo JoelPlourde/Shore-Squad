@@ -8,6 +8,7 @@ namespace ItemSystem {
 			private readonly static Dictionary<ItemEffectType, IItemEffect> _itemEffects = new Dictionary<ItemEffectType, IItemEffect>() {
 				{ ItemEffectType.EQUIP, new Equip()},
 				{ ItemEffectType.EAT, new Eat() },
+				{ ItemEffectType.DRINK, new Drink() }
 			};
 
 			public static void Activate(Actor actor, Item item) {

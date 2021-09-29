@@ -1,4 +1,5 @@
 ﻿using BodySystem;
+using EmoteSystem;
 using FactionSystem;
 using ItemSystem;
 using ItemSystem.EquipmentSystem;
@@ -11,6 +12,8 @@ using UI.Portrait;
 using UnityEngine;
 using UnityEngine.AI;
 
+[RequireComponent(typeof(AudioSource))]
+[RequireComponent(typeof(Emotion))]
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(TaskScheduler))]
@@ -23,11 +26,13 @@ public class Actor : MonoBehaviour {
 	public event Action<bool> OnSelectionEvent;
 
 	public virtual void Awake() {
+		AudioSource = GetComponent<AudioSource>();
 		Animator = GetComponent<Animator>();
 		TaskScheduler = GetComponent<TaskScheduler>();
 		StatusEffectScheduler = GetComponent<StatusEffectScheduler>();
 		NavMeshAgent = GetComponent<NavMeshAgent>();
 		Armory = GetComponentInChildren<Armory>();
+		Emotion = GetComponent<Emotion>();
 
 		Rigidbody rigidbody = gameObject.GetComponent<Rigidbody>();
 		rigidbody.isKinematic = true;
@@ -41,6 +46,8 @@ public class Actor : MonoBehaviour {
 		SphereCollider collider = gameObject.AddComponent<SphereCollider>();
 		collider.radius = 1f;
 		collider.isTrigger = true;
+
+		Emotion.Initialize(this);
 	}
 
 	public void Initialize(ActorDto actorDto) {
@@ -106,6 +113,7 @@ public class Actor : MonoBehaviour {
 
 	public bool Selected { get; private set; }
 
+	public AudioSource AudioSource { get; private set; }
 	public Animator Animator { get; private set; }
 	public TaskScheduler TaskScheduler { get; private set; }
 	public StatusEffectScheduler StatusEffectScheduler { get; private set; }
@@ -113,6 +121,7 @@ public class Actor : MonoBehaviour {
 	public Armory Armory { get; private set; } = new Armory();
 	public Inventory Inventory { get; private set; } = new Inventory(Inventory.MAX_STACK);
 	public Skills Skills { get; private set; } = new Skills();
+	public Emotion Emotion { get; private set; }
 
 	public Attributes Attributes { get; private set; } = new Attributes();
 	public Statistics Statistics { get; private set; } = new Statistics();

@@ -8,7 +8,6 @@ namespace TaskSystem {
 	public class Interact : TaskBehaviour {
 
 		private InteractArguments _interactArguments;
-		private NavMeshAgent navMeshAgent;
 		private Trigger trigger;
 
 		public override void Execute() {
@@ -17,12 +16,11 @@ namespace TaskSystem {
 
 			TriggerManager.CreateTrigger(_interactArguments.Position, _interactArguments.Interactable.GetInteractionRadius(), OnTriggerEnterCondition, AtDestination);
 
-			// Start the NavMeshAgent.
-			navMeshAgent = gameObject.GetComponent<NavMeshAgent>();
-			navMeshAgent.SetDestination(_interactArguments.Position);
-			navMeshAgent.isStopped = false;
-
-			actor.Animator.SetBool("Move", true);
+			if (Vector3.Distance(actor.transform.position, _interactArguments.Position) > (_interactArguments.Interactable.GetInteractionRadius() * 2)) {
+				actor.NavMeshAgent.SetDestination(_interactArguments.Position);
+				actor.NavMeshAgent.isStopped = false;
+				actor.Animator.SetBool("Move", true);
+			}
 		}
 
 		public override void Combine(ITaskArguments taskArguments) {
@@ -35,7 +33,7 @@ namespace TaskSystem {
 
 		private void AtDestination() {
 			_interactArguments.Interactable.OnInteractEnter(actor);
-			navMeshAgent.isStopped = true;
+			actor.NavMeshAgent.isStopped = true;
 			actor.Animator.SetBool("Move", false);
 		}
 
@@ -45,8 +43,8 @@ namespace TaskSystem {
 			if (trigger) {
 				trigger.Destroy();
 			}
-			if (navMeshAgent.isOnNavMesh) {
-				navMeshAgent.isStopped = true;
+			if (actor.NavMeshAgent.isOnNavMesh) {
+				actor.NavMeshAgent.isStopped = true;
 			}
 			actor.Animator.SetBool("Move", false);
 		}

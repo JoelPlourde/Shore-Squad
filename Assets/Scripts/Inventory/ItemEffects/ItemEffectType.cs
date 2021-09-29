@@ -2,7 +2,8 @@
 	namespace EffectSystem {
 		public enum ItemEffectType {
 			EQUIP,
-			EAT
+			EAT,
+			DRINK
 		}
 	}
 }

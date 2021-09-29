@@ -27,19 +27,19 @@ namespace NodeSystem {
 			}
 
 			if (_node.IsDepleted()) {
-				FeedbackManager.Instance.DisplayError(actor, "This node has been completed depleted.");
+				actor.Emotion.PlayEmote(EmoteSystem.EmoteType.SHRUG);
 				actor.TaskScheduler.CancelTask();
 				return;
 			}
 
 			if (actor.Skills.GetLevel(_nodeData.SkillType).Value < _nodeData.Requirement) {
-				FeedbackManager.Instance.DisplayError(actor, "You are not skilled enough to harvest this!");
+				actor.Emotion.PlayEmote(EmoteSystem.EmoteType.WONDERING);
 				actor.TaskScheduler.CancelTask();
 				return;
 			}
 
 			if (!actor.Armory.HasWeaponEquipped(_nodeData.WeaponType)) {
-				FeedbackManager.Instance.DisplayError(actor, "You need to equip the proper tool!");
+				actor.Emotion.PlayEmote(EmoteSystem.EmoteType.WONDERING);
 				actor.TaskScheduler.CancelTask();
 				return;
 			}

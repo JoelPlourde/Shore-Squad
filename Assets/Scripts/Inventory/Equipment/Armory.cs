@@ -56,6 +56,8 @@ namespace ItemSystem {
 
 						_actor.Animator.SetBool("Weapon", true);
 						_actor.Animator.SetInteger("Weapon Type", (int) _currentWeaponType);
+
+						_actor.Emotion.PlayEmote(EmoteSystem.EmoteType.SHEATHE);
 					}
 
 					if (equipment.EquipmentData.SlotType == SlotType.SHIELD) {
@@ -123,6 +125,8 @@ namespace ItemSystem {
 
 					_actor.Animator.SetBool("Weapon", false);
 					_actor.Animator.SetInteger("Weapon Type", (int)_currentWeaponType);
+
+					_actor.Emotion.PlayEmote(EmoteSystem.EmoteType.SHEATHE);
 				}
 
 				if (equipment.EquipmentData.SlotType == SlotType.SHIELD) {

@@ -26,7 +26,7 @@ namespace GamePlay {
 		}
 
 		public void DisplayError(Actor actor, string error) {
-			DisplayMessage(actor, "<color=#FF0000>" + error + "</color>");
+			DisplayMessage(actor, "<color=#ff000000>+" + error + "</color>");
 		}
 
 		public void DisplayMessage(Actor actor, string message) {
