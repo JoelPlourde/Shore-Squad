@@ -36,10 +36,14 @@ namespace UI {
 
 			if (CurrentMenu == menuType) {
 				CurrentMenu = MenuType.NONE;
+
+				SoundSystem.Instance.PlaySound(SoundManager.Instance.GetAudioClip("menu_close"), 0.5f);
 			} else {
 				if (CurrentMenu != MenuType.NONE) {
 					ToggleInterface(CurrentMenu);
 				}
+
+				SoundSystem.Instance.PlaySound(SoundManager.Instance.GetAudioClip("menu_open"), 0.3f);
 
 				CurrentMenu = menuType;
 			}
