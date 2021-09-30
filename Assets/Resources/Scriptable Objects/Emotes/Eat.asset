@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Eat
   m_EditorClassIdentifier: 
   emoteType: 2
-  Sound: {fileID: 0}
+  Sound: {fileID: 8300000, guid: 66242f0ed9e3a284b87f3f0c0b45a7e4, type: 3}
+  Delay: 0.45
   ParticleSystem: {fileID: 4623365569239740739, guid: 9e1ade55fe9156649b6189277afddb70,
     type: 3}
   LocalPosition: {x: 0, y: 1.528, z: 0.261}

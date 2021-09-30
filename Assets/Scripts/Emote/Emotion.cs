@@ -1,9 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace EmoteSystem {
-	// Attach this to the Actor.
 	public class Emotion : MonoBehaviour {
 
 		private Actor _actor;
@@ -24,7 +21,9 @@ namespace EmoteSystem {
 			}
 
 			if (!ReferenceEquals(emoteData.Sound, null)) {
-				_actor.AudioSource.PlayOneShot(emoteData.Sound);
+				_actor.AudioSource.pitch = Random.Range(0.85f, 1.15f);
+				_actor.AudioSource.clip = emoteData.Sound;
+				_actor.AudioSource.PlayDelayed(emoteData.Delay);
 			}
 		}
 	}

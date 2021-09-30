@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f12d0fa4380a008459247aa8587e4f56, type: 3}
   m_Name: Sheathe
   m_EditorClassIdentifier: 
-  emoteType: 0
+  emoteType: 4
   Sound: {fileID: 0}
   ParticleSystem: {fileID: 0}
   LocalPosition: {x: 0, y: 0, z: 0}

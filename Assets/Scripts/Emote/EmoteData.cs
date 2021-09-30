@@ -17,6 +17,9 @@ namespace EmoteSystem {
 		[Tooltip("The sound that will be played during the Emote (if any)")]
 		public AudioClip Sound;
 
+		[Tooltip("The sound will be played after the delay (in seconds)")]
+		public float Delay;
+
 		[Header("Particle System")]
 		[SerializeField]
 		[Tooltip("Particle System to be displayed on top of the character's head (if any")]

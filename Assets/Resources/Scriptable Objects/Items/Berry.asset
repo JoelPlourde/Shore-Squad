@@ -21,6 +21,6 @@ MonoBehaviour:
     <size=16><color=#1DFF00>+1 Nutrition</color></size>'
   ItemType: 2
   ItemEffects:
-  - ItemEffectType: 2
+  - ItemEffectType: 1
     Magnitude: 0.25
   Stackable: 1
