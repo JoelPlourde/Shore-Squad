@@ -58,6 +58,7 @@ public static class Squad {
 		if (_units.Count > 0) {
 			actor = _units[0].Actor;
 			_units[0].EnableSelector(true);
+			HasSelected = true;
 			return true;
 		}
 		return false;
@@ -103,6 +104,7 @@ public static class Squad {
 
 		Unit selectedUnit = _units.Find(x => x.Actor.Guid == actor.Guid);
 		selectedUnit.EnableSelector(true);
+		HasSelected = true;
 
 		CameraSystem.CameraController.Instance.FollowTarget(actor.transform);
 	}
@@ -114,7 +116,8 @@ public static class Squad {
 		_units.ForEach(x => {
 			x.EnableSelector(false);
 		});
-	
+		HasSelected = false;
+
 		CameraSystem.CameraController.Instance.StopFollow();
 	}
 
@@ -165,8 +168,11 @@ public static class Squad {
 			}
 			Unit selectedUnit = _units.Find(x => x.Actor.Guid.ToString() == raycastHit.collider.name);
 			selectedUnit.EnableSelector(true);
+			HasSelected = true;
 		}
 	}
+
+	public static bool HasSelected { get; private set; }
 
 	#region Selector
 	private static GameObject CreateSelector(Actor actor) {

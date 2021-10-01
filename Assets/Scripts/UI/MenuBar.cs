@@ -19,6 +19,17 @@ namespace UI {
 				menuButton.Initialize(OnClick);
 			}
 
+			UserInputs.Instance.Subscribe(KeyCode.E, delegate { OnClick(0); });
+			UserInputs.Instance.Subscribe(KeyCode.R, delegate { OnClick(1); });
+			UserInputs.Instance.Subscribe(KeyCode.T, delegate { OnClick(2); });
+			UserInputs.Instance.Subscribe(KeyCode.Escape, delegate {
+				if (Squad.HasSelected) {
+					Squad.UnselectAll();
+				} else {
+					OnClick(3);
+				}
+			});
+
 			_interfaceStatus = new Dictionary<MenuType, Menu>() {
 				{ MenuType.INVENTORY, InventoryHandler.Instance},
 				{ MenuType.EQUIPMENT, EquipmentHandler.Instance },
@@ -56,16 +67,26 @@ namespace UI {
 		/// </summary>
 		/// <param name="index">The index of the interface to toggle.</param>
 		private void ToggleInterface(MenuType index) {
+			if (index == MenuType.SETTINGS) {
+				ToggleMenu(_interfaceStatus[index], null);
+				return;
+			}
+
 			if (Squad.Any(out Actor actor)) {
-				if (_interfaceStatus.TryGetValue(index, out Menu menu)) {
-					if (!menu.Canvas.enabled) {
-						menu.Open(actor);
-					} else {
-						menu.Close(actor);
-					}
-				} else {
-					throw new UnityException("This feature is not yet implemented.");
-				}
+				ToggleMenu(_interfaceStatus[index], actor);
+			}
+		}
+
+		/// <summary>
+		/// Toggle the menu.
+		/// </summary>
+		/// <param name="menu">The menu</param>
+		/// <param name="actor">The actor</param>
+		private void ToggleMenu(Menu menu, Actor actor) {
+			if (!menu.Canvas.enabled) {
+				menu.Open(actor);
+			} else {
+				menu.Close(actor);
 			}
 		}
 

@@ -3,6 +3,7 @@ using PointerSystem;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UI;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -19,6 +20,9 @@ public class UserInputs : MonoBehaviour, IUpdatable {
 	private Dictionary<string, InputAction> _actions = new Dictionary<string, InputAction>();
 	private RaycastHit _hit;
 	private InputAction _value;
+
+	private KeyCode[] _keyCodes = new KeyCode[0];
+	private Dictionary<KeyCode, Action> _keyCodeActions = new Dictionary<KeyCode, Action>();
 
 	private void Awake() {
 		if (ReferenceEquals(Instance, null)) {
@@ -55,8 +59,10 @@ public class UserInputs : MonoBehaviour, IUpdatable {
 			}
 		}
 
-		if (Input.GetKeyUp(KeyCode.Escape)) {
-			Squad.UnselectAll();
+		foreach (KeyCode keyCode in _keyCodes) {
+			if (Input.GetKeyUp(keyCode)) {
+				_keyCodeActions[keyCode]?.Invoke();
+			}
 		}
 	}
 
@@ -65,6 +71,22 @@ public class UserInputs : MonoBehaviour, IUpdatable {
 			if (_actions.TryGetValue(_hit.collider.name, out _value) || _actions.TryGetValue(_hit.collider.tag, out _value)) {
 				_value.Action?.Invoke(mouseButton, _hit);
 			}
+		}
+	}
+
+	/// <summary>
+	/// Subscribe to a keycode. The Action will be triggered when the user presses the keyCode.
+	/// </summary>
+	/// <param name="keyCode">The KeyCode to subscribe to.</param>
+	/// <param name="action">The action to be executed.</param>
+	public void Subscribe(KeyCode keyCode, Action action) {
+		if (_keyCodeActions.TryGetValue(keyCode, out Action existingAction)) {
+			_keyCodeActions[keyCode] += existingAction;
+		} else {
+			List<KeyCode> keyCodes = _keyCodes.ToList();
+			keyCodes.Add(keyCode);
+			_keyCodes = keyCodes.ToArray();
+			_keyCodeActions.Add(keyCode, action);
 		}
 	}
 

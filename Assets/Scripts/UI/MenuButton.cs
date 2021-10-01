@@ -8,6 +8,12 @@ namespace UI {
 
 		private Button _button;
 
+		[SerializeField]
+		private string _tooltip;
+
+		[SerializeField]
+		private KeyCode _keyCode;
+
 		public void Initialize(UnityAction<int> onClick) {
 			_button = GetComponent<Button>();
 			_button.onClick.AddListener(delegate { onClick(transform.GetSiblingIndex()); });
@@ -17,6 +23,10 @@ namespace UI {
 			if (!ReferenceEquals(_button, null)) {
 				_button.onClick.RemoveAllListeners();
 			}
+		}
+
+		public override string GetTooltip() {
+			return _tooltip + " [" + _keyCode.ToString() + "]";
 		}
 	}
 }

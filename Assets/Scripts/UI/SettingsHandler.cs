@@ -8,11 +8,9 @@ namespace UI {
 		protected override void Awake() {
 			base.Awake();
 			Instance = this;
-			Debug.Log("Settings is initializeds!!");
 		}
 
 		public override void Open(Actor actor) {
-			Debug.Log("Open!");
 			Canvas.enabled = true;
 		}
 
