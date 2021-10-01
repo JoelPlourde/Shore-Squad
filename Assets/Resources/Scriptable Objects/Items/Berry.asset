@@ -23,4 +23,6 @@ MonoBehaviour:
   ItemEffects:
   - ItemEffectType: 1
     Magnitude: 0.25
+    Duration: 0
+    StatusEffectData: {fileID: 0}
   Stackable: 1

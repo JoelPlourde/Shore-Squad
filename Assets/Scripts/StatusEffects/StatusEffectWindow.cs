@@ -60,7 +60,6 @@ namespace StatusEffectSystem {
 					StatusEffectData asset = CreateInstance<StatusEffectData>();
 					asset.Name = name;
 					asset.name = name;
-					asset.Duration = duration;
 					asset.Tooltip = tooltip;
 					asset.Reset = reset;
 					asset.Temporary = temporary;

@@ -52,7 +52,7 @@ namespace StatusEffectSystem {
 				if (status.StatusEffectData.Reset == true) {
 					_statuses[index].ResetDuration();
 				} else {
-					_statuses[index].IncreaseDuration(status.StatusEffectData.Duration);
+					_statuses[index].IncreaseDuration(status.Duration);
 				}
 
 				if (status.StatusEffectData.CanStack == true) {

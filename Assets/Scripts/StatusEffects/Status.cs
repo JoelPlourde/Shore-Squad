@@ -10,8 +10,17 @@ namespace StatusEffectSystem {
 			StatusEffectData = statusEffectData;
 		}
 
+		public Status(Actor actor, float magnitude, int duration, StatusEffectData statusEffectData) {
+			Guid = Guid.NewGuid();
+			Actor = actor;
+			Magnitude = magnitude;
+			Duration = duration;
+			MaxDuration = duration;
+			StatusEffectData = statusEffectData;
+		}
+
 		public void ResetDuration() {
-			Duration = StatusEffectData.Duration;
+			Duration = MaxDuration;
 		} 
 
 		public int IncreaseDuration(int value) {
@@ -37,6 +46,7 @@ namespace StatusEffectSystem {
 		public Actor Actor { get; private set; }
 		public StatusEffectData StatusEffectData { get; private set; }
 		public float Magnitude { get; private set; }
+		public int MaxDuration { get; private set; }
 		public int Duration { get; private set; }
 		public int Stack { get; private set; }
 

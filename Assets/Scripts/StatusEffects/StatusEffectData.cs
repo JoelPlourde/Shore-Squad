@@ -16,10 +16,6 @@ namespace StatusEffectSystem {
 		public Sprite Sprite;
 
 		[SerializeField]
-		[Tooltip("The duration of the status effect. How long does the status effect lasts for by default ?")]
-		public int Duration;
-
-		[SerializeField]
 		[Tooltip("If the same status effect is re-apply, if true; reset the duration to its original. if false; combine new duration and remaining duration.")]
 		public bool Reset = true;
 

@@ -74,6 +74,8 @@ public class Attributes {
 	/// <param name="value">A value in %</param>
 	public void ReduceSpeed(float value) {
 		Speed = Constant.ACTOR_BASE_SPEED - (Constant.ACTOR_BASE_SPEED * value);
+		_actor.NavMeshAgent.speed = Speed;
+		_actor.Animator.SetFloat("Speed", Speed);
 	}
 
 	/// <summary>
@@ -82,6 +84,8 @@ public class Attributes {
 	/// <param name="value">A value in % of the speed bonus applied before.</param>
 	public void ResetSpeed(float value) {
 		Speed = Speed + (Constant.ACTOR_BASE_SPEED * value);
+		_actor.NavMeshAgent.speed = Speed;
+		_actor.Animator.SetFloat("Speed", Speed);
 	}
 
 	/// <summary>
@@ -90,6 +94,8 @@ public class Attributes {
 	/// <param name="value">A value in %</param>
 	public void IncreaseSpeed(float value) {
 		Speed = Constant.ACTOR_BASE_SPEED + (Constant.ACTOR_BASE_SPEED * value);
+		_actor.NavMeshAgent.speed = Speed;
+		_actor.Animator.SetFloat("Speed", Speed);
 	}
 	#endregion
 
