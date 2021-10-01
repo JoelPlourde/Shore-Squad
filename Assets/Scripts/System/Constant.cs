@@ -14,7 +14,8 @@
 	public static readonly float AGENT_BASE_WALK_SPEED = 1.5f;
 	public static readonly float AGENT_BASE_RUN_SPEED = 4.5f;
 
-	public static readonly int ACTOR_BASE_SPEED = 1;
+	public static readonly float ACTOR_BASE_SPEED = 3.5f;
+	public static readonly float ACTOR_BASE_ROTATION_SPEED = 480f;
 	public static readonly float ACTOR_BASE_FOOD = 20f;
 
 	public static readonly string STARVING = "Starving";

@@ -26,20 +26,8 @@ namespace TaskSystem {
 			actor.NavMeshAgent.SetDestination(moveArguments.Position);
 			actor.NavMeshAgent.isStopped = false;
 
-			/*
-			 * TODO: Take into account any previous speed modifier into consideration.
-			// Calculate the distance, it if above a threshold run, if not walk.
-			float distance = (moveArguments.Position - actor.NavMeshAgent.transform.position).magnitude;
-			Debug.Log(distance);
-			if (distance > 5f) {
-				actor.Animator.SetInteger("Movement", 1);
-				actor.NavMeshAgent.speed = Constant.AGENT_BASE_RUN_SPEED;
-			} else {
-				actor.Animator.SetInteger("Movement", 0);
-				actor.NavMeshAgent.speed = Constant.AGENT_BASE_WALK_SPEED;
-			}
-			*/
-
+			// Send the animation.
+			actor.Animator.SetFloat("Speed", actor.NavMeshAgent.speed);
 			actor.Animator.SetBool("Move", true);
 		}
 

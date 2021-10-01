@@ -38,10 +38,10 @@ public class Actor : MonoBehaviour {
 		rigidbody.isKinematic = true;
 		rigidbody.useGravity = false;
 
-		NavMeshAgent.autoBraking = true;
-		NavMeshAgent.stoppingDistance = 0.1f;
-		NavMeshAgent.angularSpeed = 360f;
-		NavMeshAgent.speed = 1.5f;
+		NavMeshAgent.autoBraking = false;
+		NavMeshAgent.stoppingDistance = 0f;
+		NavMeshAgent.angularSpeed = Constant.ACTOR_BASE_ROTATION_SPEED;
+		NavMeshAgent.speed = Constant.ACTOR_BASE_SPEED;
 
 		SphereCollider collider = gameObject.AddComponent<SphereCollider>();
 		collider.radius = 1f;
