@@ -134,6 +134,9 @@ public static class Squad {
 					x.Actor.TaskScheduler.CreateTask<Move>(moveArguments);
 				}
 			});
+
+			// Create an indicator at the position.
+			ParticleSystemManager.Instance.SpawnParticleSystem("vfx_Indicator", moveArguments.Position);
 		}
 	}
 

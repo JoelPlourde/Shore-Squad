@@ -26,6 +26,11 @@ namespace TaskSystem {
 			actor.NavMeshAgent.SetDestination(moveArguments.Position);
 			actor.NavMeshAgent.isStopped = false;
 
+			float angle = Vector3.Angle(transform.forward, (moveArguments.Position - transform.position));
+			if (angle > 160) {
+				actor.Animator.SetTrigger("Turn");
+			}
+
 			// Send the animation.
 			actor.Animator.SetFloat("Speed", actor.NavMeshAgent.speed);
 			actor.Animator.SetBool("Move", true);

@@ -7,17 +7,16 @@ namespace GamePlay {
 	public class FeedbackManager : MonoBehaviour {
 		public static FeedbackManager Instance;
 
-		public GameObject prefab;
+		private static readonly int CAPACITY = 10;
 
-		private int _index = 0;
-		private FeedbackComponent[] _feedbacks = new FeedbackComponent[10];
+		public GameObject prefab;
+		private CircularBuffer<FeedbackComponent> _circularBuffer = new CircularBuffer<FeedbackComponent>(CAPACITY);
 
 		private void Awake() {
 			Instance = this;
 
-			for (int i = 0; i < _feedbacks.Length; i++) {
-				_feedbacks[i] = Instantiate(prefab, transform).GetComponent<FeedbackComponent>();
-				_feedbacks[i].Disable();
+			for (int i = 0; i < CAPACITY; i++) {
+				_circularBuffer.Insert(Instantiate(prefab, transform).GetComponent<FeedbackComponent>()).Disable();
 			}
 		}
 
@@ -30,9 +29,7 @@ namespace GamePlay {
 		}
 
 		public void DisplayMessage(Actor actor, string message) {
-			_feedbacks[_index].Enable(actor, message);
-			_index++;
-			_index %= _feedbacks.Length;
+			_circularBuffer.Next().Enable(actor, message);
 		}
 	}
 }

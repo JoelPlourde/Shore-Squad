@@ -10,6 +10,7 @@ using ItemSystem;
 using SkillSystem;
 using EmoteSystem;
 
+[RequireComponent(typeof(ParticleSystemManager))]
 [RequireComponent(typeof(AudioSource))]
 [RequireComponent(typeof(SoundManager))]
 [RequireComponent(typeof(SoundSystem))]

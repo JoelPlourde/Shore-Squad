@@ -1,10 +1,21 @@
-﻿using NUnit.Framework;
+﻿using GamePlay;
+using NUnit.Framework;
 using SaveSystem;
 using SkillSystem;
 using System;
+using UnityEngine;
+using UnityEngine.TestTools;
 
 namespace UnitTest {
 	public class SkillsTest {
+
+		public void Setup() {
+			GameObject gameObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
+			FeedbackManager feedbackManager = gameObject.AddComponent<FeedbackManager>();
+			Debug.Log(feedbackManager);
+		}
+
+
 		[Test]
 		public void Initialize_test() {
 			Skills skills = new Skills();
@@ -16,6 +27,7 @@ namespace UnitTest {
 		}
 
 		[Test]
+		[PrebuildSetup(typeof(SkillsTest))]
 		public void GainExperience_test() {
 			Skills skills = new Skills();
 			SkillsDto skillsDto = GetSkillsDtoFixture(out int[] values);
