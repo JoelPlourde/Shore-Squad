@@ -24,6 +24,7 @@ public class Actor : MonoBehaviour {
 	public bool Playable = false;
 
 	public event Action<bool> OnSelectionEvent;
+	public event Action<Actor> OnHarvestEvent;
 
 	public virtual void Awake() {
 		AudioSource = GetComponent<AudioSource>();
@@ -33,6 +34,10 @@ public class Actor : MonoBehaviour {
 		NavMeshAgent = GetComponent<NavMeshAgent>();
 		Armory = GetComponentInChildren<Armory>();
 		Emotion = GetComponent<Emotion>();
+		MiniCamera = GetComponentInChildren<MiniCamera>();
+		if (MiniCamera == null) {
+			throw new UnityException("Please verify the MiniCamera of this actor.");
+		}
 
 		Rigidbody rigidbody = gameObject.GetComponent<Rigidbody>();
 		rigidbody.isKinematic = true;
@@ -106,6 +111,13 @@ public class Actor : MonoBehaviour {
 		OnSelectionEvent?.Invoke(value);
 	}
 
+	/// <summary>
+	/// Function called by an Animation Event
+	/// </summary>
+	public void OnHarvest() {
+		OnHarvestEvent?.Invoke(this);
+	}
+
 	public bool Dead { get => Status.Dead; set => Status.Dead = value; }
 	public bool Fleeing { get => Status.Fleeing; set => Status.Fleeing = value; }
 	public bool Sheltered { get => Status.Sheltered; set => Status.Sheltered = value; }
@@ -128,6 +140,8 @@ public class Actor : MonoBehaviour {
 	public Status Status { get; private set; } = new Status();
 	public Face Face { get; private set; } = new Face();
 	public Body Body { get; private set; } = new Body();
+
+	public MiniCamera MiniCamera { get; private set; }
 
 	public Guid Guid { get; private set; }
 }

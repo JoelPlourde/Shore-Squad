@@ -8,7 +8,7 @@ public static class GameplayUtils {
 	/// <param name="speed">The value of Speed.</param>
 	/// <returns>The repeat rate in seconds.</returns>
 	public static float CalculateRepeatRateBasedOnSpeed(float speed) {
-		return (0.01f * speed) + 2;
+		return (0.01f * speed) + 1;
 	}
 
 	/// <summary>

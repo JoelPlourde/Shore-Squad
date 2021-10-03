@@ -13,7 +13,6 @@ namespace NodeSystem {
 		private NodeData _nodeData;
 
 		private Node _node;
-		private Dictionary<string, Coroutine> _routines = new Dictionary<string, Coroutine>();
 
 		/// <summary>
 		/// On Interact Enter, starts the gathering process.
@@ -44,22 +43,21 @@ namespace NodeSystem {
 				return;
 			}
 
-			_routines.Add(actor.name, StartCoroutine(Routine(actor, GameplayUtils.CalculateRepeatRateBasedOnSpeed(actor.Statistics.GetStatistic(_nodeData.SpeedStatistic)))));
+			actor.Animator.SetFloat("Harvest Speed", GameplayUtils.CalculateRepeatRateBasedOnSpeed(actor.Statistics.GetStatistic(_nodeData.SpeedStatistic)));
+			actor.Animator.SetBool("Harvest", true);
+			actor.OnHarvestEvent += OnHit;
 		}
 
 		/// <summary>
-		/// Routine that reduces health of this node every X seconds.
+		/// Callback that will be called whenever the Actor.OnHarvestEvent is triggered.
 		/// </summary>
-		/// <param name="actor">The actor that reducing the health.</param>
-		/// <param name="repeatRate">The rate at which the actor should strike the node.</param>
-		/// <returns>The IEnumerator</returns>
-		IEnumerator Routine(Actor actor, float repeatRate) {
-			while (true) {
-				yield return new WaitForSeconds(repeatRate);
-				if (_node.ReduceHealth(actor, actor.Statistics.GetStatistic(_nodeData.DamageStatistic)) <= 0) {
-					actor.TaskScheduler.CancelTask();
-				}
+		/// <param name="actor">The actor the event is called on.</param>
+		private void OnHit(Actor actor) {
+			if (_node.ReduceHealth(actor, actor.Statistics.GetStatistic(_nodeData.DamageStatistic)) <= 0) {
+				actor.TaskScheduler.CancelTask();
 			}
+
+			actor.Skills.GainExperience(_nodeData.SkillType, _nodeData.Experience);
 		}
 
 		/// <summary>
@@ -67,17 +65,13 @@ namespace NodeSystem {
 		/// </summary>
 		/// <param name="actor"></param>
 		public void OnInteractExit(Actor actor) {
-			if (_routines.TryGetValue(actor.name, out Coroutine coroutine)) {
-				StopCoroutine(coroutine);
-				_routines.Remove(actor.name);
-			}
+			actor.Animator.SetBool("Harvest", false);
+			actor.OnHarvestEvent -= OnHarvest;
 		}
 
 		private void OnHarvest(Actor actor) {
 			// TODO Output the Loot.
 			Debug.Log("LOOT!!");
-
-			actor.Skills.GainExperience(_nodeData.SkillType, _nodeData.Experience);
 		}
 
 		public float GetInteractionRadius() {

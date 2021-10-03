@@ -135,8 +135,10 @@ public static class Squad {
 				}
 			});
 
-			// Create an indicator at the position.
-			ParticleSystemManager.Instance.SpawnParticleSystem("vfx_Indicator", moveArguments.Position);
+			if (HasSelected) {
+				// Create an indicator at the position.
+				ParticleSystemManager.Instance.SpawnParticleSystem("vfx_Indicator", moveArguments.Position);
+			}
 		}
 	}
 

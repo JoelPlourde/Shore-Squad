@@ -23,6 +23,8 @@ MonoBehaviour:
   ItemEffects:
   - ItemEffectType: 0
     Magnitude: 0
+    Duration: 0
+    StatusEffectData: {fileID: 0}
   Stackable: 0
   EquipmentPrefab: {fileID: 4948250561221570548, guid: 14dc863178c73da428369b4bf6c98ac3,
     type: 3}

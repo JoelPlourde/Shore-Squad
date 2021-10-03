@@ -20,5 +20,6 @@ MonoBehaviour:
   WeaponType: 3
   Requirement: 1
   Experience: 5
+  HarvestSpeed: 1.15
   DamageStatistic: 9
   SpeedStatistic: 8

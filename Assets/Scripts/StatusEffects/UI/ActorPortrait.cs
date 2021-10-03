@@ -1,6 +1,7 @@
 ﻿using StatusEffectSystem.UI;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace UI {
 	namespace Portrait {
@@ -25,6 +26,15 @@ namespace UI {
 					throw new UnityException("Please verify the structure of the ActorPortrait: StatusesHandler is missing.");
 				}
 				StatusHandler.Initialize(actor.Guid);
+
+				MiniPortrait = transform.Find("Mask/MiniPortrait").GetComponent<RawImage>();
+				if (MiniPortrait == null) {
+					throw new UnityException("Please verify the structure of the ActorPortrait: Mask/MiniPortrait is missing.");
+				}
+				RenderTexture renderTexture = new RenderTexture(256, 256, 8, RenderTextureFormat.ARGB32);
+				renderTexture.Create();
+				MiniPortrait.texture = renderTexture;
+				actor.MiniCamera.Initialize(renderTexture);
 
 				Selection = transform.Find("Selection").gameObject;
 				if (Selection == null) {
@@ -53,6 +63,7 @@ namespace UI {
 			public StatusHandler StatusHandler { get; private set; }
 			public FoodBar FoodBar { get; private set; }
 			public GameObject Selection { get; private set; }
+			public RawImage MiniPortrait { get; private set; }
 		}
 	}
 }
