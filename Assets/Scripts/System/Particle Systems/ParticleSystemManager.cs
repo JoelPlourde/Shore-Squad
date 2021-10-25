@@ -24,6 +24,17 @@ public class ParticleSystemManager : MonoBehaviour
 		}
 	}
 
+	/// <summary>
+	/// Register the Particle System by its name.
+	/// </summary>
+	/// <param name="particleSystemName">The particle system name.</param>
+	/// <param name="prefab">The prefab.</param>
+	public void RegisterParticleSystem(string particleSystemName, GameObject prefab) {
+		if (!_prefabs.ContainsKey(particleSystemName)) {
+			_prefabs.Add(particleSystemName, prefab);
+		}
+	}
+
 	private void HandleBuffer(string key, GameObject prefab, Vector3 position) {
 		if (!_buffers.ContainsKey(key)) {
 			Particle particle = SpawnParticle(prefab);

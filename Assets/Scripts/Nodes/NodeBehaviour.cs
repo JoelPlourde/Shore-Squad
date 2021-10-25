@@ -1,7 +1,4 @@
-﻿using GamePlay;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace NodeSystem {
 	public class NodeBehaviour : MonoBehaviour, IInteractable {
@@ -13,6 +10,11 @@ namespace NodeSystem {
 		private NodeData _nodeData;
 
 		private Node _node;
+
+		private void Start() {
+			// Register the particle system if any.
+			ParticleSystemManager.Instance.RegisterParticleSystem(_nodeData.HitParticleSystem.name, _nodeData.HitParticleSystem);
+		}
 
 		/// <summary>
 		/// On Interact Enter, starts the gathering process.
@@ -53,11 +55,15 @@ namespace NodeSystem {
 		/// </summary>
 		/// <param name="actor">The actor the event is called on.</param>
 		private void OnHit(Actor actor) {
+			if (!ReferenceEquals(_nodeData.HitParticleSystem, null)) {
+				ParticleSystemManager.Instance.SpawnParticleSystem(_nodeData.HitParticleSystem.name, actor.transform.position + _nodeData.HitRelativePosition);
+			}
+
+			// TODO ADD SOUND
+
 			if (_node.ReduceHealth(actor, actor.Statistics.GetStatistic(_nodeData.DamageStatistic)) <= 0) {
 				actor.TaskScheduler.CancelTask();
 			}
-
-			actor.Skills.GainExperience(_nodeData.SkillType, _nodeData.Experience);
 		}
 
 		/// <summary>
@@ -72,6 +78,8 @@ namespace NodeSystem {
 		private void OnHarvest(Actor actor) {
 			// TODO Output the Loot.
 			Debug.Log("LOOT!!");
+
+			actor.Skills.GainExperience(_nodeData.SkillType, _nodeData.Experience);
 		}
 
 		public float GetInteractionRadius() {

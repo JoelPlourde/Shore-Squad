@@ -20,6 +20,9 @@ MonoBehaviour:
   WeaponType: 3
   Requirement: 1
   Experience: 5
-  HarvestSpeed: 1.15
   DamageStatistic: 9
   SpeedStatistic: 8
+  HitParticleSystem: {fileID: 1012558301860995777, guid: 9614f92314ef4db4699e10082cd877c9,
+    type: 3}
+  HitRelativePosition: {x: -0.144, y: 0.85, z: -1.173}
+  HitSound: {fileID: 0}

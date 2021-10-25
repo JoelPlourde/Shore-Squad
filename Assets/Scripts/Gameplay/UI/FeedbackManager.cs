@@ -21,7 +21,7 @@ namespace GamePlay {
 		}
 
 		public void DisplayExperienceGain(Actor actor, int experience) {
-			DisplayMessage(actor, "<color=#ff0000ff>+" + experience + "</color>");
+			DisplayMessage(actor, "<color=#35fc03>+" + experience + "</color>");
 		}
 
 		public void DisplayError(Actor actor, string error) {

@@ -269,7 +269,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1905922953, guid: 817dfdaeefbe16645a5343d0a5ebae30, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 41.970196
+      value: 41.970055
       objectReference: {fileID: 0}
     - target: {fileID: 1915549929, guid: 817dfdaeefbe16645a5343d0a5ebae30, type: 3}
       propertyPath: m_AnchorMin.y
@@ -1757,7 +1757,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad5a4471d190ffc40b8d95caaf21b412, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InteractionRadius: 1
+  InteractionRadius: 1.5
   _nodeData: {fileID: 11400000, guid: 8087fc854048783468e0e5848bff48a4, type: 2}
 --- !u!65 &1675900258
 BoxCollider:
@@ -1826,7 +1826,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1675900256}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 274.86, y: 16.42, z: 311.11652}
+  m_LocalPosition: {x: 274.86, y: 16.42, z: 314.89}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
