@@ -1,4 +1,5 @@
-﻿using BodySystem;
+﻿using AudioSystem;
+using BodySystem;
 using EmoteSystem;
 using FactionSystem;
 using ItemSystem;
@@ -8,11 +9,10 @@ using SkillSystem;
 using StatusEffectSystem;
 using System;
 using TaskSystem;
-using UI.Portrait;
 using UnityEngine;
 using UnityEngine.AI;
 
-[RequireComponent(typeof(AudioSource))]
+[RequireComponent(typeof(AudioPlayer))]
 [RequireComponent(typeof(Emotion))]
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(Animator))]
@@ -27,7 +27,7 @@ public class Actor : MonoBehaviour {
 	public event Action<Actor> OnHarvestEvent;
 
 	public virtual void Awake() {
-		AudioSource = GetComponent<AudioSource>();
+		AudioPlayer = GetComponent<AudioPlayer>();
 		Animator = GetComponent<Animator>();
 		TaskScheduler = GetComponent<TaskScheduler>();
 		StatusEffectScheduler = GetComponent<StatusEffectScheduler>();
@@ -125,7 +125,7 @@ public class Actor : MonoBehaviour {
 
 	public bool Selected { get; private set; }
 
-	public AudioSource AudioSource { get; private set; }
+	public AudioPlayer AudioPlayer { get; private set; }
 	public Animator Animator { get; private set; }
 	public TaskScheduler TaskScheduler { get; private set; }
 	public StatusEffectScheduler StatusEffectScheduler { get; private set; }

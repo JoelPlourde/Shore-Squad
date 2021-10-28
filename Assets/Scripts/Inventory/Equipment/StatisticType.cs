@@ -11,7 +11,9 @@
 			HEAT_RESISTANCE,        // This value correlates with the ability to adapt to hot environment
 			MINING_SPEED,           // This value correlates with the speed at which the character strike a mining node.
 			MINING_STRENGTH,        // This value correlates with the damage inflicted to the mining node.
-			LUCK                    // This value correlates with the ability to critically strike a node.
+			LUCK,                   // This value correlates with the ability to critically strike a node.
+			LOGGING_SPEED,			// This value correlates with the speed at which the character strike a lumber node.
+			LOGGING_STRENGTH		// This value correlates with the damage inflicted to the lumber node.
 		}
 	}
 }

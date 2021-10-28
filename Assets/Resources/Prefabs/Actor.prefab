@@ -1782,7 +1782,7 @@ GameObject:
   - component: {fileID: 292237734037973185}
   - component: {fileID: -8864126796614585121}
   - component: {fileID: 3516270053860658714}
-  - component: {fileID: 8415192542007433878}
+  - component: {fileID: 3015627265431606604}
   m_Layer: 9
   m_Name: Actor
   m_TagString: FACTIONLESS
@@ -2024,7 +2024,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &8415192542007433878
+--- !u!114 &3015627265431606604
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2033,10 +2033,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 8696446425973915764}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb47ebe769db374459854d31349548b1, type: 3}
+  m_Script: {fileID: 11500000, guid: c1327f7822bcd7f429fcaff13e36a23d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  time: 0
 --- !u!1 &8763754895354821933
 GameObject:
   m_ObjectHideFlags: 0

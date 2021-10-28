@@ -44,12 +44,10 @@ namespace NodeSystem {
 		public StatisticType SpeedStatistic;
 
 		[Header("Particle System")]
-		[Tooltip("The particle system that will played when the node is hit.")]
-		public GameObject HitParticleSystem;
+		[Tooltip("The particle System to be played whenever the character hits this node.")]
+		public ParticleSystemData OnHit;
 
-		[Tooltip("The relative Position where the particle system will be spawn from relative to the character.")]
-		public Vector3 HitRelativePosition;
-
-		public AudioClip HitSound;
+		[Tooltip("The particle system to be played to determine how the node reacts to being hit.")]
+		public ParticleSystemData OnResponse;
 	}
 }

@@ -21,9 +21,7 @@ namespace EmoteSystem {
 			}
 
 			if (!ReferenceEquals(emoteData.Sound, null)) {
-				_actor.AudioSource.pitch = Random.Range(0.85f, 1.15f);
-				_actor.AudioSource.clip = emoteData.Sound;
-				_actor.AudioSource.PlayDelayed(emoteData.Delay);
+				_actor.AudioPlayer.PlayDelayed(emoteData.Sound, emoteData.Delay);
 			}
 		}
 	}

@@ -13,7 +13,7 @@ namespace NodeSystem {
 
 		private void Start() {
 			// Register the particle system if any.
-			ParticleSystemManager.Instance.RegisterParticleSystem(_nodeData.HitParticleSystem.name, _nodeData.HitParticleSystem);
+			ParticleSystemManager.Instance.RegisterParticleSystem(_nodeData.OnHit.ParticleSystem.name, _nodeData.OnHit.ParticleSystem);
 		}
 
 		/// <summary>
@@ -54,12 +54,14 @@ namespace NodeSystem {
 		/// Callback that will be called whenever the Actor.OnHarvestEvent is triggered.
 		/// </summary>
 		/// <param name="actor">The actor the event is called on.</param>
-		private void OnHit(Actor actor) {
-			if (!ReferenceEquals(_nodeData.HitParticleSystem, null)) {
-				ParticleSystemManager.Instance.SpawnParticleSystem(_nodeData.HitParticleSystem.name, actor.transform.position + _nodeData.HitRelativePosition);
+		protected virtual void OnHit(Actor actor) {
+			if (!ReferenceEquals(_nodeData.OnHit.ParticleSystem, null)) {
+				ParticleSystemManager.Instance.SpawnParticleSystem(_nodeData.OnHit.ParticleSystem.name, actor.transform.position + _nodeData.OnHit.RelativePosition);
 			}
 
-			// TODO ADD SOUND
+			if (!ReferenceEquals(_nodeData.OnHit.Sound, null)) {
+				actor.AudioPlayer.PlayOneShot(_nodeData.OnHit.Sound);
+			}
 
 			if (_node.ReduceHealth(actor, actor.Statistics.GetStatistic(_nodeData.DamageStatistic)) <= 0) {
 				actor.TaskScheduler.CancelTask();

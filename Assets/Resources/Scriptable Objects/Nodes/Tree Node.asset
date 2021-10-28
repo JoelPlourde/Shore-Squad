@@ -10,23 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e6fb8310d4201904b8ca8fcb39d8d651, type: 3}
-  m_Name: Copper Node
+  m_Name: Tree Node
   m_EditorClassIdentifier: 
   Health: 100
   Durability: 0
   Capacity: 5
   DropTable: {fileID: 0}
-  SkillType: 0
-  WeaponType: 3
+  SkillType: 1
+  WeaponType: 4
   Requirement: 1
-  Experience: 5
-  DamageStatistic: 9
-  SpeedStatistic: 8
+  Experience: 1
+  DamageStatistic: 12
+  SpeedStatistic: 11
   OnHit:
-    ParticleSystem: {fileID: 1012558301860995777, guid: 9614f92314ef4db4699e10082cd877c9,
+    ParticleSystem: {fileID: 2647849099764195650, guid: 2c253c7f68f028641ab30e12ea3ec862,
       type: 3}
-    RelativePosition: {x: -0.144, y: 0.85, z: -1.173}
-    Sound: {fileID: 8300000, guid: 5319ed8706fc0b44eb7b7745d52fddf9, type: 3}
+    RelativePosition: {x: -1.04, y: 0.97, z: 0.45}
+    Sound: {fileID: 8300000, guid: 78886a3d2cbf54f45abb7764e0c5521f, type: 3}
   OnResponse:
     ParticleSystem: {fileID: 0}
     RelativePosition: {x: 0, y: 0, z: 0}

@@ -14,6 +14,8 @@ namespace ItemSystem {
 				} else if (MenuBar.Instance.CurrentMenu == MenuType.EQUIPMENT){
 					OnUnequip(actor, item);
 				}
+
+				Tooltip.Instance.HideTooltip();
 			}
 
 			public void OnEquip(Actor actor, Item item) {
