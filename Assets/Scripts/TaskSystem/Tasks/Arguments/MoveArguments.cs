@@ -10,7 +10,7 @@ namespace TaskSystem {
 
 		public MoveArguments(Vector3 position) {
 			Position = position;
-			Radius = 0.5f;
+			Radius = 0.1f;
 		}
 
 		public MoveArguments(Vector3 position, float radius) {

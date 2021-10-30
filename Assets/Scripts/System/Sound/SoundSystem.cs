@@ -21,4 +21,13 @@ public class SoundSystem : MonoBehaviour
 		_audioSource.volume = volume;
 		_audioSource.PlayOneShot(audioClip);
 	}
+
+	/// <summary>
+	/// Play a sound by its name at a certain volume.
+	/// </summary>
+	/// <param name="audioClipName">The name of the audio clip to be played.</param>
+	/// <param name="volume">The volume in percentage (%).</param>
+	public void PlaySound(string audioClipName, float volume) {
+		PlaySound(SoundManager.Instance.GetAudioClip(audioClipName), volume);
+	}
 }

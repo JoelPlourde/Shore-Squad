@@ -19,10 +19,10 @@ namespace UI {
 				menuButton.Initialize(OnClick);
 			}
 
-			UserInputs.Instance.Subscribe(KeyCode.E, delegate { OnClick(0); });
-			UserInputs.Instance.Subscribe(KeyCode.R, delegate { OnClick(1); });
-			UserInputs.Instance.Subscribe(KeyCode.T, delegate { OnClick(2); });
-			UserInputs.Instance.Subscribe(KeyCode.Escape, delegate {
+			UserInputs.Instance.Subscribe(_menuButtons[0].GetKeyCode(), delegate { OnClick(0); });
+			UserInputs.Instance.Subscribe(_menuButtons[1].GetKeyCode(), delegate { OnClick(1); });
+			UserInputs.Instance.Subscribe(_menuButtons[2].GetKeyCode(), delegate { OnClick(2); });
+			UserInputs.Instance.Subscribe(_menuButtons[3].GetKeyCode(), delegate {
 				if (Squad.HasSelected) {
 					Squad.UnselectAll();
 				} else {

@@ -28,5 +28,9 @@ namespace UI {
 		public override string GetTooltip() {
 			return _tooltip + " [" + _keyCode.ToString() + "]";
 		}
+
+		public KeyCode GetKeyCode() {
+			return _keyCode;
+		}
 	}
 }

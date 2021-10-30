@@ -28,7 +28,7 @@ MonoBehaviour:
     RelativePosition: {x: -1.04, y: 0.97, z: 0.45}
     Sound: {fileID: 8300000, guid: 78886a3d2cbf54f45abb7764e0c5521f, type: 3}
   OnResponse:
-    ParticleSystem: {fileID: 2647849099764195650, guid: 2c253c7f68f028641ab30e12ea3ec862,
+    ParticleSystem: {fileID: 3490109510393429610, guid: ba3a3ce34410dde4f835700f8a1f22df,
       type: 3}
     RelativePosition: {x: 0, y: 2, z: 0}
     Sound: {fileID: 8300000, guid: c2ae32c7ca8427c478a162fcab826041, type: 3}

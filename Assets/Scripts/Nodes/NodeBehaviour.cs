@@ -97,5 +97,10 @@ namespace NodeSystem {
 		public float GetInteractionRadius() {
 			return InteractionRadius;
 		}
+
+		public void OnDrawGizmosSelected() {
+			Gizmos.color = Color.blue;
+			Gizmos.DrawWireSphere(transform.position, InteractionRadius);
+		}
 	}
 }

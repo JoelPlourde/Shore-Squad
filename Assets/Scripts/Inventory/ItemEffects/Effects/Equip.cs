@@ -31,7 +31,15 @@ namespace ItemSystem {
 					return;
 				}
 
-				// TODO ADD SOUND HERE.
+				switch (equipment.EquipmentData.WeaponType) {
+					case WeaponType.AXE:
+					case WeaponType.PICKAXE:
+					case WeaponType.SINGLE_HANDED:
+					case WeaponType.TWO_HANDED:
+						actor.AudioPlayer.PlayOneShot(SoundManager.Instance.GetAudioClip("unsheathe_weapon"));
+						break;
+				}
+
 				if (actor.Armory.Equip(equipment, out Equipment previousEquipment)) {
 					if (actor.Inventory.RemoveItemFromInventoryAtPosition(item.Index, item.Amount)) {
 						if (!ReferenceEquals(previousEquipment, null)) {
@@ -48,6 +56,15 @@ namespace ItemSystem {
 				if (requiredSpace > actor.Inventory.GetNumberOfAvailableSlotForItem(item.ItemData)) {
 					FeedbackManager.Instance.DisplayError(actor, string.Format("You need at least {0} slot in your inventory to unequip this", requiredSpace));
 					return;
+				}
+
+				switch (equipment.EquipmentData.WeaponType) {
+					case WeaponType.AXE:
+					case WeaponType.PICKAXE:
+					case WeaponType.SINGLE_HANDED:
+					case WeaponType.TWO_HANDED:
+						actor.AudioPlayer.PlayOneShot(SoundManager.Instance.GetAudioClip("sheathe_weapon"));
+						break;
 				}
 
 				// TODO ADD SOUND HERE.

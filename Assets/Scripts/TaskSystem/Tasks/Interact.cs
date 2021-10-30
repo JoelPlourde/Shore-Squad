@@ -19,7 +19,11 @@ namespace TaskSystem {
 			if (Vector3.Distance(actor.transform.position, _interactArguments.Position) > (_interactArguments.Interactable.GetInteractionRadius() * 2)) {
 				actor.NavMeshAgent.SetDestination(_interactArguments.Position);
 				actor.NavMeshAgent.isStopped = false;
+
+				actor.Animator.SetFloat("Speed", actor.NavMeshAgent.speed);
 				actor.Animator.SetBool("Move", true);
+			} else {
+				actor.transform.LookAt(_interactArguments.Position, Vector3.up);
 			}
 		}
 

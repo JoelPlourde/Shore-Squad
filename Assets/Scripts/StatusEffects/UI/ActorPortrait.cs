@@ -55,6 +55,8 @@ namespace UI {
 			}
 
 			public void OnPointerClick(PointerEventData eventData) {
+				SoundSystem.Instance.PlaySound("hover", 0.2f);
+
 				Squad.SelectActor(Actor);
 			}
 
