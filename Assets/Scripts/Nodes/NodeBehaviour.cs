@@ -7,13 +7,17 @@ namespace NodeSystem {
 		public float InteractionRadius;
 
 		[SerializeField]
-		private NodeData _nodeData;
+		protected NodeData _nodeData;
 
-		private Node _node;
+		protected Node _node;
 
-		private void Start() {
+		public void Start() {
 			// Register the particle system if any.
-			ParticleSystemManager.Instance.RegisterParticleSystem(_nodeData.OnHit.ParticleSystem.name, _nodeData.OnHit.ParticleSystem);
+			if (!ReferenceEquals(_nodeData.OnHit, null)) {
+				ParticleSystemManager.Instance.RegisterParticleSystem(_nodeData.OnHit.ParticleSystem.name, _nodeData.OnHit.ParticleSystem);
+			}
+
+			OnStart();
 		}
 
 		/// <summary>
@@ -66,6 +70,8 @@ namespace NodeSystem {
 			if (_node.ReduceHealth(actor, actor.Statistics.GetStatistic(_nodeData.DamageStatistic)) <= 0) {
 				actor.TaskScheduler.CancelTask();
 			}
+
+			OnResponse(actor);
 		}
 
 		/// <summary>
@@ -76,6 +82,10 @@ namespace NodeSystem {
 			actor.Animator.SetBool("Harvest", false);
 			actor.OnHarvestEvent -= OnHarvest;
 		}
+
+		public virtual void OnStart() {}
+
+		public virtual void OnResponse(Actor actor) {}
 
 		private void OnHarvest(Actor actor) {
 			// TODO Output the Loot.

@@ -3,10 +3,11 @@ using UnityEngine;
 using DropSystem;
 using ItemSystem.EquipmentSystem;
 using SkillSystem;
+using UnityEditor;
 
 namespace NodeSystem {
 	[Serializable]
-	[CreateAssetMenu(fileName = "NodeData", menuName = "ScriptableObjects/Node Data")]
+	[CreateAssetMenu(fileName = "NodeData", menuName = "ScriptableObjects/Node Data/Base")]
 	public class NodeData : ScriptableObject {
 
 		[Header("Harvest Parameters")]
@@ -46,8 +47,5 @@ namespace NodeSystem {
 		[Header("Particle System")]
 		[Tooltip("The particle System to be played whenever the character hits this node.")]
 		public ParticleSystemData OnHit;
-
-		[Tooltip("The particle system to be played to determine how the node reacts to being hit.")]
-		public ParticleSystemData OnResponse;
 	}
 }
