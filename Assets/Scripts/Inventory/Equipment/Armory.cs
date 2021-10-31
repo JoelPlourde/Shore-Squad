@@ -73,6 +73,10 @@ namespace ItemSystem {
 						_actor.Body.DisplayBodyParts(equipment.EquipmentData.SlotType, false);
 					}
 
+					if (equipment.EquipmentData.SlotType == SlotType.BODY) {
+						_actor.Body.DisplayBodyParts(BodySystem.BodyPartType.ARMS, !equipment.EquipmentData.HideArms);
+					}
+
 					_actor.Statistics.UpdateStatistics(equipment.EquipmentData.EquipmentStats.Statistics, true);
 
 					OnEquipmentAddedEvent?.Invoke(equipment);

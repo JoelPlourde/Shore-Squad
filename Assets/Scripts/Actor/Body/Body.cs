@@ -79,6 +79,12 @@ namespace BodySystem {
 			_skinnedMeshRenderer.materials = GetMaterials(materials, slotType, show);
 		}
 
+		public void DisplayBodyParts(BodyPartType bodyPartType, bool show) {
+			Material[] materials = _skinnedMeshRenderer.materials;
+			materials[(int)bodyPartType] = GetMaterial(bodyPartType, show);
+			_skinnedMeshRenderer.materials = materials;
+		}
+
 		/// <summary>
 		/// Display or Hide the respective Body Parts based on the Slot Type.
 		/// </summary>
