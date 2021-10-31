@@ -6,7 +6,8 @@
 			TWO_HANDED = 2,
 			PICKAXE = 3,
 			AXE = 4,
-			LANTERN = 5
+			LANTERN = 5,
+			TORCH = 6
 		}
 	}
 }

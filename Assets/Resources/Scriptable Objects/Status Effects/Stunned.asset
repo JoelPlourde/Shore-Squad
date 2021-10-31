@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: Stunned
   m_EditorClassIdentifier: 
   Name: Stunned
-  Sprite: {fileID: 0}
-  Duration: 5
+  Sprite: {fileID: 21300000, guid: 95f1ddf762a491342bf0c96f30b3271c, type: 3}
   Reset: 1
   Temporary: 1
   CanStack: 0

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 656fd23eb31f3ac4aa3b80ee64427820, type: 3}
   m_Name: Lantern
   m_EditorClassIdentifier: 
-  Sprite: {fileID: 21300000, guid: 502848424f9be5845b8a65a596269c49, type: 3}
+  Sprite: {fileID: 21300000, guid: f4b387276e4e5de4981eed18ba01b188, type: 3}
   Prefab: {fileID: 0}
   Tooltip: '<color=#BFBFBF><size=20>Equip</size></color> <size=22>Lantern</size>
 

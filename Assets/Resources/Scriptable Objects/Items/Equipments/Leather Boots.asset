@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 656fd23eb31f3ac4aa3b80ee64427820, type: 3}
   m_Name: Leather Boots
   m_EditorClassIdentifier: 
-  Sprite: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: db133e97bd969d44faa9d915d1f8be2c, type: 3}
   Prefab: {fileID: 9013216995371323266, guid: 2e62e9be1424086449a121e9c2998ab6, type: 3}
   Tooltip: '<color=#BFBFBF><size=20>Equip</size></color> <size=22>Leather Boots</size>
 
@@ -25,6 +25,8 @@ MonoBehaviour:
   ItemEffects:
   - ItemEffectType: 0
     Magnitude: 0
+    Duration: 0
+    StatusEffectData: {fileID: 0}
   Stackable: 0
   EquipmentPrefab: {fileID: 9013216995371323266, guid: 2e62e9be1424086449a121e9c2998ab6,
     type: 3}
