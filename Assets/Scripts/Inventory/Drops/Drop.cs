@@ -31,5 +31,9 @@ namespace DropSystem {
 		public override string ToString() {
 			return ItemData.name + "x" + Amount;
 		}
+
+		public Item ToItem() {
+			return new Item(ItemData, Amount);
+		}
 	}
 }

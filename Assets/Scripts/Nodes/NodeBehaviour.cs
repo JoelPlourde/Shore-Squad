@@ -1,4 +1,7 @@
 ﻿using UnityEngine;
+using DropSystem;
+using System.Collections.Generic;
+using ItemSystem;
 
 namespace NodeSystem {
 	public class NodeBehaviour : MonoBehaviour, IInteractable {
@@ -88,8 +91,12 @@ namespace NodeSystem {
 		public virtual void OnResponse(Actor actor) {}
 
 		private void OnHarvest(Actor actor) {
-			// TODO Output the Loot.
-			Debug.Log("LOOT!!");
+			Drop drop = _nodeData.DropTable.GetRandomDrop();
+
+			actor.Inventory.AddItemsToInventory(new List<Item> { drop.ToItem() }, out List<Item> remainingItems);
+			if (remainingItems.Count > 0) {
+				Debug.Log("Do something with the exceeding items!");
+			}
 
 			actor.Skills.GainExperience(_nodeData.SkillType, _nodeData.Experience);
 		}

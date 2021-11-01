@@ -89,7 +89,7 @@ namespace ItemSystem {
 		}
 
 		/// <summary>
-		/// Add an item to the inventory.
+		/// Add an item to the inventory. WARNING DO NOT USE THIS METHOD DIRECTLY, USE ADDITEMSTOINVENTORY
 		/// </summary>
 		/// <param name="itemData">The ItemData to add.</param>
 		/// <param name="amount">The amount to add.</param>
