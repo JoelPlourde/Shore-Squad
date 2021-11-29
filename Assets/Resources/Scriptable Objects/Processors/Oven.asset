@@ -7,14 +7,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a64f701ca53781408ef5a4dec585c9d, type: 3}
-  m_Name: CopperNode
+  m_Script: {fileID: 11500000, guid: c1ba8587d3647d4488865d08b2a35f48, type: 3}
+  m_Name: Oven
   m_EditorClassIdentifier: 
-  Drops:
-  - ItemData: {fileID: 11400000, guid: e73fd69002fdc0d47be3642885101242, type: 2}
-    Weight: 100
-    Quantity:
-      Min: 1
-      Max: 1
+  Recipes:
+  - {fileID: 11400000, guid: 5e086f1871c3a1c4787a5b84b09dfaba, type: 2}
+  Manual: 0
+  RequiresPower: 1
+  Efficiency: 0

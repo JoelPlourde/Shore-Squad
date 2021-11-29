@@ -1,21 +1,24 @@
 ﻿using UnityEngine;
 
 namespace UI {
-	public class SettingsHandler : Menu {
+	[RequireComponent(typeof(Canvas))]
+	public class SettingsHandler : MonoBehaviour, IMenu {
 
 		public static SettingsHandler Instance;
 
-		protected override void Awake() {
-			base.Awake();
+		private void Awake() {
+			Canvas = GetComponent<Canvas>();
 			Instance = this;
 		}
 
-		public override void Open(Actor actor) {
+		public void Open(Actor actor) {
 			Canvas.enabled = true;
 		}
 
-		public override void Close(Actor actor) {
+		public void Close(Actor actor) {
 			Canvas.enabled = false;
 		}
+
+		public Canvas Canvas { get; set; }
 	}
 }

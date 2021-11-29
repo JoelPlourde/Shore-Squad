@@ -1,16 +1,26 @@
 ﻿using DropSystem;
 using ItemSystem;
 using NUnit.Framework;
+using UnityEngine;
+using UnityEngine.TestTools;
 
 namespace UnitTest {
-	public class DropTest {
+	public class DropTest : IPrebuildSetup {
+
+		public void Setup() {
+			GameObject gameobject = new GameObject();
+			gameobject.AddComponent<ItemManager>();
+		}
+
 		[Test]
+		[PrebuildSetup(typeof(DropTest))]
 		public void DropTable_test() {
 			DropTable dropTable = GetDropTableFixture();
 			Assert.That(dropTable.Drops.Length, Is.EqualTo(2));
 		}
 
 		[Test]
+		[PrebuildSetup(typeof(DropTest))]
 		public void GetRandomDrop_test() {
 			DropTable dropTable = GetDropTableFixture();
 			Drop drop = dropTable.GetRandomDrop();
@@ -19,7 +29,26 @@ namespace UnitTest {
 		}
 
 		private DropTable GetDropTableFixture() {
-			return DropTableManager.GetDropTable("Normal Tree");
+			Drop[] drops = new Drop[2];
+			drops[0] = new Drop {
+				ItemData = GetItemDataFixture(0),
+				Weight = 10,
+				Quantity = new Quantity {
+					Min = 1,
+					Max = 2
+				}
+			};
+			drops[1] = new Drop {
+				ItemData = GetItemDataFixture(1),
+				Weight = 90,
+				Quantity = new Quantity {
+					Min = 1,
+					Max = 2
+				}
+			};
+			return new DropTable {
+				Drops = drops
+			};
 		}
 
 		private ItemData GetItemDataFixture(int index) {

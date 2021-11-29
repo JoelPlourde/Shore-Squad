@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a7d26e20cfda80046b9311ea6298a385, type: 3}
-  m_Name: Stone
+  m_Name: Flour
   m_EditorClassIdentifier: 
-  Sprite: {fileID: 21300000, guid: 767a04d14aa89c74b94c20d59bb8bda1, type: 3}
+  Sprite: {fileID: 0}
   Prefab: {fileID: 0}
-  Tooltip: '<size=22>Stone</size>
+  Tooltip: '<size=22>Flour</size>
 
     <size=16>Resource</size>'
   ItemType: 0

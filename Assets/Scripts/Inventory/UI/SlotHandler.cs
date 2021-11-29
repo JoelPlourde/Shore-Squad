@@ -1,6 +1,6 @@
 ﻿using ItemSystem.EffectSystem;
 using PointerSystem;
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UI;
 using UnityEngine;
@@ -12,6 +12,9 @@ namespace ItemSystem {
 		[RequireComponent(typeof(Image))]
 		public class SlotHandler : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerUpHandler, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler {
 
+			public event Action OnBeginDragEvent;
+			public event Action OnEndDragEvent;
+
 			private void Awake() {
 				Image = transform.Find("Item").GetComponent<Image>();
 				Amount = GetComponentInChildren<Text>();
@@ -19,25 +22,34 @@ namespace ItemSystem {
 				Image.rectTransform.sizeDelta = new Vector2(45, 45);
 			}
 
+			public void Initialize(IContainer container, bool readOnly, int id) {
+				Container = container;
+				ReadOnly = readOnly;
+				ID = id;
+			}
+
 			public void Refresh(Item item) {
 				if (ReferenceEquals(item, null)) {
-					Enable(false);
+					Disable();
 					return;
 				}
 
 				Item = item;
 				Image.sprite = item.ItemData.Sprite;
 				Amount.text = (item.Amount > 1) ? item.Amount.ToString() : "";
-				Enable(true);
+				Enable();
 			}
 
-			public void Enable(bool enable) {
-				Image.enabled = enable;
-				Amount.enabled = enable;
+			public void Enable() {
+				Image.enabled = true;
+				Amount.enabled = true;
+			}
 
-				if (!enable) {
-					Item = null;
-				}
+			public void Disable() {
+				Image.enabled = false;
+				Amount.enabled = false;
+
+				Item = null;
 			}
 
 			#region Pointer
@@ -69,10 +81,20 @@ namespace ItemSystem {
 
 				if (HasItem) {
 					if (Squad.FirstSelected(out Actor actor)) {
-						ItemEffectFactory.Activate(actor, Item);
+						if (ReadOnly) {
+							if (InventoryUtils.TransferItem(Container.Inventory, actor.Inventory, Item.ItemData, Item.Amount)) {
+								// TODO Give Experience based on the Recipe.
 
-						if (!HasItem) {
-							Tooltip.Instance.HideTooltip();
+								Tooltip.Instance.HideTooltip();
+
+								OnEndDragEvent?.Invoke();
+							}
+						} else {
+							ItemEffectFactory.Activate(actor, Item);
+
+							if (!HasItem) {
+								Tooltip.Instance.HideTooltip();
+							}
 						}
 					}
 				}
@@ -86,50 +108,72 @@ namespace ItemSystem {
 			#endregion
 
 			#region Drag
-			public bool _dragging = false;
+			private bool _dragging = false;
 
 			public void OnBeginDrag(PointerEventData eventData) {
+				if (ReadOnly) {
+					return;
+				}
+
+				if (ReferenceEquals(Item, null)) {
+					return;
+				}
+
 				_dragging = true;
 
-				Image.transform.SetParent(transform.parent);
+				Image.transform.SetParent(transform.root);
 				Amount.transform.SetParent(Image.transform);
+
+				OnBeginDragEvent?.Invoke();
 			}
 
 			public void OnDrag(PointerEventData eventData) {
+				if (ReadOnly) {
+					return;
+				}
+
 				Image.rectTransform.position = Input.mousePosition;
 			}
 
 			public void OnEndDrag(PointerEventData eventData) {
+				if (ReadOnly) {
+					return;
+				}
+
 				_dragging = false;
 
 				var raycastResults = new List<RaycastResult>();
 				EventSystem.current.RaycastAll(new PointerEventData(EventSystem.current) { position = Input.mousePosition }, raycastResults);
 
 				if (raycastResults.Count > 0) {
-					bool handled = false;
-					bool remainsInInventory = false;
+					bool handle = false;
 					foreach (var result in raycastResults) {
-						if (ReferenceEquals(result.gameObject.transform, transform.parent)) {
-							remainsInInventory = true;
-						}
+						SlotHandler destinationSlot = result.gameObject.GetComponent<SlotHandler>();
+						if (!ReferenceEquals(destinationSlot, null)) {
 
-						if (ReferenceEquals(result.gameObject.transform.parent, transform.parent) && !ReferenceEquals(result.gameObject, Image.gameObject)) {
-							handled = true;
-							if (Squad.FirstSelected(out Actor actor)) {
+							if (ReferenceEquals(destinationSlot, this)) {
 								ReplaceImage(eventData.pointerDrag.transform);
-								actor.Inventory.SwapItems(eventData.pointerDrag.transform.GetSiblingIndex() - 1, result.gameObject.transform.GetSiblingIndex() - 1);
+								handle = true;
+								break;
 							}
+
+							if (ReferenceEquals(Container, destinationSlot.Container)) {
+								Container.SwapItems(Item.Index, destinationSlot.ID);
+							} else {
+								InventoryUtils.SwapItemsBetweenContainers(Item, Container, destinationSlot.Container, Item.Index, destinationSlot.ID);
+							}
+
+							ReplaceImage(eventData.pointerDrag.transform);
+							handle = true;
+							break;
 						}
 					}
 
-					if (!handled) {
-						if (remainsInInventory) {
-							ReplaceImage(eventData.pointerDrag.transform);
-						} else {
-							// TODO implement drop the object in the world if not dropped on any other items.
-							throw new UnityException("This functionality has not been implemented yet!");
-						}
+					if (!handle) {
+						ReplaceImage(eventData.pointerDrag.transform);
 					}
+
+					OnEndDragEvent?.Invoke();
 				}
 			}
 			#endregion
@@ -149,6 +193,10 @@ namespace ItemSystem {
 			public Text Amount { get; private set; }
 
 			public Item Item { get; private set; }
+			public IContainer Container { get; private set; }
+
+			public bool ReadOnly { get; private set; }
+			public int ID { get; private set; }
 			public bool HasItem { get { return !ReferenceEquals(Item, null); } }
 		}
 	}

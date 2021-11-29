@@ -9,7 +9,7 @@ namespace UI {
 		public static MenuBar Instance;
 
 		private MenuButton[] _menuButtons;
-		private Dictionary<MenuType, Menu> _interfaceStatus;
+		private Dictionary<MenuType, IMenu> _interfaceStatus;
 
 		private void Awake() {
 			Instance = this;
@@ -30,7 +30,7 @@ namespace UI {
 				}
 			});
 
-			_interfaceStatus = new Dictionary<MenuType, Menu>() {
+			_interfaceStatus = new Dictionary<MenuType, IMenu>() {
 				{ MenuType.INVENTORY, InventoryHandler.Instance},
 				{ MenuType.EQUIPMENT, EquipmentHandler.Instance },
 				{ MenuType.EXPERIENCE, ExperienceHandler.Instance },
@@ -82,7 +82,7 @@ namespace UI {
 		/// </summary>
 		/// <param name="menu">The menu</param>
 		/// <param name="actor">The actor</param>
-		private void ToggleMenu(Menu menu, Actor actor) {
+		private void ToggleMenu(IMenu menu, Actor actor) {
 			if (!menu.Canvas.enabled) {
 				menu.Open(actor);
 			} else {

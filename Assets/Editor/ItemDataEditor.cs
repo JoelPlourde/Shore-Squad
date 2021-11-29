@@ -12,6 +12,10 @@ namespace ItemSystem {
 
 			ItemData itemData = (ItemData) target;
 
+			if (itemData.Burnable) {
+				itemData.Power = EditorGUILayout.IntField("Power", itemData.Power);
+			}
+
 			if (itemData.ItemType == ItemType.CONSUMABLE) {
 				if (itemData.ItemEffects.Count == 0) {
 					itemData.ItemEffects.Add(new ItemEffect {

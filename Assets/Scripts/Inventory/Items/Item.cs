@@ -1,10 +1,19 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace ItemSystem {
+	[Serializable]
 	public class Item {
-
+		[SerializeField]
 		public ItemData ItemData;
+
+		[SerializeField]
 		public int Amount;
+
+		public Item(Item item) {
+			ItemData = item.ItemData;
+			Amount = item.Amount;
+		}
 
 		public Item(ItemData itemData, int amount) {
 			ItemData = itemData;

@@ -31,5 +31,5 @@
 
 	public static readonly int MAXIMUM_LUCK = 100;
 
-	public static readonly float TOOLTIP_DELAY = 0.5f;
+	public static readonly float TOOLTIP_DELAY = 0.2f;
 }

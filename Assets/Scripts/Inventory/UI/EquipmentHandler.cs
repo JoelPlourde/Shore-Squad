@@ -5,14 +5,17 @@ using UnityEngine;
 
 namespace ItemSystem {
 	namespace UI {
-		public class EquipmentHandler : Menu {
+		[RequireComponent(typeof(Canvas))]
+		public class EquipmentHandler : MonoBehaviour, IMenu {
 
 			public static EquipmentHandler Instance;
 
+			private Armory _currentArmory;
+
 			private SlotHandler[] _slots = new SlotHandler[Enum.GetNames(typeof(SlotType)).Length];
 
-			protected override void Awake() {
-				base.Awake();
+			private void Awake() {
+				Canvas = GetComponent<Canvas>();
 				Instance = this;
 
 				_slots = GetComponentsInChildren<SlotHandler>();
@@ -22,31 +25,35 @@ namespace ItemSystem {
 				}
 			}
 
-			public override void Open(Actor actor) {
+			public void Open(Actor actor) {
+				_currentArmory = actor.Armory;
+
 				actor.Armory.OnEquipmentAddedEvent += OnEquipmentAdded;
 				actor.Armory.OnEquipmentRemovedEvent += OnEquipmentRemoved;
 
 				int index = 0;
 				foreach (SlotType slotType in (SlotType[])Enum.GetValues(typeof(SlotType))) {
-					index = (int) slotType;
+					index = (int)slotType;
 					if (actor.Armory.Equipments[slotType].IsAttached) {
 						_slots[index].Refresh(new Item(actor.Armory.Equipments[slotType].Equipment.EquipmentData, actor.Armory.Equipments[slotType].Equipment.Amount));
 					} else {
-						_slots[index].Enable(false);
+						_slots[index].Disable();
 					}
 				}
 
 				Canvas.enabled = true;
 			}
 
-			public override void Close(Actor actor) {
+			public void Close(Actor actor) {
 				Canvas.enabled = false;
+
+				_currentArmory = null;
 
 				actor.Armory.OnEquipmentAddedEvent -= OnEquipmentAdded;
 				actor.Armory.OnEquipmentRemovedEvent -= OnEquipmentRemoved;
 
 				foreach (SlotHandler slotHandler in _slots) {
-					slotHandler.Enable(false);
+					slotHandler.Disable();
 				}
 			}
 
@@ -55,8 +62,10 @@ namespace ItemSystem {
 			}
 
 			private void OnEquipmentRemoved(Equipment equipment) {
-				_slots[(int)equipment.EquipmentData.SlotType].Enable(false);
+				_slots[(int)equipment.EquipmentData.SlotType].Disable();
 			}
+
+			public Canvas Canvas { get; set; }
 		}
 	}
 }

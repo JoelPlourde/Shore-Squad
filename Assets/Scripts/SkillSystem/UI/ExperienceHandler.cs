@@ -4,20 +4,21 @@ using UnityEngine;
 
 namespace SkillSystem {
 	namespace UI {
-		public class ExperienceHandler : Menu {
+		[RequireComponent(typeof(Canvas))]
+		public class ExperienceHandler : MonoBehaviour, IMenu {
 
 			public static ExperienceHandler Instance;
 
 			private SkillComponent[] _skillComponents;
 
-			protected override void Awake() {
-				base.Awake();
+			private void Awake() {
 				Instance = this;
 
+				Canvas = GetComponent<Canvas>();
 				_skillComponents = GetComponentsInChildren<SkillComponent>();
 			}
 
-			public override void Open(Actor actor) {
+			public void Open(Actor actor) {
 				foreach (SkillType skillType in Enum.GetValues(typeof(SkillType))) {
 					_skillComponents[(int) skillType].Initialize(SkillManager.Instance.GetSkillData(skillType), actor.Skills.GetSkillLevels[skillType], delegate { OnClick(skillType, actor); });
 				}
@@ -28,7 +29,7 @@ namespace SkillSystem {
 				Canvas.enabled = true;
 			}
 
-			public override void Close(Actor actor) {
+			public void Close(Actor actor) {
 				Canvas.enabled = false;
 
 				actor.Skills.OnLevelUp -= OnLevelUp;
@@ -56,6 +57,8 @@ namespace SkillSystem {
 			private void OnExperienceGain(SkillType skillType, Level level) {
 				_skillComponents[(int)skillType].TextComponent.OnGainExperience(level);
 			}
+
+			public Canvas Canvas { get; set; }
 		}
 	}
 }

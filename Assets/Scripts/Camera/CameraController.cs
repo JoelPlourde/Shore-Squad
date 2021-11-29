@@ -25,13 +25,14 @@ namespace CameraSystem {
 		public int MaxZoom = 30;
 
 		private RaycastHit _hit;
-		protected private Vector3 _localRotation;
-		protected private Vector3 _smoothedPosition;
-		protected private float _desiredDistance = 20f;
+		private Vector3 _localRotation;
+		private Vector3 _smoothedPosition;
+		private float _desiredDistance = 20f;
 
-		protected private Vector3 _direction;
+		private Vector3 _direction;
+		private Vector3 _offset = new Vector3(0, 1.5f, 0); // To check if the Target's head is blocking, not its feet.
 
-		protected private bool _isFollowing = false;
+		private bool _isFollowing = false;
 
 		private void Awake() {
 			Instance = this;
@@ -55,7 +56,7 @@ namespace CameraSystem {
 			_desiredDistance -= Input.GetAxis("Mouse ScrollWheel") * Time.smoothDeltaTime * ScrollSensitivity;
 
 			_direction = (transform.position - Target.transform.position).normalized;
-			if (Physics.Raycast(Target.transform.position, _direction * _desiredDistance, out _hit, _desiredDistance, BlockingLayer, QueryTriggerInteraction.UseGlobal)) {
+			if (Physics.Raycast(Target.transform.position + _offset, _direction * _desiredDistance, out _hit, _desiredDistance, BlockingLayer, QueryTriggerInteraction.UseGlobal)) {
 				Distance = (_hit.point - Target.transform.position).magnitude;
 			} else {
 				Distance = _desiredDistance;

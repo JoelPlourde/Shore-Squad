@@ -351,7 +351,6 @@ namespace UnitTest {
 			Debug.Log(inventory.Items);
 
 			Assert.That(inventory.GetItemAtIndex(0), Is.EqualTo(null));
-			Debug.Log("Here !");
 			List<int> indexes = new List<int>();
 			Assert.That(inventory.AddItemToInventory(GetItemDataFixture(), 5, ref indexes));
 			Debug.Log(indexes);
@@ -932,6 +931,81 @@ namespace UnitTest {
 			Assert.That(!inventory.RemoveItemFromInventoryAtPosition(2, 1));
 		}
 
+		[Test]
+		[PrebuildSetup(typeof(InventoryTest))]
+		public void AddItemInInventoryAtPosition_test() {
+			Inventory inventory = new Inventory(2);
+
+			Item branch = new Item(GetItemDataFixture(0), 15);
+			Item log = new Item(GetItemDataFixture(1), 6);
+			Item remainder = null;
+
+			Assert.True(inventory.AddItemInInventoryAtPosition(branch, 0, ref remainder));
+			Assert.Null(remainder);
+
+			Assert.True(inventory.AddItemInInventoryAtPosition(log, 1, ref remainder));
+			Assert.Null(remainder);
+
+			Assert.That(inventory.Items[0].ItemData.ID, Is.EqualTo("branch"));
+			Assert.That(inventory.Items[0].Amount, Is.EqualTo(15));
+			Assert.That(inventory.Items[1].ItemData.ID, Is.EqualTo("log"));
+			Assert.That(inventory.Items[1].Amount, Is.EqualTo(6));
+		}
+		
+		[Test]
+		[PrebuildSetup(typeof(InventoryTest))]
+		public void AddItemInInventoryAtPosition_Combine_test() {
+			Inventory inventory = new Inventory(2);
+
+			Item branch1 = new Item(GetItemDataFixture(0), 15);
+			Item log = new Item(GetItemDataFixture(1), 6);
+			Item remainder = null;
+
+			Assert.True(inventory.AddItemInInventoryAtPosition(branch1, 0, ref remainder));
+			Assert.Null(remainder);
+
+			Assert.True(inventory.AddItemInInventoryAtPosition(log, 1, ref remainder));
+			Assert.Null(remainder);
+
+			Item branch2 = new Item(GetItemDataFixture(0), 6);
+			Assert.True(inventory.AddItemInInventoryAtPosition(branch2, 0, ref remainder));
+			Assert.NotNull(remainder);
+
+			Assert.That(remainder.Amount, Is.EqualTo(1));
+
+			Assert.That(inventory.Items[0].ItemData.ID, Is.EqualTo("branch"));
+			Assert.That(inventory.Items[0].Amount, Is.EqualTo(20));
+			Assert.That(inventory.Items[1].ItemData.ID, Is.EqualTo("log"));
+			Assert.That(inventory.Items[1].Amount, Is.EqualTo(6));
+		}
+		// TODO TEST when its combine but full.
+
+		[Test]
+		[PrebuildSetup(typeof(InventoryTest))]
+		public void AddItemInInventoryAtPosition_Swap_test() {
+			Inventory inventory = new Inventory(2);
+
+			Item branch = new Item(GetItemDataFixture(0), 15);
+			Item log1 = new Item(GetItemDataFixture(1), 6);
+			Item log2 = new Item(GetItemDataFixture(1), 8);
+			Item _ = null;
+			Item remainder = null;
+
+			Assert.True(inventory.AddItemInInventoryAtPosition(branch, 0, ref _));
+			Assert.Null(_);
+
+			Assert.True(inventory.AddItemInInventoryAtPosition(log1, 1, ref _));
+			Assert.Null(_);
+
+			Assert.True(inventory.AddItemInInventoryAtPosition(log2, 0, ref remainder));
+			Assert.That(remainder.ItemData.ID, Is.EqualTo("branch"));
+			Assert.That(remainder.Amount, Is.EqualTo(15));
+
+			Assert.That(inventory.Items[0].ItemData.ID, Is.EqualTo("log"));
+			Assert.That(inventory.Items[0].Amount, Is.EqualTo(8));
+			Assert.That(inventory.Items[1].ItemData.ID, Is.EqualTo("log"));
+			Assert.That(inventory.Items[1].Amount, Is.EqualTo(6));
+		}
 
 		private ItemData GetItemDataFixture() {
 			ItemData itemData = ItemManager.Instance.GetItemData("branch");

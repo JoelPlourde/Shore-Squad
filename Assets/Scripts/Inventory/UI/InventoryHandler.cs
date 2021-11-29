@@ -1,13 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UI;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace ItemSystem {
 	namespace UI {
+		[RequireComponent(typeof(Canvas))]
 		[RequireComponent(typeof(GridLayoutGroup))]
-		public class InventoryHandler : Menu {
+		public class InventoryHandler : BaseHandler, IMenu {
 
 			public static InventoryHandler Instance;
 
@@ -15,8 +15,8 @@ namespace ItemSystem {
 
 			private SlotHandler[] _slots = new SlotHandler[Inventory.MAX_STACK];
 
-			protected override void Awake() {
-				base.Awake();
+			private void Awake() {
+				Canvas = GetComponent<Canvas>();
 				Instance = this;
 
 				GridLayoutGroup gridLayoutGroup = GetComponent<GridLayoutGroup>();
@@ -33,11 +33,16 @@ namespace ItemSystem {
 					GameObject slotHandlerObj = Instantiate(SlotTemplate, transform);
 					slotHandlerObj.name = "Slot" + i;
 					_slots[i] = slotHandlerObj.GetComponent<SlotHandler>();
-					_slots[i].Enable(false);
+					_slots[i].Initialize(this, false, i);
+					_slots[i].Disable();
 				}
+
+				_interactable = true;
 			}
 
-			public override void Open(Actor actor) {
+			public void Open(Actor actor) {
+				Initialize(actor.Inventory);
+
 				actor.Inventory.OnDirtyItemsEvent += OnDirtyItemsEvent;
 				actor.Inventory.OnRedrawEvent += RedrawEvent;
 
@@ -46,32 +51,18 @@ namespace ItemSystem {
 				Canvas.enabled = true;
 			}
 
-			public override void Close(Actor actor) {
+			public void Close(Actor actor) {
 				actor.Inventory.OnDirtyItemsEvent -= OnDirtyItemsEvent;
 				actor.Inventory.OnRedrawEvent -= RedrawEvent;
 
 				foreach (SlotHandler slot in _slots) {
-					slot.Enable(false);
+					slot.Disable();
 				}
 
 				Canvas.enabled = false;
 			}
 
-			private void OnDirtyItemsEvent(List<int> indexes, Item[] items) {
-				foreach (int index in indexes) {
-					_slots[index].Refresh(items[index]);
-				}
-			}
-
-			private void RedrawEvent(Item[] items) {
-				for (int i = 0; i < items.Length; i++) {
-					if (items[i] != null) {
-						_slots[i].Refresh(items[i]);
-					} else {
-						_slots[i].Enable(false);
-					}
-				}
-			}
+			public Canvas Canvas { get; set; }
 		}
 	}
 }

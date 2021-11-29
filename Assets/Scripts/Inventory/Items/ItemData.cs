@@ -33,6 +33,15 @@ namespace ItemSystem {
 		[Tooltip("Determine whether or not the object can be stacked in the inventory or not.")]
 		public bool Stackable = true;
 
+		[SerializeField]
+		[Tooltip("Determine whether or not the item is burnable.")]
+		public bool Burnable = false;
+
+		[SerializeField]
+		[HideInInspector]
+		[Tooltip("The value of power this Item provide when burned.")]
+		public int Power = 0;
+
 		public override bool Equals(object other) {
 			if ((other == null) || !GetType().Equals(other.GetType())) {
 				return false;

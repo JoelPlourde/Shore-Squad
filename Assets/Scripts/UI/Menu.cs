@@ -1,19 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace UI {
-	[RequireComponent(typeof(Canvas))]
-	public abstract class Menu : MonoBehaviour {
+	public interface IMenu {
 
-		protected virtual void Awake() {
-			Canvas = GetComponent<Canvas>();
-		}
+		void Open(Actor actor);
 
-		public abstract void Open(Actor actor);
+		void Close(Actor actor);
 
-		public abstract void Close(Actor actor);
-
-		public Canvas Canvas { get; private set; }
+		Canvas Canvas { get; set; }
 	}
 }

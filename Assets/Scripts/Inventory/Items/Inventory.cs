@@ -5,6 +5,7 @@ using UnityEngine;
 using System.Linq;
 using System;
 using SaveSystem;
+using UI;
 
 namespace ItemSystem {
 	public class Inventory {
@@ -24,7 +25,7 @@ namespace ItemSystem {
 		/// <param name="inventoryDto">The saved inventory to load.</param>
 		public void Initialize(InventoryDto inventoryDto) {
 			for (int i = 0; i < Items.Length; i++) {
-				if (inventoryDto.ItemDtos[i].ID != "-1") {
+				if (!ReferenceEquals(inventoryDto.ItemDtos[i], null) && inventoryDto.ItemDtos[i].ID != "-1") {
 					Items[i] = new Item(ItemManager.Instance.GetItemData(inventoryDto.ItemDtos[i].ID), inventoryDto.ItemDtos[i].Amount);
 				} else {
 					Items[i] = null;
@@ -191,6 +192,45 @@ namespace ItemSystem {
 				} else {
 					return false;
 				}
+			}
+
+			return false;
+		}
+
+		/// <summary>
+		/// Add an item in the inventory at position.
+		/// </summary>
+		/// <param name="item">The item to add.</param>
+		/// <param name="index">The index where to add the item</param>
+		/// <param name="remainingItem">The remaining item, if any</param>
+		/// <param name="callback"></param>
+		/// <returns></returns>
+		public bool AddItemInInventoryAtPosition(Item item, int index, ref Item remainingItem) {
+			if (ReferenceEquals(Items[index], null)) {
+				Items[index] = new Item(item.ItemData, item.Amount, index);
+				OnDirtyItemsEvent?.Invoke(new List<int>() { index }, Items);
+				return true;
+			}
+
+			// There is an item in the slot, check if the Item is the same to combine them.
+			if (item.ItemData.ID == Items[index].ItemData.ID) {
+				Items[index].Amount += item.Amount;
+				int difference = Items[index].Amount - MAX_STACK;
+				if (difference > 0) {
+					// Adjust the remaining quantity.
+					remainingItem = new Item(Items[index].ItemData, difference);
+				}
+				Items[index].Amount = Mathf.Clamp(Items[index].Amount, 0, MAX_STACK);
+				OnDirtyItemsEvent?.Invoke(new List<int>() { index }, Items);
+				return true;
+			}
+
+			// There is an item in the slot, but its not the same, swap.
+			if (item.ItemData.ID != Items[index].ItemData.ID) {
+				remainingItem = Items[index];
+				Items[index] = new Item(item.ItemData, item.Amount, index);
+				OnDirtyItemsEvent?.Invoke(new List<int>() { index }, Items);
+				return true;
 			}
 
 			return false;
