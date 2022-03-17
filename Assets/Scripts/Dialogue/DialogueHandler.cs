@@ -168,6 +168,8 @@ namespace DialogueSystem {
 		private void OnExit() {
 			_canvas.enabled = false;
 
+			EnableComponents(false, false);
+
 			ResetListeners();
 
 			OnDialogueEnd?.Invoke();
