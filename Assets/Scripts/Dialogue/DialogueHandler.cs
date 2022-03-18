@@ -11,6 +11,7 @@ namespace DialogueSystem {
 		private Text _text;
 		private Canvas _canvas;
 		private Node _currentNode;
+		private OptionHandler _optionHandler;
 		private ButtonComponent _next;
 		private ButtonComponent[] _options;
 		private ButtonComponent _exit;
@@ -30,7 +31,8 @@ namespace DialogueSystem {
 			_text = GetComponentWithNullCheck<Text>(transform.Find("Text"));
 			_canvas = GetComponentWithNullCheck<Canvas>(transform);
 
-			_options = transform.Find("Options").GetComponentsInChildren<ButtonComponent>();
+			_optionHandler = transform.Find("Options").GetComponent<OptionHandler>();
+			_options = _optionHandler.GetComponentsInChildren<ButtonComponent>();
 			if (ReferenceEquals(_options, null) || _options.Length == 0) {
 				throw new UnityException("Please verify the hierarchy of DialogueHandler: Options is missing.");
 			}
@@ -48,7 +50,9 @@ namespace DialogueSystem {
 
 			InitializeListeners();
 
-			EnableComponents(false, false);
+			EnableNextButton(false);
+
+			EnableOptions(false);
 
 			UpdateComponents();
 
@@ -79,7 +83,9 @@ namespace DialogueSystem {
 
 			_currentNode = _currentNode.Nodes[index];
 
-			EnableComponents(false, false);
+			EnableNextButton(false);
+
+			EnableOptions(false);
 
 			OnNext();
 		}
@@ -98,6 +104,8 @@ namespace DialogueSystem {
 			// Update the text.
 			DisplayText(_currentNode.Content);
 
+			EnableNextButton(false);
+
 			if (_isDisplayed) {
 				// Determine if the current node has some options.
 				bool hasOptions = (_currentNode.Nodes.Length > 1);
@@ -109,23 +117,26 @@ namespace DialogueSystem {
 					}
 				}
 
-				EnableComponents(hasOptions, !hasOptions);
+				EnableOptions(hasOptions);
+
+				EnableNextButton(!hasOptions);
 			}
 		}
 
 		/// <summary>
-		/// Enabled the components: options and next button independantly
+		/// Enable/Disable the Next Button
 		/// </summary>
-		/// <param name="optionsEnabled">Enable/Disable the options</param>
-		/// <param name="nextEnabled">Enable/Disable the next button</param>
-		private void EnableComponents(bool optionsEnabled, bool nextEnabled) {
-			// Disable/Enable the options if required.
-			foreach (var option in _options) {
-				option.gameObject.SetActive(optionsEnabled);
-			}
+		/// <param name="enabled">True to enable, false to disable.</param>
+		private void EnableNextButton(bool enabled) {
+			_next.gameObject.SetActive(enabled);
+		}
 
-			// Disable/Enable the Next button.
-			_next.gameObject.SetActive(nextEnabled);
+		/// <summary>
+		/// Enable/Disable the Options
+		/// </summary>
+		/// <param name="enabled">True to enable, false to disable.</param>
+		private void EnableOptions(bool enabled) {
+			_optionHandler.gameObject.SetActive(enabled);
 		}
 
 		/// <summary>
@@ -155,6 +166,7 @@ namespace DialogueSystem {
 				_textIndex = 0;
 
 				_isDisplayed = true;
+
 				CancelInvoke();
 
 				UpdateComponents();
@@ -168,7 +180,9 @@ namespace DialogueSystem {
 		private void OnExit() {
 			_canvas.enabled = false;
 
-			EnableComponents(false, false);
+			EnableNextButton(false);
+
+			EnableOptions(false);
 
 			ResetListeners();
 

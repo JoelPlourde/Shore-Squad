@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/capital_city_port/capital_city_port.unity
     guid: d9228ecc424978f439af849c2e191874
   - enabled: 1
-    path: Assets/Scenes/Boat.unity
+    path: Assets/Scenes/boat/boat.unity
     guid: 9db3dd363f75d234293ef035645ce5c7
   m_configObjects: {}

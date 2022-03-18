@@ -20,14 +20,20 @@ namespace UI {
 		}
 
 		public virtual void OnPointerEnter(PointerEventData pointerEventData) {
-			Tooltip.Instance.ShowTooltip(GetTooltip(), Constant.TOOLTIP_DELAY);
+			if (GetTooltip() != "") {
+				Tooltip.Instance.ShowTooltip(GetTooltip(), Constant.TOOLTIP_DELAY);
+			}
+
 			LeanTween.scale(gameObject, SCALE_UP, 0.25f);
 
 			SoundSystem.Instance.PlaySound(SoundManager.Instance.GetAudioClip("hover"), 0.2f);
 		}
 
 		public virtual void OnPointerExit(PointerEventData pointerEventData) {
-			Tooltip.Instance.HideTooltip();
+			if (GetTooltip() != "") {
+				Tooltip.Instance.HideTooltip();
+			}
+
 			if (!ReferenceEquals(gameObject, null)) {
 				LeanTween.cancel(gameObject);
 				LeanTween.scale(gameObject, Vector3.one, 0.1f);
