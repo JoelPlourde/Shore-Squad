@@ -9,9 +9,9 @@ namespace ItemSystem {
 		public class Equip : IItemEffect {
 
 			public void Activate(Actor actor, Item item, ItemEffect _) {
-				if (MenuBar.Instance.CurrentMenu == MenuType.INVENTORY) {
+				if (ActorMenuBar.Instance.CurrentMenu == MenuType.INVENTORY) {
 					OnEquip(actor, item);
-				} else if (MenuBar.Instance.CurrentMenu == MenuType.EQUIPMENT){
+				} else if (ActorMenuBar.Instance.CurrentMenu == MenuType.EQUIPMENT){
 					OnUnequip(actor, item);
 				}
 

@@ -1,48 +1,25 @@
-﻿using ItemSystem.UI;
-using SkillSystem.UI;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace UI {
-	public class MenuBar : MonoBehaviour {
+	public abstract class BaseMenuBar : MonoBehaviour {
 
-		public static MenuBar Instance;
+		protected MenuButton[] _menuButtons;
+		protected Dictionary<MenuType, IMenu> _interfaceStatus;
 
-		private MenuButton[] _menuButtons;
-		private Dictionary<MenuType, IMenu> _interfaceStatus;
-
-		private void Awake() {
-			Instance = this;
-
+		protected virtual void Awake() {
 			_menuButtons = GetComponentsInChildren<MenuButton>();
 			foreach (MenuButton menuButton in _menuButtons) {
 				menuButton.Initialize(OnClick);
 			}
-
-			UserInputs.Instance.Subscribe(_menuButtons[0].GetKeyCode(), delegate { OnClick(0); });
-			UserInputs.Instance.Subscribe(_menuButtons[1].GetKeyCode(), delegate { OnClick(1); });
-			UserInputs.Instance.Subscribe(_menuButtons[2].GetKeyCode(), delegate { OnClick(2); });
-			UserInputs.Instance.Subscribe(_menuButtons[3].GetKeyCode(), delegate {
-				if (Squad.HasSelected) {
-					Squad.UnselectAll();
-				} else {
-					OnClick(3);
-				}
-			});
-
-			_interfaceStatus = new Dictionary<MenuType, IMenu>() {
-				{ MenuType.INVENTORY, InventoryHandler.Instance},
-				{ MenuType.EQUIPMENT, EquipmentHandler.Instance },
-				{ MenuType.EXPERIENCE, ExperienceHandler.Instance },
-				{ MenuType.SETTINGS, SettingsHandler.Instance }
-			};
 		}
 
 		/// <summary>
 		/// On Click on the button of the menu, open/close the interface to have only a single interface opened.
 		/// </summary>
 		/// <param name="index">The index clicked.</param>
-		public void OnClick(int index) {
+		protected void OnClick(int index) {
 			MenuType menuType = (MenuType)index;
 
 			if (CurrentMenu == menuType) {
@@ -66,23 +43,14 @@ namespace UI {
 		/// Toggle the interface indicates by the index
 		/// </summary>
 		/// <param name="index">The index of the interface to toggle.</param>
-		private void ToggleInterface(MenuType index) {
-			if (index == MenuType.SETTINGS) {
-				ToggleMenu(_interfaceStatus[index], null);
-				return;
-			}
-
-			if (Squad.Any(out Actor actor)) {
-				ToggleMenu(_interfaceStatus[index], actor);
-			}
-		}
+		protected abstract void ToggleInterface(MenuType index); 
 
 		/// <summary>
 		/// Toggle the menu.
 		/// </summary>
 		/// <param name="menu">The menu</param>
 		/// <param name="actor">The actor</param>
-		private void ToggleMenu(IMenu menu, Actor actor) {
+		protected void ToggleMenu(IMenu menu, Actor actor) {
 			if (!menu.Canvas.enabled) {
 				menu.Open(actor);
 			} else {
