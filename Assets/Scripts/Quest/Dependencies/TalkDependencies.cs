@@ -20,7 +20,6 @@ namespace QuestSystem {
 		public DialogueData DialogueData;
 
 		public override void Spawn(Quest quest) {
-			Debug.Log("Spawning: " + NPC.name);
 			GameObject npcObject = GameObject.Find(NPC.name);
 			if (ReferenceEquals(npcObject, null)) {
 				npcObject = Instantiate(NPC, Position, Quaternion.identity);

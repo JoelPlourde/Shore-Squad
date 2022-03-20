@@ -26,7 +26,6 @@ namespace StatusEffectSystem {
 			}
 
 			public void Initialize(Guid guid) {
-				Debug.Log("Initialized status handler !");
 				if (_initialized == false) {
 					_initialized = true;
 					StatusEffectScheduler.Instance(guid).OnAddStatusEffectEvent += OnAdd;

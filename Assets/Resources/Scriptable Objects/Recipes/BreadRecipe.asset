@@ -17,5 +17,5 @@ MonoBehaviour:
     Amount: 1
   Outputs:
   - ItemData: {fileID: 11400000, guid: a3a8970b40442d54d9ad045a387e9068, type: 2}
-    Amount: 5
-  RequiredProgress: 2
+    Amount: 1
+  RequiredProgress: 4
