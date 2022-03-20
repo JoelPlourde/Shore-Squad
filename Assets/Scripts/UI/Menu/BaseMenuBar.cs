@@ -58,6 +58,6 @@ namespace UI {
 			}
 		}
 
-		public MenuType CurrentMenu { get; private set; } = MenuType.NONE;
+		public MenuType CurrentMenu { get; protected set; } = MenuType.NONE;
 	}
 }

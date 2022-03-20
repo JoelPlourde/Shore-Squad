@@ -91,6 +91,20 @@ public class UserInputs : MonoBehaviour, IUpdatable {
 	}
 
 	/// <summary>
+	/// Unsubscribe to a keycode.
+	/// </summary>
+	/// <param name="keyCode"></param>
+	public void Unsubscribe(KeyCode keyCode) {
+		if (_keyCodeActions.TryGetValue(keyCode, out Action existingAction)) {
+			Debug.Log(_keyCodeActions[keyCode]);
+			_keyCodeActions[keyCode] -= existingAction;
+			Debug.Log(_keyCodeActions[keyCode]);
+		} else {
+			throw new UnityException("No action were registered to the following key code: " + keyCode);
+		}
+	}
+
+	/// <summary>
 	/// Subscribe to a topic. The action will be triggered when the user clicks on an object with the same tag and/or name.
 	/// </summary>
 	/// <param name="topic">The topic to subscribe to.</param>
