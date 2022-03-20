@@ -9,9 +9,11 @@ namespace ConstructionSystem {
 		public class ConstructionManagerComponent : MonoBehaviour {
 
 			private void Awake() {
+				/*
 				foreach (var item in ConstructionManager.GetConstructionDatas()) {
 					CreateButton(item);
 				}
+				*/
 			}
 
 			public void CreateButton(ConstructionData constructionData) {

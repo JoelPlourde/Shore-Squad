@@ -2,18 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 using ConstructionSystem;
-using System.Linq;
 
 public static class ConstructionManager {
 
 	private static Dictionary<string, ConstructionData> _constructions;
 
 	static ConstructionManager() {
-		_constructions = Resources.LoadAll<ConstructionData>("Scriptable Objects/Constructions").ToDictionary(x => x.name.ToLower());
-	}
+		Architect = Resources.Load<Architect>("Scriptable Objects/Constructions");
 
-	public static List<ConstructionData> GetConstructionDatas() {
-		return _constructions.Values.ToList();
+		_constructions = new Dictionary<string, ConstructionData>();
+
+		foreach (Category category in Architect.Categories) {
+			foreach (ConstructionData constructionData in category.ConstructionDatas) {
+				_constructions.Add(constructionData.name.ToLower(), constructionData);
+			}
+		}
 	}
 
 	public static ConstructionData GetConstructionData(string name) {
@@ -23,4 +26,6 @@ public static class ConstructionManager {
 			throw new UnityException("The Construction couldn't be found by its name. Please define this Construction Data: " + name);
 		}
 	}
+
+	public static Architect Architect { get; private set; }
 }

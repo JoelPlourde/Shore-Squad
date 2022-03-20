@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace ConstructionSystem {
 	[Serializable]
-	[CreateAssetMenu(fileName = "ConstructionData", menuName = "ScriptableObjects/Construction Data")]
+	[CreateAssetMenu(fileName = "ConstructionData", menuName = "ScriptableObjects/Construction/Construction Data")]
 	public class ConstructionData : ScriptableObject {
 
 		/*
