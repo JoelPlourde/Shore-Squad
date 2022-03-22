@@ -9,7 +9,7 @@ namespace ConstructionSystem {
 	/// </summary>
 	[Serializable]
 	[CreateAssetMenu(fileName = "ArchitectData", menuName = "ScriptableObjects/Construction/Architect Data")]
-	public class Architect : ScriptableObject {
+	public class ArchitectData : ScriptableObject {
 
 		[SerializeField]
 		public List<Category> Categories;
@@ -29,7 +29,15 @@ namespace ConstructionSystem {
 
 		[SerializeField]
 		[Tooltip("Image of the Category")]
-		public Sprite Sprite;
+		public Sprite DefaultSprite;
+
+		[SerializeField]
+		[Tooltip("Image of the Category, when pressed.")]
+		public Sprite PressedSprite;
+
+		[SerializeField]
+		[Tooltip("Image of the Category, when highlighted (on hover).")]
+		public Sprite HighlightedSprite;
 
 		[SerializeField]
 		public List<ConstructionData> ConstructionDatas;

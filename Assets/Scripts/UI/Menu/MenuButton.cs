@@ -9,9 +9,6 @@ namespace UI {
 		private Button _button;
 
 		[SerializeField]
-		private string _tooltip;
-
-		[SerializeField]
 		private KeyCode _keyCode;
 
 		public void Initialize(UnityAction<int> onClick) {

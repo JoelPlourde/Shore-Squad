@@ -10,6 +10,13 @@ namespace UI {
 
 		private static readonly Vector3 SCALE_DOWN = new Vector3(1.15f, 1.15f, 1.15f);
 
+		[SerializeField]
+		protected string _tooltip = "";
+
+		public void Initialize(string tooltip) {
+			_tooltip = tooltip;
+		}
+
 		#region OnPointerEvent
 		public virtual void OnPointerDown(PointerEventData eventData) {
 			LeanTween.scale(gameObject, SCALE_DOWN, 0.05f);
@@ -42,7 +49,7 @@ namespace UI {
 		#endregion
 
 		public virtual string GetTooltip() {
-			return "";
+			return _tooltip;
 		}
 	}
 }

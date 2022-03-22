@@ -8,7 +8,7 @@ public static class ConstructionManager {
 	private static Dictionary<string, ConstructionData> _constructions;
 
 	static ConstructionManager() {
-		Architect = Resources.Load<Architect>("Scriptable Objects/Constructions");
+		Architect = Resources.Load<ArchitectData>("Scriptable Objects/Constructions/Architect");
 
 		_constructions = new Dictionary<string, ConstructionData>();
 
@@ -27,5 +27,5 @@ public static class ConstructionManager {
 		}
 	}
 
-	public static Architect Architect { get; private set; }
+	public static ArchitectData Architect { get; private set; }
 }

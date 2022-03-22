@@ -1,6 +1,4 @@
 ﻿using GameSystem;
-using System;
-using System.IO;
 using UnityEngine;
 
 namespace EncampmentSystem {
