@@ -12,5 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac2e006156eaa4e4d8e54767a9b1844d, type: 3}
   m_Name: change_scene_to_boat
   m_EditorClassIdentifier: 
-  Scene: boat
+  SceneReference:
+    Scene: {fileID: 102900000, guid: 9db3dd363f75d234293ef035645ce5c7, type: 3}
+    SceneName: boat
+    sceneIndex: 1
+    sceneEnabled: 1
   Position: {x: 0, y: 0, z: 0}

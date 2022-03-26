@@ -6,24 +6,39 @@ using UnityEngine.SceneManagement;
 namespace QuestSystem {
 	[Serializable]
 	[CreateAssetMenu(fileName = "ChangeSceneTrigger", menuName = "ScriptableObjects/Quest/Trigger/Change Scene")]
-	public class ChangeSceneTrigger : Trigger {
+	public class SceneTrigger : Trigger {
 
 		[SerializeField]
-		[Tooltip("[Required] Scene name to change to.")]
-		public string Scene;
+		[Tooltip("Scene to change to.")]
+		public SceneReference SceneReference;
 
 		[SerializeField]
 		[Tooltip("Position where to teleport the Actors to in the new scene.")]
 		public Vector3 Position;
 
 		public override void Execute() {
-			SceneController.Instance.OnSceneLoadedEvent += OnSceneLoaded;
-			SceneController.Instance.LoadScene(Scene);
+			if (SceneReference.SceneName != SceneManager.GetActiveScene().name) {
+				// Subscribe
+				SceneController.Instance.OnSceneLoadedEvent += OnSceneLoaded;
+				SceneController.Instance.LoadScene(SceneReference.SceneName);
+
+			} else {
+				TeleportSquad(Position);
+			}
+
+			// Show a Loading Screen.
 		}
 
 		private void OnSceneLoaded() {
+			// Unsubscribe
 			SceneController.Instance.OnSceneLoadedEvent -= OnSceneLoaded;
 
+			TeleportSquad(Position);
+
+			// Hide the Loading Screen.
+		}
+
+		private void TeleportSquad(Vector3 position) {
 			Squad.TeleportSquad(Position);
 
 			if (Squad.FirstSelected(out Actor actor)) {
