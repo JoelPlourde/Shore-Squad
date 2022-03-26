@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SceneReference:
     Scene: {fileID: 102900000, guid: 9db3dd363f75d234293ef035645ce5c7, type: 3}
-    SceneName: boat
+    SceneName: tutorial
     sceneIndex: 1
     sceneEnabled: 1
-  Position: {x: 0, y: 0, z: 0}
+  Position: {x: 0, y: 0.58, z: 0}

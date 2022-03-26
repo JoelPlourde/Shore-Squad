@@ -13,6 +13,7 @@ namespace GameSystem {
 		public event Action OnSceneLoadedEvent;
 
 		private Queue<QuestAction> _questActions = new Queue<QuestAction>();
+		private AsyncOperation _asyncOperation;
 
 		private void Awake() {
 			Instance = this;
@@ -31,7 +32,20 @@ namespace GameSystem {
 			UserInputs.Instance.UnsubscribeAll();
 
 			SceneManager.sceneLoaded += OnSceneLoaded;
-			SceneManager.LoadScene(scene, LoadSceneMode.Single);
+
+			LoadingScreen.Instance.ShowLoadingScreen();
+
+			StartCoroutine(LoadSceneAsynchronous(scene));
+		}
+
+		IEnumerator LoadSceneAsynchronous(string sceneName) {
+			_asyncOperation = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single);
+
+			while (!_asyncOperation.isDone) {
+				LoadingScreen.Instance.UpgradeProgressBar(_asyncOperation.progress);
+
+				yield return null;
+			}
 		}
 
 		/// <summary>
@@ -47,6 +61,8 @@ namespace GameSystem {
 			UserInputs.Instance.EnableInput();
 
 			IsLoading = false;
+
+			LoadingScreen.Instance.HideLoadingScreen();
 		}
 
 		/// <summary>

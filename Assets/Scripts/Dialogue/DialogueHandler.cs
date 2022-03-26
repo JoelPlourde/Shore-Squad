@@ -23,6 +23,8 @@ namespace DialogueSystem {
 
 		public event Action OnDialogueEnd;
 
+		private Actor _actor;
+
 		private void Awake() {
 			Instance = this;
 
@@ -38,8 +40,15 @@ namespace DialogueSystem {
 			}
 		}
 
-		public void Initialize(DialogueData dialogueData) {
-			// Reset interal variable
+		/// <summary>
+		/// Start the dialogue with an Actor
+		/// </summary>
+		/// <param name="actor">The Actor in question.</param>
+		/// <param name="dialogueData">The dialogue data</param>
+		public void StartDialogue(Actor actor, DialogueData dialogueData) {
+			_actor = actor;
+
+			// Reset internal variable
 			_displayText = "";
 			_textIndex = 0;
 			_isDisplayed = false;
@@ -57,6 +66,33 @@ namespace DialogueSystem {
 			UpdateComponents();
 
 			_canvas.enabled = true;
+		}
+
+		/// <summary>
+		/// Determine if the dialogue is already busy.
+		/// </summary>
+		/// <returns>Whether or not the dialogue is busy with an actor. True for yes, false for no.</returns>
+		public bool IsBusy() {
+			return !ReferenceEquals(_actor, null);
+		}
+
+		/// <summary>
+		/// Check if the dialogue is busy with a particular actor.
+		/// </summary>
+		/// <param name="actor">The actor to check</param>
+		/// <returns>True if the dialogue is busy with the same actor, else false.</returns>
+		public bool CheckIfDialogueIsBusyWithActor(Actor actor) {
+			return ReferenceEquals(actor, _actor);
+		}
+
+		/// <summary>
+		/// Stop the dialogue with an actor.
+		/// </summary>
+		/// <param name="actor">The actor that was dialoguing</param>
+		public void StopDialogue(Actor actor) {
+			_actor = null;
+
+			OnExit();
 		}
 
 		private void OnNext() {
@@ -189,6 +225,8 @@ namespace DialogueSystem {
 			OnDialogueEnd?.Invoke();
 
 			CancelInvoke();
+
+			_actor = null;
 		}
 
 		#region Listeners

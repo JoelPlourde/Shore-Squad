@@ -26,13 +26,18 @@ namespace QuestSystem {
 		}
 
 		public void OnInteractEnter(Actor actor) {
-			CameraSystem.CameraTarget.Instance.ZoomIn((_actor.transform.position + transform.position) / 2);
-			DialogueHandler.Instance.OnDialogueEnd += OnDialogueEnded;
-			DialogueHandler.Instance.Initialize(_dialogueData);
+			if (!DialogueHandler.Instance.IsBusy()) {
+				CameraSystem.CameraTarget.Instance.ZoomIn((_actor.transform.position + transform.position) / 2);
+				DialogueHandler.Instance.OnDialogueEnd += OnDialogueEnded;
+				DialogueHandler.Instance.StartDialogue(actor, _dialogueData);
+			}
 		}
 
 		public void OnInteractExit(Actor actor) {
-			CameraSystem.CameraTarget.Instance.ZoomOut();
+			if (DialogueHandler.Instance.CheckIfDialogueIsBusyWithActor(actor)) {
+				DialogueHandler.Instance.StopDialogue(actor);
+				CameraSystem.CameraTarget.Instance.ZoomOut();
+			}
 		}
 
 		public float GetInteractionRadius() {

@@ -25,8 +25,6 @@ namespace QuestSystem {
 			} else {
 				TeleportSquad(Position);
 			}
-
-			// Show a Loading Screen.
 		}
 
 		private void OnSceneLoaded() {
@@ -34,8 +32,6 @@ namespace QuestSystem {
 			SceneController.Instance.OnSceneLoadedEvent -= OnSceneLoaded;
 
 			TeleportSquad(Position);
-
-			// Hide the Loading Screen.
 		}
 
 		private void TeleportSquad(Vector3 position) {
