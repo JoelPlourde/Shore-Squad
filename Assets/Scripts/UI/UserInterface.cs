@@ -6,12 +6,11 @@ namespace UI {
 	[RequireComponent(typeof(CanvasScaler))]
 	public class UserInterface : MonoBehaviour {
 
+		private RectTransform _rectTransform;
 		private CanvasScaler _canvasScaler;
 
 		private void Awake() {
-			if (ReferenceEquals(Instance, null)) {
-				Instance = this;
-			}
+			Instance = this;
 
 			DontDestroyOnLoad(this);
 
@@ -20,6 +19,8 @@ namespace UI {
 				throw new UnityException("Verify the structure of the UIController to include a child named: Portraits");
 			}
 
+			_rectTransform = GetComponent<RectTransform>();
+
 			_canvasScaler = GetComponent<CanvasScaler>();
 			_canvasScaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
 			_canvasScaler.referenceResolution = new Vector2(1920, 1080);
@@ -27,5 +28,7 @@ namespace UI {
 
 		public static UserInterface Instance { get; private set; }
 		public Transform Portraits { get; private set; }
+		public float ScreenHeight { get { return _rectTransform.sizeDelta.y; } }
+		public float ScreenWeight { get { return _rectTransform.sizeDelta.x; } }
 	}
 }

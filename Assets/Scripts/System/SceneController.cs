@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -26,18 +27,30 @@ namespace GameSystem {
 		public void LoadScene(string scene) {
 			IsLoading = true;
 
-			// TODO disable user inputs.
 			UserInputs.Instance.DisableInput();
 
 			UserInputs.Instance.UnsubscribeAll();
 
 			SceneManager.sceneLoaded += OnSceneLoaded;
 
-			LoadingScreen.Instance.ShowLoadingScreen();
-
-			StartCoroutine(LoadSceneAsynchronous(scene));
+			TransitionHandler.Instance.FadeIn(scene, ProceedWithLoadScene);
 		}
 
+		/// <summary>
+		/// After the Fade-In, continue with the Load Scene sequence.
+		/// </summary>
+		/// <param name="sceneName">The name of the scene.</param>
+		private void ProceedWithLoadScene(string sceneName) {
+			LoadingScreen.Instance.ShowLoadingScreen();
+
+			StartCoroutine(LoadSceneAsynchronous(sceneName));
+		}
+
+		/// <summary>
+		/// Load the Scene asynchronously.
+		/// </summary>
+		/// <param name="sceneName">The name of the scene.</param>
+		/// <returns></returns>
 		IEnumerator LoadSceneAsynchronous(string sceneName) {
 			_asyncOperation = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single);
 
@@ -48,12 +61,21 @@ namespace GameSystem {
 			}
 		}
 
+
 		/// <summary>
 		/// Event triggered when the scene has finished loading. This will dequeue all pending quest actions and triggers anyone listening to this event.
 		/// </summary>
 		/// <param name="scene"></param>
 		/// <param name="mode"></param>
 		private void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
+			TransitionHandler.Instance.FadeOut(scene.name, ProceedWithSceneUnload);
+		}
+
+		/// <summary>
+		/// After the Fade-out, continue with the Load scene sequence.
+		/// </summary>
+		/// <param name="sceneName">The name of the scene.</param>
+		private void ProceedWithSceneUnload(string sceneName) {
 			DequeueActions();
 
 			OnSceneLoadedEvent?.Invoke();
