@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Tutorial;
 
 namespace SaveSystem {
 	[Serializable]
@@ -12,5 +13,8 @@ namespace SaveSystem {
 
 		[SerializeField]
 		public List<ActorDto> ActorDtos = new List<ActorDto>();
+
+		[SerializeField]
+		public EncyclopediaDto EncyclopediaDto = new EncyclopediaDto();
 	}
 }
