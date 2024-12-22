@@ -49,8 +49,8 @@ public static class TerrainScanner
 		Color[] pixels = Enumerable.Repeat(Color.white, map.Count).ToArray();
 		for (int i = relativeOrigin.x; i < (relativeOrigin.x + map.Size.x); i++) {
 			for (int j = relativeOrigin.y; j < (relativeOrigin.y + map.Size.y); j++) {
-				float x_01 = i / (float)terrain.terrainData.heightmapWidth;
-				float y_01 = j / (float)terrain.terrainData.heightmapHeight;
+				float x_01 = i / (float)terrain.terrainData.heightmapResolution;
+				float y_01 = j / (float)terrain.terrainData.heightmapResolution;
 
 				if (terrain.terrainData.GetSteepness(x_01, y_01) > Constant.AGENT_MAX_SLOPE) {
 					pixels[((i - relativeOrigin.x)) + ((j - relativeOrigin.y) * map.Size.x)] = Color.black;

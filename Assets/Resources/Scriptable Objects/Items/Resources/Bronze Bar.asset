@@ -20,3 +20,5 @@ MonoBehaviour:
   ItemType: 0
   ItemEffects: []
   Stackable: 1
+  Burnable: 0
+  Power: 0

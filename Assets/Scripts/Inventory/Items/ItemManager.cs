@@ -22,6 +22,14 @@ namespace ItemSystem {
 			_itemDatas = itemDatas.ToDictionary(x => x.ID);
 		}
 
+		public bool PlaceItemInWorld(Item item, Vector3 position) {
+			for (int i = 0; i < item.Amount; i++) {
+				Instantiate(item.ItemData.Prefab, position, Quaternion.identity);
+			}
+			
+			return true;
+		}
+
 		public ItemData GetItemData(string name) {
 			if (_itemDatas.TryGetValue(name.ToLower().Replace(" ", "_"), out ItemData itemData)) {
 				return itemData;
