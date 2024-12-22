@@ -9,7 +9,8 @@ namespace ItemSystem {
 				{ ItemEffectType.EQUIP, new Equip()},
 				{ ItemEffectType.EAT, new Eat() },
 				{ ItemEffectType.DRINK, new Drink() },
-				{ ItemEffectType.STATUS_EFFECT, new StatusEffect() }
+				{ ItemEffectType.STATUS_EFFECT, new StatusEffect() },
+				{ ItemEffectType.PROCESS, new Process() }
 			};
 
 			public static void Activate(Actor actor, Item item) {

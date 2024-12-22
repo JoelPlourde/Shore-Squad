@@ -4,7 +4,8 @@
 			EQUIP = 0,
 			EAT = 1,
 			DRINK = 2,
-			STATUS_EFFECT = 3
+			STATUS_EFFECT = 3,
+			PROCESS = 4
 		}
 	}
 }
