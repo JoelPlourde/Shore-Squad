@@ -4,6 +4,7 @@
 		WONDERING = 1,
 		EAT = 2,
 		DRINK = 3,
-		SHEATHE = 4
+		SHEATHE = 4,
+		PROCESS = 5
 	}
 }

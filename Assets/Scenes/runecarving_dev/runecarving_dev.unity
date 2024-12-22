@@ -93,7 +93,8 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000004, guid: 09cb389981af85f448d0b745fd3919cd,
+    type: 2}
   m_LightingSettings: {fileID: 2065484519}
 --- !u!196 &4
 NavMeshSettings:
@@ -2338,7 +2339,7 @@ Light:
     m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
-    m_Strength: 0.373
+    m_Strength: 0.527
     m_Bias: 0.07
     m_NormalBias: 0.22
     m_NearPlane: 0.2
@@ -2398,6 +2399,74 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: 224.3, z: 0}
+--- !u!1001 &1115089487642089578
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4883415026500786923, guid: 54a0ff6eb8ec0c040915573493cca14c,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.9936503
+      objectReference: {fileID: 0}
+    - target: {fileID: 4883415026500786923, guid: 54a0ff6eb8ec0c040915573493cca14c,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.014120135
+      objectReference: {fileID: 0}
+    - target: {fileID: 4883415026500786923, guid: 54a0ff6eb8ec0c040915573493cca14c,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.043384165
+      objectReference: {fileID: 0}
+    - target: {fileID: 4883415026500786923, guid: 54a0ff6eb8ec0c040915573493cca14c,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4883415026500786923, guid: 54a0ff6eb8ec0c040915573493cca14c,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4883415026500786923, guid: 54a0ff6eb8ec0c040915573493cca14c,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4883415026500786923, guid: 54a0ff6eb8ec0c040915573493cca14c,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4883415026500786923, guid: 54a0ff6eb8ec0c040915573493cca14c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4883415026500786923, guid: 54a0ff6eb8ec0c040915573493cca14c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4883415026500786923, guid: 54a0ff6eb8ec0c040915573493cca14c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5228310535766933585, guid: 54a0ff6eb8ec0c040915573493cca14c,
+        type: 3}
+      propertyPath: m_Name
+      value: Carved Stone (Object)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 54a0ff6eb8ec0c040915573493cca14c, type: 3}
 --- !u!1001 &8281910036713537665
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2478,3 +2547,4 @@ SceneRoots:
   - {fileID: 793029602}
   - {fileID: 335604050}
   - {fileID: 8281910036713537665}
+  - {fileID: 1115089487642089578}

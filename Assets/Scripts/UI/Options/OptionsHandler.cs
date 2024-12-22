@@ -62,7 +62,14 @@ namespace UI {
 			_childCount = 0;
 			float preferredWidth = 0;
 			foreach (var itemEffect in slotHandler.Item.ItemData.ItemEffects) {
-				AddOption(EnumExtensions.FormatItemEffectType(itemEffect.ItemEffectType), slotHandler.Item.ItemData.name, ref preferredWidth, delegate { OnItemEffectClicked(slotHandler.Item); });
+				string effectName;
+				if (string.IsNullOrEmpty(itemEffect.effectName)) {
+					effectName = EnumExtensions.FormatItemEffectType(itemEffect.ItemEffectType);
+				} else {
+					effectName = itemEffect.effectName;
+				}
+
+				AddOption(effectName, slotHandler.Item.ItemData.name, ref preferredWidth, delegate { OnItemEffectClicked(slotHandler.Item); });
 			}
 
 			// Set default option on items.
