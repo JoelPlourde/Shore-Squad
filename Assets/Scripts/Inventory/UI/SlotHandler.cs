@@ -171,6 +171,15 @@ namespace ItemSystem {
 
 					if (!handle) {
 						ReplaceImage(eventData.pointerDrag.transform);
+
+						Ray ray = Camera.main.ScreenPointToRay(eventData.position);
+						if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, LayerMask.GetMask("Terrain"))) {
+							if (Squad.FirstSelected(out Actor actor)) {
+								if (ItemManager.Instance.PlaceItemInWorld(Item, hit.point)) {
+									actor.Inventory.RemoveItemFromInventoryAtPosition(Item.Index, Item.Amount);
+								}
+							}
+						}
 					}
 
 					OnEndDragEvent?.Invoke();

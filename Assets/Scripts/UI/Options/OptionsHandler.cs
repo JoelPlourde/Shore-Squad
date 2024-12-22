@@ -67,7 +67,7 @@ namespace UI {
 
 			// Set default option on items.
 			AddOption("Select", slotHandler.Item.ItemData.name, ref preferredWidth, delegate { OnItemSelect(slotHandler); });
-			AddOption("Drop", slotHandler.Item.ItemData.name, ref preferredWidth, OnItemDropped);
+			AddOption("Drop", slotHandler.Item.ItemData.name, ref preferredWidth, delegate { OnItemDropped(slotHandler); });
 			AddOption("Cancel", "", ref preferredWidth, Close);
 
 			// Disable all the unused options!
@@ -138,8 +138,12 @@ namespace UI {
 		/// <summary>
 		/// Event triggered whenever the Drop option is activated.
 		/// </summary>
-		public void OnItemDropped() {
-			Debug.Log("Not yet implemented!");
+		public void OnItemDropped(SlotHandler slotHandler) {
+			if (Squad.FirstSelected(out Actor actor)) {
+				if (ItemManager.Instance.PlaceItemInWorld(slotHandler.Item, actor.transform.position)) {
+					actor.Inventory.RemoveItemFromInventoryAtPosition(slotHandler.Item.Index, slotHandler.Item.Amount);
+				}
+			}
 			Close();
 		}
 

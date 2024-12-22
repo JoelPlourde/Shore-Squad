@@ -17,7 +17,7 @@ namespace NodeSystem {
 		public void Start() {
 			// Register the particle system if any.
 			if (!ReferenceEquals(_nodeData.OnHit, null)) {
-				ParticleSystemManager.Instance.RegisterParticleSystem(_nodeData.OnHit.ParticleSystem.name, _nodeData.OnHit.ParticleSystem);
+				ParticleSystemManager.Instance.RegisterParticleSystem(_nodeData.OnHit.ParticleSystem?.name, _nodeData.OnHit.ParticleSystem);
 			}
 
 			OnStart();

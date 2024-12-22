@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Stone
   m_EditorClassIdentifier: 
   Sprite: {fileID: 21300000, guid: 767a04d14aa89c74b94c20d59bb8bda1, type: 3}
-  Prefab: {fileID: 0}
+  Prefab: {fileID: 18933969921263529, guid: 49af58770bfa0cc43870ba6b6046cc4a, type: 3}
   Tooltip: '<size=22>Stone</size>
 
     <size=16>Resource</size>'
