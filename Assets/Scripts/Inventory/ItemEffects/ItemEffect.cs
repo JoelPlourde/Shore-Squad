@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using CraftingSystem;
+using System.Collections.Generic;
 
 namespace ItemSystem {
 	namespace EffectSystem {
@@ -32,7 +33,7 @@ namespace ItemSystem {
 			[Header("Process")]
 			[SerializeField]
 			[Tooltip("The recipe that will be crafted, if any.")]
-			public RecipeData RecipeData;
+			public List<RecipeData> RecipeDatas;
 		}
 	}
 }
