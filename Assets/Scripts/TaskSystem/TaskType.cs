@@ -4,6 +4,6 @@ using UnityEngine;
 
 namespace TaskSystem {
 	public enum TaskType {
-		SLEEP, MOVE, ATTACK, FLEE, CONSTRUCT, INTERACT
+		SLEEP, MOVE, ATTACK, FLEE, CONSTRUCT, INTERACT, PROCESS
 	}
 }

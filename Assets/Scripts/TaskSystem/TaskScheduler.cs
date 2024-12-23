@@ -16,7 +16,8 @@ namespace TaskSystem {
 			{ TaskType.CONSTRUCT, typeof(Construct) },
 			{ TaskType.FLEE, typeof(Flee) },
 			{ TaskType.MOVE, typeof(Move) },
-			{ TaskType.SLEEP, typeof(Sleep) }
+			{ TaskType.SLEEP, typeof(Sleep) },
+			{ TaskType.PROCESS, typeof(Process) }
 		};
 		private static readonly Dictionary<Guid, TaskScheduler> _instances = new Dictionary<Guid, TaskScheduler>();
 
