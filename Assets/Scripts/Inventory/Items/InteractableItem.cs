@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 
 namespace ItemSystem {
+    [RequireComponent(typeof(Rigidbody))]
     public class InteractableItem : InteractableBehavior, IInteractable {
 
 		[Tooltip("The radius at which the player should stopped at.")]

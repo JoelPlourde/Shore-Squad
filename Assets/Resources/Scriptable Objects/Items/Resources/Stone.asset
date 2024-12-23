@@ -20,6 +20,6 @@ MonoBehaviour:
   Examine: I wonder what I can do with this!
   ItemType: 0
   ItemEffects: []
-  Stackable: 1
+  Stackable: 0
   Burnable: 0
   Power: 0
