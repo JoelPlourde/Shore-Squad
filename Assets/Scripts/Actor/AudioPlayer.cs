@@ -21,6 +21,17 @@ namespace AudioSystem {
 			_audioSource.PlayDelayed(delay);
 		}
 
+		public void PlayLooping(AudioClip audioClip, float delay = 0) {
+			RandomizePitch();
+			_audioSource.clip = audioClip;
+			_audioSource.loop = true;
+			_audioSource.PlayDelayed(delay);
+		}
+
+		public void Stop() {
+			_audioSource.Stop();
+		}
+
 		private void RandomizePitch() {
 			_audioSource.pitch = Random.Range(0.85f, 1.15f);
 		}

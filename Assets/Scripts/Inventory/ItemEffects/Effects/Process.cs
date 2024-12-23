@@ -43,8 +43,6 @@ namespace ItemSystem {
                     return;
                 }
 
-                _actor.Emotion.PlayEmote(EmoteSystem.EmoteType.PROCESS);
-
                 _actor.Inventory.RemoveItemsFromInventory(_recipeData.Inputs, out List<Item> removedItems);
                 if (removedItems.Count > 0) {
                     Debug.Log("We could not remove the item!!");
