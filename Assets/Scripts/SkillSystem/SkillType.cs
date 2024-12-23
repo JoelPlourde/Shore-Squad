@@ -5,6 +5,7 @@
 		ALCHEMY = 2,
 		COOKING = 3,
 		FARMING = 4,
-		FISHING = 5
+		FISHING = 5,
+		RUNECARVING = 6,
 	}
 }

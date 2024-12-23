@@ -1,0 +1,15 @@
+{
+    "SkillType": 6,
+    "Color": {
+        "r": 0.9382991790771484,
+        "g": 0.0,
+        "b": 1.0,
+        "a": 0.0
+    },
+    "Title": "Runecarving",
+    "Description": "The ability to carve Runes",
+    "Icon": {
+        "instanceID": 23330
+    },
+    "Competencies": []
+}

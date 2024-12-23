@@ -23,6 +23,10 @@ namespace SkillSystem {
 
 			foreach (SkillType skillType in Enum.GetValues(typeof(SkillType))) {
 				_skills.Add(skillType, new Level());
+				if (skillsDto.levelDtos.Length <= (int) skillType) {
+					Debug.Log("This new skill has been added: " + skillType);
+					continue;
+				}
 				_skills[skillType].Initialize(skillsDto.levelDtos[(int) skillType]);
 			}
 		}
