@@ -39,6 +39,9 @@ namespace TaskSystem {
 			_interactArguments.Interactable.OnInteractEnter(actor);
 			actor.NavMeshAgent.isStopped = true;
 			actor.Animator.SetBool("Move", false);
+			if (_interactArguments.Interactable.IsPickup()) {
+				actor.Animator.SetTrigger("Pickup");
+			}
 		}
 
 		public override void OnEnd() {
