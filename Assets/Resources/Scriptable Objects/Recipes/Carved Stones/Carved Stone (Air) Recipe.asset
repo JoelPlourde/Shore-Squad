@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 339273e0a72de804295bccfd953b1a5a, type: 3}
-  m_Name: CarvedStoneRecipe
+  m_Name: Carved Stone (Air) Recipe
   m_EditorClassIdentifier: 
   Inputs:
   - ItemData: {fileID: 11400000, guid: 2156c9b311b3a034b8e76d1bec53172e, type: 2}
     Amount: 1
   Outputs:
-  - ItemData: {fileID: 0}
-    Amount: 0
+  - ItemData: {fileID: 11400000, guid: affd8836436127040a081faec089cd20, type: 2}
+    Amount: 1
   RequiredProgress: 1

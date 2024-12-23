@@ -13,7 +13,7 @@ namespace ItemSystem {
             private RecipeData _recipeData;
 
 			public void Activate(Actor actor, Item item, ItemEffect itemEffect) {
-                if (ReferenceEquals(itemEffect.RecipeData, null)) {
+                if (ReferenceEquals(itemEffect.RecipeDatas, null)) {
                     Debug.LogError("To Process an item, you must provide its Recipe!");
                     return;
                 }
@@ -43,7 +43,7 @@ namespace ItemSystem {
                     return;
                 }
 
-				actor.Emotion.PlayEmote(EmoteSystem.EmoteType.PROCESS);
+                _actor.Emotion.PlayEmote(EmoteSystem.EmoteType.PROCESS);
 
                 _actor.Inventory.RemoveItemsFromInventory(_recipeData.Inputs, out List<Item> removedItems);
                 if (removedItems.Count > 0) {

@@ -19,13 +19,7 @@ MonoBehaviour:
     <size=16>Resource</size>'
   Examine: I wonder what I can do with this!
   ItemType: 0
-  ItemEffects:
-  - ItemEffectType: 4
-    effectName: Carve
-    Magnitude: 0
-    Duration: 0
-    StatusEffectData: {fileID: 0}
-    RecipeData: {fileID: 0}
+  ItemEffects: []
   Stackable: 1
   Burnable: 0
   Power: 0
