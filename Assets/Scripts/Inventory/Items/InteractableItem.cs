@@ -33,6 +33,10 @@ namespace ItemSystem {
 			return InteractionRadius;
 		}
 
+        public bool IsPickup() {
+            return true;
+        }
+
         protected override OutlineType GetOutlineType() {
             return OutlineType.ITEM;
         }

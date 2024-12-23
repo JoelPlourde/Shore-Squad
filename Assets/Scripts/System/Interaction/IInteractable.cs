@@ -6,4 +6,8 @@
 
 	// To determine how close the Actor has to be to interact with this.
 	float GetInteractionRadius();
+
+	virtual bool IsPickup() {
+		return false;
+	}
 }
