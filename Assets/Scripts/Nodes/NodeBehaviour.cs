@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using ItemSystem;
 
 namespace NodeSystem {
-	public class NodeBehaviour : MonoBehaviour, IInteractable {
+	public class NodeBehaviour : InteractableBehavior, IInteractable {
 
 		[Tooltip("The radius at which the player should stopped at.")]
 		public float InteractionRadius;
@@ -103,6 +103,10 @@ namespace NodeSystem {
 
 		public float GetInteractionRadius() {
 			return InteractionRadius;
+		}
+
+		protected override OutlineType GetOutlineType() {
+			return OutlineType.INTERACTABLE;
 		}
 
 		public void OnDrawGizmosSelected() {
