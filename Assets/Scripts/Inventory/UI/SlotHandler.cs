@@ -177,8 +177,14 @@ namespace ItemSystem {
 							if (Squad.FirstSelected(out Actor actor)) {
 								if (ItemManager.Instance.PlaceItemInWorld(Item, hit.point)) {
 									actor.Inventory.RemoveItemFromInventoryAtPosition(Item.Index, Item.Amount);
+								} else {
+									Debug.LogWarning("Failed to place item in world!");
 								}
+							} else {
+								Debug.LogWarning("No actor selected!");
 							}
+						} else {
+							Debug.LogWarning("Failed to raycast!");
 						}
 					}
 

@@ -6,7 +6,7 @@ namespace ItemSystem {
     public class InteractableItem : InteractableBehavior, IInteractable {
 
 		[Tooltip("The radius at which the player should stopped at.")]
-		public float InteractionRadius;
+		public float InteractionRadius = 1f;
 
         [SerializeField]
         protected ItemData _itemData;
