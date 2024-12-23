@@ -11,10 +11,9 @@ namespace TaskSystem {
 			// Validate the arguments you've received is of the correct type.
 			_processArguments = TaskArguments as ProcessArguments;
 
-            Debug.Log("Processing task started in the task itself");
-
             actor.Animator.SetBool("Processing", true);
             actor.Animator.SetFloat("Processing Speed", 1);
+			actor.Emotion.PlayEmote(EmoteSystem.EmoteType.PROCESS, true);
 
             // Start a timer with the processing time.
             _coroutine = waitForProcessingTime();
@@ -37,8 +36,8 @@ namespace TaskSystem {
         }
 
         public override void OnEnd() {
+            actor.Emotion.StopEmote(EmoteSystem.EmoteType.PROCESS);
             base.OnEnd();
-
             actor.Animator.SetBool("Processing", false);
         }
     }

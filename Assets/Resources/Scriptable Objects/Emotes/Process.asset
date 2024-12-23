@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Process
   m_EditorClassIdentifier: 
   emoteType: 5
-  Sound: {fileID: 0}
+  Sound: {fileID: 8300000, guid: 356f2953de7cd1f449adcd7635858c32, type: 3}
   Delay: 0
-  ParticleSystem: {fileID: 0}
-  LocalPosition: {x: 0, y: 0, z: 0}
+  ParticleSystem: {fileID: 6863705561966766795, guid: d4a407430880f3944bc4f3c6e3788d01,
+    type: 3}
+  LocalPosition: {x: 0, y: 1, z: 0.5}
