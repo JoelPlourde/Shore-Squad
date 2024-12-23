@@ -24,6 +24,10 @@ namespace ItemSystem {
 
 		public bool PlaceItemInWorld(Item item, Vector3 position) {
 			for (int i = 0; i < item.Amount; i++) {
+
+				// To the position, add 1 unit in the Y-axis
+				position.y += 0.25f;
+
 				Instantiate(item.ItemData.Prefab, position, Quaternion.identity);
 			}
 			
