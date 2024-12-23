@@ -34,7 +34,7 @@ namespace ItemSystem {
 
                 ProcessArguments processArguments = new ProcessArguments(recipeData.RequiredProgress, OnProcessingDone);
 
-                _actor.TaskScheduler.CreateTask(processArguments, TaskPriority.LOW);
+                _actor.TaskScheduler.CreateTask(processArguments, TaskPriority.HIGH);
             }
 
             public void OnProcessingDone() {
