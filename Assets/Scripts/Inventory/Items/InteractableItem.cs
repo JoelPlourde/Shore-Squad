@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 
 namespace ItemSystem {
-    public class InteractableItem : MonoBehaviour, IInteractable {
+    public class InteractableItem : InteractableBehavior, IInteractable {
 
 		[Tooltip("The radius at which the player should stopped at.")]
 		public float InteractionRadius;
@@ -32,5 +32,9 @@ namespace ItemSystem {
 		public float GetInteractionRadius() {
 			return InteractionRadius;
 		}
+
+        protected override OutlineType GetOutlineType() {
+            return OutlineType.ITEM;
+        }
     }
 }

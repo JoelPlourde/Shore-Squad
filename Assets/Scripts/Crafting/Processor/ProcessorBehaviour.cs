@@ -4,7 +4,7 @@ using CraftingSystem.UI;
 using UnityEngine;
 
 namespace CraftingSystem {
-	public class ProcessorBehaviour : MonoBehaviour, IInteractable {
+	public class ProcessorBehaviour : InteractableBehavior, IInteractable {
 
 		[SerializeField]
 		private float _interactionRadius;
@@ -125,6 +125,10 @@ namespace CraftingSystem {
 
 		public float GetInteractionRadius() {
 			return _interactionRadius;
+		}
+
+		protected override OutlineType GetOutlineType() {
+			return OutlineType.INTERACTABLE;
 		}
 
 		public Vector3 WorldPosition { get { return transform.position + new Vector3(0, CameraController.Instance.Distance / _heightRatio, 0); } }

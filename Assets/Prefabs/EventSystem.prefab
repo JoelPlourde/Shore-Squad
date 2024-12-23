@@ -37,6 +37,7 @@ GameObject:
   - component: {fileID: 5587549613101646622}
   - component: {fileID: 9039628097569725183}
   - component: {fileID: 1831636428214258029}
+  - component: {fileID: 4427641242788990663}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -495,5 +496,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8ddd3da49de35ac40b35a72193c27b9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4427641242788990663
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6618174110233258670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70b2824690a05c7418fc60bf62f6d47f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

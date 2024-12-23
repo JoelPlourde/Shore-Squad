@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 using PointerSystem;
 
 namespace QuestSystem {
-	public class NPC : MonoBehaviour, IInteractable {
+	public class NPC : InteractableBehavior, IInteractable {
 
 		private DialogueData _dialogueData;
 		private Actor _actor;
@@ -43,6 +43,11 @@ namespace QuestSystem {
 		public float GetInteractionRadius() {
 			return 1f;
 		}
+
+		protected override OutlineType GetOutlineType() {
+			return OutlineType.NPC;
+		}
+
 		#endregion
 
 		private void OnDialogueEnded() {
