@@ -18,4 +18,8 @@ MonoBehaviour:
   Outputs:
   - ItemData: {fileID: 11400000, guid: affd8836436127040a081faec089cd20, type: 2}
     Amount: 1
-  RequiredProgress: 1
+  RequiredProgress: 2
+  RequiredSkills: []
+  ExperienceGains:
+  - SkillType: 6
+    Experience: 5

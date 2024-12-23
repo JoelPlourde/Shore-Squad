@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UI;
 using CraftingSystem;
 using TaskSystem;
+using SkillSystem;
 
 namespace ItemSystem {
 	namespace EffectSystem {
@@ -54,9 +55,18 @@ namespace ItemSystem {
                     Debug.Log("We could not add the item!!");
                     return;
                 }
+
+                for (int i = 0; i < _recipeData.ExperienceGains.Count; i++) {
+                    ExperienceGain experienceGain = _recipeData.ExperienceGains[i];
+                    _actor.Skills.GainExperience(experienceGain.SkillType, experienceGain.Experience);
+                }
             }
 
             private bool CheckIfRecipeIsValid() {
+                if (!_recipeData.CheckIfActorHasRequirements(_actor)) {
+                    return false;
+                }
+
                 Item[] itemsArray = _actor.Inventory.GetItems().ToArray();
                 return _recipeData.CheckIfRecipeIsValid(itemsArray);
             }

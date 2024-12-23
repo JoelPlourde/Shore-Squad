@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using ItemSystem;
 using UnityEngine;
+using SkillSystem;
 
 namespace CraftingSystem {
 	[Serializable]
@@ -16,10 +17,29 @@ namespace CraftingSystem {
 		public List<Item> Outputs;
 
 		[SerializeField]
+		[Header("Crafting Time")]
 		public int RequiredProgress = 100;
+
+		[SerializeField]
+		[Header("Requirements")]
+		public List<SkillRequirement> RequiredSkills;
+
+		[SerializeField]
+		[Header("Experience")]
+		public List<ExperienceGain> ExperienceGains;
 
 		public Dictionary<string, RecipeData> ToDictionary() {
 			return Inputs.ToDictionary(x => x.ItemData.ID, x => this);
+		}
+
+		public bool CheckIfActorHasRequirements(Actor actor) {
+			for (int i = 0; i < RequiredSkills.Count; i++) {
+				if (actor.Skills.GetLevel( RequiredSkills[i].SkillType).Value <  RequiredSkills[i].Level) {
+					Debug.Log("The actor does not have the required skill level.");
+					return false;
+				}
+			}
+			return true;
 		}
 
 		public bool CheckIfRecipeIsPossible(Item[] items) {
