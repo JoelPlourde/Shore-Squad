@@ -2,18 +2,35 @@ using UnityEngine;
 
 namespace ElementalRift {
     public class OrbBehaviour : MonoBehaviour {
+
+        // This value will be in the RiftBehavior
+        public float _percentage = 1.0f;
+
+        private Transform _orb;
+
         private ParticleSystem _circle;
         private ParticleSystem _particles;
         private ParticleSystem _beam;
         private ParticleSystem _smoke;
 
-        void Awake() {
-            Transform parent = transform.Find("Particle Systems");
+        /** For reference, we'll scale these value over time, but we take a copy of what the Inspector value was. **/
+        private float _default_particle_emission_rate;
+        private float _default_beam_emission_rate;
+        private float _default_circle_emission_rate;
+        private float _default_smoke_emission_rate;
 
-            _particles = parent.Find("PS_Particles").GetComponent<ParticleSystem>();
-            _circle = parent.Find("PS_Circle").GetComponent<ParticleSystem>();
-            _beam = parent.Find("PS_Beam").GetComponent<ParticleSystem>();
-            _smoke = parent.Find("PS_Smoke").GetComponent<ParticleSystem>();
+        void Awake() {
+            _orb = transform.Find("Particle Systems");
+
+            _particles = _orb.Find("PS_Particles").GetComponent<ParticleSystem>();
+            _circle = _orb.Find("PS_Circle").GetComponent<ParticleSystem>();
+            _beam = _orb.Find("PS_Beam").GetComponent<ParticleSystem>();
+            _smoke = _orb.Find("PS_Smoke").GetComponent<ParticleSystem>();
+
+            _default_particle_emission_rate = _particles.emission.rateOverTime.constant;
+            _default_beam_emission_rate = _beam.emission.rateOverTime.constant;
+            _default_circle_emission_rate = _circle.emission.rateOverTime.constant;
+            _default_smoke_emission_rate = _smoke.emission.rateOverTime.constant;
         }
 
         public void Update() {
@@ -41,6 +58,37 @@ namespace ElementalRift {
             if (Input.GetKeyUp(KeyCode.E)) {
                 ChangeElement(ElementType.EARTH);
             }
+
+            if (Input.GetKeyUp(KeyCode.P)) {
+                _percentage += 0.1f;
+                ScaleOrb(_percentage);
+                Debug.Log("Percentage: " + _percentage);
+            }
+
+            if (Input.GetKeyUp(KeyCode.M)) {
+                _percentage -= 0.1f;
+                ScaleOrb(_percentage);
+                Debug.Log("Percentage: " + _percentage);
+            }
+        }
+
+        /**
+        * This method will scale the orb based on the percentage.
+        **/
+        private void ScaleOrb(float percentage) {
+            var _particleEmission = _particles.emission;
+            _particleEmission.rateOverTime = _default_particle_emission_rate * percentage;
+
+            var _beamEmission = _beam.emission;
+            _beamEmission.rateOverTime = _default_beam_emission_rate * percentage;
+
+            var _circleEmission = _circle.emission;
+            _circleEmission.rateOverTime = _default_circle_emission_rate * percentage;
+
+            var _smokeEmission = _smoke.emission;
+            _smokeEmission.rateOverTime = _default_smoke_emission_rate * percentage;
+
+            LeanTween.scale(_orb.gameObject, Vector3.one * percentage, 0.5f);
         }
 
         private void ChangeElement(ElementType elementType) {
