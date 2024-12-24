@@ -1,7 +1,7 @@
 using UnityEngine;
 
 namespace ElementalRift {
-    public class ElementalOrbBehaviour : MonoBehaviour {
+    public class OrbBehaviour : MonoBehaviour {
         private ParticleSystem _circle;
         private ParticleSystem _particles;
         private ParticleSystem _beam;
