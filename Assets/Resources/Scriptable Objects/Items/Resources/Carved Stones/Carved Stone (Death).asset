@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a7d26e20cfda80046b9311ea6298a385, type: 3}
-  m_Name: Carved Stone (Air)
+  m_Name: Carved Stone (Death)
   m_EditorClassIdentifier: 
-  Sprite: {fileID: 21300000, guid: 738aa674804a72d4d92f03b375035e64, type: 3}
-  Prefab: {fileID: 6578540413160493972, guid: 1b250163cb286014fac7b433a7cc0b6a, type: 3}
-  Tooltip: '<size=22>Carved Stone (Air)</size>
+  Sprite: {fileID: 21300000, guid: 17fc6de3d0bea0a41bcc3d7ce417ca62, type: 3}
+  Prefab: {fileID: 1999553980501313063, guid: 314ca6e9e5a670a41a4dbae702c63d72, type: 3}
+  Tooltip: '<size=22>Carved Stone (Death)</size>
 
     <size=16>Resource</size>'
   Examine: 
   ItemType: 0
   ItemEffects: []
-  Stackable: 0
+  Stackable: 1
   Burnable: 0
   Power: 0

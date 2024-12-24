@@ -18,9 +18,15 @@ namespace ElementalRift {
 
         public void Update() {
             // If the user presses up on key H
-            if (Input.GetKeyDown(KeyCode.H)) {
-                AdjustColors(Color.green, Color.blue);
+            if (Input.GetKeyDown(KeyCode.A)) {
+                AdjustColors(Color.blue, Color.white);
+                UpdateExternalForce(LayerMask.GetMask("Air Element"));
             }
+        }
+
+        public void UpdateExternalForce(LayerMask LayerMask) {
+            var externalForces = _particles.externalForces;
+            externalForces.influenceMask = LayerMask;
         }
 
         public void AdjustColors(Color startColor, Color endColor) {

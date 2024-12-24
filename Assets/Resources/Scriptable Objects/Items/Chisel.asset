@@ -27,6 +27,11 @@ MonoBehaviour:
     StatusEffectData: {fileID: 0}
     RecipeDatas:
     - {fileID: 11400000, guid: 4870a684c230df045ac524ca0b8012f7, type: 2}
-  Stackable: 1
+    - {fileID: 11400000, guid: 5b19ae5e7bcfbad4d8ce66c87f8b1fa8, type: 2}
+    - {fileID: 11400000, guid: 2b1f5a8d5983393488763a4f4373f0cf, type: 2}
+    - {fileID: 11400000, guid: 6889d55a2180f3c4eb41f132886d26c4, type: 2}
+    - {fileID: 11400000, guid: d510de7dfe26d8d409cd1c050ef6a3e7, type: 2}
+    - {fileID: 11400000, guid: 6f5712246914a244396b3ba67fe025b2, type: 2}
+  Stackable: 0
   Burnable: 0
   Power: 0

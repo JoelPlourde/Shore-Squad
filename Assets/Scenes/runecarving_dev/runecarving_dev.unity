@@ -120,74 +120,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 23800000, guid: 41ed5317bdcc22645addf73b1bbdf2ff, type: 2}
---- !u!1001 &47609244
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4883415026500786923, guid: 54a0ff6eb8ec0c040915573493cca14c,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.86333025
-      objectReference: {fileID: 0}
-    - target: {fileID: 4883415026500786923, guid: 54a0ff6eb8ec0c040915573493cca14c,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.00014120374
-      objectReference: {fileID: 0}
-    - target: {fileID: 4883415026500786923, guid: 54a0ff6eb8ec0c040915573493cca14c,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -1.4113754
-      objectReference: {fileID: 0}
-    - target: {fileID: 4883415026500786923, guid: 54a0ff6eb8ec0c040915573493cca14c,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4883415026500786923, guid: 54a0ff6eb8ec0c040915573493cca14c,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4883415026500786923, guid: 54a0ff6eb8ec0c040915573493cca14c,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4883415026500786923, guid: 54a0ff6eb8ec0c040915573493cca14c,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4883415026500786923, guid: 54a0ff6eb8ec0c040915573493cca14c,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4883415026500786923, guid: 54a0ff6eb8ec0c040915573493cca14c,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4883415026500786923, guid: 54a0ff6eb8ec0c040915573493cca14c,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5228310535766933585, guid: 54a0ff6eb8ec0c040915573493cca14c,
-        type: 3}
-      propertyPath: m_Name
-      value: Carved Stone (Object)
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 54a0ff6eb8ec0c040915573493cca14c, type: 3}
 --- !u!1001 &335604050
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -426,6 +358,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Elemental_Orb
+      objectReference: {fileID: 0}
+    - target: {fileID: 6020353862730550845, guid: b1c8f086f5d2d1f4889f87455ff84715,
+        type: 3}
+      propertyPath: ExternalForcesModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6020353862730550845, guid: b1c8f086f5d2d1f4889f87455ff84715,
+        type: 3}
+      propertyPath: ExternalForcesModule.influenceMask.m_Bits
+      value: 2147483648
       objectReference: {fileID: 0}
     - target: {fileID: 7108775261316940341, guid: b1c8f086f5d2d1f4889f87455ff84715,
         type: 3}
@@ -2818,7 +2760,6 @@ SceneRoots:
   - {fileID: 793029602}
   - {fileID: 335604050}
   - {fileID: 8281910036713537665}
-  - {fileID: 47609244}
   - {fileID: 1116928582}
   - {fileID: 5015088816556681592}
   - {fileID: 630982742}

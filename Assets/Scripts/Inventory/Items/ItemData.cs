@@ -56,6 +56,9 @@ namespace ItemSystem {
 		}
 
 		public override int GetHashCode() {
+			if (ID == null) {
+				return 0;
+			}
 			return ID.GetHashCode();
 		}
 

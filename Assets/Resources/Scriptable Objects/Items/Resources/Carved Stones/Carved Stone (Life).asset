@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a7d26e20cfda80046b9311ea6298a385, type: 3}
-  m_Name: Carved Stone (Air)
+  m_Name: Carved Stone (Life)
   m_EditorClassIdentifier: 
-  Sprite: {fileID: 21300000, guid: 738aa674804a72d4d92f03b375035e64, type: 3}
-  Prefab: {fileID: 6578540413160493972, guid: 1b250163cb286014fac7b433a7cc0b6a, type: 3}
-  Tooltip: '<size=22>Carved Stone (Air)</size>
+  Sprite: {fileID: 21300000, guid: af0b1e820fbb3834a87f0ff0c436d863, type: 3}
+  Prefab: {fileID: 1498349272345642681, guid: ce4f1e554f318bc458b313b8122b8080, type: 3}
+  Tooltip: '<size=22>Carved Stone (Life)</size>
 
     <size=16>Resource</size>'
   Examine: 
