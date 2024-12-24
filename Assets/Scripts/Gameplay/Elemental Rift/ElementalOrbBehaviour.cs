@@ -18,10 +18,36 @@ namespace ElementalRift {
 
         public void Update() {
             // If the user presses up on key H
-            if (Input.GetKeyDown(KeyCode.A)) {
-                AdjustColors(Color.blue, Color.white);
-                UpdateExternalForce(LayerMask.GetMask("Air Element"));
+            if (Input.GetKeyUp(KeyCode.A)) {
+                ChangeElement(ElementType.AIR);
             }
+
+            if (Input.GetKeyUp(KeyCode.F)) {
+                ChangeElement(ElementType.FIRE);
+            }
+
+            if (Input.GetKeyUp(KeyCode.L)) {
+                ChangeElement(ElementType.LIFE);
+            }
+
+            if (Input.GetKeyUp(KeyCode.D)) {
+                ChangeElement(ElementType.DEATH);
+            }
+
+            if (Input.GetKeyUp(KeyCode.W)) {
+                ChangeElement(ElementType.WATER);
+            }
+            
+            if (Input.GetKeyUp(KeyCode.E)) {
+                ChangeElement(ElementType.EARTH);
+            }
+        }
+
+        private void ChangeElement(ElementType elementType) {
+            ElementData elementData = ElementManager.Instance.GetElementData(elementType);
+
+            AdjustColors(elementData.PrimaryColor, elementData.SecondaryColor);
+            UpdateExternalForce(elementData.LayerMask);
         }
 
         public void UpdateExternalForce(LayerMask LayerMask) {

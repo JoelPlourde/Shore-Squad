@@ -120,6 +120,74 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 23800000, guid: 41ed5317bdcc22645addf73b1bbdf2ff, type: 2}
+--- !u!1001 &294875428
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7484945181961617311, guid: 20c89991f7333884a97f4f00e66fd7ff,
+        type: 3}
+      propertyPath: m_Name
+      value: Carved Stone (Water)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7823893094002566437, guid: 20c89991f7333884a97f4f00e66fd7ff,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.6980183
+      objectReference: {fileID: 0}
+    - target: {fileID: 7823893094002566437, guid: 20c89991f7333884a97f4f00e66fd7ff,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7823893094002566437, guid: 20c89991f7333884a97f4f00e66fd7ff,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 6.866128
+      objectReference: {fileID: 0}
+    - target: {fileID: 7823893094002566437, guid: 20c89991f7333884a97f4f00e66fd7ff,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7823893094002566437, guid: 20c89991f7333884a97f4f00e66fd7ff,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7823893094002566437, guid: 20c89991f7333884a97f4f00e66fd7ff,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7823893094002566437, guid: 20c89991f7333884a97f4f00e66fd7ff,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7823893094002566437, guid: 20c89991f7333884a97f4f00e66fd7ff,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7823893094002566437, guid: 20c89991f7333884a97f4f00e66fd7ff,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7823893094002566437, guid: 20c89991f7333884a97f4f00e66fd7ff,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 20c89991f7333884a97f4f00e66fd7ff, type: 3}
 --- !u!1001 &335604050
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -377,7 +445,7 @@ PrefabInstance:
     - target: {fileID: 7108775261316940341, guid: b1c8f086f5d2d1f4889f87455ff84715,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2
+      value: 3.35
       objectReference: {fileID: 0}
     - target: {fileID: 7108775261316940341, guid: b1c8f086f5d2d1f4889f87455ff84715,
         type: 3}
@@ -533,6 +601,142 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &801596744
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1498349272345642681, guid: ce4f1e554f318bc458b313b8122b8080,
+        type: 3}
+      propertyPath: m_Name
+      value: Carved Stone (Life)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2270064994883263491, guid: ce4f1e554f318bc458b313b8122b8080,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 6.92
+      objectReference: {fileID: 0}
+    - target: {fileID: 2270064994883263491, guid: ce4f1e554f318bc458b313b8122b8080,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.11
+      objectReference: {fileID: 0}
+    - target: {fileID: 2270064994883263491, guid: ce4f1e554f318bc458b313b8122b8080,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 4.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 2270064994883263491, guid: ce4f1e554f318bc458b313b8122b8080,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2270064994883263491, guid: ce4f1e554f318bc458b313b8122b8080,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2270064994883263491, guid: ce4f1e554f318bc458b313b8122b8080,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2270064994883263491, guid: ce4f1e554f318bc458b313b8122b8080,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2270064994883263491, guid: ce4f1e554f318bc458b313b8122b8080,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2270064994883263491, guid: ce4f1e554f318bc458b313b8122b8080,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2270064994883263491, guid: ce4f1e554f318bc458b313b8122b8080,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ce4f1e554f318bc458b313b8122b8080, type: 3}
+--- !u!1001 &912026514
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2351243976001044547, guid: 753796a890efbaa42b1e3f60988e6c12,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5.047785
+      objectReference: {fileID: 0}
+    - target: {fileID: 2351243976001044547, guid: 753796a890efbaa42b1e3f60988e6c12,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 2351243976001044547, guid: 753796a890efbaa42b1e3f60988e6c12,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3.1985931
+      objectReference: {fileID: 0}
+    - target: {fileID: 2351243976001044547, guid: 753796a890efbaa42b1e3f60988e6c12,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2351243976001044547, guid: 753796a890efbaa42b1e3f60988e6c12,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.000000021855694
+      objectReference: {fileID: 0}
+    - target: {fileID: 2351243976001044547, guid: 753796a890efbaa42b1e3f60988e6c12,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2351243976001044547, guid: 753796a890efbaa42b1e3f60988e6c12,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2351243976001044547, guid: 753796a890efbaa42b1e3f60988e6c12,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2351243976001044547, guid: 753796a890efbaa42b1e3f60988e6c12,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2351243976001044547, guid: 753796a890efbaa42b1e3f60988e6c12,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3164512511032662777, guid: 753796a890efbaa42b1e3f60988e6c12,
+        type: 3}
+      propertyPath: m_Name
+      value: Carved Stone (Fire)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 753796a890efbaa42b1e3f60988e6c12, type: 3}
 --- !u!1001 &1116928582
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -681,6 +885,210 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9ccb80b9aacdce419621aca80dfe696, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &1700051789
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1221609562957651101, guid: 314ca6e9e5a670a41a4dbae702c63d72,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 1221609562957651101, guid: 314ca6e9e5a670a41a4dbae702c63d72,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.22
+      objectReference: {fileID: 0}
+    - target: {fileID: 1221609562957651101, guid: 314ca6e9e5a670a41a4dbae702c63d72,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 4.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1221609562957651101, guid: 314ca6e9e5a670a41a4dbae702c63d72,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1221609562957651101, guid: 314ca6e9e5a670a41a4dbae702c63d72,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1221609562957651101, guid: 314ca6e9e5a670a41a4dbae702c63d72,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1221609562957651101, guid: 314ca6e9e5a670a41a4dbae702c63d72,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1221609562957651101, guid: 314ca6e9e5a670a41a4dbae702c63d72,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1221609562957651101, guid: 314ca6e9e5a670a41a4dbae702c63d72,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1221609562957651101, guid: 314ca6e9e5a670a41a4dbae702c63d72,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1999553980501313063, guid: 314ca6e9e5a670a41a4dbae702c63d72,
+        type: 3}
+      propertyPath: m_Name
+      value: Carved Stone (Death)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 314ca6e9e5a670a41a4dbae702c63d72, type: 3}
+--- !u!1001 &1866792400
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1483232411076160748, guid: d536289c188e32b44a479e13b3bd55cf,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5.53
+      objectReference: {fileID: 0}
+    - target: {fileID: 1483232411076160748, guid: d536289c188e32b44a479e13b3bd55cf,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1483232411076160748, guid: d536289c188e32b44a479e13b3bd55cf,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 7.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 1483232411076160748, guid: d536289c188e32b44a479e13b3bd55cf,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1483232411076160748, guid: d536289c188e32b44a479e13b3bd55cf,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1483232411076160748, guid: d536289c188e32b44a479e13b3bd55cf,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1483232411076160748, guid: d536289c188e32b44a479e13b3bd55cf,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1483232411076160748, guid: d536289c188e32b44a479e13b3bd55cf,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1483232411076160748, guid: d536289c188e32b44a479e13b3bd55cf,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1483232411076160748, guid: d536289c188e32b44a479e13b3bd55cf,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2296361544356345430, guid: d536289c188e32b44a479e13b3bd55cf,
+        type: 3}
+      propertyPath: m_Name
+      value: Carved Stone (Earth)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d536289c188e32b44a479e13b3bd55cf, type: 3}
+--- !u!1001 &1898807178
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5764742806590179630, guid: 1b250163cb286014fac7b433a7cc0b6a,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 7.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 5764742806590179630, guid: 1b250163cb286014fac7b433a7cc0b6a,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0000009536743
+      objectReference: {fileID: 0}
+    - target: {fileID: 5764742806590179630, guid: 1b250163cb286014fac7b433a7cc0b6a,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 6.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 5764742806590179630, guid: 1b250163cb286014fac7b433a7cc0b6a,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5764742806590179630, guid: 1b250163cb286014fac7b433a7cc0b6a,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5764742806590179630, guid: 1b250163cb286014fac7b433a7cc0b6a,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5764742806590179630, guid: 1b250163cb286014fac7b433a7cc0b6a,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5764742806590179630, guid: 1b250163cb286014fac7b433a7cc0b6a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5764742806590179630, guid: 1b250163cb286014fac7b433a7cc0b6a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5764742806590179630, guid: 1b250163cb286014fac7b433a7cc0b6a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6578540413160493972, guid: 1b250163cb286014fac7b433a7cc0b6a,
+        type: 3}
+      propertyPath: m_Name
+      value: Carved Stone (Air)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1b250163cb286014fac7b433a7cc0b6a, type: 3}
 --- !u!1001 &1914525586
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2769,3 +3177,9 @@ SceneRoots:
   - {fileID: 5036591430125720995}
   - {fileID: 1212919133215153870}
   - {fileID: 190444670192512565}
+  - {fileID: 1898807178}
+  - {fileID: 1700051789}
+  - {fileID: 1866792400}
+  - {fileID: 912026514}
+  - {fileID: 801596744}
+  - {fileID: 294875428}
