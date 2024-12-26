@@ -191,5 +191,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ParticleCount: 0
   RuneData: {fileID: 11400000, guid: ff0b77d0cd1e69a4da02b0569c735ce0, type: 2}
-  ItemData: {fileID: 11400000, guid: 2156c9b311b3a034b8e76d1bec53172e, type: 2}
+  ItemData: {fileID: 11400000, guid: dcf58ba9141c81044a163216850ae994, type: 2}
   ElementType: 3

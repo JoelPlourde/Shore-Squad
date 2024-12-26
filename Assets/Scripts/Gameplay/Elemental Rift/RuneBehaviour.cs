@@ -57,7 +57,7 @@ namespace ElementalRift {
 
                 // Spawn the relevant ItemData
                 Item item = new Item(ItemData, 1);
-                ItemManager.Instance.PlaceItemInWorld(item, transform.position, transform.rotation);
+                ItemManager.Instance.PlaceItemInWorld(item, transform.position, transform.rotation, false);
 
                 // Destroy itself
                 Destroy(gameObject);
