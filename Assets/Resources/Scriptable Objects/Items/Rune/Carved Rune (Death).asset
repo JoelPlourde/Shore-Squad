@@ -19,7 +19,15 @@ MonoBehaviour:
     <size=16>Resource</size>'
   Examine: 
   ItemType: 0
-  ItemEffects: []
+  ItemEffects:
+  - ItemEffectType: 4
+    effectName: Break
+    Magnitude: 0
+    Duration: 0
+    StatusEffectData: {fileID: 0}
+    RecipeDatas:
+    - {fileID: 11400000, guid: 412889ad908058f4d98271d1a567857e, type: 2}
+    IsImmediate: 0
   Stackable: 0
   Burnable: 0
   Power: 0

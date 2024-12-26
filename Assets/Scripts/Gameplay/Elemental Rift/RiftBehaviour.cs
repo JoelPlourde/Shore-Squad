@@ -84,7 +84,6 @@ namespace ElementalRift {
                     RuneBehaviour runeBehaviour = _runeBehaviours[i];
                     if (runeBehaviour == null) {
                         _runeBehaviours.RemoveAt(i);
-                        Debug.Log("Removed null rune");
                         continue;
                     }
 

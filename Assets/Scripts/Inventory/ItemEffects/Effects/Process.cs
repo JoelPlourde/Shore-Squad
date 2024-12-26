@@ -22,7 +22,12 @@ namespace ItemSystem {
                 _actor = actor;
                 _item = item;
                 
-                RecipeHandler.Instance.Show(itemEffect.RecipeDatas, StartProcessingTask, item.ItemData.Sprite);
+                if (itemEffect.IsImmediate) {
+                    StartProcessingTask(itemEffect.RecipeDatas[0]);
+                    return;
+                } else {
+                    RecipeHandler.Instance.Show(itemEffect.RecipeDatas, StartProcessingTask, item.ItemData.Sprite);
+                }
 			}
 
             public void StartProcessingTask(RecipeData recipeData) {
