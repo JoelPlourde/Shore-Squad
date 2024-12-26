@@ -9,6 +9,11 @@ namespace ElementalRift {
         private ParticleSystem _beam;
         private ParticleSystem _smoke;
 
+        // Collapse Particles
+        private ParticleSystem _collapse;
+        private ParticleSystem _collapse_trails;
+        private ParticleSystem _collapse_particles;
+
         /** For reference, we'll scale these value over time, but we take a copy of what the Inspector value was. **/
         private float _default_particle_emission_rate;
         private float _default_beam_emission_rate;
@@ -23,6 +28,7 @@ namespace ElementalRift {
             _circle = transform.Find("PS_Circle").GetComponent<ParticleSystem>();
             _beam = transform.Find("PS_Beam").GetComponent<ParticleSystem>();
             _smoke = transform.Find("PS_Smoke").GetComponent<ParticleSystem>();
+            _collapse = transform.Find("PS_Collapse").GetComponent<ParticleSystem>();
 
             // Initialize the collision module in the Particle Systems
             var collision = _particles.collision;
@@ -98,6 +104,23 @@ namespace ElementalRift {
             _smokeEmission.rateOverTime = _default_smoke_emission_rate * percentage;
 
             LeanTween.scale(transform.gameObject, Vector3.one * percentage, 0.5f);
+        }
+
+        public void CollapseOrb(ElementType elementType) {
+            ParticleSystem _collapse = transform.Find("PS_Collapse").GetComponent<ParticleSystem>();
+            ParticleSystem _collapse_trails = _collapse.transform.Find("PS_Trails").GetComponent<ParticleSystem>();
+            ParticleSystem _collapse_particles = _collapse.transform.Find("PS_Particles").GetComponent<ParticleSystem>();
+
+            ElementData elementData = ElementManager.Instance.GetElementData(elementType);
+
+            Gradient gradient = BuildGradient(elementData.PrimaryColor, elementData.SecondaryColor);
+            AdjustColor(_collapse, gradient);
+            AdjustColor(_collapse_trails, gradient);
+            AdjustColor(_collapse_particles, gradient);
+
+            _collapse.transform.parent = transform.parent;
+
+            _collapse.gameObject.SetActive(true);
         }
 
         public void ChangeElement(ElementType primaryElementType, ElementType secondaryElementType = ElementType.NONE) {

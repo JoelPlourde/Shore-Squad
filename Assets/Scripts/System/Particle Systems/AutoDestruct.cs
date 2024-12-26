@@ -1,9 +1,14 @@
+using UnityEditor.EditorTools;
 using UnityEngine;
 
 [RequireComponent(typeof(ParticleSystem))]
 public class AutoDestruct : MonoBehaviour {
 
+    [Tooltip("The minimum delay before the particle system is destroyed")]
     public float minimumDelay = 0.5f;
+
+    [Tooltip("If true, only disable the particle system")]
+    public bool disableOnly = false;
 
     private ParticleSystem[] _particleSystems;
 
@@ -21,10 +26,13 @@ public class AutoDestruct : MonoBehaviour {
         }
 
         foreach (ParticleSystem particleSystem in _particleSystems) {
-
             // Once the particle system has 0 particles, destroy the game object
             if (particleSystem.particleCount == 0) {
-                Destroy(gameObject);
+                if (disableOnly) {
+                    gameObject.SetActive(false);
+                } else {
+                    Destroy(gameObject);
+                }
             }
         }
     }

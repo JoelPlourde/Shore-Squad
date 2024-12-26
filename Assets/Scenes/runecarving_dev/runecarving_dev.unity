@@ -3196,11 +3196,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4268672392373304771, guid: 1ce30131fe5f9b64f8ed58d573a392c0,
-        type: 3}
-      propertyPath: _percentage
-      value: 2.42
-      objectReference: {fileID: 0}
     - target: {fileID: 6500959337202837916, guid: 1ce30131fe5f9b64f8ed58d573a392c0,
         type: 3}
       propertyPath: m_Name

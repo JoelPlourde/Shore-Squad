@@ -72,8 +72,8 @@ namespace ElementalRift {
                 _percentage = CalculateHealthPercentage();
 
                 if (_percentage <= riftData.MinimumHealthPercentage) {
+                    _orbBehaviour.CollapseOrb(elementType);
                     _orbBehaviour.gameObject.SetActive(false);
-                    Debug.LogWarning("Orb has collapsed, not yet implemented!");
                 }
 
                 UpdateOrb();
