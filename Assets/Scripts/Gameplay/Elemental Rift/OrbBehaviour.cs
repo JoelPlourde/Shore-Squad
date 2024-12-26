@@ -1,12 +1,8 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ElementalRift {
     public class OrbBehaviour : MonoBehaviour {
-
-        // This value will be in the RiftBehavior
-        public float _percentage = 1.0f;
-
-        private Transform _orb;
 
         private ParticleSystem _circle;
         private ParticleSystem _particles;
@@ -19,63 +15,76 @@ namespace ElementalRift {
         private float _default_circle_emission_rate;
         private float _default_smoke_emission_rate;
 
+        private RiftBehaviour _riftBehaviour;
+
         void Awake() {
-            _orb = transform.Find("Particle Systems");
+            // Find all the required component
+            _particles = transform.Find("PS_Particles").GetComponent<ParticleSystem>();
+            _circle = transform.Find("PS_Circle").GetComponent<ParticleSystem>();
+            _beam = transform.Find("PS_Beam").GetComponent<ParticleSystem>();
+            _smoke = transform.Find("PS_Smoke").GetComponent<ParticleSystem>();
 
-            _particles = _orb.Find("PS_Particles").GetComponent<ParticleSystem>();
-            _circle = _orb.Find("PS_Circle").GetComponent<ParticleSystem>();
-            _beam = _orb.Find("PS_Beam").GetComponent<ParticleSystem>();
-            _smoke = _orb.Find("PS_Smoke").GetComponent<ParticleSystem>();
+            // Initialize the collision module in the Particle Systems
+            var collision = _particles.collision;
+            collision.type = ParticleSystemCollisionType.World;
+            collision.quality = ParticleSystemCollisionQuality.High;
+            collision.lifetimeLoss = 1.0f;
+            collision.sendCollisionMessages = true;
 
+            // Subscribe to the ParticleCollider
+            _particles.GetComponent<ParticleCollider>().Initialize(this);
+
+            // Record the default values
             _default_particle_emission_rate = _particles.emission.rateOverTime.constant;
             _default_beam_emission_rate = _beam.emission.rateOverTime.constant;
             _default_circle_emission_rate = _circle.emission.rateOverTime.constant;
             _default_smoke_emission_rate = _smoke.emission.rateOverTime.constant;
         }
 
-        public void Update() {
-            // If the user presses up on key H
-            if (Input.GetKeyUp(KeyCode.A)) {
-                ChangeElement(ElementType.AIR);
-            }
+        /**
+        * This method will initialize the OrbBehaviour with the RiftBehaviour.
+        **/
+        public void Initialize(RiftBehaviour riftBehaviour) {
+            _riftBehaviour = riftBehaviour;
+        }
 
-            if (Input.GetKeyUp(KeyCode.F)) {
-                ChangeElement(ElementType.FIRE);
-            }
+        public void SpawnOrb(ElementType primaryElementType, ElementType secondaryElementType = ElementType.NONE) {
+            ChangeElement(primaryElementType, secondaryElementType);
+            ScaleOrb(1.0f);
+        }
 
-            if (Input.GetKeyUp(KeyCode.L)) {
-                ChangeElement(ElementType.LIFE);
-            }
-
-            if (Input.GetKeyUp(KeyCode.D)) {
-                ChangeElement(ElementType.DEATH);
-            }
-
-            if (Input.GetKeyUp(KeyCode.W)) {
-                ChangeElement(ElementType.WATER);
-            }
-            
-            if (Input.GetKeyUp(KeyCode.E)) {
-                ChangeElement(ElementType.EARTH);
-            }
-
-            if (Input.GetKeyUp(KeyCode.P)) {
-                _percentage += 0.1f;
-                ScaleOrb(_percentage);
-                Debug.Log("Percentage: " + _percentage);
-            }
-
-            if (Input.GetKeyUp(KeyCode.M)) {
-                _percentage -= 0.1f;
-                ScaleOrb(_percentage);
-                Debug.Log("Percentage: " + _percentage);
+        public void OnParticleCollision(GameObject other) {
+            string layer = LayerMask.LayerToName(other.layer);
+            GameObject rune = other.transform.parent.gameObject;
+            switch (layer) {
+                case "Air Element":
+                    _riftBehaviour.ReduceHealth(rune, ElementType.AIR, 1);
+                    break;
+                case "Fire Element":
+                    _riftBehaviour.ReduceHealth(rune, ElementType.FIRE, 1);
+                    break;
+                case "Water Element":
+                    _riftBehaviour.ReduceHealth(rune, ElementType.WATER, 1);
+                    break;
+                case "Earth Element":
+                    _riftBehaviour.ReduceHealth(rune, ElementType.EARTH, 1);
+                    break;
+                case "Life Element":
+                    _riftBehaviour.ReduceHealth(rune, ElementType.LIFE, 1);
+                    break;
+                case "Death Element":
+                    _riftBehaviour.ReduceHealth(rune, ElementType.DEATH, 1);
+                    break;
+                default:
+                    Debug.Log("Unknown Layer: " + layer);
+                    break;
             }
         }
 
         /**
         * This method will scale the orb based on the percentage.
         **/
-        private void ScaleOrb(float percentage) {
+        public void ScaleOrb(float percentage) {
             var _particleEmission = _particles.emission;
             _particleEmission.rateOverTime = _default_particle_emission_rate * percentage;
 
@@ -88,14 +97,21 @@ namespace ElementalRift {
             var _smokeEmission = _smoke.emission;
             _smokeEmission.rateOverTime = _default_smoke_emission_rate * percentage;
 
-            LeanTween.scale(_orb.gameObject, Vector3.one * percentage, 0.5f);
+            LeanTween.scale(transform.gameObject, Vector3.one * percentage, 0.5f);
         }
 
-        private void ChangeElement(ElementType elementType) {
-            ElementData elementData = ElementManager.Instance.GetElementData(elementType);
+        public void ChangeElement(ElementType primaryElementType, ElementType secondaryElementType = ElementType.NONE) {
+            ElementData primaryElementData = ElementManager.Instance.GetElementData(primaryElementType);
+            ElementData secondaryElementData;
+            if (secondaryElementType != ElementType.NONE) {
+                secondaryElementData = ElementManager.Instance.GetElementData(secondaryElementType);
+                AdjustColors(primaryElementData.PrimaryColor, secondaryElementData.SecondaryColor);
+                UpdateExternalForce(primaryElementData.LayerMask);
+                return;
+            }
 
-            AdjustColors(elementData.PrimaryColor, elementData.SecondaryColor);
-            UpdateExternalForce(elementData.LayerMask);
+            AdjustColors(primaryElementData.PrimaryColor, primaryElementData.SecondaryColor);
+            UpdateExternalForce(primaryElementData.LayerMask);
         }
 
         public void UpdateExternalForce(LayerMask LayerMask) {
