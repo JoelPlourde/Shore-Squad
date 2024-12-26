@@ -426,6 +426,74 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 18fd5ac1957a4cb4cac32f08873a1243, type: 3}
+--- !u!1001 &587545308
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1225703307001710565, guid: a459c1cbeb8b24149a93b58f84fe8f58,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.0567508
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225703307001710565, guid: a459c1cbeb8b24149a93b58f84fe8f58,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.014120616
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225703307001710565, guid: a459c1cbeb8b24149a93b58f84fe8f58,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.67
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225703307001710565, guid: a459c1cbeb8b24149a93b58f84fe8f58,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225703307001710565, guid: a459c1cbeb8b24149a93b58f84fe8f58,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225703307001710565, guid: a459c1cbeb8b24149a93b58f84fe8f58,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225703307001710565, guid: a459c1cbeb8b24149a93b58f84fe8f58,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225703307001710565, guid: a459c1cbeb8b24149a93b58f84fe8f58,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225703307001710565, guid: a459c1cbeb8b24149a93b58f84fe8f58,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225703307001710565, guid: a459c1cbeb8b24149a93b58f84fe8f58,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1894117709666032991, guid: a459c1cbeb8b24149a93b58f84fe8f58,
+        type: 3}
+      propertyPath: m_Name
+      value: Carved Rune (Fire)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a459c1cbeb8b24149a93b58f84fe8f58, type: 3}
 --- !u!1 &793029598
 GameObject:
   m_ObjectHideFlags: 0
@@ -763,6 +831,74 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2c9d057149975f943aaf5f6fb69ba50c, type: 3}
+--- !u!1001 &1180907997
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2517348919152799931, guid: 223284f0fab85994ba852bf211bc2b82,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.8542588
+      objectReference: {fileID: 0}
+    - target: {fileID: 2517348919152799931, guid: 223284f0fab85994ba852bf211bc2b82,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.07065986
+      objectReference: {fileID: 0}
+    - target: {fileID: 2517348919152799931, guid: 223284f0fab85994ba852bf211bc2b82,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2517348919152799931, guid: 223284f0fab85994ba852bf211bc2b82,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2517348919152799931, guid: 223284f0fab85994ba852bf211bc2b82,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2517348919152799931, guid: 223284f0fab85994ba852bf211bc2b82,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2517348919152799931, guid: 223284f0fab85994ba852bf211bc2b82,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2517348919152799931, guid: 223284f0fab85994ba852bf211bc2b82,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2517348919152799931, guid: 223284f0fab85994ba852bf211bc2b82,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2517348919152799931, guid: 223284f0fab85994ba852bf211bc2b82,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3000729056894298625, guid: 223284f0fab85994ba852bf211bc2b82,
+        type: 3}
+      propertyPath: m_Name
+      value: Carved Rune (Death)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 223284f0fab85994ba852bf211bc2b82, type: 3}
 --- !u!1001 &1201151590
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -843,6 +979,278 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9ccb80b9aacdce419621aca80dfe696, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &1358554072
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8075035751379768339, guid: e6120b17df25ae144843df8bfc35ccb6,
+        type: 3}
+      propertyPath: m_Name
+      value: Carved Rune (Water)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8888868263398887081, guid: e6120b17df25ae144843df8bfc35ccb6,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.6484122
+      objectReference: {fileID: 0}
+    - target: {fileID: 8888868263398887081, guid: e6120b17df25ae144843df8bfc35ccb6,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.014120139
+      objectReference: {fileID: 0}
+    - target: {fileID: 8888868263398887081, guid: e6120b17df25ae144843df8bfc35ccb6,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.76
+      objectReference: {fileID: 0}
+    - target: {fileID: 8888868263398887081, guid: e6120b17df25ae144843df8bfc35ccb6,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8888868263398887081, guid: e6120b17df25ae144843df8bfc35ccb6,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8888868263398887081, guid: e6120b17df25ae144843df8bfc35ccb6,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8888868263398887081, guid: e6120b17df25ae144843df8bfc35ccb6,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8888868263398887081, guid: e6120b17df25ae144843df8bfc35ccb6,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8888868263398887081, guid: e6120b17df25ae144843df8bfc35ccb6,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8888868263398887081, guid: e6120b17df25ae144843df8bfc35ccb6,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e6120b17df25ae144843df8bfc35ccb6, type: 3}
+--- !u!1001 &1503389205
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1643198145805345212, guid: 53eb34da607308749800c3f66f027bdc,
+        type: 3}
+      propertyPath: m_Name
+      value: Carved Rune (Earth)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2127388618803559174, guid: 53eb34da607308749800c3f66f027bdc,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.5893457
+      objectReference: {fileID: 0}
+    - target: {fileID: 2127388618803559174, guid: 53eb34da607308749800c3f66f027bdc,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.014120378
+      objectReference: {fileID: 0}
+    - target: {fileID: 2127388618803559174, guid: 53eb34da607308749800c3f66f027bdc,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.17013776
+      objectReference: {fileID: 0}
+    - target: {fileID: 2127388618803559174, guid: 53eb34da607308749800c3f66f027bdc,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2127388618803559174, guid: 53eb34da607308749800c3f66f027bdc,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2127388618803559174, guid: 53eb34da607308749800c3f66f027bdc,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2127388618803559174, guid: 53eb34da607308749800c3f66f027bdc,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2127388618803559174, guid: 53eb34da607308749800c3f66f027bdc,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2127388618803559174, guid: 53eb34da607308749800c3f66f027bdc,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2127388618803559174, guid: 53eb34da607308749800c3f66f027bdc,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 53eb34da607308749800c3f66f027bdc, type: 3}
+--- !u!1001 &1526490429
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6990344618164671473, guid: f5f7d2b5a1dd81a4d8abb880f8ed3026,
+        type: 3}
+      propertyPath: m_Name
+      value: Carved Rune (Air)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7658760154383681867, guid: f5f7d2b5a1dd81a4d8abb880f8ed3026,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.97
+      objectReference: {fileID: 0}
+    - target: {fileID: 7658760154383681867, guid: f5f7d2b5a1dd81a4d8abb880f8ed3026,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.014120383
+      objectReference: {fileID: 0}
+    - target: {fileID: 7658760154383681867, guid: f5f7d2b5a1dd81a4d8abb880f8ed3026,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.20941007
+      objectReference: {fileID: 0}
+    - target: {fileID: 7658760154383681867, guid: f5f7d2b5a1dd81a4d8abb880f8ed3026,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7658760154383681867, guid: f5f7d2b5a1dd81a4d8abb880f8ed3026,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7658760154383681867, guid: f5f7d2b5a1dd81a4d8abb880f8ed3026,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7658760154383681867, guid: f5f7d2b5a1dd81a4d8abb880f8ed3026,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7658760154383681867, guid: f5f7d2b5a1dd81a4d8abb880f8ed3026,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7658760154383681867, guid: f5f7d2b5a1dd81a4d8abb880f8ed3026,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7658760154383681867, guid: f5f7d2b5a1dd81a4d8abb880f8ed3026,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f5f7d2b5a1dd81a4d8abb880f8ed3026, type: 3}
+--- !u!1001 &1559764843
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 105806684195773199, guid: 42aa4e04f41847d40bb2c81e138aed1c,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.906437
+      objectReference: {fileID: 0}
+    - target: {fileID: 105806684195773199, guid: 42aa4e04f41847d40bb2c81e138aed1c,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.014120378
+      objectReference: {fileID: 0}
+    - target: {fileID: 105806684195773199, guid: 42aa4e04f41847d40bb2c81e138aed1c,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 105806684195773199, guid: 42aa4e04f41847d40bb2c81e138aed1c,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 105806684195773199, guid: 42aa4e04f41847d40bb2c81e138aed1c,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 105806684195773199, guid: 42aa4e04f41847d40bb2c81e138aed1c,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 105806684195773199, guid: 42aa4e04f41847d40bb2c81e138aed1c,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 105806684195773199, guid: 42aa4e04f41847d40bb2c81e138aed1c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 105806684195773199, guid: 42aa4e04f41847d40bb2c81e138aed1c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 105806684195773199, guid: 42aa4e04f41847d40bb2c81e138aed1c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 737524031534236085, guid: 42aa4e04f41847d40bb2c81e138aed1c,
+        type: 3}
+      propertyPath: m_Name
+      value: Carved Rune (Life)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 42aa4e04f41847d40bb2c81e138aed1c, type: 3}
 --- !u!1001 &1700051789
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3233,3 +3641,9 @@ SceneRoots:
   - {fileID: 912026514}
   - {fileID: 801596744}
   - {fileID: 294875428}
+  - {fileID: 1526490429}
+  - {fileID: 1180907997}
+  - {fileID: 1503389205}
+  - {fileID: 587545308}
+  - {fileID: 1559764843}
+  - {fileID: 1358554072}
