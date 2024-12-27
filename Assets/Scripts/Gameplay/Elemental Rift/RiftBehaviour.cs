@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using Unity.Collections;
+using StatusEffectSystem;
 
 namespace ElementalRift {
     [RequireComponent(typeof(SphereCollider))]
@@ -18,6 +19,7 @@ namespace ElementalRift {
         private List<RuneBehaviour> _runeBehaviours = new List<RuneBehaviour>();
         private OrbBehaviour _orbBehaviour;
         private SphereCollider _sphereCollider;
+        private TemperatureZone _temperatureZone;
 
         private void Awake() {
             if (ReferenceEquals(riftData, null)) {
@@ -28,6 +30,11 @@ namespace ElementalRift {
             // Initialize the OrbBehaviour
             _orbBehaviour = GetComponentInChildren<OrbBehaviour>(true);
             _orbBehaviour.Initialize(this);
+
+            _temperatureZone = GetComponentInChildren<TemperatureZone>(true);
+            if (!ReferenceEquals(riftData.TemperatureZoneData, null)) {
+                _temperatureZone.Initialize(riftData.TemperatureZoneData, riftData.InfluenceRadius);
+            }
 
             // Initialize the Trigger collider
             _sphereCollider = GetComponent<SphereCollider>();

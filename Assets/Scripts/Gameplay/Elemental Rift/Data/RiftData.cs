@@ -1,3 +1,4 @@
+using StatusEffectSystem;
 using UnityEngine;
 
 namespace ElementalRift {
@@ -20,5 +21,9 @@ namespace ElementalRift {
 
         [Tooltip("The secondary element of the Rift")]
         public ElementType SecondaryElement;
+
+        [Header("Ambient Effects")]
+        [Tooltip("The temperature zone of the Rift")]
+        public TemperatureZoneData TemperatureZoneData;
     }
 }

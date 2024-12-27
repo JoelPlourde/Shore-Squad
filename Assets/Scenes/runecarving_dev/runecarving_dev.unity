@@ -1092,6 +1092,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Carved Stone (Water)
       objectReference: {fileID: 0}
+    - target: {fileID: 7484945181961617311, guid: 20c89991f7333884a97f4f00e66fd7ff,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7823893094002566437, guid: 20c89991f7333884a97f4f00e66fd7ff,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3497,7 +3502,7 @@ PrefabInstance:
     - target: {fileID: 2174103101592605091, guid: 1ce30131fe5f9b64f8ed58d573a392c0,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.08
+      value: 5.1
       objectReference: {fileID: 0}
     - target: {fileID: 2174103101592605091, guid: 1ce30131fe5f9b64f8ed58d573a392c0,
         type: 3}
@@ -3507,7 +3512,7 @@ PrefabInstance:
     - target: {fileID: 2174103101592605091, guid: 1ce30131fe5f9b64f8ed58d573a392c0,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5.83
+      value: 4.93
       objectReference: {fileID: 0}
     - target: {fileID: 2174103101592605091, guid: 1ce30131fe5f9b64f8ed58d573a392c0,
         type: 3}
@@ -3544,10 +3549,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2660510893562098466, guid: 1ce30131fe5f9b64f8ed58d573a392c0,
+        type: 3}
+      propertyPath: TemperatureZoneData
+      value: 
+      objectReference: {fileID: 11400000, guid: a5efd585aaf5a71438c5819ab252c454,
+        type: 2}
     - target: {fileID: 6500959337202837916, guid: 1ce30131fe5f9b64f8ed58d573a392c0,
         type: 3}
       propertyPath: m_Name
-      value: Elemental Rift
+      value: Cold Rift
+      objectReference: {fileID: 0}
+    - target: {fileID: 6553765249774168557, guid: 1ce30131fe5f9b64f8ed58d573a392c0,
+        type: 3}
+      propertyPath: CollisionModule.maxCollisionShapes
+      value: 128
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

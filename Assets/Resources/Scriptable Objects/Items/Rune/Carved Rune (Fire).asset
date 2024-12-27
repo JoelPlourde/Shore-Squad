@@ -27,7 +27,7 @@ MonoBehaviour:
     StatusEffectData: {fileID: 0}
     RecipeDatas:
     - {fileID: 11400000, guid: 3b200df8549d92c49b616bfa1d4631fa, type: 2}
-    IsImmediate: 0
+    IsImmediate: 1
   Stackable: 0
   Burnable: 0
   Power: 0

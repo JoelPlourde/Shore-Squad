@@ -4,12 +4,11 @@ namespace StatusEffectSystem {
 	[RequireComponent(typeof(Collider))]
 	public class StatusEffectZone : MonoBehaviour {
 
-		[Range(0.0f, 10.0f)]
-		public float Magnitude = 1.0f;
-		public StatusEffectData StatusEffectData;
+		protected float _magnitude = 1.0f;
+		protected StatusEffectData _statusEffectData;
 
 		protected Status _status;
-		private Collider _collider;
+		protected Collider _collider;
 
 		private void Awake() {
 			_collider = GetComponent<Collider>();
@@ -17,14 +16,22 @@ namespace StatusEffectSystem {
 		}
 
 		protected virtual void OnTriggerEnter(Collider other) {
+			if (ReferenceEquals(_statusEffectData, null)) {
+				return;
+			}
+
 			Actor actor = other.gameObject.GetComponent<Actor>();
 			if (!ReferenceEquals(actor, null)) {
-				_status = new Status(actor, Magnitude, StatusEffectData);
+				_status = new Status(actor, _magnitude, _statusEffectData);
 				StatusEffectScheduler.Instance(actor.Guid).AddStatusEffect(_status);
 			}
 		}
 
 		protected virtual void OnTriggerExit(Collider other) {
+			if (ReferenceEquals(_statusEffectData, null)) {
+				return;
+			}
+
 			Actor actor = other.gameObject.GetComponent<Actor>();
 			if (!ReferenceEquals(actor, null)) {
 				StatusEffectScheduler.Instance(actor.Guid).RemoveStatusEffect(_status.StatusEffectData.Name);
