@@ -147,7 +147,7 @@ namespace UI {
 		/// </summary>
 		public void OnItemDropped(SlotHandler slotHandler) {
 			if (Squad.FirstSelected(out Actor actor)) {
-				if (ItemManager.Instance.PlaceItemInWorld(slotHandler.Item, actor.transform.position)) {
+				if (ItemManager.Instance.PlaceItemInWorld(slotHandler.Item, actor.transform.position, Quaternion.identity)) {
 					actor.Inventory.RemoveItemFromInventoryAtPosition(slotHandler.Item.Index, slotHandler.Item.Amount);
 				}
 			}

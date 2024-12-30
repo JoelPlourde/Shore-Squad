@@ -34,7 +34,6 @@ namespace StatusEffectSystem {
 			foreach (Status status in _statuses.ToList()) {
 				if (status.StatusEffectData.Temporary == true) {
 					status.ReduceDuration();
-
 					if (status.Duration <= 0) {
 						RemoveStatusEffect(status.StatusEffectData.Name);
 					}
@@ -70,7 +69,6 @@ namespace StatusEffectSystem {
 				}
 
 				if (status.StatusEffectData.Hidden == false) {
-					Debug.Log("Here!");
 					OnAddStatusEffectEvent?.Invoke(status);
 				}
 			}

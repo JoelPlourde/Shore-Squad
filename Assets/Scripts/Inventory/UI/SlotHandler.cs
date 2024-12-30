@@ -175,10 +175,16 @@ namespace ItemSystem {
 						Ray ray = Camera.main.ScreenPointToRay(eventData.position);
 						if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, LayerMask.GetMask("Terrain"))) {
 							if (Squad.FirstSelected(out Actor actor)) {
-								if (ItemManager.Instance.PlaceItemInWorld(Item, hit.point)) {
+								if (ItemManager.Instance.PlaceItemInWorld(Item, hit.point, Quaternion.identity)) {
 									actor.Inventory.RemoveItemFromInventoryAtPosition(Item.Index, Item.Amount);
+								} else {
+									Debug.LogWarning("Failed to place item in world!");
 								}
+							} else {
+								Debug.LogWarning("No actor selected!");
 							}
+						} else {
+							Debug.LogWarning("Failed to raycast!");
 						}
 					}
 

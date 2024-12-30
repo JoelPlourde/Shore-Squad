@@ -22,13 +22,14 @@ namespace ItemSystem {
 			_itemDatas = itemDatas.ToDictionary(x => x.ID);
 		}
 
-		public bool PlaceItemInWorld(Item item, Vector3 position) {
+		public bool PlaceItemInWorld(Item item, Vector3 position, Quaternion rotation, bool withOffset = true) {
 			for (int i = 0; i < item.Amount; i++) {
 
-				// To the position, add 1 unit in the Y-axis
-				position.y += 0.25f;
+				if (withOffset) {
+					position.y += 0.25f;
+				}
 
-				Instantiate(item.ItemData.Prefab, position, Quaternion.identity);
+				Instantiate(item.ItemData.Prefab, position, rotation);
 			}
 			
 			return true;

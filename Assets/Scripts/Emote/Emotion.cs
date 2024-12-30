@@ -38,6 +38,7 @@ namespace EmoteSystem {
 
 		public void StopEmote(EmoteType emoteType) {
 			if (_emoteParticleSystems.TryGetValue(emoteType, out GameObject particleSystem)) {
+				_emoteParticleSystems.Remove(emoteType);
 				AutoDestruct AutoDestruct = particleSystem.GetComponent<AutoDestruct>();
 				if (ReferenceEquals(AutoDestruct, null)) {
 					Destroy(particleSystem);

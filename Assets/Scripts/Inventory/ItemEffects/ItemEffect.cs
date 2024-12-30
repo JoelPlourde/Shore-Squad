@@ -34,6 +34,9 @@ namespace ItemSystem {
 			[SerializeField]
 			[Tooltip("The recipe that will be crafted, if any.")]
 			public List<RecipeData> RecipeDatas;
+
+			[Tooltip("Whether the effect is immediate or not. If it is, the menu won't be shown.")]
+			public bool IsImmediate;
 		}
 	}
 }

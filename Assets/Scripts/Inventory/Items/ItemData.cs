@@ -36,7 +36,7 @@ namespace ItemSystem {
 
 		[SerializeField]
 		[Tooltip("Determine whether or not the object can be stacked in the inventory or not.")]
-		public bool Stackable = true;
+		public bool Stackable = false;
 
 		[SerializeField]
 		[Tooltip("Determine whether or not the item is burnable.")]
@@ -56,6 +56,9 @@ namespace ItemSystem {
 		}
 
 		public override int GetHashCode() {
+			if (ID == null) {
+				return 0;
+			}
 			return ID.GetHashCode();
 		}
 
