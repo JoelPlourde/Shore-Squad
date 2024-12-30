@@ -1,4 +1,4 @@
-﻿using GamePlay;
+﻿using Gameplay;
 using ItemSystem.EquipmentSystem;
 using System.Collections.Generic;
 using UI;

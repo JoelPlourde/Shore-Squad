@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace GamePlay {
+namespace Gameplay {
 	public class FeedbackManager : MonoBehaviour {
 		public static FeedbackManager Instance;
 
@@ -29,7 +29,7 @@ namespace GamePlay {
 		}
 
 		public void DisplayMessage(Actor actor, string message) {
-			_circularBuffer.Next().Enable(actor, message);
+			_circularBuffer.Next().Enable(actor, message, 3f);
 		}
 	}
 }
