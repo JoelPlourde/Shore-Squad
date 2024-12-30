@@ -26,7 +26,7 @@ public class ActorManager : MonoBehaviour, ISaveable {
 
 	public void Save(Save save) {
 		List<ActorDto> actorDtos = new List<ActorDto>();
-		foreach (Actor actor in FindObjectsOfType<Actor>()) {
+		foreach (Actor actor in FindObjectsByType<Actor>(FindObjectsSortMode.None)) {
 			actorDtos.Add(new ActorDto(actor));
 		}
 		save.ActorDtos = actorDtos;

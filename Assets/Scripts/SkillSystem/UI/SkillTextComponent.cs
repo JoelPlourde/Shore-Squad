@@ -38,7 +38,9 @@ namespace SkillSystem {
 			/// </summary>
 			/// <param name="level">The updated level information.</param>
 			public void OnGainExperience(Level level) {
-				_tooltip = "Experience: " + level.Experience + "\nRequired: " + ((level.Value > 100) ? "N/A" : ExperienceTable.GetExperienceRequiredAt(level.Value + 1).ToString());
+				string experienceLabel = I18N.GetValue("experience");
+				string requiredLabel = I18N.GetValue("required");
+				_tooltip = experienceLabel + ": " + level.Experience + "\n" + requiredLabel + ": " + ((level.Value > 100) ? "N/A" : ExperienceTable.GetExperienceRequiredAt(level.Value + 1).ToString());
 			}
 
 			public void OnPointerEnter(PointerEventData eventData) {

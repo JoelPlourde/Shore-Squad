@@ -69,13 +69,13 @@ namespace UI {
 					effectName = itemEffect.effectName;
 				}
 
-				AddOption(effectName, slotHandler.Item.ItemData.name, ref preferredWidth, delegate { OnItemEffectClicked(slotHandler.Item); });
+				AddOption(I18N.GetValue("effects." + effectName), slotHandler.Item.ItemData.name, ref preferredWidth, delegate { OnItemEffectClicked(slotHandler.Item); });
 			}
 
 			// Set default option on items.
-			AddOption("Select", slotHandler.Item.ItemData.name, ref preferredWidth, delegate { OnItemSelect(slotHandler); });
-			AddOption("Drop", slotHandler.Item.ItemData.name, ref preferredWidth, delegate { OnItemDropped(slotHandler); });
-			AddOption("Cancel", "", ref preferredWidth, Close);
+			AddOption(I18N.GetValue("select"), slotHandler.Item.ItemData.name, ref preferredWidth, delegate { OnItemSelect(slotHandler); });
+			AddOption(I18N.GetValue("drop"), slotHandler.Item.ItemData.name, ref preferredWidth, delegate { OnItemDropped(slotHandler); });
+			AddOption(I18N.GetValue("cancel"), "", ref preferredWidth, Close);
 
 			// Disable all the unused options!
 			DisableUnusedOptions();
@@ -147,7 +147,7 @@ namespace UI {
 		/// </summary>
 		public void OnItemDropped(SlotHandler slotHandler) {
 			if (Squad.FirstSelected(out Actor actor)) {
-				if (ItemManager.Instance.PlaceItemInWorld(slotHandler.Item, actor.transform.position, Quaternion.identity)) {
+				if (ItemManager.Instance.PlaceItemInWorld(slotHandler.Item, actor.transform.position + actor.transform.forward, Quaternion.identity)) {
 					actor.Inventory.RemoveItemFromInventoryAtPosition(slotHandler.Item.Index, slotHandler.Item.Amount);
 				}
 			}

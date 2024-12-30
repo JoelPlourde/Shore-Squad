@@ -68,11 +68,11 @@ namespace QuestSystem {
 		#endregion
 
 		#region Mouse Event
-		public void OnMouseEnter() {
+		public new void OnMouseEnter() {
 			PointerManager.Instance.SetPointer(PointerMode.TALK);
 		}
 
-		public void OnMouseExit() {
+		public new void OnMouseExit() {
 			PointerManager.Instance.SetPointer(PointerMode.DEFAULT);
 		}
 		#endregion

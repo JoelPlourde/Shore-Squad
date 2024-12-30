@@ -1,0 +1,289 @@
+{
+    "select": "Select",
+    "drop": "Drop",
+    "cancel": "Cancel",
+    "resource": "Resource",
+    "equipment": "Equipment",
+    "consumable": "Consumable",
+    "inventory": "Inventory",
+    "experience": "Experience",
+    "required": "Required",
+    "skills": {
+        "runecarving": {
+            "name": "Runecarving",
+            "description": "The art of carving runes into stones."
+        },
+        "mining": {
+            "name": "Mining",
+            "description": "The art of mining ores from the earth."
+        },
+        "cooking": {
+            "name": "Cooking",
+            "description": "The art of cooking food."
+        },
+        "fishing": {
+            "name": "Fishing",
+            "description": "The art of fishing."
+        },
+        "woodworking": {
+            "name": "Woodworking",
+            "description": "The art of crafting items from wood."
+        },
+        "alchemy": {
+            "name": "Alchemy",
+            "description": "The art of crafting potions."
+        },
+        "farming": {
+            "name": "Farming",
+            "description": "The art of farming crops."
+        }
+    },
+    "items": {
+        "stone": {
+            "name": "Stone",
+            "description": "A stone found on the ground."
+        },
+        "chisel": {
+            "name": "Chisel",
+            "description": "A chisel used for carving stones."
+        },
+        "iron_pickaxe": {
+            "name": "Iron Pickaxe",
+            "description": "A pickaxe made of iron."
+        },
+        "leather_pants": {
+            "name": "Leather Pants",
+            "description": "Pants made of leather."
+        },
+        "leather_boots": {
+            "name": "Leather Boots",
+            "description": "Boots made of leather."
+        },
+        "torch": {
+            "name": "Torch",
+            "description": "A torch to light your way."
+        },
+        "air_essence": {
+            "name": "Air Essence",
+            "description": "Essence of air."
+        },
+        "fire_essence": {
+            "name": "Fire Essence",
+            "description": "Essence of fire."
+        },
+        "water_essence": {
+            "name": "Water Essence",
+            "description": "Essence of water."
+        },
+        "earth_essence": {
+            "name": "Earth Essence",
+            "description": "Essence of earth."
+        },
+        "life_essence": {
+            "name": "Life Essence",
+            "description": "Essence of life."
+        },
+        "death_essence": {
+            "name": "Death Essence",
+            "description": "Essence of death."
+        },
+        "carved_stone_air": {
+            "name": "Carved Stone (Air)",
+            "description": "A stone carved with the rune of air."
+        },
+        "carved_stone_fire": {
+            "name": "Carved Stone (Fire)",
+            "description": "A stone carved with the rune of fire."
+        },
+        "carved_stone_water": {
+            "name": "Carved Stone (Water)",
+            "description": "A stone carved with the rune of water."
+        },
+        "carved_stone_earth": {
+            "name": "Carved Stone (Earth)",
+            "description": "A stone carved with the rune of earth."
+        },
+        "carved_stone_life": {
+            "name": "Carved Stone (Life)",
+            "description": "A stone carved with the rune of life."
+        },
+        "carved_stone_death": {
+            "name": "Carved Stone (Death)",
+            "description": "A stone carved with the rune of death."
+        },
+        "carved_rune_air": {
+            "name": "Carved Rune (Air)",
+            "description": "A rune imbued with the power of air."
+        },
+        "carved_rune_fire": {
+            "name": "Carved Rune (Fire)",
+            "description": "A rune imbued with the power of fire."
+        },
+        "carved_rune_water": {
+            "name": "Carved Rune (Water)",
+            "description": "A rune imbued with the power of water."
+        },
+        "carved_rune_earth": {
+            "name": "Carved Rune (Earth)",
+            "description": "A rune imbued with the power of earth."
+        },
+        "carved_rune_life": {
+            "name": "Carved Rune (Life)",
+            "description": "A rune imbued with the power of life."
+        },
+        "carved_rune_death": {
+            "name": "Carved Rune (Death)",
+            "description": "A rune imbued with the power of death."
+        },
+        "iron_ore": {
+            "name": "Iron Ore",
+            "description": "Ore containing iron."
+        }
+    },
+    "effects": {
+        "eat": "Eat",
+        "drink": "Drink",
+        "equip": "Equip",
+        "break": "Break",
+        "carve": "Carve"
+    },
+    "status_effects": {
+        "brain_freeze": {
+            "name": "Brain Freeze",
+            "description": "You have a brain freeze."
+        },
+        "burn": {
+            "name": "Burn",
+            "description": "You are burning!"
+        },
+        "wet": {
+            "name": "Wet",
+            "description": "You are wet."
+        },
+        "cold": {
+            "name": "Cold",
+            "description": "You are cold. Find a way to warm up."
+        },
+        "dead": {
+            "name": "Dead",
+            "description": "Oh no! You are dead."
+        },
+        "decay": {
+            "name": "Decay",
+            "description": "You are decaying."
+        },
+        "disease": {
+            "name": "Disease",
+            "description": "You are diseased."
+        },
+        "fear": {
+            "name": "Fear",
+            "description": "You are afraid."
+        },
+        "hot": {
+            "name": "Hot",
+            "description": "You are hot. Find a way to cool down."
+        },
+        "hungry": {
+            "name": "Hungry",
+            "description": "You are hungry."
+        },
+        "regrowth": {
+            "name": "Regrowth",
+            "description": "You are regrowing."
+        },
+        "safe": {
+            "name": "Safe",
+            "description": "You are safe."
+        },
+        "sheltered": {
+            "name": "Sheltered",
+            "description": "You are sheltered."
+        },
+        "starving": {
+            "name": "Starving",
+            "description": "You are starving."
+        },
+        "stunned": {
+            "name": "Stunned",
+            "description": "You are stunned."
+        },
+        "tired": {
+            "name": "Tired",
+            "description": "You are tired."
+        },
+        "well_fed": {
+            "name": "Well Fed",
+            "description": "You are well fed."
+        }
+    },
+    "statistics": {
+        "armor": {
+            "name": "Armor",
+            "description": "Reduces damage taken."
+        },
+        "constitution": {
+            "name": "Constitution",
+            "description": "Increases health, regeneration and resistance to diseases."
+        },
+        "strength": {
+            "name": "Strength",
+            "description": "Increases damage dealt with melee weapons."
+        },
+        "intelligence": {
+            "name": "Intelligence",
+            "description": "Increases damage dealt with magic weapons."
+        },
+        "dexterity": {
+            "name": "Dexterity",
+            "description": "Increases damage dealt with ranged weapons."
+        },
+        "faith": {
+            "name": "Faith",
+            "description": "Increases healing done."
+        },
+        "cold_resistance": {
+            "name": "Cold Resistance",
+            "description": "Abilty to resist cold."
+        },
+        "heat_resistance": {
+            "name": "Heat Resistance",
+            "description": "Abilty to resist heat."
+        },
+        "mining_speed": {
+            "name": "Mining Speed",
+            "description": "Speed at which you mine ores."
+        },
+        "mining_strength": {
+            "name": "Mining Strength",
+            "description": "Strength of your mining."
+        },
+        "luck": {
+            "name": "Luck",
+            "description": "Increases chance of finding rare items."
+        },
+        "woodworking_speed": {
+            "name": "Woodworking Speed",
+            "description": "Speed at which you craft items."
+        },
+        "woodworking_strength": {
+            "name": "Woodworking Strength",
+            "description": "Strength of your woodworking."
+        }
+    },
+    "equipments": {
+        "headpiece": "Headpiece",
+        "chestpiece": "Chestpiece",
+        "leggings": "Leggings",
+        "gloves": "Gloves",
+        "boots": "Boots",
+        "single-handed": "Single-Handed",
+        "two-handed": "Two-Handed",
+        "tool": "Tool",
+        "off-hand": "Off-Hand",
+        "shield": "Shield",
+        "ring": "Ring",
+        "necklace": "Necklace",
+        "equipment": "Equipment"
+    }
+}

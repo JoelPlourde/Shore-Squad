@@ -61,69 +61,11 @@ namespace ItemSystem {
 				}
 
 				EditorGUILayout.Space();
-				EditorGUILayout.LabelField("General", EditorStyles.boldLabel);
-				if (GUILayout.Button("Generate Tooltip")) {
-					equipmentData.Tooltip = "";
-
-					if (equipmentData.ItemEffects.Count > 0) {
-						equipmentData.Tooltip = string.Format("<color=#BFBFBF><size=20>{0}</size></color> ", EnumExtensions.FormatItemEffectType(equipmentData.ItemEffects[0].ItemEffectType));
-					}
-
-					equipmentData.Tooltip += string.Format("<size=22>{0}</size>\n<size=16>{1}</size>\n", equipmentData.name, FormatEquipmentType(equipmentData));
-
-					int count = equipmentData.EquipmentStats.Statistics.Count;
-					foreach (Statistic statistic in equipmentData.EquipmentStats.Statistics) {
-						equipmentData.Tooltip += string.Format("<size=16><color=#1DFF00>+{0} {1}</color></size>", statistic.Value, FormatEnum(statistic.StatisticType.ToString()));
-						count--;
-						if (count > 0) {
-							equipmentData.Tooltip += "\n";
-						}
-					}
-				}
 
 				if (GUILayout.Button("Save")) {
 					EditorUtility.SetDirty(equipmentData);
 					AssetDatabase.SaveAssets();
 					AssetDatabase.Refresh();
-				}
-			}
-
-			private string FormatEnum(string input) {
-				return CultureInfo.CurrentCulture.TextInfo.ToTitleCase(input.Replace("_", " ").ToLower());
-			}
-
-			private string FormatEquipmentType(EquipmentData equipmentData) {
-				switch (equipmentData.SlotType) {
-					case SlotType.HEAD:
-						return "Headpiece";
-					case SlotType.BODY:
-						return "Chestpiece";
-					case SlotType.PANTS:
-						return "Leggings";
-					case SlotType.GLOVES:
-						return "Gloves";
-					case SlotType.BOOTS:
-						return "Boots";
-					case SlotType.WEAPON:
-						switch (equipmentData.WeaponType) {
-							case WeaponType.SINGLE_HANDED:
-								return "Single-handed";
-							case WeaponType.TWO_HANDED:
-								return "Two-handed";
-							default:
-								return "Tool";
-						}
-					case SlotType.SHIELD:
-						if (equipmentData.WeaponType != WeaponType.NONE) {
-							return "Off-hand";
-						}
-						return "Shield";
-					case SlotType.RING:
-						return "Ring";
-					case SlotType.NECK:
-						return "Necklace";
-					default:
-						return "Equipment";
 				}
 			}
 		}

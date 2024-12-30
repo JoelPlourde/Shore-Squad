@@ -1,4 +1,5 @@
 ﻿using ItemSystem.EffectSystem;
+using ItemSystem.EquipmentSystem;
 using PointerSystem;
 using System;
 using System.Collections.Generic;
@@ -55,7 +56,42 @@ namespace ItemSystem {
 			#region Pointer
 			public void OnPointerEnter(PointerEventData eventData) {
 				if (!ReferenceEquals(Item, null)) {
-					Tooltip.Instance.ShowTooltip(Item.ItemData.Tooltip, Constant.TOOLTIP_DELAY);
+					string tooltip = "";
+					string effectName;
+					if (Item.ItemData.ItemEffects.Count > 0) {
+						if (string.IsNullOrEmpty(Item.ItemData.ItemEffects[0].effectName)) {
+							effectName = EnumExtensions.FormatItemEffectType(Item.ItemData.ItemEffects[0].ItemEffectType);
+						} else {
+							effectName = Item.ItemData.ItemEffects[0].effectName;
+						}
+						tooltip += string.Format("<color=#BFBFBF><size=20>{0}</size></color> ", I18N.GetValue("effects." + effectName));
+					}
+
+					string itemName = I18N.GetValue("items." + Item.ItemData.ID + ".name");
+                    string itemType;
+					string statistics = "";
+
+                    if (Item.ItemData is EquipmentData equipmentData) {
+                        itemType = I18N.GetValue("equipments." + EnumExtensions.FormatEquipmentType(equipmentData));
+
+                        int count = equipmentData.EquipmentStats.Statistics.Count;
+                        foreach (Statistic statistic in equipmentData.EquipmentStats.Statistics) {
+                            string statisticType = I18N.GetValue("statistics." + EnumExtensions.FormatEnum(statistic.StatisticType.ToString()) + ".name");
+                            statistics += string.Format("<size=16><color=#1DFF00>+{0} {1}</color></size>", statistic.Value, statisticType);
+                            count--;
+                            if (count > 0) {
+                                statistics += "\n";
+                            }
+                        }
+                    }
+                    else {
+                        itemType = I18N.GetValue(EnumExtensions.FormatItemType(Item.ItemData.ItemType));
+                    }
+
+                    tooltip += string.Format("<size=22>{0}</size>\n<size=16>{1}</size>", itemName, itemType);
+					tooltip += string.IsNullOrEmpty(statistics) ? "" : "\n" + statistics;
+
+					Tooltip.Instance.ShowTooltip(tooltip, Constant.TOOLTIP_DELAY);
 				} else {
 					Tooltip.Instance.HideTooltip();
 				}

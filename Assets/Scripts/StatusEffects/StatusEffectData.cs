@@ -36,11 +36,6 @@ namespace StatusEffectSystem {
 		public StatusEffectCategory StatusEffectCategory;
 
 		[SerializeField]
-		[TextArea(3, 15)]
-		[Tooltip("Tooltip to be displayed when hovered on.")]
-		public string Tooltip;
-
-		[SerializeField]
 		[Tooltip("Determine what is the effect of the status.")]
 		public List<StatusEffectType> statusEffectTypes;
 	}

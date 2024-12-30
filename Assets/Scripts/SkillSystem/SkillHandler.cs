@@ -46,7 +46,7 @@ namespace SkillSystem {
 			public void Open(SkillType skillType, Actor actor) {
 				SkillData skillData = SkillManager.Instance.GetSkillData(skillType);
 
-				_title.text = skillData.Title;
+				_title.text = I18N.GetValue("skills." + skillType + ".name");
 				_icon.sprite = skillData.Icon;
 
 				_compentencyHandler.Initialize(skillData, actor.Skills);
