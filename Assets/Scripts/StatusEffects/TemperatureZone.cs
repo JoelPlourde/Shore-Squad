@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace StatusEffectSystem {
@@ -8,7 +6,6 @@ namespace StatusEffectSystem {
 
 		public TemperatureZoneData TemperatureZoneData;
 
-		private StatusEffectData _oppositeStatusEffectData;
 		private float _targetTemperature;
 		private bool _initialized = false;
 
@@ -22,8 +19,6 @@ namespace StatusEffectSystem {
 
 		public void Initialize(TemperatureZoneData temperatureZoneData, float radius = 10.0f) {
 			_magnitude = temperatureZoneData.Magnitude;
-			_statusEffectData = temperatureZoneData.statusEffectData;
-			_oppositeStatusEffectData = temperatureZoneData.OppositeStatusEffectData;
 			_targetTemperature = temperatureZoneData.TargetTemperature;
 
 			if (_collider is SphereCollider sphereCollider) {
@@ -41,8 +36,8 @@ namespace StatusEffectSystem {
 			Actor actor = other.gameObject.GetComponent<Actor>();
 
 			if (!ReferenceEquals(actor, null)) {
-				int duration = (int) Math.Abs(_targetTemperature - actor.Attributes.Temperature);
-				AdjustTemperature(actor, _magnitude, duration, _statusEffectData.Name, _statusEffectData);
+				float duration = Math.Abs((_targetTemperature - actor.Attributes.Temperature) / _magnitude);
+				AdjustTemperature(actor, _targetTemperature, duration);
 			}
 		}
 
@@ -51,17 +46,15 @@ namespace StatusEffectSystem {
 				return;
 			}
 
-			Debug.Log("Trigger Exit, removing status effect");
 			Actor actor = other.gameObject.GetComponent<Actor>();
 			if (!ReferenceEquals(actor, null)) {
-				int duration = (int) Math.Abs(Constant.DEFAULT_TEMPERATURE - actor.Attributes.Temperature);
-				AdjustTemperature(actor, -_magnitude, duration, _statusEffectData.Name, _oppositeStatusEffectData);
+				float duration = Math.Abs((Constant.DEFAULT_TEMPERATURE - actor.Attributes.Temperature) / _magnitude);
+				AdjustTemperature(actor, -_targetTemperature, duration);
 			}
 		}
 
-		private void AdjustTemperature(Actor actor, float magnitude, int duration, string name, StatusEffectData statusEffectData) {
-			StatusEffectScheduler.Instance(actor.Guid).RemoveStatusEffect(name);
-			StatusEffectScheduler.Instance(actor.Guid).AddStatusEffect(new Status(actor, magnitude, duration, statusEffectData));
+		private void AdjustTemperature(Actor actor, float targetTemperature, float duration) {
+			actor.Attributes.AdjustTemperature(targetTemperature, duration);
 		}
 	}
 }

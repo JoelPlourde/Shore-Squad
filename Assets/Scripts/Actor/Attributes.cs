@@ -21,6 +21,8 @@ public class Attributes {
 
 	private Actor _actor;
 
+	private LTDescr _temperatureLerp;
+
 	public void Initialize(Actor actor, AttributesDto attributesDto) {
 		MaxHealth = attributesDto.MaxHealth;
 		Health = attributesDto.Health;
@@ -151,22 +153,16 @@ public class Attributes {
 	#endregion
 
 	#region Temperature
-	/// <summary>
-	/// Increase temperature by a value.
-	/// </summary>
-	/// <param name="value">A value to increment by.</param>
-	public void IncreaseTemperature(float value) {
-		Temperature += value;
-		ApplyTemperatureEffect();
-	}
+	public void AdjustTemperature(float targetTemperature, float duration) {
+		if (!ReferenceEquals(_temperatureLerp, null)) {
+			LeanTween.cancel(_temperatureLerp.id);
+			_temperatureLerp = null;
+		}
 
-	/// <summary>
-	/// Decrease temperature by a value.
-	/// </summary>
-	/// <param name="value">A value to decrease by.</param>
-	public void DecreaseTemperature(float value) {
-		Temperature -= value;
-		ApplyTemperatureEffect();
+		_temperatureLerp = LeanTween.value(_actor.gameObject, Temperature, targetTemperature, duration).setOnUpdate((float value) => {
+			Temperature = value;
+			ApplyTemperatureEffect();
+		});
 	}
 
 	// TODO: Add cold/hot animation, Add feedback: Cold breath, sweat.
@@ -177,13 +173,13 @@ public class Attributes {
 		if (adjustedTemperature > 25) {
 			StatusEffectScheduler.Instance(_actor.Guid).AddStatusEffect(new StatusEffectSystem.Status(_actor, 0.5f, StatusEffectManager.GetStatusEffectData("Hot")));
 		} else {
-			// TODO check if there is a hot status effect, if so remove it.
+			StatusEffectScheduler.Instance(_actor.Guid).RemoveStatusEffect("Hot");
 		}
 
 		if (adjustedTemperature < 0) {
 			StatusEffectScheduler.Instance(_actor.Guid).AddStatusEffect(new StatusEffectSystem.Status(_actor, 0.5f, StatusEffectManager.GetStatusEffectData("Cold")));
 		} else {
-			// TODO check if there is a cold status effect, if so add it.
+			StatusEffectScheduler.Instance(_actor.Guid).RemoveStatusEffect("Cold");
 		}
 	}
 	#endregion

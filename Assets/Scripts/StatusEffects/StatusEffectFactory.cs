@@ -16,8 +16,7 @@ namespace StatusEffectSystem {
 			{ StatusEffectType.INCREASE_HUNGER_RATE, IncreaseHungerRateEffect.Instance },
 			{ StatusEffectType.REDUCE_HUNGER_RATE, ReduceHungerRateEffect.Instance },
 			{ StatusEffectType.HUNGER_OVER_TIME, HungerStatusEffect.Instance },
-			{ StatusEffectType.DEATH, DeathEffect.Instance },
-			{ StatusEffectType.ADJUST_TEMPERATURE_OVER_TIME, AdjustTemperatureStatusEffect.Instance }
+			{ StatusEffectType.DEATH, DeathEffect.Instance }
 		};
 
 		public static IStatusEffect GetStatusEffect(StatusEffectType statusEffectType) {

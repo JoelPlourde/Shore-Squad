@@ -6,10 +6,6 @@ namespace StatusEffectSystem {
         
         public float Magnitude = 1.0f;
 
-        public StatusEffectData statusEffectData;
-
-        public StatusEffectData OppositeStatusEffectData;
-
         [Range(-60f, 100f)]
         public float TargetTemperature = 20f;
     }
