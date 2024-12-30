@@ -12,9 +12,7 @@ namespace UnitTest {
 		public void Setup() {
 			GameObject gameObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
 			FeedbackManager feedbackManager = gameObject.AddComponent<FeedbackManager>();
-			Debug.Log(feedbackManager);
 		}
-
 
 		[Test]
 		public void Initialize_test() {

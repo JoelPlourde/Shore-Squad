@@ -101,7 +101,7 @@ namespace UI {
 			DisableUnusedOptions();
 
 			// Convert from world position to screen position:
-			_rectTransform.position = (Vector3) Input.mousePosition;
+			_rectTransform.position = Input.mousePosition;
 
 			ResizeComponent(_childCount, preferredWidth);
 
@@ -181,15 +181,9 @@ namespace UI {
 		}
 
 		public void OnItemExamine(ItemData itemData) {
-			Debug.Log(itemData.ID + "has been examined!");
-
 			string description = I18N.GetValue("items." + itemData.ID + ".description");
 
-			if (Squad.FirstSelected(out Actor actor)) {
-				FeedbackManager.Instance.DisplayMessage(actor, description);
-			} else {
-				Debug.LogWarning("No actor selected to examine the item.");
-			}
+			MessageHandler.Instance.ShowMessage(description);
 
 			Close();
 
