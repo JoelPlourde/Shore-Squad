@@ -17,16 +17,6 @@ namespace ItemSystem {
 		public GameObject Prefab;
 
 		[SerializeField]
-		[TextArea(3, 15)]
-		[Tooltip("Tooltip to be displayed when hovered on.")]
-		public string Tooltip;
-
-		[SerializeField]
-		[TextArea(3, 15)]
-		[Tooltip("Short Description to be displayed when the player examines the item.")]
-		public string Examine;
-
-		[SerializeField]
 		[Tooltip("The type of item")]
 		public ItemType ItemType = ItemType.DEFAULT;
 

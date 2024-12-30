@@ -18,7 +18,10 @@ namespace SkillSystem {
 			/// <param name="skillData">The skill data</param>
 			public void Initialize(SkillData skillData) {
 				GetComponent<Image>().sprite = skillData.Icon;
-				_tooltip = string.Format("<b><color=#{2}>{0}</color></b>\n{1}", skillData.Title, skillData.Description, ColorUtility.ToHtmlStringRGB(skillData.Color));
+				string skillTitle = I18N.GetValue("skills." + skillData.SkillType + ".name");
+				string skillDescription = I18N.GetValue("skills." + skillData.SkillType + ".description");
+
+				_tooltip = string.Format("<b><color=#{2}>{0}</color></b>\n{1}", skillTitle, skillDescription, ColorUtility.ToHtmlStringRGB(skillData.Color));
 			}
 
 			public void OnPointerEnter(PointerEventData eventData) {

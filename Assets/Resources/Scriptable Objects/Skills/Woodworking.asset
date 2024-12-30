@@ -10,11 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 73e65da5e1cbb0742963b7ea76472fe8, type: 3}
-  m_Name: Logging
+  m_Name: Woodworking
   m_EditorClassIdentifier: 
   SkillType: 1
   Color: {r: 0.46226418, g: 0.19682607, b: 0, a: 0}
-  Title: Logging
-  Description: Some says chopping a tree is as simple as it looks, but its an art.
   Icon: {fileID: 21300000, guid: d0b9f246b6916a8469b443e6e243d0dc, type: 3}
   Competencies: []

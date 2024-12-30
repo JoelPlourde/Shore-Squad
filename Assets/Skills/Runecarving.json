@@ -6,8 +6,6 @@
         "b": 1.0,
         "a": 0.0
     },
-    "Title": "Runecarving",
-    "Description": "The ability to carve Runes",
     "Icon": {
         "instanceID": 23330
     },

@@ -17,7 +17,10 @@ namespace ItemSystem {
 
 			ItemData[] itemDatas = Resources.LoadAll<ItemData>("Scriptable Objects/Items");
 			Array.ForEach(itemDatas, itemData => {
-				itemData.ID = itemData.name.ToLower().Replace(" ", "_");
+				itemData.ID = itemData.name.ToLower()
+					.Replace(" ", "_")
+					.Replace("(", "")
+					.Replace(")", "");
 			});
 			_itemDatas = itemDatas.ToDictionary(x => x.ID);
 		}

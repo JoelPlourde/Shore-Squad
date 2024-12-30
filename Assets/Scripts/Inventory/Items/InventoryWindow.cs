@@ -30,12 +30,10 @@ namespace ItemSystem {
 					string[] entry = line.Split(',');
 
 					string name = entry[0];
-					string tooltip = entry[1];
 					string slug = name.Replace(' ', '_').ToLower();
 
 					ItemData asset = CreateInstance<ItemData>();
 					asset.name = name;
-					asset.Tooltip = tooltip;
 
 					string spritePath = "Sprites/" + slug;
 					asset.Sprite = Resources.Load<Sprite>(spritePath);

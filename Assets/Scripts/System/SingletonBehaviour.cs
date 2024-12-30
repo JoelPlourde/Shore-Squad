@@ -9,7 +9,7 @@ public class SingletonBehaviour<T> : MonoBehaviour where T : MonoBehaviour {
 	protected virtual void Awake() {
 
 		if (ReferenceEquals(Instance, null)) {
-			Instance = (T)FindObjectOfType(typeof(T));
+			Instance = (T)FindFirstObjectByType(typeof(T));
 			DontDestroyOnLoad(this);
 		} else {
 			throw new System.Exception("An instance of this singleton already exists.");

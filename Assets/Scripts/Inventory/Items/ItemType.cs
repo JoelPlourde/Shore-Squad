@@ -1,5 +1,7 @@
 ﻿namespace ItemSystem {
 	public enum ItemType {
-		DEFAULT, EQUIPMENT, CONSUMABLE
+		DEFAULT = 0,
+		EQUIPMENT = 1,
+		CONSUMABLE = 2
 	}
 }

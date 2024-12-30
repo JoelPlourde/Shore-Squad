@@ -17,9 +17,6 @@ namespace SkillSystem {
 
 			SkillData skillData = (SkillData)target;
 
-			skillData.Title = skillData.SkillType.ToString().ToLower();
-			skillData.Title = skillData.Title.First().ToString().ToUpper() + skillData.Title.Substring(1);
-
 			GUILayout.Space(20);
 			GUILayout.Label("Advanced");
 
@@ -30,8 +27,9 @@ namespace SkillSystem {
 			GUILayout.Space(20);
 			GUILayout.Label("Export/Import");
 
+			string filename = skillData.SkillType.ToString().ToLower();
+
 			if (GUILayout.Button("Export")) {
-				string filename = skillData.Title;
 				string assetPath = AssetDatabase.GetAssetPath(skillData.GetInstanceID());
 				AssetDatabase.RenameAsset(assetPath, filename);
 				AssetDatabase.SaveAssets();
@@ -45,7 +43,7 @@ namespace SkillSystem {
 				reader.Close();
 			}
 
-			string filepath = Application.dataPath + "/Skills/" + skillData.Title + ".json";
+			string filepath = Application.dataPath + "/Skills/" + filename + ".json";
 			if (File.Exists(filepath)) {
 				EditorGUILayout.HelpBox("This skill has been last modified on: " + File.GetLastWriteTime(filepath), MessageType.Info);
 			}

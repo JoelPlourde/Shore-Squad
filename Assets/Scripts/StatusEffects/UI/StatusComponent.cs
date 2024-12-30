@@ -88,7 +88,10 @@ namespace StatusEffectSystem {
 			}
 
 			public void OnPointerEnter(PointerEventData eventData) {
-				Tooltip.Instance.ShowTooltip(_status.StatusEffectData.Tooltip, Constant.TOOLTIP_DELAY);
+				string name = _status.StatusEffectData.Name.Replace(" ", "_").ToLower();
+				string tooltip = I18N.GetValue("status_effects." + name + ".description");
+
+				Tooltip.Instance.ShowTooltip(tooltip, Constant.TOOLTIP_DELAY);
 			}
 
 			public void OnPointerExit(PointerEventData eventData) {

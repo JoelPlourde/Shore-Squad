@@ -26,55 +26,11 @@ namespace ItemSystem {
 			}
 
 			EditorGUILayout.Space();
-			EditorGUILayout.LabelField("General", EditorStyles.boldLabel);
-			if (GUILayout.Button("Generate Tooltip")) {
-				itemData.Tooltip = "";
-				if (itemData.ItemEffects.Count > 0) {
-					itemData.Tooltip = string.Format("<color=#BFBFBF><size=20>{0}</size></color> ", EnumExtensions.FormatItemEffectType(itemData.ItemEffects[0].ItemEffectType));
-				}
-
-				itemData.Tooltip += string.Format("<size=22>{0}</size>\n<size=16>{1}</size>", itemData.name, FormatItemType(itemData.ItemType));
-
-				int count = itemData.ItemEffects.Count;
-				if (count > 0) {
-					itemData.Tooltip += "\n";
-				}
-
-				foreach (var itemEffect in itemData.ItemEffects) {
-					itemData.Tooltip += string.Format("<size=16><color=#1DFF00>{0}</color></size>", FormatItemEffect(itemEffect));
-					count--;
-					if (count > 0) {
-						itemData.Tooltip += "\n";
-					}
-				}
-			}
 
 			if (GUILayout.Button("Save")) {
 				EditorUtility.SetDirty(itemData);
 				AssetDatabase.SaveAssets();
 				AssetDatabase.Refresh();
-			}
-		}
-
-		private string FormatItemType(ItemType itemType) {
-			switch (itemType) {
-				case ItemType.EQUIPMENT:
-					return "Equipment";
-				case ItemType.CONSUMABLE:
-					return "Consumable";
-				default:
-					return "Resource";
-			}
-		}
-
-		private string FormatItemEffect(ItemEffect itemEffect) {
-			switch (itemEffect.ItemEffectType) {
-				case ItemEffectType.EQUIP:
-					return "Equipment";
-				case ItemEffectType.EAT:
-					return "+" + Mathf.RoundToInt(itemEffect.Magnitude * 4) + " Nutrition";
-				default:
-					return "???";
 			}
 		}
 	}
