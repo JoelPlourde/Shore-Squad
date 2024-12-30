@@ -23,7 +23,6 @@ using EmoteSystem;
 [RequireComponent(typeof(SaveManager))]
 [RequireComponent(typeof(ActorManager))]
 [RequireComponent(typeof(QuestManager))]
-[RequireComponent(typeof(AdjustTemperatureStatusEffect))]
 [RequireComponent(typeof(HungerStatusEffect))]
 [RequireComponent(typeof(HealOverTimeEffect))]
 [RequireComponent(typeof(HealthRegenerationStatusEffect))]
