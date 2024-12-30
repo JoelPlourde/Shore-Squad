@@ -5,6 +5,7 @@ using ItemSystem.UI;
 using ItemSystem.EffectSystem;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using Gameplay;
 
 namespace UI {
 	[RequireComponent(typeof(Canvas))]
@@ -92,6 +93,25 @@ namespace UI {
 			GameController.Instance.RegisterUpdatable(this);
 		}
 
+		public void OpenRightClickMenu(ItemData itemData) {
+			float preferredWidth = 0;
+			AddOption(I18N.GetValue("examine"), "", ref preferredWidth, delegate { OnItemExamine(itemData); });
+
+			// Disable all the unused options!
+			DisableUnusedOptions();
+
+			// Convert from world position to screen position:
+			_rectTransform.position = (Vector3) Input.mousePosition;
+
+			ResizeComponent(_childCount, preferredWidth);
+
+			transform.SetAsLastSibling();
+
+			_canvas.enabled = true;
+
+			GameController.Instance.RegisterUpdatable(this);
+		}
+
 		private void AddOption(string action, string message, ref float preferredWidth, UnityAction unityAction) {
 			if (_options.Count <= _childCount) {
 				_options.Add(Instantiate(OptionPrefab, transform).GetComponent<OptionComponent>());
@@ -120,6 +140,12 @@ namespace UI {
 		public void Close() {
 			GameController.Instance.DeregisterUpdatable(this);
 			_canvas.enabled = false;
+
+			// Disable all the options.
+			foreach (var option in _options) {
+				option.Disable();
+			}
+			_childCount = 0;
 		}
 
 		/// <summary>
@@ -152,6 +178,22 @@ namespace UI {
 				}
 			}
 			Close();
+		}
+
+		public void OnItemExamine(ItemData itemData) {
+			Debug.Log(itemData.ID + "has been examined!");
+
+			string description = I18N.GetValue("items." + itemData.ID + ".description");
+
+			if (Squad.FirstSelected(out Actor actor)) {
+				FeedbackManager.Instance.DisplayMessage(actor, description);
+			} else {
+				Debug.LogWarning("No actor selected to examine the item.");
+			}
+
+			Close();
+
+			DisableUnusedOptions();
 		}
 
 		/// <summary>

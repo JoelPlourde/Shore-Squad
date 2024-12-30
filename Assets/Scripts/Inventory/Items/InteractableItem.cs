@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UI;
 
 namespace ItemSystem {
     [RequireComponent(typeof(Rigidbody))]
@@ -28,6 +29,12 @@ namespace ItemSystem {
                 return;
             }
             Destroy(this.gameObject);
+        }
+
+        private void OnMouseOver() {
+            if (Input.GetMouseButtonDown(1)) {
+                OptionsHandler.Instance.OpenRightClickMenu(_itemData);
+            }
         }
 
 		public float GetInteractionRadius() {
