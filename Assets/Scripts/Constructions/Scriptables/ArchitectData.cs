@@ -23,11 +23,6 @@ namespace ConstructionSystem {
 		public string Name;
 
 		[SerializeField]
-		[Tooltip("Describe what the category is")]
-		[TextArea(3, 15)]
-		public string Tooltip;
-
-		[SerializeField]
 		[Tooltip("Image of the Category")]
 		public Sprite DefaultSprite;
 

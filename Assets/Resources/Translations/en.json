@@ -2,6 +2,7 @@
     "select": "Select",
     "drop": "Drop",
     "cancel": "Cancel",
+    "examine": "Examine",
     "resource": "Resource",
     "equipment": "Equipment",
     "consumable": "Consumable",
@@ -285,5 +286,79 @@
         "ring": "Ring",
         "necklace": "Necklace",
         "equipment": "Equipment"
+    },
+    "construction_categories": {
+        "survival": {
+            "name": "Survival",
+            "description": "Basic constructions for survival."
+        },
+        "storage": {
+            "name": "Storage",
+            "description": "Constructions for storing objects."
+        },
+        "farming": {
+            "name": "Farming",
+            "description": "Constructions for farming."
+        },
+        "encampment": {
+            "name": "Encampment",
+            "description": "Constructions for setting up an encampment."
+        }
+    },
+    "constructions": {
+        "categories": {
+            "survival": {
+                "name": "Survival",
+                "description": "Basic constructions for survival."
+            },
+            "storage": {
+                "name": "Storage",
+                "description": "Constructions for storing objects."
+            },
+            "farming": {
+                "name": "Farming",
+                "description": "Constructions for farming."
+            },
+            "encampment": {
+                "name": "Encampment",
+                "description": "Constructions for setting up an encampment."
+            }
+        },
+        "campfire": {
+            "name": "Campfire",
+            "description": "A campfire to cook food."
+        },
+        "pit": {
+            "name": "Pit",
+            "description": "A pit to extract fresh water from the ground."
+        },
+        "sleeping_bag": {
+            "name": "Sleeping Bag",
+            "description": "A sleeping bag to sleep in."
+        },
+        "barrel": {
+            "name": "Barrel",
+            "description": "A barrel to store your objects."
+        },
+        "chest": {
+            "name": "Chest",
+            "description": "A chest to store your objects."
+        },
+        "bed": {
+            "name": "Bed",
+            "description": "A bed to sleep in."
+        },
+        "flag": {
+            "name": "Flag",
+            "description": "A flag to mark your territory."
+        },
+        "shed": {
+            "name": "Shed",
+            "description": "A shed to store your objects."
+        },
+        "well": {
+            "name": "Well",
+            "description": "A well to extract fresh water from the ground."
+        }
     }
 }

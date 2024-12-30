@@ -79,7 +79,9 @@ namespace ConstructionSystem {
 					disabledSprite = category.DefaultSprite
 				};
 
-				categoryObject.AddComponent<InteractiveButton>().Initialize(category.Tooltip);
+				string tooltip = I18N.GetValue("constructions.categories." + category.Name.Replace(" ", "_").ToLower() + ".description");
+
+				categoryObject.AddComponent<InteractiveButton>().Initialize(tooltip);
 
 				categoryObject.transform.SetParent(transform);
 				categoryObject.transform.SetAsLastSibling();
@@ -133,7 +135,11 @@ namespace ConstructionSystem {
 				// Add a button.
 				constructionObject.AddComponent<Button>().onClick.AddListener(() => OnConstructionClick(constructionData));
 				constructionObject.AddComponent<Image>().sprite = constructionData.Sprite;
-				constructionObject.AddComponent<InteractiveButton>().Initialize(constructionData.Tooltip);
+
+				string name = constructionData.name.Replace(" ", "_");
+				string tooltip = I18N.GetValue("constructions." + name + ".description");
+
+				constructionObject.AddComponent<InteractiveButton>().Initialize(tooltip);
 
 				constructionObject.transform.SetParent(content);
 				constructionObject.transform.SetAsLastSibling();
