@@ -23,10 +23,5 @@ namespace ConstructionSystem {
 		[SerializeField]
 		[Tooltip("Prefab of this construction")]
 		public GameObject Prefab;
-
-		[SerializeField]
-		[TextArea(3, 15)]
-		[Tooltip("Tooltip to be displayed.")]
-		public string Tooltip;
 	}
 }
