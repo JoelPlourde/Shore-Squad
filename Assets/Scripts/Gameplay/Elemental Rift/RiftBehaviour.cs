@@ -3,6 +3,8 @@ using UnityEngine;
 using System.Linq;
 using Unity.Collections;
 using StatusEffectSystem;
+using UI;
+using Ambience;
 
 namespace ElementalRift {
     [RequireComponent(typeof(SphereCollider))]
@@ -20,6 +22,7 @@ namespace ElementalRift {
         private OrbBehaviour _orbBehaviour;
         private SphereCollider _sphereCollider;
         private TemperatureZone _temperatureZone;
+        private AmbienceZone _ambienceZone;
 
         private void Awake() {
             if (ReferenceEquals(riftData, null)) {
@@ -34,6 +37,11 @@ namespace ElementalRift {
             _temperatureZone = GetComponentInChildren<TemperatureZone>(true);
             if (!ReferenceEquals(riftData.TemperatureZoneData, null)) {
                 _temperatureZone.Initialize(riftData.TemperatureZoneData, riftData.InfluenceRadius);
+            }
+
+            _ambienceZone = GetComponentInChildren<AmbienceZone>(true);
+            if (!ReferenceEquals(riftData.AmbienceZoneData, null)) {
+                _ambienceZone.Initialize(riftData.AmbienceZoneData, riftData.InfluenceRadius);
             }
 
             // Initialize the Trigger collider
@@ -155,7 +163,6 @@ namespace ElementalRift {
         * This method is called when a Rune enters the Rift to unregister it.
         **/
         private void OnTriggerExit(Collider other) {
-            Debug.Log("OnTriggerExit!");
             if (ReferenceEquals(other.transform.parent, null)) {
                 return;
             }
@@ -167,6 +174,7 @@ namespace ElementalRift {
 
             _runeBehaviours.Remove(runeBehaviour);
         }
+
         #endregion
     }
 }
