@@ -1082,10 +1082,9 @@ PrefabInstance:
     - target: {fileID: 6618174110233258670, guid: d9dd9a659da46644ea505e00b0edc6e4,
         type: 3}
       propertyPath: m_Name
-      value: EventSystem
+      value: System
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 417336649844220115, guid: d9dd9a659da46644ea505e00b0edc6e4, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1189,15 +1188,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Carved Stone (Water)
       objectReference: {fileID: 0}
-    - target: {fileID: 7484945181961617311, guid: 20c89991f7333884a97f4f00e66fd7ff,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7823893094002566437, guid: 20c89991f7333884a97f4f00e66fd7ff,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.3
+      value: 3.86
       objectReference: {fileID: 0}
     - target: {fileID: 7823893094002566437, guid: 20c89991f7333884a97f4f00e66fd7ff,
         type: 3}
@@ -1207,7 +1201,7 @@ PrefabInstance:
     - target: {fileID: 7823893094002566437, guid: 20c89991f7333884a97f4f00e66fd7ff,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 6.2
+      value: 5.84
       objectReference: {fileID: 0}
     - target: {fileID: 7823893094002566437, guid: 20c89991f7333884a97f4f00e66fd7ff,
         type: 3}
@@ -2924,7 +2918,7 @@ PrefabInstance:
     - target: {fileID: 5764742806590179630, guid: 1b250163cb286014fac7b433a7cc0b6a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.46
+      value: 6.33
       objectReference: {fileID: 0}
     - target: {fileID: 5764742806590179630, guid: 1b250163cb286014fac7b433a7cc0b6a,
         type: 3}
@@ -2934,7 +2928,7 @@ PrefabInstance:
     - target: {fileID: 5764742806590179630, guid: 1b250163cb286014fac7b433a7cc0b6a,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5.98
+      value: 6.3099995
       objectReference: {fileID: 0}
     - target: {fileID: 5764742806590179630, guid: 1b250163cb286014fac7b433a7cc0b6a,
         type: 3}

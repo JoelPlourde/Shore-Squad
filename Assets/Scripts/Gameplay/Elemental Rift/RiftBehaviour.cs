@@ -5,6 +5,8 @@ using Unity.Collections;
 using StatusEffectSystem;
 using UI;
 using Ambience;
+using UnityEditor.Playables;
+using UnityEngine.Diagnostics;
 
 namespace ElementalRift {
     [RequireComponent(typeof(SphereCollider))]
@@ -64,6 +66,8 @@ namespace ElementalRift {
 
             _orbBehaviour.gameObject.SetActive(true);
             _orbBehaviour.SpawnOrb(riftData.PrimaryElement, riftData.SecondaryElement);
+
+            RiftManager.Instance.SubscribeRift(this);
         }
 
         private void AddElementalHealthToOrb(ElementType elementType, int health = 100) {
@@ -72,6 +76,23 @@ namespace ElementalRift {
             } else {
                 _healthByElements.Add(elementType, health);
             }
+        }
+
+        /// <summary>
+        /// This method increases the health of the rift based on the growth probability.
+        /// </summary>
+        public void IncreaseHealth() {
+            foreach (KeyValuePair<ElementType, int> entry in _healthByElements.ToList()) {
+                // Generate a random number between 0 and RiftData.GrowthProbability
+                float random = Random.Range(0.0f, 1.0f);
+                if (random <= riftData.GrowthProbability) {
+                    _healthByElements[entry.Key] += 1;
+                }
+            }
+
+            _percentage = CalculateHealthPercentage();
+
+            UpdateOrb();
         }
 
         /**
@@ -87,6 +108,8 @@ namespace ElementalRift {
                 _percentage = CalculateHealthPercentage();
 
                 if (_percentage <= riftData.MinimumHealthPercentage) {
+                    RiftManager.Instance.UnsubscribeRift(this);
+
                     _orbBehaviour.CollapseOrb(elementType);
                     _orbBehaviour.gameObject.SetActive(false);
                 }
@@ -114,17 +137,25 @@ namespace ElementalRift {
         **/
         private void UpdateOrb() {
             // Iterate over the elements to find the two most dominant elements
-            var sortedDict = _healthByElements.OrderBy(x => x.Value);
+            int firstValue = 0;
+            ElementType primaryElement = ElementType.NONE;
 
-            ElementType primaryElement = sortedDict.First().Key;
-            ElementType secondaryElement;
+            int secondValue = 0;
+            ElementType secondaryElement = ElementType.NONE;
 
-            if (sortedDict.Count() == 1) {
-                secondaryElement = ElementType.NONE;
-            } else {
-                secondaryElement = sortedDict.Skip(1).First().Key;
+            foreach (KeyValuePair<ElementType, int> entry in _healthByElements) {
+                if (entry.Value > firstValue) {
+                    secondValue = firstValue;
+                    secondaryElement = primaryElement;
+
+                    firstValue = entry.Value;
+                    primaryElement = entry.Key;
+                } else if (entry.Value > secondValue) {
+                    secondValue = entry.Value;
+                    secondaryElement = entry.Key;
+                }
             }
-
+            
             _orbBehaviour.ChangeElement(primaryElement, secondaryElement);
 
             _orbBehaviour.ScaleOrb(_percentage);

@@ -19,6 +19,7 @@ namespace ElementalRift {
         private float _default_beam_emission_rate;
         private float _default_circle_emission_rate;
         private float _default_smoke_emission_rate;
+        private float _default_y_position;
 
         private RiftBehaviour _riftBehaviour;
 
@@ -45,6 +46,7 @@ namespace ElementalRift {
             _default_beam_emission_rate = _beam.emission.rateOverTime.constant;
             _default_circle_emission_rate = _circle.emission.rateOverTime.constant;
             _default_smoke_emission_rate = _smoke.emission.rateOverTime.constant;
+            _default_y_position = transform.localPosition.y;
         }
 
         /**
@@ -104,6 +106,8 @@ namespace ElementalRift {
             _smokeEmission.rateOverTime = _default_smoke_emission_rate * percentage;
 
             LeanTween.scale(transform.gameObject, Vector3.one * percentage, 0.5f);
+
+            LeanTween.moveLocalY(transform.gameObject, _default_y_position * (1 + percentage), 0.5f);
         }
 
         public void CollapseOrb(ElementType elementType) {
@@ -126,20 +130,26 @@ namespace ElementalRift {
         public void ChangeElement(ElementType primaryElementType, ElementType secondaryElementType = ElementType.NONE) {
             ElementData primaryElementData = ElementManager.Instance.GetElementData(primaryElementType);
             ElementData secondaryElementData;
+
+            LayerMask layerMask = primaryElementData.LayerMask;
+
             if (secondaryElementType != ElementType.NONE) {
                 secondaryElementData = ElementManager.Instance.GetElementData(secondaryElementType);
                 AdjustColors(primaryElementData.PrimaryColor, secondaryElementData.SecondaryColor);
-                UpdateExternalForce(primaryElementData.LayerMask);
+
+                layerMask |= secondaryElementData.LayerMask;
+
+                UpdateExternalForce(layerMask);
                 return;
             }
 
             AdjustColors(primaryElementData.PrimaryColor, primaryElementData.SecondaryColor);
-            UpdateExternalForce(primaryElementData.LayerMask);
+            UpdateExternalForce(layerMask);
         }
 
-        public void UpdateExternalForce(LayerMask LayerMask) {
+        public void UpdateExternalForce(LayerMask layerMask) {
             var externalForces = _particles.externalForces;
-            externalForces.influenceMask = LayerMask;
+            externalForces.influenceMask = layerMask;
         }
 
         public void AdjustColors(Color startColor, Color endColor) {
