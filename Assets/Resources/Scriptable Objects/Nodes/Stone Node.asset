@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6fb8310d4201904b8ca8fcb39d8d651, type: 3}
   m_Name: Stone Node
   m_EditorClassIdentifier: 
+  ID: stone_node
+  Action: mine
   Health: 100
   Durability: 0
   Capacity: 5

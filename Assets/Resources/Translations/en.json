@@ -3,6 +3,10 @@
     "drop": "Drop",
     "cancel": "Cancel",
     "examine": "Examine",
+    "pick_up": "Pick up",
+    "mine": "Mine",
+    "chop": "Chop",
+    "interact": "Interact",
     "resource": "Resource",
     "equipment": "Equipment",
     "consumable": "Consumable",
@@ -139,6 +143,20 @@
         "iron_ore": {
             "name": "Iron Ore",
             "description": "Ore containing iron."
+        }
+    },
+    "nodes": {
+        "stone_node": {
+            "name": "Rock",
+            "description": "A rock containing stones."
+        },
+        "copper_node": {
+            "name": "Copper Vein",
+            "description": "A vein containing copper ores."
+        },
+        "normal_tree": {
+            "name": "Tree",
+            "description": "A tree containing wood?"
         }
     },
     "effects": {

@@ -1,6 +1,8 @@
 using UnityEngine;
 using System.Collections.Generic;
 using UI;
+using TaskSystem;
+using System;
 
 namespace ItemSystem {
     [RequireComponent(typeof(Rigidbody))]
@@ -33,7 +35,14 @@ namespace ItemSystem {
 
         private void OnMouseOver() {
             if (Input.GetMouseButtonDown(1)) {
-                OptionsHandler.Instance.OpenRightClickMenu(_itemData);
+                OptionsHandler.Instance.OpenRightClickMenu(this, _itemData, InteractCallback);
+            }
+        }
+
+        private void InteractCallback() {
+            InteractArguments interactArguments = new InteractArguments(transform.position, this);
+            if (Squad.FirstSelected(out Actor actor)) {
+                actor.TaskScheduler.CreateTask<Interact>(interactArguments);
             }
         }
 
@@ -43,6 +52,10 @@ namespace ItemSystem {
 
         public bool IsPickup() {
             return true;
+        }
+
+        public string GetDefaultAction() {
+            return "pick_up";
         }
 
         protected override OutlineType GetOutlineType() {
