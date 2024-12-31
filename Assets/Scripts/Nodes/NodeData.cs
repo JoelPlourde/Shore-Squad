@@ -10,6 +10,13 @@ namespace NodeSystem {
 	[CreateAssetMenu(fileName = "NodeData", menuName = "ScriptableObjects/Node Data/Base")]
 	public class NodeData : ScriptableObject {
 
+		[Header("General Parameters")]
+		[Tooltip("The unique identifier of the node.")]
+		public string ID;
+
+		[Tooltip("The name of the action.")]
+		public string Action;
+
 		[Header("Harvest Parameters")]
 		[Tooltip("The healthbar of this node.")]
 		public int Health = 100;

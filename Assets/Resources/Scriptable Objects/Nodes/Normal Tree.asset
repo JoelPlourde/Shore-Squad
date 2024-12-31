@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eecc94826f9ac444aa3f6e3aea55fcd7, type: 3}
   m_Name: Normal Tree
   m_EditorClassIdentifier: 
+  ID: normal_tree
+  Action: chop
   Health: 100
   Durability: 0
   Capacity: 5

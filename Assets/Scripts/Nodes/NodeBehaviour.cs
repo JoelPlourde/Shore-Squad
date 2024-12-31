@@ -2,6 +2,8 @@
 using DropSystem;
 using System.Collections.Generic;
 using ItemSystem;
+using UI;
+using TaskSystem;
 
 namespace NodeSystem {
 	public class NodeBehaviour : InteractableBehavior, IInteractable {
@@ -21,6 +23,25 @@ namespace NodeSystem {
 			}
 
 			OnStart();
+		}
+
+		/// <summary>
+		/// On Mouse Over, opens the right click menu.
+		/// </summary>
+		private void OnMouseOver() {
+            if (Input.GetMouseButtonDown(1)) {
+                OptionsHandler.Instance.OpenRightClickMenu(this, _nodeData, InteractCallback);
+            }
+        }
+
+		/// <summary>
+		/// Callback to create the Interact task.
+		/// </summary>
+		private void InteractCallback() {
+			InteractArguments interactArguments = new InteractArguments(transform.position, this);
+			if (Squad.FirstSelected(out Actor actor)) {
+				actor.TaskScheduler.CreateTask<Interact>(interactArguments);
+			}
 		}
 
 		/// <summary>
@@ -103,6 +124,10 @@ namespace NodeSystem {
 
 		public float GetInteractionRadius() {
 			return InteractionRadius;
+		}
+
+		public string GetDefaultAction() {
+			return _nodeData.Action;
 		}
 
 		protected override OutlineType GetOutlineType() {

@@ -6,6 +6,8 @@ using ItemSystem.EffectSystem;
 using UnityEngine.Events;
 using UnityEngine.UI;
 using Gameplay;
+using System;
+using NodeSystem;
 
 namespace UI {
 	[RequireComponent(typeof(Canvas))]
@@ -93,9 +95,46 @@ namespace UI {
 			GameController.Instance.RegisterUpdatable(this);
 		}
 
-		public void OpenRightClickMenu(ItemData itemData) {
+		/// <summary>
+		/// Open the right-click menu specific to a Node.
+		/// </summary>
+		/// <param name="interactable"></param>
+		/// <param name="nodeData"></param>
+		/// <param name="callback"></param>
+		public void OpenRightClickMenu(IInteractable interactable, NodeData nodeData, Action callback) {
+			string nodeName = I18N.GetValue("nodes." + nodeData.ID + ".name");
+			OpenRightClickMenu(interactable, nodeName, nodeData, callback);
+		}
+
+		/// <summary>
+		/// Open the right-click menu specific to an Item.
+		/// </summary>
+		/// <param name="interactable"></param>
+		/// <param name="itemData"></param>
+		/// <param name="callback"></param>
+		public void OpenRightClickMenu(IInteractable interactable, ItemData itemData, Action callback) {
+			string itemName = I18N.GetValue("items." + itemData.ID + ".name");
+			OpenRightClickMenu(interactable, itemName, itemData, callback);
+		}
+
+		/// <summary>
+		/// Open the right-click menu with the given parameters.
+		/// </summary>
+		/// <param name="interactable"></param>
+		/// <param name="name"></param>
+		/// <param name="data"></param>
+		/// <param name="callback"></param>
+		private void OpenRightClickMenu(IInteractable interactable, string name, object data, Action callback) {
 			float preferredWidth = 0;
-			AddOption(I18N.GetValue("examine"), "", ref preferredWidth, delegate { OnItemExamine(itemData); });
+
+			string defaultAction = I18N.GetValue(interactable.GetDefaultAction());
+
+			AddOption(defaultAction, name, ref preferredWidth, delegate { callback(); });
+			if (data is ItemData itemData) {
+				AddOption(I18N.GetValue("examine"), "", ref preferredWidth, delegate { OnItemExamine(itemData); });
+			} else if (data is NodeData nodeData) {
+				AddOption(I18N.GetValue("examine"), "", ref preferredWidth, delegate { OnNodeExamine(nodeData); });
+			}
 
 			// Disable all the unused options!
 			DisableUnusedOptions();
@@ -127,9 +166,9 @@ namespace UI {
 
 		void IUpdatable.OnUpdate() {
 			_relativePosition = Input.mousePosition - _rectTransform.position;
-			if (_relativePosition.y >= _padding.y || _relativePosition.y < -(_relativeSizeDelta.y)) {
+			if (_relativePosition.y >= _padding.y || _relativePosition.y < -_relativeSizeDelta.y) {
 				Close();
-			} else if (_relativePosition.x < -(_relativeSizeDelta.x) || _relativePosition.x >= _relativeSizeDelta.x) {
+			} else if (_relativePosition.x < -_relativeSizeDelta.x || _relativePosition.x >= _relativeSizeDelta.x) {
 				Close();
 			}
 		}
@@ -180,13 +219,25 @@ namespace UI {
 			Close();
 		}
 
+		/// <summary>
+		/// Method called whenever the option "examine" is clicked on an item.
+		/// </summary>
+		/// <param name="itemData"></param>
 		public void OnItemExamine(ItemData itemData) {
 			string description = I18N.GetValue("items." + itemData.ID + ".description");
-
 			MessageHandler.Instance.ShowMessage(description);
-
 			Close();
+			DisableUnusedOptions();
+		}
 
+		/// <summary>
+		/// Method called whenever the option "examine" is clicked on a node.
+		/// </summary>
+		/// <param name="nodeData"></param>
+		public void OnNodeExamine(NodeData nodeData) {
+			string description = I18N.GetValue("nodes." + nodeData.ID + ".description");
+			MessageHandler.Instance.ShowMessage(description);
+			Close();
 			DisableUnusedOptions();
 		}
 

@@ -10,4 +10,8 @@
 	virtual bool IsPickup() {
 		return false;
 	}
+
+	virtual string GetDefaultAction() {
+		return "Interact";
+	}
 }
