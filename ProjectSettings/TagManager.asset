@@ -6,11 +6,12 @@ TagManager:
   tags:
   - Terrain
   - Interactable
+  - CameraTarget
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - CameraTarget
   - Water
   - UI
   - 

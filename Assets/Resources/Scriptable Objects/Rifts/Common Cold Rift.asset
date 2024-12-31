@@ -19,3 +19,4 @@ MonoBehaviour:
   SecondaryElement: 1
   TemperatureZoneData: {fileID: 11400000, guid: a5efd585aaf5a71438c5819ab252c454,
     type: 2}
+  AmbienceZoneData: {fileID: 11400000, guid: ef6b0c09fb9fbe249900ea35662e3440, type: 2}

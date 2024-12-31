@@ -9883,7 +9883,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1320ef8319b775c4db4f55c4b36eab4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TemperatureZoneData: {fileID: 0}
+  TemperatureZoneData: {fileID: 11400000, guid: a5efd585aaf5a71438c5819ab252c454,
+    type: 2}
 --- !u!1 &5980695352202863163
 GameObject:
   m_ObjectHideFlags: 0
@@ -14818,6 +14819,7 @@ Transform:
   - {fileID: 7765306675565058439}
   - {fileID: 1994701870269959937}
   - {fileID: 5436176860955039647}
+  - {fileID: 245668038304063388}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4268672392373304771
@@ -14839,7 +14841,7 @@ MonoBehaviour:
     m_Bits: 823
   _includeLayerMask:
     serializedVersion: 2
-    m_Bits: 4227858944
+    m_Bits: 4227858952
 --- !u!135 &521001109577277720
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -14893,6 +14895,80 @@ Transform:
   - {fileID: 4454431677624939270}
   m_Father: {fileID: 2174103101592605091}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &431247079069442964
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 2174103101592605091}
+    m_Modifications:
+    - target: {fileID: 474233837046217736, guid: ad60ca00b8be70e4b8a169312619778e,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 474233837046217736, guid: ad60ca00b8be70e4b8a169312619778e,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 474233837046217736, guid: ad60ca00b8be70e4b8a169312619778e,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 474233837046217736, guid: ad60ca00b8be70e4b8a169312619778e,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 474233837046217736, guid: ad60ca00b8be70e4b8a169312619778e,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 474233837046217736, guid: ad60ca00b8be70e4b8a169312619778e,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 474233837046217736, guid: ad60ca00b8be70e4b8a169312619778e,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 474233837046217736, guid: ad60ca00b8be70e4b8a169312619778e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 474233837046217736, guid: ad60ca00b8be70e4b8a169312619778e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 474233837046217736, guid: ad60ca00b8be70e4b8a169312619778e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9093472657407397805, guid: ad60ca00b8be70e4b8a169312619778e,
+        type: 3}
+      propertyPath: m_Name
+      value: Ambience Zone
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ad60ca00b8be70e4b8a169312619778e, type: 3}
+--- !u!4 &245668038304063388 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 474233837046217736, guid: ad60ca00b8be70e4b8a169312619778e,
+    type: 3}
+  m_PrefabInstance: {fileID: 431247079069442964}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1774871341227773472
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14914,7 +14990,7 @@ PrefabInstance:
     - target: {fileID: 4778946826901497805, guid: 780ca8d6c12e3d44dbe786ea20a3f26c,
         type: 3}
       propertyPath: CollisionModule.maxCollisionShapes
-      value: 16
+      value: 128
       objectReference: {fileID: 0}
     - target: {fileID: 8314336864490313639, guid: 780ca8d6c12e3d44dbe786ea20a3f26c,
         type: 3}
