@@ -30,4 +30,7 @@
 	public static readonly int MAXIMUM_LUCK = 100;
 
 	public static readonly float TOOLTIP_DELAY = 0.2f;
+
+	// The tick rate for the rifts (in seconds).
+	public static readonly float RIFT_TICK_RATE = 10.0f;
 }

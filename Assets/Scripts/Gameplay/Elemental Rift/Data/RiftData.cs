@@ -6,6 +6,9 @@ namespace ElementalRift {
     [CreateAssetMenu(fileName = "RiftData", menuName = "ScriptableObjects/Elemental Rift/Rift Data")]
     public class RiftData : ScriptableObject {
 
+        [Tooltip("The percentage of change to grow of an elemental rift")]
+        public float GrowthProbability = 1.0f;
+
         [Tooltip("The maximum health of an elemental rift")]
         [SerializeField]
         public int MaximumHealth = 200;

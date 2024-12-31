@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8f091f0ffddbec41a33e35f4aac9748, type: 3}
   m_Name: Common Cold Rift
   m_EditorClassIdentifier: 
+  GrowthProbability: 0.5
   MaximumHealth: 200
   MinimumHealthPercentage: 0.25
   InfluenceRadius: 15

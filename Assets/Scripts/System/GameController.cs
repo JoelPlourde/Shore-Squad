@@ -9,6 +9,7 @@ using GameSystem;
 using ItemSystem;
 using SkillSystem;
 using EmoteSystem;
+using ElementalRift;
 
 [RequireComponent(typeof(ParticleSystemManager))]
 [RequireComponent(typeof(AudioSource))]
@@ -31,6 +32,9 @@ using EmoteSystem;
 [RequireComponent(typeof(TimerManager))]
 [RequireComponent(typeof(Foreman))]
 [RequireComponent(typeof(Time))]
+[RequireComponent(typeof(ElementManager))]
+[RequireComponent(typeof(RiftManager))]
+[RequireComponent(typeof(InteractionManager))]
 public class GameController : SingletonBehaviour<GameController> {
 
 	private List<IUpdatable> _updates = new List<IUpdatable>();
