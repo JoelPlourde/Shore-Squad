@@ -22,8 +22,6 @@ namespace TaskSystem {
 
 				actor.Animator.SetFloat("Speed", actor.NavMeshAgent.speed);
 				actor.Animator.SetBool("Move", true);
-			} else {
-				actor.transform.LookAt(_interactArguments.Position, Vector3.up);
 			}
 		}
 
@@ -36,7 +34,15 @@ namespace TaskSystem {
 		}
 
 		private void AtDestination() {
-			actor.transform.LookAt(_interactArguments.Position, Vector3.up);
+			Vector3 targetDirection = _interactArguments.Position - actor.transform.position;
+			Vector3 currentDirection = actor.transform.forward;
+
+			// Calculate the angle between the two vectors using the Cross Product
+			float angle = Vector3.SignedAngle(currentDirection, targetDirection, Vector3.up);
+
+			// Add the angle to the current rotation
+			float y = actor.transform.rotation.eulerAngles.y + angle;
+			LeanTween.rotateY(actor.gameObject, y, 0.5f);
 
 			_interactArguments.Interactable.OnInteractEnter(actor);
 			actor.NavMeshAgent.isStopped = true;
