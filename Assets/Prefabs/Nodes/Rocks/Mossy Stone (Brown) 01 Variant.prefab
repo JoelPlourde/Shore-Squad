@@ -8,10 +8,15 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1190251784743852238, guid: 2d571f312bcce08449e3ee53cf5ba1d2,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: beb203e4177330546999b109180997db, type: 2}
     - target: {fileID: 1254827228780100559, guid: 2d571f312bcce08449e3ee53cf5ba1d2,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 17.6
+      value: -11.839289
       objectReference: {fileID: 0}
     - target: {fileID: 1254827228780100559, guid: 2d571f312bcce08449e3ee53cf5ba1d2,
         type: 3}
@@ -21,7 +26,7 @@ PrefabInstance:
     - target: {fileID: 1254827228780100559, guid: 2d571f312bcce08449e3ee53cf5ba1d2,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 8.5
+      value: 16.46
       objectReference: {fileID: 0}
     - target: {fileID: 1254827228780100559, guid: 2d571f312bcce08449e3ee53cf5ba1d2,
         type: 3}
@@ -31,17 +36,17 @@ PrefabInstance:
     - target: {fileID: 1254827228780100559, guid: 2d571f312bcce08449e3ee53cf5ba1d2,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1254827228780100559, guid: 2d571f312bcce08449e3ee53cf5ba1d2,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1254827228780100559, guid: 2d571f312bcce08449e3ee53cf5ba1d2,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1254827228780100559, guid: 2d571f312bcce08449e3ee53cf5ba1d2,
         type: 3}
@@ -63,6 +68,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mossy Stone (Brown) 01 Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 6172300970004912468, guid: 2d571f312bcce08449e3ee53cf5ba1d2,
+        type: 3}
+      propertyPath: InteractionRadius
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6201943856475578314, guid: 2d571f312bcce08449e3ee53cf5ba1d2,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: beb203e4177330546999b109180997db, type: 2}
+    - target: {fileID: 6369891667210860916, guid: 2d571f312bcce08449e3ee53cf5ba1d2,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: beb203e4177330546999b109180997db, type: 2}
     - target: {fileID: 8062744533364384735, guid: 2d571f312bcce08449e3ee53cf5ba1d2,
         type: 3}
       propertyPath: 'm_Materials.Array.data[0]'

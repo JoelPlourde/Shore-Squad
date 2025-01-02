@@ -158,6 +158,7 @@ public static class Squad {
 
 					// From a direction, calculate the position of the Actor to the Interactable when accounting for the interaction radius;
 					Vector3 position = (direction.normalized * (direction.magnitude - interactable.GetInteractionRadius())) + x.Actor.transform.position;
+
 					InteractArguments interactArguments = new InteractArguments(position, interactable);
 
 					x.Actor.TaskScheduler.CreateTask<Interact>(interactArguments);
