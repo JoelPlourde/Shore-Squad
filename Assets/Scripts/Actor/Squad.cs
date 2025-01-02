@@ -149,7 +149,9 @@ public static class Squad {
 	/// <param name="raycastHit">The RaycastHit information</param>
 	private static void Interact(MouseButton mouseButton, RaycastHit raycastHit) {
 		if (mouseButton == MouseButton.LEFT_MOUSE_BUTTON) {
-			InteractArguments interactArguments = new InteractArguments(raycastHit.collider.transform.position, raycastHit.collider.gameObject.GetComponent<IInteractable>());
+			Debug.Log("Transform Position: " + raycastHit.collider.transform.position);
+			Debug.Log("Collider Center: " + raycastHit.collider.bounds.center);
+			InteractArguments interactArguments = new InteractArguments(raycastHit.collider.bounds.center, raycastHit.collider.gameObject.GetComponent<IInteractable>());
 			_units.ForEach(x => {
 				if (x.Actor.Selected) {
 					x.Actor.TaskScheduler.CreateTask<Interact>(interactArguments);

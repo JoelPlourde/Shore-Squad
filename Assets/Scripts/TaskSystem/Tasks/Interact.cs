@@ -36,6 +36,8 @@ namespace TaskSystem {
 		}
 
 		private void AtDestination() {
+			actor.transform.LookAt(_interactArguments.Position, Vector3.up);
+
 			_interactArguments.Interactable.OnInteractEnter(actor);
 			actor.NavMeshAgent.isStopped = true;
 			actor.Animator.SetBool("Move", false);
