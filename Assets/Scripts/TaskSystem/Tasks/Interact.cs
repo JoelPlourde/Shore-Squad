@@ -14,7 +14,7 @@ namespace TaskSystem {
 			// Validate the arguments you've received is of the correct type.
 			_interactArguments = TaskArguments as InteractArguments;
 
-			TriggerManager.CreateTrigger(_interactArguments.Position, _interactArguments.Interactable.GetInteractionRadius(), OnTriggerEnterCondition, AtDestination);
+			trigger = TriggerManager.CreateTrigger(_interactArguments.Position, _interactArguments.Interactable.GetInteractionRadius(), OnTriggerEnterCondition, AtDestination);
 
 			if (Vector3.Distance(actor.transform.position, _interactArguments.Position) > (_interactArguments.Interactable.GetInteractionRadius() * 2)) {
 				actor.NavMeshAgent.SetDestination(_interactArguments.Position);
