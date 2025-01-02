@@ -16,7 +16,7 @@ namespace TaskSystem {
 
 			trigger = TriggerManager.CreateTrigger(_interactArguments.Position, _interactArguments.Interactable.GetInteractionRadius(), OnTriggerEnterCondition, AtDestination);
 
-			if (Vector3.Distance(actor.transform.position, _interactArguments.Position) > (_interactArguments.Interactable.GetInteractionRadius() * 2)) {
+			if (Vector3.Distance(actor.transform.position, _interactArguments.Position) > _interactArguments.Interactable.GetInteractionRadius()) {
 				actor.NavMeshAgent.SetDestination(_interactArguments.Position);
 				actor.NavMeshAgent.isStopped = false;
 

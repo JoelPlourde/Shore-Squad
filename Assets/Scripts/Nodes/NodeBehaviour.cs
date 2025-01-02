@@ -104,7 +104,7 @@ namespace NodeSystem {
 		/// <param name="actor"></param>
 		public void OnInteractExit(Actor actor) {
 			actor.Animator.SetBool("Harvest", false);
-			actor.OnHarvestEvent -= OnHarvest;
+			actor.OnHarvestEvent -= OnHit;
 		}
 
 		public virtual void OnStart() {}
