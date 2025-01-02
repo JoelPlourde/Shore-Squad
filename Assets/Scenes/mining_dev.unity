@@ -305,7 +305,7 @@ Transform:
   m_GameObject: {fileID: 789437697}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.9, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1994,12 +1994,12 @@ PrefabInstance:
     - target: {fileID: 3016803683967735493, guid: fe3911ac8dc23204b91ee226e75e9360,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 12.296615
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3016803683967735493, guid: fe3911ac8dc23204b91ee226e75e9360,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.1841953
+      value: 7.96
       objectReference: {fileID: 0}
     - target: {fileID: 3016803683967735493, guid: fe3911ac8dc23204b91ee226e75e9360,
         type: 3}
@@ -2035,6 +2035,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8740313487915508053, guid: fe3911ac8dc23204b91ee226e75e9360,
+        type: 3}
+      propertyPath: InteractionRadius
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2359,7 +2364,7 @@ Transform:
   m_GameObject: {fileID: 1749853312}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 29.43929, y: -12.296615, z: -3.1841953}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2382,12 +2387,12 @@ PrefabInstance:
     - target: {fileID: 1254827228780100559, guid: 2d571f312bcce08449e3ee53cf5ba1d2,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 12.296615
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1254827228780100559, guid: 2d571f312bcce08449e3ee53cf5ba1d2,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.8841953
+      value: 7.66
       objectReference: {fileID: 0}
     - target: {fileID: 1254827228780100559, guid: 2d571f312bcce08449e3ee53cf5ba1d2,
         type: 3}
@@ -2428,6 +2433,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Mossy Stone (Grey) 01
+      objectReference: {fileID: 0}
+    - target: {fileID: 6172300970004912468, guid: 2d571f312bcce08449e3ee53cf5ba1d2,
+        type: 3}
+      propertyPath: InteractionRadius
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2837,12 +2847,12 @@ PrefabInstance:
     - target: {fileID: 2183214356828898408, guid: 6b7e6c9375f6c5549bc648c1b888428e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 12.296615
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2183214356828898408, guid: 6b7e6c9375f6c5549bc648c1b888428e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.8641953
+      value: 7.64
       objectReference: {fileID: 0}
     - target: {fileID: 2183214356828898408, guid: 6b7e6c9375f6c5549bc648c1b888428e,
         type: 3}
@@ -2884,6 +2894,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mossy Stone (Grey) 04
       objectReference: {fileID: 0}
+    - target: {fileID: 6603869663626131763, guid: 6b7e6c9375f6c5549bc648c1b888428e,
+        type: 3}
+      propertyPath: InteractionRadius
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2897,6 +2912,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 789437698}
     m_Modifications:
+    - target: {fileID: 4236647314626201219, guid: 8f8f9cfb98e2b9b42872bc8161d4456a,
+        type: 3}
+      propertyPath: InteractionRadius
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5276827931212853822, guid: 8f8f9cfb98e2b9b42872bc8161d4456a,
         type: 3}
       propertyPath: m_Name
@@ -2910,12 +2930,12 @@ PrefabInstance:
     - target: {fileID: 9082064974648812568, guid: 8f8f9cfb98e2b9b42872bc8161d4456a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 12.296615
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9082064974648812568, guid: 8f8f9cfb98e2b9b42872bc8161d4456a,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 11.6841955
+      value: 16.46
       objectReference: {fileID: 0}
     - target: {fileID: 9082064974648812568, guid: 8f8f9cfb98e2b9b42872bc8161d4456a,
         type: 3}
@@ -2976,6 +2996,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mossy Stone (Brown) 04
       objectReference: {fileID: 0}
+    - target: {fileID: 1633781958347939560, guid: 5533184441eafeb4d9c706fc50d39ba8,
+        type: 3}
+      propertyPath: InteractionRadius
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6000379733420630963, guid: 5533184441eafeb4d9c706fc50d39ba8,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2984,12 +3009,12 @@ PrefabInstance:
     - target: {fileID: 6000379733420630963, guid: 5533184441eafeb4d9c706fc50d39ba8,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 12.296615
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6000379733420630963, guid: 5533184441eafeb4d9c706fc50d39ba8,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 11.664196
+      value: 16.44
       objectReference: {fileID: 0}
     - target: {fileID: 6000379733420630963, guid: 5533184441eafeb4d9c706fc50d39ba8,
         type: 3}
@@ -3053,12 +3078,12 @@ PrefabInstance:
     - target: {fileID: 1011029344133985875, guid: db8dd5de4f640284db7e3f8f3f685f38,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 12.296615
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1011029344133985875, guid: db8dd5de4f640284db7e3f8f3f685f38,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 11.984196
+      value: 16.76
       objectReference: {fileID: 0}
     - target: {fileID: 1011029344133985875, guid: db8dd5de4f640284db7e3f8f3f685f38,
         type: 3}
@@ -3100,6 +3125,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mossy Stone (Brown) 02
       objectReference: {fileID: 0}
+    - target: {fileID: 6814482713356321219, guid: db8dd5de4f640284db7e3f8f3f685f38,
+        type: 3}
+      propertyPath: InteractionRadius
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3127,12 +3157,12 @@ PrefabInstance:
     - target: {fileID: 4578280934107821096, guid: 62d6238c57b184340a7d8bb5a05fb13e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 12.296615
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4578280934107821096, guid: 62d6238c57b184340a7d8bb5a05fb13e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.3841953
+      value: 8.16
       objectReference: {fileID: 0}
     - target: {fileID: 4578280934107821096, guid: 62d6238c57b184340a7d8bb5a05fb13e,
         type: 3}
@@ -3169,6 +3199,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7322237758184799581, guid: 62d6238c57b184340a7d8bb5a05fb13e,
+        type: 3}
+      propertyPath: InteractionRadius
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 9078901239406750708, guid: 62d6238c57b184340a7d8bb5a05fb13e,
         type: 3}
       propertyPath: m_Name
@@ -3192,6 +3227,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mossy Stone (Brown) 03
       objectReference: {fileID: 0}
+    - target: {fileID: 3529903700076449204, guid: 5826fab46c7dd1c468ca8338929f8722,
+        type: 3}
+      propertyPath: InteractionRadius
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7703475899418199233, guid: 5826fab46c7dd1c468ca8338929f8722,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3200,12 +3240,12 @@ PrefabInstance:
     - target: {fileID: 7703475899418199233, guid: 5826fab46c7dd1c468ca8338929f8722,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 12.296615
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7703475899418199233, guid: 5826fab46c7dd1c468ca8338929f8722,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 12.1841955
+      value: 16.96
       objectReference: {fileID: 0}
     - target: {fileID: 7703475899418199233, guid: 5826fab46c7dd1c468ca8338929f8722,
         type: 3}
