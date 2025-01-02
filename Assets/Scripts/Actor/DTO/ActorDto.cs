@@ -10,6 +10,9 @@ namespace SaveSystem {
 		public Vector3 Position;
 
 		[SerializeField]
+		public Vector3 Rotation;
+
+		[SerializeField]
 		public string Guid;
 
 		[SerializeField]
@@ -38,6 +41,7 @@ namespace SaveSystem {
 
 		public ActorDto(Actor actor) {
 			Position = actor.transform.position;
+			Rotation = actor.transform.eulerAngles;
 			Guid = actor.Guid.ToString();
 			Playable = actor.Playable;
 			FactionType = actor.FactionType;

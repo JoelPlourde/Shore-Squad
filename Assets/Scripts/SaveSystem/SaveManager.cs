@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace SaveSystem {
 	public class SaveManager : MonoBehaviour {
@@ -12,11 +13,34 @@ namespace SaveSystem {
 		}
 
 		private void Start() {
-			NewGame();
+			if (!LoadRecentSaveFile()) {
+				NewGame();
+			}
+		}
 
-			// LoadSaveFile("savefile-1618670670.json");
+		public bool LoadRecentSaveFile() {
+			string path = Application.persistentDataPath;
+			DirectoryInfo directory = new DirectoryInfo(path);
+			FileInfo[] files = directory.GetFiles("*.json");
 
-			// SaveGame();
+			if (files.Length == 0) {
+				return false;
+			}
+
+			string sceneName = SceneManager.GetActiveScene().name;
+
+			FileInfo mostRecentFile = files[0];
+			foreach (FileInfo file in files) {
+				if (!file.Name.Contains(sceneName)) {
+					continue;
+				}
+
+				if (file.LastWriteTime > mostRecentFile.LastWriteTime) {
+					mostRecentFile = file;
+				}
+			}
+
+			return LoadPlayerSaveFile(mostRecentFile.Name);
 		}
 
 		public void NewGame() {
@@ -27,12 +51,12 @@ namespace SaveSystem {
 			}
 		}
 
-		public void LoadPlayerSaveFile(string filename = "default") {
+		public bool LoadPlayerSaveFile(string filename = "default") {
 			Save = new Save();
 
 			string path = Application.persistentDataPath + "/" + filename;
 			if (!File.Exists(path)) {
-				throw new UnityException("File does not exist :(");
+				return false;
 			}
 
 			StreamReader reader = new StreamReader(path);
@@ -42,6 +66,7 @@ namespace SaveSystem {
 			foreach (ISaveable saveable in GetComponents<ISaveable>()) {
 				saveable.Load(Save);
 			}
+			return true;
 		}
 
 		public void SaveGame() {
@@ -54,8 +79,14 @@ namespace SaveSystem {
 			string path = Application.persistentDataPath + "/";
 			Directory.CreateDirectory(path);
 
-			Debug.Log(path);
-			File.WriteAllText(Path.Combine(path, "savefile-" + new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds() + ".json"), JsonUtility.ToJson(Save, true));
+			string sceneName = SceneManager.GetActiveScene().name;
+			string filename = sceneName + "-" + new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds() + ".json";
+			string absolutePath = Path.Combine(path, filename);
+			string fileContents = JsonUtility.ToJson(Save, true);
+
+			File.WriteAllText(absolutePath, fileContents);
+
+			Debug.Log("Game saved to: " + absolutePath);
 		}
 
 		public Save Save { get; private set; }
