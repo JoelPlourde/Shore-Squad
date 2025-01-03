@@ -22,6 +22,8 @@ public class ActorManager : MonoBehaviour, ISaveable {
 		foreach (ActorDto actorDto in save.ActorDtos) {
 			SpawnActor(actorDto);
 		}
+
+		Squad.SelectActors(save.SquadDto.ActorGuids);
 	}
 
 	public void Save(Save save) {
@@ -30,6 +32,9 @@ public class ActorManager : MonoBehaviour, ISaveable {
 			actorDtos.Add(new ActorDto(actor));
 		}
 		save.ActorDtos = actorDtos;
+		if (Application.isPlaying) {
+			save.SquadDto.ActorGuids = Squad.GetSelectedActorIds();
+		}
 	}
 
 	private void SpawnActor(ActorDto actorDto) {

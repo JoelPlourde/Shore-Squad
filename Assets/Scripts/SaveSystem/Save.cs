@@ -4,10 +4,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using Tutorial;
 using UnityEditor.EditorTools;
+using CameraSystem;
 
 namespace SaveSystem {
 	[Serializable]
 	public class Save {
+
+		[SerializeField]
+		public CameraDto CameraDto = new CameraDto();
+
+		[SerializeField]
+		public CameraTargetDto CameraTargetDto = new CameraTargetDto();
+
+		[SerializeField]
+		public SquadDto SquadDto = new SquadDto();
 
 		[SerializeField]
 		public List<QuestDto> QuestDtos = new List<QuestDto>();

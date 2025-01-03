@@ -1,7 +1,8 @@
-﻿using UnityEngine;
+﻿using SaveSystem;
+using UnityEngine;
 
 namespace CameraSystem {
-	public class CameraController : MonoBehaviour, IUpdatable {
+	public class CameraController : MonoBehaviour, IUpdatable, ISaveable {
 
 		public static CameraController Instance;
 
@@ -26,7 +27,6 @@ namespace CameraSystem {
 
 		private RaycastHit _hit;
 		private Vector3 _localRotation;
-		private Vector3 _smoothedPosition;
 		private float _desiredDistance = 20f;
 
 		private Vector3 _direction;
@@ -37,7 +37,7 @@ namespace CameraSystem {
 		private void Awake() {
 			Instance = this;
 
-			DontDestroyOnLoad(this.gameObject);
+			DontDestroyOnLoad(gameObject);
 
 			Camera = GetComponent<Camera>();
 			Distance = (MinZoom + MaxZoom) / 2;
@@ -46,10 +46,6 @@ namespace CameraSystem {
 				throw new UnityException("Please assign a CameraTarget to the CameraController object.");
 			}
 			Target.Initialize(CameraTargetLayer);
-		}
-
-		private void Start() {
-			GameController.Instance.RegisterLateUpdatable(this);
 		}
 
 		public void OnUpdate() {
@@ -98,8 +94,22 @@ namespace CameraSystem {
 			}
 		}
 
-		public Camera Camera { get; private set; }
-		public float Distance { get; private set; } = 20;
+        #region SaveSystem
+        public void Load(Save save) {
+			transform.position = save.CameraDto.Position;
+			_localRotation = save.CameraDto.Rotation;
+			_desiredDistance = save.CameraDto.Distance;
+
+			GameController.Instance.RegisterLateUpdatable(this);
+        }
+
+        public void Save(Save save){
+            save.CameraDto = new CameraDto(transform.position, _localRotation, Distance);
+        }
+        #endregion
+
+        public Camera Camera { get; private set; }
+		public float Distance { get; private set; }
 	}
 }
 

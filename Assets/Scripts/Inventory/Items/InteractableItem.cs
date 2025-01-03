@@ -9,8 +9,8 @@ namespace ItemSystem {
     [RequireComponent(typeof(Rigidbody))]
     public class InteractableItem : InteractableBehavior, IInteractable, IWorldSaveable {
 
-        [SerializeField]
-        public string UUID = Guid.NewGuid().ToString();
+        [UniqueIdentifier]
+        public string UUID;
 
 		[Tooltip("The radius at which the player should stopped at.")]
 		public float InteractionRadius = 1f;
@@ -72,17 +72,41 @@ namespace ItemSystem {
                 // Replace the object where it was last saved.
                 transform.position = worldItemDto.Position;
                 transform.eulerAngles = worldItemDto.Rotation;
+
+                // Get any IConditionaSaveable on this object or underneath it.
+                IConditionalSaveable[] conditionalSaveables = GetComponentsInChildren<IConditionalSaveable>();
+                foreach (IConditionalSaveable conditionalSaveable in conditionalSaveables) {
+                    if (worldItemDto.conditionalData.TryGetValue(conditionalSaveable.GetType().Name, out string data)) {
+                        conditionalSaveable.LoadSerializedData(data);
+                    }
+                }
             }
         }
 
         public void Save(Save save) {
             WorldItemDto worldItemDto = new WorldItemDto(GetUUID(), _itemData.ID, 1, transform.position, transform.eulerAngles);
 
-            save.WorldItemDtos.Add(GetUUID(), worldItemDto);
+            // Get any IConditionaSaveable on this object or underneath it.
+            IConditionalSaveable[] conditionalSaveables = GetComponentsInChildren<IConditionalSaveable>();
+            foreach (IConditionalSaveable conditionalSaveable in conditionalSaveables) {
+                if (conditionalSaveable.IsSaveRequired()) {
+                    worldItemDto.AppendData(conditionalSaveable.GetType().Name, conditionalSaveable.GetSerializedData());
+                }
+            }
+
+            if (save.WorldItemDtos.ContainsKey(GetUUID())) {
+                save.WorldItemDtos[GetUUID()] = worldItemDto;
+            } else {
+                save.WorldItemDtos.Add(GetUUID(), worldItemDto);
+            }
         }
 
         public string GetUUID() {
             return UUID;
+        }
+
+        public void RegenerateUUID() {
+            UUID = Guid.NewGuid().ToString();
         }
 
         public bool DetermineState(Save worldSave, Save playerSave) {

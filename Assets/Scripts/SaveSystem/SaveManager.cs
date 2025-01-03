@@ -5,7 +5,7 @@ using ItemSystem;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Diagnostics;
-using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace SaveSystem {
 	public class SaveManager : MonoBehaviour {
@@ -102,8 +102,20 @@ namespace SaveSystem {
 
 			save.ActorDtos.Add(new ActorDto());
 
-			foreach (ISaveable saveable in GetComponents<ISaveable>()) {
-				saveable.Load(save);
+			// Load all GameObject within the scene.
+			GameObject[] gameObjects = FindObjectsByType<GameObject>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
+
+			foreach (GameObject gameObject in gameObjects) {
+				// For each GameObject, find all components that implement ISaveable.
+				ISaveable[] saveables = gameObject.GetComponents<ISaveable>();
+
+				if (saveables.Length == 0) {
+                	continue;
+            	}
+
+				foreach (ISaveable saveable in saveables) {
+					saveable.Load(save);
+				}
 			}
 		}
 
@@ -144,17 +156,21 @@ namespace SaveSystem {
 				}
 			}
 
-			// For objects that are in the player save, but not in the world save, we need to load them.
-			playerSave.WorldItemDtos.Except(_worldSave.WorldItemDtos).ToList().ForEach(worldItemDto => {
-				ItemData itemData = ItemManager.Instance.GetItemData(worldItemDto.Value.ID);
+			// For each objects that are in the player save:
+			foreach (KeyValuePair<string, WorldItemDto> worldItemDto in playerSave.WorldItemDtos.ToList()) {
+				// Check if the worldItemDto is in the world save.
+				if (!_worldSave.WorldItemDtos.ContainsKey(worldItemDto.Key)) {
+					// If not, spawn it:
+					ItemData itemData = ItemManager.Instance.GetItemData(worldItemDto.Value.ID);
 
-				Item item = new Item(itemData, worldItemDto.Value.Amount);
+					Item item = new Item(itemData, worldItemDto.Value.Amount);
 
-				// Euler Angles to Quaternion
-				Quaternion quaternion = Quaternion.Euler(worldItemDto.Value.Rotation);
+					// Euler Angles to Quaternion
+					Quaternion quaternion = Quaternion.Euler(worldItemDto.Value.Rotation);
 
-				ItemManager.Instance.PlaceItemInWorld(item, worldItemDto.Value.Position, quaternion, false);
-			});
+					ItemManager.Instance.PlaceItemInWorld(item, worldItemDto.Value.Position, quaternion, false);
+				}
+			}
 
 			stopwatch.Stop();
 			UnityEngine.Debug.Log("Loaded player save in: " + stopwatch.ElapsedMilliseconds + "ms");
@@ -224,8 +240,6 @@ namespace SaveSystem {
 
 			string absolutePath = Path.Combine(path, filename);
 			string fileContents = JsonUtility.ToJson(save, true);
-
-			UnityEngine.Debug.Log(save.WorldItemDtos.Count);
 
 			File.WriteAllText(absolutePath, fileContents);
 

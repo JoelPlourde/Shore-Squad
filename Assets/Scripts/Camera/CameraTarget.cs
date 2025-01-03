@@ -1,9 +1,10 @@
-﻿using UnityEngine;
+﻿using SaveSystem;
+using UnityEngine;
 
 namespace CameraSystem {
 	[RequireComponent(typeof(Rigidbody))]
 	[RequireComponent(typeof(SphereCollider))]
-	public class CameraTarget : MonoBehaviour, IUpdatable {
+	public class CameraTarget : MonoBehaviour, IUpdatable, ISaveable {
 
 		public static CameraTarget Instance;
 
@@ -105,5 +106,15 @@ namespace CameraSystem {
 				GameController.Instance.DeregisterLateUpdatable(this);
 			}
 		}
-	}
+
+		#region SaveSystem
+        public void Load(Save save) {
+			transform.position = save.CameraTargetDto.Position;
+        }
+
+        public void Save(Save save) {
+			save.CameraTargetDto = new CameraTargetDto(this);
+        }
+		#endregion
+    }
 }

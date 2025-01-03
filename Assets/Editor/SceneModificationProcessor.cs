@@ -1,9 +1,14 @@
 using System;
+using System.Collections.Generic;
 using SaveSystem;
 using UnityEditor;
 using UnityEngine;
 
-public class SceneLifecycle : AssetModificationProcessor {
+/// <summary>
+/// This class is responsible to save the scene in a World file to determine what objects have been interacted with
+/// and what to save as a result.
+/// </summary>
+public class SceneModificationProcessor : AssetModificationProcessor {
 
     public static string[] OnWillSaveAssets(string[] paths) {
         foreach (string path in paths) {
@@ -27,6 +32,8 @@ public class SceneLifecycle : AssetModificationProcessor {
 
         Save save = new Save();
 
+        HashSet<string> uniqueIds = new HashSet<string>();
+
         // In each gameobject, find all components that implement ISaveable.
         foreach (GameObject gameObject in gameObjects) {
             ISaveable[] saveables = gameObject.GetComponents<ISaveable>();
@@ -36,6 +43,13 @@ public class SceneLifecycle : AssetModificationProcessor {
             }
 
             foreach (ISaveable saveable in saveables) {
+                // re-think this solution.
+                if (saveable is IWorldSaveable worldSaveable) {
+                    if (uniqueIds.Contains(worldSaveable.GetUUID())) {
+                        Debug.LogError("Duplicate UUID found: " + worldSaveable.GetUUID());
+                    }
+                    uniqueIds.Add(worldSaveable.GetUUID());
+                }
                 saveable.Save(save);
             }
         }

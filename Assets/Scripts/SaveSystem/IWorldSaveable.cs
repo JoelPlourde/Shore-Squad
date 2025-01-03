@@ -4,7 +4,7 @@ namespace SaveSystem {
     /// <summary>
     /// Interface for objects that can be saved in the world.
     /// </summary>
-    public interface IWorldSaveable : ISaveable{
+    public interface IWorldSaveable : ISaveable {
 
         /// <summary>
         /// Compare the state of the object in the world with the state of the object in the player save to determine how to handle the object.
@@ -19,5 +19,7 @@ namespace SaveSystem {
 		/// </summary>
 		/// <returns>The UUID if any, else an empty string.</returns>
 		string GetUUID();
+
+        void RegenerateUUID();
     }
 }

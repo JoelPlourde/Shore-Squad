@@ -16,7 +16,7 @@
 
 	public static readonly float ACTOR_BASE_SPEED = 3.5f;
 	public static readonly float ACTOR_BASE_ROTATION_SPEED = 480f;
-	public static readonly float ACTOR_BASE_FOOD = 20f;
+	public static readonly float ACTOR_BASE_FOOD = 5f;
 
 	public static readonly string STARVING = "Starving";
 	public static readonly string HUNGRY = "Hungry";
@@ -40,5 +40,5 @@
 	public static readonly float DEFAULT_DAMAGE = 1.0f;
 	public static readonly float DEFAULT_HEALTH_REGENERATION = 1.00f;
 	public static readonly float DEFAULT_HUNGER_RATE = 0.05f;
-	public static readonly float DEFAULT_FOOD = 20f;
+	public static readonly float DEFAULT_FOOD = 5f;
 }

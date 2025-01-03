@@ -2,6 +2,7 @@
 using UnityEngine;
 using TaskSystem;
 using UnityEngine.SceneManagement;
+using CameraSystem;
 
 public static class Squad {
 
@@ -184,6 +185,43 @@ public static class Squad {
 			selectedUnit.EnableSelector(true);
 			HasSelected = true;
 		}
+	}
+
+	/// <summary>
+	/// Select the actors with the given actor IDs.
+	/// </summary>
+	/// <param name="actorIds"></param>
+	public static void SelectActors(List<string> actorIds) {
+		_units.ForEach(x => {
+			x.EnableSelector(false);
+		});
+
+		HasSelected = false;
+
+		for (int i = 0; i < actorIds.Count; i++) {
+			Unit selectedUnit = _units.Find(y => y.Actor.Guid.ToString() == actorIds[i]);
+			selectedUnit.EnableSelector(true);
+
+			if (i == 0) {
+				CameraController.Instance.FollowTarget(selectedUnit.Actor.transform);
+			}
+		}
+
+		HasSelected = true;
+	}
+
+	/// <summary>
+	/// Get the selected actor IDs.
+	/// </summary>
+	/// <returns></returns>
+	public static List<string> GetSelectedActorIds() {
+		List<string> ids = new List<string>();
+		_units.ForEach(x => {
+			if (x.Actor.Selected) {
+				ids.Add(x.Actor.Guid.ToString());
+			}
+		});
+		return ids;
 	}
 
 	public static bool HasSelected { get; private set; }

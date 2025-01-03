@@ -32,7 +32,8 @@ namespace ItemSystem {
 					position.y += 0.25f;
 				}
 
-				Instantiate(item.ItemData.Prefab, position, rotation);
+				GameObject @object = Instantiate(item.ItemData.Prefab, position, rotation);
+				@object.GetComponent<InteractableItem>().RegenerateUUID();
 			}
 			
 			return true;

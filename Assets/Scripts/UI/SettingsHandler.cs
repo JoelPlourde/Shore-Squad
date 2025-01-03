@@ -13,25 +13,19 @@ namespace UI {
 			Instance = this;
 
 			Button saveButton = transform.Find("SaveButton").GetComponent<Button>();
-			saveButton.onClick.AddListener(OnSave);
+			saveButton.onClick.AddListener(() => {
+				SaveManager.Instance.SaveGame();
+			});
 
 			Button loadButton = transform.Find("LoadButton").GetComponent<Button>();
-			loadButton.onClick.AddListener(OnLoad);
+			loadButton.onClick.AddListener(() => {
+				throw new UnityException("Not yet implemented!");
+			});
 
 			Button exitButton = transform.Find("ExitButton").GetComponent<Button>();
-			exitButton.onClick.AddListener(OnExit);
-		}
-
-		public void OnSave() {
-			SaveSystem.SaveManager.Instance.SaveGame();
-		}
-
-		public void OnLoad() {
-			SaveSystem.SaveManager.Instance.LoadRecentPlayerSaveFile();
-		}
-
-		public void OnExit() {
-			Application.Quit();
+			exitButton.onClick.AddListener(() => {
+				Application.Quit();
+			});
 		}
 
 		public void Open(Actor actor) {
