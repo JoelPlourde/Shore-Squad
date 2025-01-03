@@ -1,8 +1,10 @@
+using System;
 using ItemSystem;
+using SaveSystem;
 using UnityEngine;
 
 namespace ElementalRift {
-    public class RuneBehaviour : MonoBehaviour {
+    public class RuneBehaviour : MonoBehaviour, IConditionalSaveable {
 
         [Tooltip("The current particle count of the Rune")]
         public int ParticleCount = 0;
@@ -74,5 +76,23 @@ namespace ElementalRift {
             }
             return -1;
         }
+
+        #region SaveSystem
+        public bool IsSaveRequired() {
+            return ParticleCount > 0;
+        }
+
+        public string GetSerializedData() {
+            return "" + ParticleCount;
+        }
+
+        public string GetComponentType() {
+            return GetType().Name;
+        }
+
+        public void LoadSerializedData(string @object) {
+            ParticleCount = int.Parse(@object);
+        }
+        #endregion
     }
 }

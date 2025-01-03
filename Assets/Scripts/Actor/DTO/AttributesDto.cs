@@ -35,7 +35,7 @@ namespace SaveSystem {
 			HealthRegeneration = Constant.DEFAULT_HEALTH_REGENERATION;
 			Speed = Constant.DEFAULT_SPEED;
 			Damage = Constant.DEFAULT_DAMAGE;
-			HungerRate = Constant.DEFAULT_DAMAGE;
+			HungerRate = Constant.DEFAULT_HUNGER_RATE;
 			Food = Constant.DEFAULT_FOOD;
 			Temperature = Constant.DEFAULT_TEMPERATURE;
 		}
