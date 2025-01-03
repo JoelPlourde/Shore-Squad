@@ -9,7 +9,9 @@ namespace SaveSystem {
 		[SerializeField]
 		public LevelDto[] levelDtos;
 
-		public SkillsDto() {}
+		public SkillsDto() {
+			levelDtos = new LevelDto[Enum.GetValues(typeof(SkillType)).Length];
+		}
 
 		public SkillsDto(Skills skills) {
 			levelDtos = new LevelDto[Enum.GetValues(typeof(SkillType)).Length];

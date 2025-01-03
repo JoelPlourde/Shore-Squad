@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using UI;
 using TaskSystem;
 using System;
+using SaveSystem;
 
 namespace ItemSystem {
     [RequireComponent(typeof(Rigidbody))]
-    public class InteractableItem : InteractableBehavior, IInteractable {
+    public class InteractableItem : InteractableBehavior, IInteractable, IWorldSaveable {
+
+        [SerializeField]
+        public string UUID = Guid.NewGuid().ToString();
 
 		[Tooltip("The radius at which the player should stopped at.")]
 		public float InteractionRadius = 1f;
@@ -61,5 +65,43 @@ namespace ItemSystem {
         protected override OutlineType GetOutlineType() {
             return OutlineType.ITEM;
         }
+
+        #region SaveSystem
+        public void Load(Save save) {
+            if (save.WorldItemDtos.TryGetValue(UUID, out WorldItemDto worldItemDto)) {
+                // Replace the object where it was last saved.
+                transform.position = worldItemDto.Position;
+                transform.eulerAngles = worldItemDto.Rotation;
+            }
+        }
+
+        public void Save(Save save) {
+            WorldItemDto worldItemDto = new WorldItemDto(GetUUID(), _itemData.ID, 1, transform.position, transform.eulerAngles);
+
+            save.WorldItemDtos.Add(GetUUID(), worldItemDto);
+        }
+
+        public string GetUUID() {
+            return UUID;
+        }
+
+        public bool DetermineState(Save worldSave, Save playerSave) {
+            bool existsInWorld = worldSave.WorldItemDtos.ContainsKey(UUID);
+            bool existsInPlayer = playerSave.WorldItemDtos.ContainsKey(UUID);
+
+            if (existsInWorld && !existsInPlayer) {
+                // The item exists in the world but not in the player' save, therefore it has been picked up, delete it.
+                Destroy(gameObject);
+                return false;
+            }
+
+            if (existsInWorld && existsInPlayer) {
+                // The item exists in both the world and the player's save, it may or may not have been interacted with, load it.
+                return true;
+            }
+
+            return true;
+        }
+        #endregion
     }
 }

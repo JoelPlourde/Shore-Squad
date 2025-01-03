@@ -13,6 +13,10 @@ namespace SkillSystem {
 		}
 
 		public void Initialize(LevelDto levelDto) {
+			if (ReferenceEquals(levelDto, null)) {
+				return;
+			}
+
 			Value = levelDto.Value;
 			Experience = levelDto.Experience;
 		}

@@ -27,6 +27,10 @@ namespace ItemSystem {
 				_actor = actor;
 
 				foreach (ItemDto itemDto in armoryDto.EquipmentDtos) {
+					if (ReferenceEquals(itemDto, null)) {
+						continue;
+					}
+
 					if (itemDto.ID != "-1") {
 						if (!Equip(new Equipment(ItemManager.Instance.GetEquipmentData(itemDto.ID), itemDto.Amount), out Equipment previousEquipment)) {
 							throw new UnityException("Please investigate there shouldn't an equipment in this slot.");

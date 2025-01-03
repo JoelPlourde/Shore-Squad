@@ -5,15 +5,13 @@ using UnityEngine;
 namespace Tutorial {
 	public class Encyclopedia {
 
-		private Dictionary<AdviceType, Advice> _advices;
+		private Dictionary<AdviceType, Advice> _advices = new Dictionary<AdviceType, Advice>();
 
 		/// <summary>
 		/// Load the Advices from the save file.
 		/// </summary>
 		/// <param name="adviceDtos"></param>
 		public Encyclopedia(EncyclopediaDto encyclopediaDto) {
-			_advices = new Dictionary<AdviceType, Advice>();
-
 			if (encyclopediaDto.AdviceDtos.Count == 0) {
 				// Populate the Encyclopedia for the first time.
 				foreach (AdviceData adviceData in AdviceManager.Instance.GetAdviceDatas()) {

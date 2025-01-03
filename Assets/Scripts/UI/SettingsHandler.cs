@@ -27,7 +27,7 @@ namespace UI {
 		}
 
 		public void OnLoad() {
-			SaveSystem.SaveManager.Instance.LoadRecentSaveFile();
+			SaveSystem.SaveManager.Instance.LoadRecentPlayerSaveFile();
 		}
 
 		public void OnExit() {

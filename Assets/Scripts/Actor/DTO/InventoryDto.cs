@@ -9,6 +9,10 @@ namespace SaveSystem {
 		[SerializeField]
 		public ItemDto[] ItemDtos;
 
+		public InventoryDto() {
+			ItemDtos = new ItemDto[Inventory.MAX_STACK];
+		}
+
 		public InventoryDto(Inventory inventory) {
 			ItemDtos = new ItemDto[Inventory.MAX_STACK];
 

@@ -19,6 +19,13 @@ namespace SaveSystem {
 		[SerializeField]
 		public bool Sheltered;
 
+		public StatusDto() {
+			Dead = false;
+			Stunned = false;
+			Fleeing = false;
+			Sheltered = false;
+		}
+
 		public StatusDto(Status status) {
 			if (ReferenceEquals(status, null)) {
 				status = new Status();
