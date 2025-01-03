@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Tutorial;
+using UnityEditor.EditorTools;
 
 namespace SaveSystem {
 	[Serializable]
@@ -16,5 +17,9 @@ namespace SaveSystem {
 
 		[SerializeField]
 		public EncyclopediaDto EncyclopediaDto = new EncyclopediaDto();
+
+		[SerializeField]
+		// The list of items placed in the world.
+		public SerializableDictionary<string, WorldItemDto> WorldItemDtos = new SerializableDictionary<string, WorldItemDto>();
 	}
 }

@@ -30,6 +30,17 @@ namespace SaveSystem {
 		[SerializeField]
 		public string UnderwearColor;
 
+		public FeaturesDto() {
+			Sex = 0;
+			Eyes = 0;
+			Mouth = 0;
+			Eyebrow = 0;
+			Hairstyle = 0;
+			HairColor = "#FFEB04";
+			SkinColor = "#B98D50";
+			UnderwearColor = "#FFFFFF";
+		}
+
 		public FeaturesDto(Body body, Face face) {
 			Sex = (int)body.SexType;
 			Eyes = face.features[FeatureType.EYES];

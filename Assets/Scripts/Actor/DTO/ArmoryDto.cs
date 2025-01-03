@@ -10,6 +10,10 @@ namespace SaveSystem {
 		[SerializeField]
 		public ItemDto[] EquipmentDtos;
 
+		public ArmoryDto() {
+			EquipmentDtos = new ItemDto[Enum.GetValues(typeof(SlotType)).Length];
+		}
+
 		public ArmoryDto(Armory armory) {
 			EquipmentDtos = new ItemDto[Enum.GetValues(typeof(SlotType)).Length];
 			foreach (KeyValuePair<SlotType, Attachment> pair in armory.Equipments) {

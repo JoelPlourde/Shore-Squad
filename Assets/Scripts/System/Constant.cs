@@ -33,4 +33,12 @@
 
 	// The tick rate for the rifts (in seconds).
 	public static readonly float RIFT_TICK_RATE = 10.0f;
+
+	// Character Attributes
+	public static readonly float DEFAULT_HEALTH = 100;
+	public static readonly float DEFAULT_SPEED = 1.0f;
+	public static readonly float DEFAULT_DAMAGE = 1.0f;
+	public static readonly float DEFAULT_HEALTH_REGENERATION = 1.00f;
+	public static readonly float DEFAULT_HUNGER_RATE = 0.05f;
+	public static readonly float DEFAULT_FOOD = 20f;
 }

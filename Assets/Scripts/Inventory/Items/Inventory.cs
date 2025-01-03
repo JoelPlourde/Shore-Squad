@@ -26,7 +26,7 @@ namespace ItemSystem {
 		public void Initialize(InventoryDto inventoryDto) {
 			for (int i = 0; i < Items.Length; i++) {
 				if (!ReferenceEquals(inventoryDto.ItemDtos[i], null) && inventoryDto.ItemDtos[i].ID != "-1") {
-					Items[i] = new Item(ItemManager.Instance.GetItemData(inventoryDto.ItemDtos[i].ID), inventoryDto.ItemDtos[i].Amount);
+					Items[i] = new Item(ItemManager.Instance.GetItemData(inventoryDto.ItemDtos[i].ID), inventoryDto.ItemDtos[i].Amount, i);
 				} else {
 					Items[i] = null;
 				}

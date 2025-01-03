@@ -29,6 +29,17 @@ namespace SaveSystem {
 		[SerializeField]
 		public float Temperature;
 
+		public AttributesDto() {
+			MaxHealth = Constant.DEFAULT_HEALTH;
+			Health = Constant.DEFAULT_HEALTH;
+			HealthRegeneration = Constant.DEFAULT_HEALTH_REGENERATION;
+			Speed = Constant.DEFAULT_SPEED;
+			Damage = Constant.DEFAULT_DAMAGE;
+			HungerRate = Constant.DEFAULT_DAMAGE;
+			Food = Constant.DEFAULT_FOOD;
+			Temperature = Constant.DEFAULT_TEMPERATURE;
+		}
+
 		public AttributesDto(Attributes attributes) {
 			if (ReferenceEquals(attributes, null)) {
 				attributes = new Attributes();

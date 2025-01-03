@@ -212,15 +212,17 @@ namespace ItemSystem {
 						if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, LayerMask.GetMask("Terrain"))) {
 							if (Squad.FirstSelected(out Actor actor)) {
 								if (ItemManager.Instance.PlaceItemInWorld(Item, hit.point, Quaternion.identity)) {
-									actor.Inventory.RemoveItemFromInventoryAtPosition(Item.Index, Item.Amount);
+									if (!actor.Inventory.RemoveItemFromInventoryAtPosition(Item.Index, Item.Amount)) {
+										Debug.Log("Failed to remove item from inventory!");
+									}
 								} else {
-									Debug.LogWarning("Failed to place item in world!");
+									Debug.Log("Failed to place item in world!");
 								}
 							} else {
-								Debug.LogWarning("No actor selected!");
+								Debug.Log("No actor selected!");
 							}
 						} else {
-							Debug.LogWarning("Failed to raycast!");
+							Debug.Log("Failed to raycast!");
 						}
 					}
 

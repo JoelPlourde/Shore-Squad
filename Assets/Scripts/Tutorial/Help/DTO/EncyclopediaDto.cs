@@ -14,6 +14,10 @@ namespace Tutorial {
 				AdviceDtos = new List<AdviceDto>()
 			};
 
+			if (ReferenceEquals(encyclopedia, null)) {
+				return encyclopediaDto;
+			}
+
 			foreach (Advice advice in encyclopedia.GetAdvices()) {
 				encyclopediaDto.AdviceDtos.Add(AdviceDto.FromAdvice(advice));
 			}
