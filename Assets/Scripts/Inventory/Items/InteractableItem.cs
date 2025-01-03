@@ -9,8 +9,8 @@ namespace ItemSystem {
     [RequireComponent(typeof(Rigidbody))]
     public class InteractableItem : InteractableBehavior, IInteractable, IWorldSaveable {
 
-        [SerializeField]
-        public string UUID = Guid.NewGuid().ToString();
+        [UniqueIdentifier]
+        public string UUID;
 
 		[Tooltip("The radius at which the player should stopped at.")]
 		public float InteractionRadius = 1f;
@@ -103,6 +103,10 @@ namespace ItemSystem {
 
         public string GetUUID() {
             return UUID;
+        }
+
+        public void RegenerateUUID() {
+            UUID = Guid.NewGuid().ToString();
         }
 
         public bool DetermineState(Save worldSave, Save playerSave) {

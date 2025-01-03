@@ -19,5 +19,7 @@ namespace SaveSystem {
 		/// </summary>
 		/// <returns>The UUID if any, else an empty string.</returns>
 		string GetUUID();
+
+        void RegenerateUUID();
     }
 }

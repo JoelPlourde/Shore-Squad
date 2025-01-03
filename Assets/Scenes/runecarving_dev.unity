@@ -838,7 +838,7 @@ PrefabInstance:
     - target: {fileID: 6176225788176411420, guid: 314ca6e9e5a670a41a4dbae702c63d72,
         type: 3}
       propertyPath: ParticleCount
-      value: 10
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1119,6 +1119,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1947458383}
     m_Modifications:
+    - target: {fileID: 6208655154314540235, guid: e6120b17df25ae144843df8bfc35ccb6,
+        type: 3}
+      propertyPath: UUID
+      value: 78066727-de9b-4aa5-a301-92d30b7b0f04
+      objectReference: {fileID: 0}
     - target: {fileID: 8075035751379768339, guid: e6120b17df25ae144843df8bfc35ccb6,
         type: 3}
       propertyPath: m_Name
@@ -1184,6 +1189,85 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8888868263398887081, guid: e6120b17df25ae144843df8bfc35ccb6,
     type: 3}
   m_PrefabInstance: {fileID: 1358554072}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1373493899
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1947458383}
+    m_Modifications:
+    - target: {fileID: 2134233669679684086, guid: 1b250163cb286014fac7b433a7cc0b6a,
+        type: 3}
+      propertyPath: UUID
+      value: b2c6f169-cb84-4aca-aed5-190643e27196
+      objectReference: {fileID: 0}
+    - target: {fileID: 5764742806590179630, guid: 1b250163cb286014fac7b433a7cc0b6a,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 6.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 5764742806590179630, guid: 1b250163cb286014fac7b433a7cc0b6a,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.014120854
+      objectReference: {fileID: 0}
+    - target: {fileID: 5764742806590179630, guid: 1b250163cb286014fac7b433a7cc0b6a,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 6.3099995
+      objectReference: {fileID: 0}
+    - target: {fileID: 5764742806590179630, guid: 1b250163cb286014fac7b433a7cc0b6a,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5764742806590179630, guid: 1b250163cb286014fac7b433a7cc0b6a,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5764742806590179630, guid: 1b250163cb286014fac7b433a7cc0b6a,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5764742806590179630, guid: 1b250163cb286014fac7b433a7cc0b6a,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5764742806590179630, guid: 1b250163cb286014fac7b433a7cc0b6a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5764742806590179630, guid: 1b250163cb286014fac7b433a7cc0b6a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5764742806590179630, guid: 1b250163cb286014fac7b433a7cc0b6a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6578540413160493972, guid: 1b250163cb286014fac7b433a7cc0b6a,
+        type: 3}
+      propertyPath: m_Name
+      value: Carved Stone (Air) (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1b250163cb286014fac7b433a7cc0b6a, type: 3}
+--- !u!4 &1373493900 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5764742806590179630, guid: 1b250163cb286014fac7b433a7cc0b6a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1373493899}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1503389205
 PrefabInstance:
@@ -2833,6 +2917,7 @@ Transform:
   - {fileID: 1559764844}
   - {fileID: 1358554073}
   - {fileID: 2033602386}
+  - {fileID: 1373493900}
   - {fileID: 899988750}
   - {fileID: 780408051}
   - {fileID: 718261540}
@@ -2850,6 +2935,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1947458383}
     m_Modifications:
+    - target: {fileID: 2134233669679684086, guid: 1b250163cb286014fac7b433a7cc0b6a,
+        type: 3}
+      propertyPath: UUID
+      value: a638c015-06b6-4a92-ae86-e586edbf25a3
+      objectReference: {fileID: 0}
     - target: {fileID: 5764742806590179630, guid: 1b250163cb286014fac7b433a7cc0b6a,
         type: 3}
       propertyPath: m_LocalPosition.x
